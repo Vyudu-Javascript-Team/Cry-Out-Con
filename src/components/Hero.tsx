@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Calendar, MapPin, Play } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import AnimatedText from './AnimatedText';
@@ -9,10 +9,13 @@ import NeonText from './NeonText';
 import VideoGallery from './VideoGallery';
 
 export const Hero = () => {
+  const containerRef = useRef(null);
   const [isVideoGalleryOpen, setIsVideoGalleryOpen] = useState(false);
   const { scrollYProgress } = useScroll({
+    target: containerRef,
     offset: ["start start", "end start"]
   });
+  
   const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const contentScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
 
@@ -32,7 +35,7 @@ export const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <AnimatedBackground />
       
       <motion.div
