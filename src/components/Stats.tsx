@@ -7,25 +7,25 @@ export const Stats = () => {
   const stats = [
     {
       icon: <Users className="w-12 h-12" />,
-      number: "115K+",
+      number: "5K+",
       label: "Attendees",
       color: "from-blue-400 to-blue-600"
     },
     {
       icon: <Building2 className="w-12 h-12" />,
-      number: "3.2K+",
-      label: "Ministries",
+      number: "2",
+      label: "Conferences",
       color: "from-purple-400 to-purple-600"
     },
     {
       icon: <Globe2 className="w-12 h-12" />,
-      number: "140+",
-      label: "Countries",
+      number: "1",
+      label: "Locations",
       color: "from-pink-400 to-pink-600"
     },
     {
       icon: <Award className="w-12 h-12" />,
-      number: "1000+",
+      number: "50+",
       label: "Speakers",
       color: "from-amber-400 to-amber-600"
     }
