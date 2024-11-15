@@ -93,7 +93,7 @@ const DiveIn = () => {
           <SectionTitle 
             title="Start Your Journey"
             subtitle="Experience transformation through The Lighthouse Church's five foundational pillars"
-            gradient="from-white to-white/80"
+            gradient="from-blue-400 to-purple-600"
           />
 
           <div className="relative mt-20">
