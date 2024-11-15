@@ -36,13 +36,15 @@ export const Hero = () => {
 
   return (
     <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 -z-10">
+      {/* Background container with higher z-index than -10 to ensure it's always visible */}
+      <div className="absolute inset-0 z-0">
         <AnimatedBackground />
       </div>
       
+      {/* Content with higher z-index */}
       <motion.div
         style={{ opacity: contentOpacity, scale: contentScale }}
-        className="container mx-auto px-4 relative z-20"
+        className="container mx-auto px-4 relative z-10"
       >
         <motion.div
           initial={{ opacity: 0 }}
