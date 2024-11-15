@@ -1,19 +1,10 @@
-import React, { useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const AnimatedBackground = () => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-
   return (
     <motion.div
-      ref={containerRef}
-      className="absolute inset-0 -z-10 overflow-hidden"
+      className="fixed inset-0 -z-10 overflow-hidden pointer-events-none"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -33,7 +24,6 @@ const AnimatedBackground = () => {
           ease: "linear",
           repeatType: "loop"
         }}
-        style={{ y }}
       />
       
       <motion.div
@@ -51,7 +41,6 @@ const AnimatedBackground = () => {
           repeatType: "loop",
           delay: 1
         }}
-        style={{ y }}
       />
       
       {/* Light rays */}

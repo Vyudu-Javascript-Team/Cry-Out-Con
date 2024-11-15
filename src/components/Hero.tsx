@@ -10,9 +10,11 @@ import VideoGallery from './VideoGallery';
 
 export const Hero = () => {
   const [isVideoGalleryOpen, setIsVideoGalleryOpen] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
+  const { scrollYProgress } = useScroll({
+    offset: ["start start", "end start"]
+  });
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const contentScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
 
   const scrollToRegistration = () => {
     const registrationSection = document.getElementById('registration');
@@ -34,7 +36,7 @@ export const Hero = () => {
       <AnimatedBackground />
       
       <motion.div
-        style={{ opacity, scale }}
+        style={{ opacity: contentOpacity, scale: contentScale }}
         className="container mx-auto px-4 relative z-20"
       >
         <motion.div
@@ -122,7 +124,6 @@ export const Hero = () => {
       </motion.div>
       
       <motion.div
-        style={{ opacity }}
         className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary to-transparent z-20"
       />
 
