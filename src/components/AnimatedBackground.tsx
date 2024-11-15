@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const AnimatedBackground: React.FC = () => {
   return (
     <motion.div
-      className="fixed inset-0 -z-10 overflow-hidden pointer-events-none"
+      className="absolute inset-0 overflow-hidden pointer-events-none"
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
     >

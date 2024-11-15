@@ -36,7 +36,9 @@ export const Hero = () => {
 
   return (
     <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <AnimatedBackground />
+      <div className="absolute inset-0 -z-10">
+        <AnimatedBackground />
+      </div>
       
       <motion.div
         style={{ opacity: contentOpacity, scale: contentScale }}
