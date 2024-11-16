@@ -15,6 +15,7 @@ import VideoSection from './components/VideoSection';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import FloatingNav from './components/FloatingNav';
 import LiveChat from './components/LiveChat';
+import Keynotes from './components/Keynotes';
 
 function App() {
   const { scrollYProgress } = useScroll();
@@ -52,6 +53,7 @@ function App() {
         <div id="stats"><Stats /></div>
         <div id="dive-in"><DiveIn /></div>
         <div id="video"><VideoSection /></div>
+        <div id="keynotes"><Keynotes /></div>
         <div id="registration"><Registration /></div>
         <div id="exhibitor-info"><EmpowermentResources /></div>
         <div id="hotels"><Hotels /></div>

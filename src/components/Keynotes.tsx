@@ -3,6 +3,10 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import SpotlightEffect from './SpotlightEffect';
 import { Instagram, Globe } from 'lucide-react';
 import SectionTitle from './SectionTitle';
+import bishop from "../assets/images/bishop.png";
+import latrice from "../assets/images/latrice.png";
+import thomas from "../assets/images/thomas.png";
+import keion from "../assets/images/PASTOR-KEION.png";
 
 const GradientText = ({ children, className = "" }) => (
   <motion.span
@@ -46,67 +50,29 @@ export const Keynotes = () => {
 
   const speakers = [
     {
-      name: "Dr. Sarah Chen",
-      title: "AI Ethics & Innovation",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400",
-      instagram: "https://instagram.com/drsarahchen",
-      website: "https://sarahchen.ai"
+      name: "Pastor Keion Henderson",
+      title: "Founder and CEO, The Lighthouse Church",
+      image: keion,
+      instagram: "https://www.instagram.com/pastorkeion/",
+      website: "https://keionhenderson.com/about-us/"
     },
     {
-      name: "Mark Thompson",
-      title: "Future of Computing",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400",
-      instagram: "https://instagram.com/markthompson",
-      website: "https://markthompson.tech"
+      name: "Dr. Eric Thomas",
+      image: thomas,
+      instagram: "https://www.instagram.com/etthehiphoppreacher?igsh=MTVwbW43am85dHFs",
+      website: "https://ericthomas.com/"
     },
     {
-      name: "Dr. Emily Rodriguez",
-      title: "Quantum Computing",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=400",
-      instagram: "https://instagram.com/emilyrodriguez",
-      website: "https://emilyrodriguez.quantum"
+      name: "Evangelist Latrice Ryan", 
+      image: latrice,
+      instagram: "https://www.instagram.com/latriceryan?igsh=bXV5Njd3eXRueGZ6",
+      website: "https://latrice-ryan-ministries-82cd.mykajabi.com/KSI22"
     },
     {
-      name: "Dr. James Wilson",
-      title: "Cybersecurity Trends",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
-      instagram: "https://instagram.com/drjameswilson",
-      website: "https://jameswilson.security"
-    },
-    {
-      name: "Lisa Chang",
-      title: "Sustainable Tech",
-      image: "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?auto=format&fit=crop&q=80&w=400",
-      instagram: "https://instagram.com/lisachang",
-      website: "https://lisachang.eco"
-    },
-    {
-      name: "Michael Foster",
-      title: "Digital Transformation",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400",
-      instagram: "https://instagram.com/michaelfoster",
-      website: "https://michaelfoster.digital"
-    },
-    {
-      name: "Dr. Aisha Patel",
-      title: "Biotech Innovation",
-      image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?auto=format&fit=crop&q=80&w=400",
-      instagram: "https://instagram.com/aishapatel",
-      website: "https://aishapatel.bio"
-    },
-    {
-      name: "Robert Kim",
-      title: "AR/VR Future",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400",
-      instagram: "https://instagram.com/robertkim",
-      website: "https://robertkim.vr"
-    },
-    {
-      name: "Dr. Maria Santos",
-      title: "Space Technology",
-      image: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&q=80&w=400",
-      instagram: "https://instagram.com/mariasantos",
-      website: "https://mariasantos.space"
+      name: "Bishop Kevin Wallace",   
+      image: bishop,
+      instagram: "https://www.instagram.com/bishopkevinwallace?igsh=MTFrc3R3ODI2ZHg5MA==",
+      website: "https://www.kevinwallace.tv/"
     }
   ];
 
@@ -116,8 +82,8 @@ export const Keynotes = () => {
       
       <div className="container mx-auto px-4 relative">
         <SectionTitle 
-          title="Featured Keynotes"
-          subtitle="Meet our distinguished speakers and industry leaders"
+          title="Keynotes Speakers"
+          subtitle="Meet our distinguished speakers"
           gradient="from-blue-400 via-purple-400 to-pink-400"
         />
 
