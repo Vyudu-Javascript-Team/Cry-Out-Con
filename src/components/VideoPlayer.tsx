@@ -12,7 +12,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
   const [isMuted, setIsMuted] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLIFrameElement>(null);
+  const videoRef = useRef<HTMLVideoElement | HTMLIFrameElement>(null);
 
   const getEmbedUrl = (url: string, type: string) => {
     switch (type) {
@@ -28,8 +28,19 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
   };
 
   const togglePlay = () => {
-    if (videoRef.current) {
-      const iframe = videoRef.current;
+    if (!videoRef.current) return;
+
+    if (type === "direct"){
+      const video = videoRef.current as HTMLVideoElement;
+      if (isPlaying) {
+        video.pause();
+      } else {
+        video.play();
+      }
+
+      setIsPlaying(!isPlaying);
+    } else {
+      const iframe = videoRef.current as HTMLIFrameElement;
       if (type === 'youtube') {
         iframe.contentWindow?.postMessage(
           JSON.stringify({
@@ -46,13 +57,20 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
           '*'
         );
       }
+
       setIsPlaying(!isPlaying);
     }
   };
 
   const toggleMute = () => {
-    if (videoRef.current) {
-      const iframe = videoRef.current;
+    if (!videoRef.current) return; 
+
+    if (type === "direct"){
+      const video = videoRef.current as HTMLVideoElement;
+      video.muted = !video.muted;
+      setIsMuted(!isMuted);
+    } else {
+      const iframe = videoRef.current as HTMLIFrameElement;
       if (type === 'youtube') {
         iframe.contentWindow?.postMessage(
           JSON.stringify({
@@ -69,7 +87,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
           }),
           '*'
         );
-      }
+      } 
       setIsMuted(!isMuted);
     }
   };
@@ -93,13 +111,24 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
     >
-      <iframe
-        ref={videoRef}
+      {type === "direct" ? (
+        <video
+        ref={videoRef as React.RefObject<HTMLVideoElement>}
+        src={url}
+        className="w-full h-full"
+        muted={isMuted}
+        playsInline
+      />
+      ) : (
+        <iframe
+        ref={videoRef as React.RefObject<HTMLIFrameElement>}
         src={getEmbedUrl(url, type)}
         className="w-full h-full"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       />
+      )}
+      
 
       {/* Controls overlay */}
       <motion.div

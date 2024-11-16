@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 import VideoPlayer from './VideoPlayer';
+import introVideo from "../assets/videos/0622 - CRYOUT 2025 REVEAL REV.mp4";
 
 const VideoSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -59,8 +60,8 @@ const VideoSection = () => {
             className="relative"
           >
             <VideoPlayer
-              url="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-              type="youtube"
+              url={introVideo}
+              type="direct"
             />
             
             {/* Enhanced decorative elements */}
