@@ -27,6 +27,83 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
     }
   };
 
+  // Add intersection observer to handle scroll-based autoplay
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!videoRef.current) return;
+
+          if (entry.isIntersecting) {
+            // Video is in view - play
+            if (type === "direct") {
+              const video = videoRef.current as HTMLVideoElement;
+              video.play().catch(error => {
+                console.log("Autoplay failed:", error);
+              });
+            } else {
+              const iframe = videoRef.current as HTMLIFrameElement;
+              if (type === 'youtube') {
+                iframe.contentWindow?.postMessage(
+                  JSON.stringify({
+                    event: 'command',
+                    func: 'playVideo'
+                  }),
+                  '*'
+                );
+              } else if (type === 'vimeo') {
+                iframe.contentWindow?.postMessage(
+                  JSON.stringify({
+                    method: 'play'
+                  }),
+                  '*'
+                );
+              }
+            }
+            setIsPlaying(true);
+          } else {
+            // Video is out of view - pause
+            if (type === "direct") {
+              const video = videoRef.current as HTMLVideoElement;
+              video.pause();
+            } else {
+              const iframe = videoRef.current as HTMLIFrameElement;
+              if (type === 'youtube') {
+                iframe.contentWindow?.postMessage(
+                  JSON.stringify({
+                    event: 'command',
+                    func: 'pauseVideo'
+                  }),
+                  '*'
+                );
+              } else if (type === 'vimeo') {
+                iframe.contentWindow?.postMessage(
+                  JSON.stringify({
+                    method: 'pause'
+                  }),
+                  '*'
+                );
+              }
+            }
+            setIsPlaying(false);
+          }
+        });
+      },
+      {
+        threshold: 0.5, // 50% of video must be visible
+        rootMargin: '-50px 0px' // Adds margin to top and bottom
+      }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    // Cleanup observer on component unmount
+    return () => observer.disconnect();
+  }, [type]);
+  
+
   const togglePlay = () => {
     if (!videoRef.current) return;
 
