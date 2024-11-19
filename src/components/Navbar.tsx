@@ -49,37 +49,22 @@ export const Navbar = () => {
       }}
       className="fixed top-0 left-0 right-0 z-[9999] will-change-transform"
     >
-      <nav className="container mx-auto px-4 h-full">
-        <div className="flex items-center justify-between h-full">
+      <nav className="flex items-center justify-between mx-auto md:px-12 px-8 h-full ">
           <motion.a
             href="/"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex-shrink-0 relative group flex items-center gap-4"
+            className="flex-shrink-0 relative group flex items-center"
           >
             <motion.img
               src={logo}
               alt="Cry Out Conference Logo"
-              className="w-10 h-10 object-contain"
+              className="h-full w-auto max-h-[40px] object-contain"
               style={{
-                scale: useTransform(scrollY, [0, 100], [1.1, 1]),
+                scale: useTransform(scrollY, [0, 100], [1.3, 1]),
               }}
-            />
-            <motion.span
-              className="md:text-2xl font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent"
-              style={{
-                scale: useTransform(scrollY, [0, 100], [1.1, 1]),
-              }}
-            >
-              Cry Out Con 2025
-            </motion.span>
-            <motion.div
-              className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white group-hover:w-full transition-all duration-300"
-              style={{
-                opacity: useTransform(scrollY, [0, 100], [0, 1]),
-              }}
-            />
+            />      
           </motion.a>
 
           <motion.button
@@ -92,7 +77,6 @@ export const Navbar = () => {
           >
             Register Now
           </motion.button>
-        </div>
       </nav>
     </motion.header>
   );
