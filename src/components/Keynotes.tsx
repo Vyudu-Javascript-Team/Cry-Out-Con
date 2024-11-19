@@ -82,13 +82,13 @@ export const Keynotes = () => {
       
       <div className="container mx-auto px-4 relative">
         <SectionTitle 
-          title="Keynotes Speakers"
+          title="Keynote Speakers"
           subtitle="Meet our distinguished speakers"
           gradient="from-blue-400 via-purple-400 to-pink-400"
         />
 
         {/* Keynote speakers grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
           {speakers.map((speaker, index) => (
             <motion.div
               key={speaker.name}
@@ -99,7 +99,7 @@ export const Keynotes = () => {
               className="relative group"
             >
               <motion.div
-                className="relative overflow-hidden rounded-xl aspect-[3/4]"
+                className="relative overflow-hidden rounded-xl aspect-[3/4] max-w-[300px] mx-auto"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
