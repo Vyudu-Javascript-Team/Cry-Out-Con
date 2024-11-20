@@ -82,7 +82,7 @@ export const Keynotes = () => {
       
       <div className="container mx-auto px-4 relative">
         <SectionTitle 
-          title="Keynote Speakers"
+          title="Keynotes Speakers"
           subtitle="Meet our distinguished speakers"
           gradient="from-blue-400 via-purple-400 to-pink-400"
         />

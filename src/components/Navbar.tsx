@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import logo from "../assets/cryout_alt_logo_whiteback.png";
+import logo from "../assets/cryout-logo.png";
 
 export const Navbar = () => {
   const { scrollY } = useScroll();
@@ -55,12 +55,12 @@ export const Navbar = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex-shrink-0 relative group flex items-center"
+            className="relative md:ml-8"
           >
             <motion.img
               src={logo}
               alt="Cry Out Conference Logo"
-              className="h-full w-auto max-h-[40px] object-contain"
+              className="md:h-full md:w-auto md:max-h-[40px] w-20 object-contain bg-white"
               style={{
                 scale: useTransform(scrollY, [0, 100], [1.3, 1]),
               }}
@@ -73,7 +73,7 @@ export const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={scrollToRegistration}
-            className="md:px-6 md:py-2 px-2 py-1 bg-white text-primary rounded font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-white/25"
+            className="md:px-4 md:py-2 px-2 bg-white text-primary rounded font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-white/25"
           >
             Register Now
           </motion.button>
