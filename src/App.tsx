@@ -1,7 +1,5 @@
-import React, { useState, useEffect, Suspense } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { Stats } from './components/Stats';
 import { News } from './components/News';
 import { Partners } from './components/Partners';
 import { Insights } from './components/Insights';
@@ -50,7 +48,6 @@ function App() {
         style={{ scale: contentScale }}
       >
         <div id="hero"><Hero /></div>
-        <div id="stats"><Stats /></div>
         <div id="dive-in"><DiveIn /></div>
         <div id="video"><VideoSection /></div>
         <div id="keynotes"><Keynotes /></div>

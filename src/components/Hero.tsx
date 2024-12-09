@@ -62,7 +62,7 @@ export const Hero = () => {
               <div className="text-6xl md:text-8xl font-bold tracking-tight">
                 <span className="inline-block">THE </span>
                 <NeonText text="CRY OUT" className="mx-2" />
-                <span className="inline-block">EXPERIENCE</span>
+                <span className="inline-block">CON</span>
               </div>
               <div className="text-6xl md:text-8xl font-bold tracking-tight">
                 <GlitchText text="2025" />
@@ -115,17 +115,7 @@ export const Hero = () => {
               Register Now
             </AnimatedButton>
 
-            <AnimatedButton
-              onClick={() => setIsVideoGalleryOpen(true)}
-              className="bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full text-lg font-semibold transition-all border border-white/20 hover:bg-white/20"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <div className="flex items-center gap-2">
-                <Play className="w-5 h-5" />
-                <span>Watch Videos</span>
-              </div>
-            </AnimatedButton>
+            
           </motion.div>
         </motion.div>
       </motion.div>
