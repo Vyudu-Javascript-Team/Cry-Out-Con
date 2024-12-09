@@ -111,7 +111,7 @@ export const Keynotes = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent" />
                 
                 {/* Social Icons */}
-                <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute top-3 right-4 flex gap-2 opacity-100">
                   <motion.a
                     href={speaker.instagram}
                     target="_blank"
