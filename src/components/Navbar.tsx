@@ -60,7 +60,7 @@ export const Navbar = () => {
             <motion.img
               src={logo}
               alt="Cry Out Conference Logo"
-              className="md:h-full md:w-auto md:max-h-[40px] w-20 object-contain bg-white"
+              className="md:h-full md:w-auto md:max-h-[40px] w-20 object-contain "
               style={{
                 scale: useTransform(scrollY, [0, 100], [1.3, 1]),
               }}

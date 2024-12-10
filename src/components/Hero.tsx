@@ -60,7 +60,6 @@ export const Hero = () => {
           >
             <div className="flex flex-col items-center space-y-4">
               <div className="text-6xl md:text-8xl font-bold tracking-tight">
-                <span className="inline-block">THE </span>
                 <NeonText text="CRY OUT" className="mx-2" />
                 <span className="inline-block">CON</span>
               </div>
@@ -85,15 +84,13 @@ export const Hero = () => {
             className="flex flex-wrap justify-center gap-6 text-white/90 text-lg"
           >
             <motion.div
-              whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.15)' }}
-              className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20"
+              className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-6 py-3"
             >
               <MapPin className="w-5 h-5" />
               <span>Houston, Texas</span>
             </motion.div>
             <motion.div
-              whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.15)' }}
-              className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20"
+              className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-6 py-3"
             >
               <Calendar className="w-5 h-5" />
               <span>May 1st - 3rd</span>

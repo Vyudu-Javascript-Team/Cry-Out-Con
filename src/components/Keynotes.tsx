@@ -67,12 +67,6 @@ export const Keynotes = () => {
       image: latrice,
       instagram: "https://www.instagram.com/latriceryan?igsh=bXV5Njd3eXRueGZ6",
       website: "https://latrice-ryan-ministries-82cd.mykajabi.com/KSI22"
-    },
-    {
-      name: "Bishop Kevin Wallace",   
-      image: bishop,
-      instagram: "https://www.instagram.com/bishopkevinwallace?igsh=MTFrc3R3ODI2ZHg5MA==",
-      website: "https://www.kevinwallace.tv/"
     }
   ];
 

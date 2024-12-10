@@ -151,7 +151,7 @@ const Registration = () => {
                       : 'bg-white/20 text-white hover:bg-white/30'
                   }`}
                 >
-                  Choose Plan
+                  Choose {plan.name}
                 </motion.button>
               </motion.div>
             </motion.div>
