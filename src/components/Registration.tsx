@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Check, X } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import SpotlightEffect from './SpotlightEffect';
@@ -115,9 +115,9 @@ const Registration = () => {
                 />
                 
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold mb-4">{plan.name}</h3>
-                  <div className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
-                    <span className="text-3xl">$</span>
+                  <h3 className="text-2xl font-bold mb-4 text-purple-400 to-purple-600">{plan.name}</h3>
+                  <div className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-pink-600">
+                    <span className="text-5xl">$</span>
                     {plan.price}
                   </div>
                 </div>
@@ -147,11 +147,11 @@ const Registration = () => {
                   onClick={() => handlePlanSelection(plan.name)}
                   className={`w-full mt-8 py-4 rounded-xl font-semibold transition-all duration-300 ${
                     selectedPlan === plan.name
-                      ? 'bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white'
-                      : 'bg-white/20 text-white hover:bg-white/30'
+                      ? 'bg-gradient-to-r from-purple-400 to-purple-600'
+                      : 'bg-gradient-to-r from-purple-400 to-purple-600'
                   }`}
                 >
-                  Choose {plan.name}
+                  CHOOSE {plan.name}
                 </motion.button>
               </motion.div>
             </motion.div>

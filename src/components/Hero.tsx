@@ -84,13 +84,13 @@ export const Hero = () => {
             className="flex flex-wrap justify-center gap-6 text-white/90 text-lg"
           >
             <motion.div
-              className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-6 py-3"
+              className="flex items-center space-x-2 backdrop-blur-sm px-6 py-3"
             >
               <MapPin className="w-5 h-5" />
               <span>Houston, Texas</span>
             </motion.div>
             <motion.div
-              className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm px-6 py-3"
+              className="flex items-center space-x-2 backdrop-blur-sm px-6 py-3"
             >
               <Calendar className="w-5 h-5" />
               <span>May 1st - 3rd</span>
