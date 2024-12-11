@@ -14,8 +14,11 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import FloatingNav from './components/FloatingNav';
 import LiveChat from './components/LiveChat';
 import Keynotes from './components/Keynotes';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import HotelDetails from './components/HotelDetails';
+import AllSpeakers from './components/AllSpeakers';
 
-function App() {
+function Home() {
   const { scrollYProgress } = useScroll();
   
   const backgroundOpacity = useTransform(
@@ -39,7 +42,6 @@ function App() {
         style={{ opacity: backgroundOpacity }}
       />
       
-      <Navbar />
       <FloatingNav />
       <LiveChat />
       
@@ -57,10 +59,28 @@ function App() {
         <div id="insights"><Insights /></div>
         <div id="news"><News /></div>
         <div id="partners"><Partners /></div>
-        <Footer />
+        
       </motion.div>
     </div>
   );
+}
+
+function App(){
+  return (
+    <BrowserRouter>
+      <div className="relative min-h-screen bg-primary text-white overflow-x-hidden">
+        <Navbar />
+        
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/hotel-details" element={<HotelDetails />} />
+          <Route path="/speakers" element={<AllSpeakers />} />
+        </Routes>
+        
+        <Footer />
+      </div>
+    </BrowserRouter>
+  )
 }
 
 export default App;

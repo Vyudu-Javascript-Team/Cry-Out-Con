@@ -55,7 +55,7 @@ export const News = () => {
   };
 
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-8 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-primary/50 to-primary" />
       
       <div className="container mx-auto px-4 relative">

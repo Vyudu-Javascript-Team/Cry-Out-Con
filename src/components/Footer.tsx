@@ -4,7 +4,7 @@ import SunrayEffect from './SunrayEffect';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-primary py-12 relative">
+    <footer className="bg-primary py-8 relative">
       <SunrayEffect />
       
       <div className="container mx-auto px-4 relative z-10">

@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Partners = () => {
   return (
-    <section className="py-20 bg-white/5">
+    <section className="py-8 bg-white/5">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-white mb-12 text-center">Our Partners</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">

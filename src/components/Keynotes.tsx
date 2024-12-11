@@ -3,10 +3,10 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import SpotlightEffect from './SpotlightEffect';
 import { Instagram, Globe } from 'lucide-react';
 import SectionTitle from './SectionTitle';
-import bishop from "../assets/images/bishop.png";
 import latrice from "../assets/images/latrice.png";
 import thomas from "../assets/images/thomas.png";
 import keion from "../assets/images/PASTOR-KEION.png";
+import { useNavigate } from 'react-router-dom';
 
 const GradientText = ({ children, className = "" }) => (
   <motion.span
@@ -24,24 +24,25 @@ const GradientText = ({ children, className = "" }) => (
   </motion.span>
 );
 
-const AnimatedLetter = ({ letter, index }) => (
-  <motion.span
-    className="inline-block"
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{
-      duration: 0.5,
-      delay: index * 0.05,
-      type: "spring",
-      stiffness: 100,
-    }}
-  >
-    {letter}
-  </motion.span>
-);
+// const AnimatedLetter = ({ letter, index }) => (
+//   <motion.span
+//     className="inline-block"
+//     initial={{ opacity: 0, y: 50 }}
+//     whileInView={{ opacity: 1, y: 0 }}
+//     viewport={{ once: true }}
+//     transition={{
+//       duration: 0.5,
+//       delay: index * 0.05,
+//       type: "spring",
+//       stiffness: 100,
+//     }}
+//   >
+//     {letter}
+//   </motion.span>
+// );
 
 export const Keynotes = () => {
+  const navigate = useNavigate();
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -71,7 +72,7 @@ export const Keynotes = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="relative py-32 overflow-hidden">
+    <section ref={sectionRef} className="relative py-8 overflow-hidden">
       <SpotlightEffect sectionRef={sectionRef} color="blue" delay={0.2} />
       
       <div className="container mx-auto px-4 relative">
@@ -145,8 +146,8 @@ export const Keynotes = () => {
           className="text-center mt-16"
         >
           <motion.a
-            href="#speakers"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full text-white font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
+            onClick={() => navigate('/speakers')}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full text-white font-semibold hover:cursor-pointer hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
