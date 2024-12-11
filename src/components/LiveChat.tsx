@@ -97,7 +97,7 @@ const LiveChat = () => {
               exit={{ opacity: 0 }}
             >
               <MessageCircle className="w-5 h-5" />
-              <span className="font-medium">Chat with us</span>
+              <span className="font-medium">Contact Us</span>
             </motion.div>
           )}
         </AnimatePresence>
