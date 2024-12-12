@@ -40,15 +40,10 @@ export const Navbar = () => {
     const gradient = "from-blue-400 via-purple-500 to-pink-500";
     const isActive = location.pathname === to;
 
-    const handleClick = () => {
-      navigate(to);
-      setIsMobileMenuOpen(false); 
-    };
-
     return (
       <div className="relative">
         <motion.div
-          onClick={handleClick}
+          onClick={() => navigate(to)}
           className="text-white hover:cursor-pointer hover:text-gray-300 transition-colors"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -94,18 +89,21 @@ export const Navbar = () => {
       <div className="flex flex-col space-y-4">
         <NavLink to="/speakers">Speakers</NavLink>
         <NavLink to="/hotel-details">Hotels</NavLink>
-        <NavLink to="/">Contact Us</NavLink>
-        <motion.button
+        {/* <NavLink to="/">Contact Us</NavLink> */}
+        
+        <motion.a
+        href="https://brushfire.com/tlhc/cryout25/578593"
+        target="_blank"
+        rel="noopener noreferrer"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => {
             setIsMobileMenuOpen(false);
-            navigate("/registration");
           }}
           className="px-4 py-2 bg-white text-primary rounded font-semibold"
         >
           Register Now
-        </motion.button>
+        </motion.a>
       </div>
     </motion.div>
   );
@@ -124,12 +122,12 @@ export const Navbar = () => {
       className="fixed top-0 left-0 right-0 z-[9999] will-change-transform"
     >
       <nav className="flex items-center justify-between mx-auto md:px-12 px-8 h-full ">
-        <motion.a
-          href="/"
+        <motion.div
+          onClick={() => navigate("/")}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="relative md:ml-8"
+          className="relative md:ml-8 hover:cursor-pointer"
         >
           <motion.img
             src={logo}
@@ -139,26 +137,28 @@ export const Navbar = () => {
               scale: useTransform(scrollY, [0, 100], [1.3, 1]),
             }}
           />
-        </motion.a>
+        </motion.div>
 
         <div className="hidden md:flex items-center space-x-8">
           <NavLink to="/speakers">Speakers</NavLink>
           <NavLink to="/hotel-details">Hotels</NavLink>
-          <NavLink to="/">Contact Us</NavLink>
+          {/* <NavLink to="/">Contact Us</NavLink> */}
 
-          <motion.button
+          <motion.a
+            href="https://brushfire.com/tlhc/cryout25/578593"
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => navigate("/registration")}
             className="md:px-4 md:py-2 px-2 bg-white text-primary rounded font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-white/25"
           >
             Register Now
-          </motion.button>
+          </motion.a>
         </div>
 
-        <motion.button
+        <button
           className="md:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle mobile menu"
@@ -180,7 +180,7 @@ export const Navbar = () => {
               }
             ></path>
           </svg>
-        </motion.button>
+        </button>
 
         <AnimatePresence>{isMobileMenuOpen && <MobileMenu />}</AnimatePresence>
       </nav>

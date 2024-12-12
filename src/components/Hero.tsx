@@ -7,6 +7,7 @@ import AnimatedBackground from './AnimatedBackground';
 import GlitchText from './GlitchText';
 import NeonText from './NeonText';
 import VideoGallery from './VideoGallery';
+import Countdown from './Countdown';
 
 export const Hero = () => {
   const containerRef = useRef(null);
@@ -93,7 +94,7 @@ export const Hero = () => {
               className="flex items-center space-x-2 backdrop-blur-sm px-6 py-3"
             >
               <Calendar className="w-5 h-5" />
-              <span>May 1st - 3rd</span>
+              <span>May 1st - 3rd, 2025</span>
             </motion.div>
           </motion.div>
           
@@ -101,16 +102,19 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex flex-wrap justify-center gap-6 pt-8"
+            className="flex flex-col items-center gap-8 p-2"
           >
-            <AnimatedButton 
-              onClick={scrollToRegistration}
-              className="bg-white text-primary px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-lg hover:shadow-white/25"
+            <Countdown />
+            <motion.a 
+              href="https://brushfire.com/tlhc/cryout25/578593"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white text-primary px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-lg hover:cursor-pointer hover:shadow-white/25"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
             >
               Register Now
-            </AnimatedButton>
+            </motion.a>
 
             
           </motion.div>

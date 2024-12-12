@@ -50,7 +50,7 @@ const DiveIn = () => {
   return (
     <motion.section 
       ref={sectionRef}
-      className="py-8 relative overflow-hidden"
+      className="py-16 relative overflow-hidden"
       style={{ opacity }}
     >
       {/* 3D Perspective Background */}

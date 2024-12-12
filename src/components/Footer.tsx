@@ -7,7 +7,8 @@ const Footer: React.FC = () => {
     <footer className="bg-primary py-8 relative">
       <SunrayEffect />
       
-      <div className="container mx-auto px-4 relative z-10">
+     
+      <div className="container max-w-7xl mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
             <h3 className="text-xl font-bold text-white mb-4">About Cry Out Con</h3>

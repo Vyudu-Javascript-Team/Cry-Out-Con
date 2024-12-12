@@ -70,7 +70,7 @@ const HotelDetails = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary via-primary/95 to-primary py-20">
-      <div className="container mx-auto px-4">
+      <div className="container relative max-w-7xl mx-auto px-4">
         <SectionTitle 
           title="Hotels"
           subtitle="Here is a list of hotels you can get accommodation"
