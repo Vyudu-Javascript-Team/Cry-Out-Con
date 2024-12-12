@@ -6,7 +6,12 @@ import SectionTitle from './SectionTitle';
 import latrice from "../assets/images/latrice.png";
 import thomas from "../assets/images/thomas.png";
 import keion from "../assets/images/PASTOR-KEION.png";
-// Import other speaker images as needed
+import shana from "../assets/images/Dr.ShanaDLewis.jpg";
+import vincent from "../assets/images/Vincent Casey.jpeg";
+import blakes from "../assets/images/BishopRCBlakes.jpg";
+import jordan from "../assets/images/JordanWelch.jpg";
+import john from "../assets/images/JohnHannah.jpg";
+
 
 const AllSpeakers = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -30,6 +35,36 @@ const AllSpeakers = () => {
         image: latrice,
         instagram: "https://www.instagram.com/latriceryan?igsh=bXV5Njd3eXRueGZ6",
         website: "https://latrice-ryan-ministries-82cd.mykajabi.com/KSI22"
+      },
+      {
+        name: "Dr. Shana D. Lewis", 
+        image: shana,
+        instagram: "https://www.instagram.com/iamdrshana",
+        website: "https://latrice-ryan-ministries-82cd.mykajabi.com/KSI22"
+      },
+      {
+        name: "Vincent A. Casey", 
+        image: vincent,
+        instagram: "https://www.instagram.com/notyouraverageminister",
+        website: "https://latrice-ryan-ministries-82cd.mykajabi.com/KSI22"
+      },
+      {
+        name: "RC Blakes", 
+        image: blakes,
+        instagram: "https://www.instagram.com/rcblakes",
+        website: "https://latrice-ryan-ministries-82cd.mykajabi.com/KSI22"
+      },
+      {
+        name: "Jordan G. Welch", 
+        image: jordan,
+        instagram: "https://www.instagram.com/jordan.g.welch",
+        website: "https://latrice-ryan-ministries-82cd.mykajabi.com/KSI22"
+      },
+      {
+        name: "Pastor John F. Hannah", 
+        image: john,
+        instagram: "https://www.instagram.com/pastorhannah",
+        website: "https://latrice-ryan-ministries-82cd.mykajabi.com/KSI22"
       }
   ];
 
@@ -37,7 +72,8 @@ const AllSpeakers = () => {
     <section ref={sectionRef} className="relative py-32 overflow-hidden">
       <SpotlightEffect sectionRef={sectionRef} color="blue" delay={0.2} />
       
-      <div className="container mx-auto px-4 relative">
+      
+      <div className="container relative max-w-7xl mx-auto px-4">
         <SectionTitle 
           title="Conference Speakers"
           subtitle="Meet all our amazing speakers"

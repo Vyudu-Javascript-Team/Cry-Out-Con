@@ -44,6 +44,7 @@ const GradientText = ({ children, className = "" }) => (
 export const Keynotes = () => {
   const navigate = useNavigate();
   const sectionRef = useRef<HTMLElement>(null);
+  
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
