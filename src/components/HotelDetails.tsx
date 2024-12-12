@@ -22,7 +22,7 @@ const HotelDetails = () => {
         "Connected to the George R. Brown Convention Center, featuring a rooftop Texas-shaped lazy river and infinity pool.",
       address: "1777 Walker St, Houston, TX 77010",
       phone: "+1 (713) 654-1777",
-      website: "https://www.marriott.com/houston-marquis",
+      website: "https://book.passkey.com/e/50935226",
       rating: 4.5,
       price: 189,
       amenities: [
@@ -48,7 +48,7 @@ const HotelDetails = () => {
         "Downtown luxury hotel with skyline views and direct access to the George R. Brown Convention Center.",
       address: "1600 Lamar St, Houston, TX 77010",
       phone: "+1 (713) 739-8000",
-      website: "https://www.hilton.com/americas-houston",
+      website: "https://book.passkey.com/gt/220475741?gtid=a12b4ac2d9c17f6187cd3142d1ce7032",
       rating: 4.4,
       price: 179,
       amenities: [
