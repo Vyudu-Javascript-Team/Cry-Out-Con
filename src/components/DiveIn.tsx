@@ -11,7 +11,7 @@ const DiveIn = () => {
           <SectionTitle 
             title="The Lighthouse Church"
             subtitle="A beacon of hope and transformation in our community"
-            gradient="from-blue-400 to-purple-600"
+            gradient="from-purple-400 to-purple-600"
           />
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">

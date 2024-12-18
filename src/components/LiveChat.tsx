@@ -114,7 +114,7 @@ const ContactForm = () => {
       <SectionTitle 
             title="Contact Us"
             subtitle=""
-            gradient="from-blue-400 to-purple-600"
+            gradient="from-purple-400 to-purple-600"
           />
         <motion.form onSubmit={handleSubmit} className="max-w-lg mx-auto">
           <motion.div className="mb-4" variants={itemVariants}>

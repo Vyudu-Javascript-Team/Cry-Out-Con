@@ -8,7 +8,7 @@ export const Partners = () => {
       <SectionTitle 
             title="Our Partners"
             subtitle=""
-            gradient="from-blue-400 to-purple-600"
+            gradient="from-purple-400 to-purple-600"
           />
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {['Microsoft', 'Apple', 'Google', 'Amazon'].map((partner) => (
