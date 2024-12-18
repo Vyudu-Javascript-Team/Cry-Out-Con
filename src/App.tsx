@@ -43,7 +43,7 @@ function Home() {
       />
       
       <FloatingNav />
-      <LiveChat />
+      
       
       <motion.div 
         className="relative pt-16"
@@ -54,11 +54,12 @@ function Home() {
         <div id="video"><VideoSection /></div>
         <div id="keynotes"><Keynotes /></div>
         <div id="registration"><Registration /></div>
-        <div id="exhibitor-info"><EmpowermentResources /></div>
+        {/* <div id="exhibitor-info"><EmpowermentResources /></div> */}
         <div id="hotels"><Hotels /></div>
-        <div id="insights"><Insights /></div>
+        {/* <div id="insights"><Insights /></div> */}
         <div id="news"><News /></div>
-        <div id="partners"><Partners /></div>
+        {/* <div id="partners"><Partners /></div> */}
+        <div id="contact"><LiveChat /></div>
         
       </motion.div>
     </div>

@@ -89,7 +89,7 @@ export const Navbar = () => {
       <div className="flex flex-col space-y-4">
         <NavLink to="/speakers">Speakers</NavLink>
         <NavLink to="/hotel-details">Hotels</NavLink>
-        {/* <NavLink to="/">Contact Us</NavLink> */}
+        <a href="#contact">Contact Us</a>
         
         <motion.a
         href="https://brushfire.com/tlhc/cryout25/578593"
@@ -142,7 +142,7 @@ export const Navbar = () => {
         <div className="hidden md:flex items-center space-x-8">
           <NavLink to="/speakers">Speakers</NavLink>
           <NavLink to="/hotel-details">Hotels</NavLink>
-          {/* <NavLink to="/">Contact Us</NavLink> */}
+          <a href="#contact">Contact Us</a>
 
           <motion.a
             href="https://brushfire.com/tlhc/cryout25/578593"

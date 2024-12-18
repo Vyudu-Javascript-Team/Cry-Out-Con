@@ -1,47 +1,50 @@
-import React, { useState, useRef } from 'react';
-import { Calendar, MapPin, Play } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import AnimatedText from './AnimatedText';
-import AnimatedButton from './AnimatedButton';
-import AnimatedBackground from './AnimatedBackground';
-import GlitchText from './GlitchText';
-import NeonText from './NeonText';
-import VideoGallery from './VideoGallery';
-import Countdown from './Countdown';
+import React, { useState, useRef } from "react";
+import { Calendar, MapPin, Play } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import AnimatedText from "./AnimatedText";
+import AnimatedButton from "./AnimatedButton";
+import AnimatedBackground from "./AnimatedBackground";
+import GlitchText from "./GlitchText";
+import NeonText from "./NeonText";
+import VideoGallery from "./VideoGallery";
+import Countdown from "./Countdown";
 
 export const Hero = () => {
   const containerRef = useRef(null);
   const [isVideoGalleryOpen, setIsVideoGalleryOpen] = useState(false);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end start"],
   });
-  
+
   const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const contentScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
 
   const scrollToRegistration = () => {
-    const registrationSection = document.getElementById('registration');
+    const registrationSection = document.getElementById("registration");
     const navHeight = 80; // Height of the fixed navbar
-    
+
     if (registrationSection) {
       const elementPosition = registrationSection.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navHeight;
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   };
 
   return (
-    <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section
+      ref={containerRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
       {/* Background container with higher z-index than -10 to ensure it's always visible */}
       <div className="absolute inset-0 z-0">
         <AnimatedBackground />
       </div>
-      
+
       {/* Content with higher z-index */}
       <motion.div
         style={{ opacity: contentOpacity, scale: contentScale }}
@@ -61,8 +64,7 @@ export const Hero = () => {
           >
             <div className="flex flex-col items-center space-y-4">
               <div className="text-6xl md:text-8xl font-bold tracking-tight">
-                <NeonText text="CRY OUT" className="mx-2" />
-                <span className="inline-block">CON</span>
+                <NeonText text="CRY OUT CON" className="mx-2" />
               </div>
               <div className="text-6xl md:text-8xl font-bold tracking-tight">
                 <GlitchText text="2025" />
@@ -73,31 +75,31 @@ export const Hero = () => {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mt-4"
               >
-                Join a transformative journey of healing and spiritual growth through the power of surrender and connection with God.
+                Join a transformative journey of healing and spiritual growth
+                through the power of surrender and connection with God.
               </motion.p>
             </div>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-6 text-white/90 text-lg"
+            className="flex flex-wrap justify-center md:gap-6 text-white/90 text-sm "
           >
-            <motion.div
-              className="flex items-center space-x-2 backdrop-blur-sm px-6 py-3"
-            >
+            <motion.div className="flex items-center space-x-2 backdrop-blur-sm px-6 py-3">
               <MapPin className="w-5 h-5" />
-              <span>Houston, Texas</span>
+              <div className="flex flex-col md:items-center">
+                <p>George R. Brown Convention Centre</p>
+                <p>Houston, Texas</p>
+              </div>
             </motion.div>
-            <motion.div
-              className="flex items-center space-x-2 backdrop-blur-sm px-6 py-3"
-            >
+            <motion.div className="flex items-center space-x-2 backdrop-blur-sm px-6 py-3">
               <Calendar className="w-5 h-5" />
               <span>May 1st - 3rd, 2025</span>
             </motion.div>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -105,7 +107,7 @@ export const Hero = () => {
             className="flex flex-col items-center gap-8 p-2"
           >
             <Countdown />
-            <motion.a 
+            <motion.a
               href="https://brushfire.com/tlhc/cryout25/578593"
               target="_blank"
               rel="noopener noreferrer"
@@ -115,17 +117,13 @@ export const Hero = () => {
             >
               Register Now
             </motion.a>
-
-            
           </motion.div>
         </motion.div>
       </motion.div>
-      
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary to-transparent z-20"
-      />
 
-      <VideoGallery 
+      <motion.div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary to-transparent z-20" />
+
+      <VideoGallery
         isOpen={isVideoGalleryOpen}
         onClose={() => setIsVideoGalleryOpen(false)}
       />
