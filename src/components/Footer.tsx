@@ -8,7 +8,7 @@ import {
 import { Facebook, Instagram} from "lucide-react";
 import SunrayEffect from "./SunrayEffect";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/cryout-logo.png";
+import logo from "../assets/primary-logo-whiteback.jpg";
 
 const Footer: React.FC = () => {
   const { scrollY } = useScroll();
