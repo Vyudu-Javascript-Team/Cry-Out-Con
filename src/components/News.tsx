@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import image1 from "../assets/images/DSC01895-1.jpg";
-import image2 from "../assets/images/DSC06746.jpg";
-import image3 from "../assets/images/DSC07000-1.jpg";
-import image4 from "../assets/images/IMG_1737.jpg";
+import image1 from "../assets/sectionimages/IMG_6984.jpg";
+import image2 from "../assets/sectionimages/6N7A9961.jpg";
+import image3 from "../assets/sectionimages/IMG_6543.jpg";
+import image4 from "../assets/sectionimages/IMG_1392.jpg";
+import image5 from "../assets/sectionimages/IMG_8152.jpg";
 import { image } from "framer-motion/client";
 
 export const News = () => {
@@ -13,33 +14,24 @@ export const News = () => {
 
   const news = [
     {
-      title: "Cry Out Con 2025 Innovation Awards",
-      description:
-        "Celebrating groundbreaking ministries and innovative solutions.",
-      date: "March 15, 2024",
-      category: "Awards",
+      title: "Captivating Conversations",
       image: image1,
     },
     {
-      title: "New Speakers Announced",
-      description: "Meet the latest ministry leaders joining our conference.",
-      date: "March 14, 2024",
-      category: "Speakers",
+      title: "Dynamic Keynotes",
       image: image2,
     },
     {
-      title: "Ministry Showcase Preview",
-      description: "Revolutionary ideas from emerging ministry leaders.",
-      date: "March 13, 2024",
-      category: "Ministry",
+      title: "Powerful Praise",
       image: image3,
     },
     {
-      title: "Spiritual Growth Report",
-      description: "Analysis of spiritual transformation impact.",
-      date: "March 12, 2024",
-      category: "Research",
+      title: "Transformative Breakouts",
       image: image4,
+    },
+    {
+      title: "Release & Revelation",
+      image: image5,
     },
   ];
 
@@ -90,6 +82,27 @@ export const News = () => {
 
   return (
     <section className="relative h-[500px] w-screen overflow-hidden">
+      <div
+        className="absolute w-full h-full"
+        style={{
+          backgroundImage: `url(${news[currentIndex === 0 ? news.length - 1 : currentIndex - 1].image})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          filter: "blur(4px) brightness(0.5)",
+        }}
+      />
+
+      {/* Next Image (Blurred) */}
+      <div
+        className="absolute w-full h-full"
+        style={{
+          backgroundImage: `url(${news[currentIndex === news.length - 1 ? 0 : currentIndex + 1].image})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          filter: "blur(4px) brightness(0.5)",
+        }}
+      />
+
       <div className="relative h-full w-full overflow-hidden">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
@@ -114,28 +127,23 @@ export const News = () => {
                 paginate(-1);
               }
             }}
-            className="absolute w-full h-full"
+            className="absolute w-full h-full flex justify-center"
           >
             <div
               className="w-full h-full relative"
               style={{
                 backgroundImage: `url(${news[currentIndex].image})`,
-                backgroundSize: "cover",
+                backgroundSize: "contain",
                 backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
               }}
             >
               <div className="absolute inset-0 bg-black/50" />
               <div className="absolute bottom-0 left-0 right-0 p-12 bg-gradient-to-t from-black/80 to-transparent">
                 <div className="container mx-auto">
-                  <span className="px-4 py-2 text-sm bg-white/10 rounded-full text-white/80 mb-4 inline-block">
-                    {news[currentIndex].category}
-                  </span>
                   <h3 className="text-4xl font-bold mb-4 text-white max-w-3xl">
                     {news[currentIndex].title}
                   </h3>
-                  <p className="text-white/80 mb-4 text-lg max-w-2xl">
-                    {news[currentIndex].description}
-                  </p>
                 </div>
               </div>
             </div>
