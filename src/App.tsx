@@ -1,22 +1,23 @@
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { News } from './components/News';
-import { Partners } from './components/Partners';
-import { Insights } from './components/Insights';
-import DiveIn from './components/DiveIn';
-import EmpowermentResources from './components/ExhibitorInfo';
+// import { Partners } from './components/Partners';
+// import { Insights } from './components/Insights';
+// import DiveIn from './components/DiveIn';
+// import EmpowermentResources from './components/ExhibitorInfo';
 import Registration from './components/Registration';
 import Hotels from './components/Hotels';
 import Footer from './components/Footer';
 import { FluidCanvas } from './components/FluidCanvas';
 import VideoSection from './components/VideoSection';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import FloatingNav from './components/FloatingNav';
-import LiveChat from './components/LiveChat';
+// import FloatingNav from './components/FloatingNav';
+// import LiveChat from './components/LiveChat';
 import Keynotes from './components/Keynotes';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HotelDetails from './components/HotelDetails';
 import AllSpeakers from './components/AllSpeakers';
+import Newsletter from './components/Newsletter';
 
 function Home() {
   const { scrollYProgress } = useScroll();
@@ -42,15 +43,14 @@ function Home() {
         style={{ opacity: backgroundOpacity }}
       />
       
-      <FloatingNav />
+      {/* <FloatingNav /> */}
       
       
       <motion.div 
         className="relative pt-16"
-        style={{ scale: contentScale }}
       >
         <div id="hero"><Hero /></div>
-        <div id="dive-in"><DiveIn /></div>
+        {/* <div id="dive-in"><DiveIn /></div> */}
         <div id="video"><VideoSection /></div>
         <div id="keynotes"><Keynotes /></div>
         <div id="registration"><Registration /></div>
@@ -58,8 +58,9 @@ function Home() {
         <div id="hotels"><Hotels /></div>
         {/* <div id="insights"><Insights /></div> */}
         <div id="news"><News /></div>
+        <div id="newsletter"><Newsletter /></div>
         {/* <div id="partners"><Partners /></div> */}
-        <div id="contact"><LiveChat /></div>
+        {/* <div id="contact"><LiveChat /></div> */}
         
       </motion.div>
     </div>

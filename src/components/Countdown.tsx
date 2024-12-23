@@ -32,9 +32,9 @@ const Countdown = () => {
   }, []);
 
   return (
-    <div className="flex justify-center gap-4 text-white">
+    <div className="flex justify-center gap-3 text-white">
       {Object.entries(timeLeft).map(([unit, value]) => (
-        <div key={unit} className="flex flex-col items-center backdrop-blur-sm px-4 py-2 rounded-lg">
+        <div key={unit} className="flex flex-col items-center backdrop-blur-sm px-2 py-2 rounded-lg">
           <span className="text-3xl font-bold">{value.toString().padStart(2, '0')}</span>
           <span className="text-sm uppercase tracking-wider">{unit}</span>
         </div>

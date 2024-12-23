@@ -4,7 +4,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import logo from "../assets/primary-logo-whiteback.jpg";
+import logo from "../assets/cryoutcon.jpg";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -17,15 +17,15 @@ export const Navbar = () => {
   const headerBackground = useTransform(
     scrollY,
     [0, 100],
-    ["rgba(15, 15, 42, 0)", "rgba(15, 15, 42, 0.98)"]
+    ["rgba(15, 15, 42, 0)", "rgba(15, 15, 42, 0.75)"]
   );
 
-  const headerHeight = useTransform(scrollY, [0, 100], ["5.5rem", "4rem"]);
+  const headerHeight = useTransform(scrollY, [0, 100], ["4.5rem", "4rem"]);
 
   const backdropBlur = useTransform(
     scrollY,
     [0, 100],
-    ["blur(0px)", "blur(16px)"]
+    ["blur(4px)", "blur(8px)"]
   );
 
   const borderOpacity = useTransform(scrollY, [0, 100], [0, 0.1]);
@@ -45,8 +45,8 @@ export const Navbar = () => {
         <motion.div
           onClick={() => navigate(to)}
           className="text-white hover:cursor-pointer hover:text-gray-300 transition-colors"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
           {children}
         </motion.div>
@@ -88,13 +88,15 @@ export const Navbar = () => {
     >
       <div className="flex flex-col space-y-4">
         <NavLink to="/speakers">Speakers</NavLink>
-        <NavLink to="/hotel-details">Hotels</NavLink>
-        <a href="#contact">Contact Us</a>
-        
+        <a href="#a">Agenda</a>
+        <NavLink to="/hotel-details">Travel Info</NavLink>
+        {/* <NavLink to="#">Sponsors</NavLink>
+        <a href="#">Get App</a> */}
+
         <motion.a
-        href="https://brushfire.com/tlhc/cryout25/578593"
-        target="_blank"
-        rel="noopener noreferrer"
+          href="https://brushfire.com/tlhc/cryout25/578593"
+          target="_blank"
+          rel="noopener noreferrer"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => {
@@ -132,17 +134,19 @@ export const Navbar = () => {
           <motion.img
             src={logo}
             alt="Cry Out Conference Logo"
-            className="md:h-full md:w-auto md:max-h-[40px] w-20 object-contain "
+            className="md:w-auto md:max-h-[30px] w-20 object-contain"
             style={{
-              scale: useTransform(scrollY, [0, 100], [1.3, 1]),
+              scale: useTransform(scrollY, [0, 100], [1.1, 1]),
             }}
           />
         </motion.div>
 
         <div className="hidden md:flex items-center space-x-8">
           <NavLink to="/speakers">Speakers</NavLink>
-          <NavLink to="/hotel-details">Hotels</NavLink>
-          <a href="#contact">Contact Us</a>
+          <a href="#">Agenda</a>
+          <NavLink to="/hotel-details">Travel Info</NavLink>
+          {/* <NavLink to="#">Sponsors</NavLink>
+          <a href="#">Get App</a> */}
 
           <motion.a
             href="https://brushfire.com/tlhc/cryout25/578593"

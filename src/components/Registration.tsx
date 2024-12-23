@@ -1,92 +1,129 @@
-import { useState, useRef } from 'react';
-import { Check, X } from 'lucide-react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import SpotlightEffect from './SpotlightEffect';
-import FluidWaveBackground from './FluidWaveBackground';
-import SectionTitle from './SectionTitle';
+import { useState, useRef } from "react";
+import { Check, X } from "lucide-react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
+import SpotlightEffect from "./SpotlightEffect";
+import FluidWaveBackground from "./FluidWaveBackground";
+import SectionTitle from "./SectionTitle";
 
 const Registration = () => {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.8, 1, 1, 0.8]);
+  const scale = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.8, 1],
+    [0.8, 1, 1, 0.8]
+  );
 
   const plans = [
     {
-      name: 'VIP',
-      price: 349,
-      features: [
-        { name: 'VIP event w/ Pastor and Lady Henderson', included: true },
-        { name: 'Access to VIP Lounge', included: true },
-        { name: 'Exclusive Cry Out gift', included: true },
-        { name: 'Exclusive conference entrance', included: true },
-        { name: 'VIP conference tote', included: true },
-        { name: 'Access to conference program', included: true },
-        { name: 'VIP registration badge', included: true },
-        { name: 'Seating in VIP section', included: true }
-      ]
-    },
-    {
-      name: 'PREMIER',
-      price: 249,
-      features: [
-        { name: 'Premier conference tote', included: true },
-        { name: 'Access to conference program', included: true },
-        { name: 'Premier registration badge', included: true },
-        { name: 'Seating in Premier section', included: true },
-        { name: 'Exclusive conference entrance', included: false },
-        { name: 'Exclusive Cry Out gift', included: false },
-        { name: 'Access to VIP Lounge', included: false },
-        { name: 'VIP event w/ Pastor and Lady Henderson', included: false }
-      ]
-    },
-    {
-      name: 'GENERAL',
+      name: "GENERAL",
       price: 149,
       features: [
-        { name: 'Access to conference program', included: true },
-        { name: 'General registration badge', included: true },
-        { name: 'Seating in General section', included: true },
-        { name: 'Conference tote', included: false },
-        { name: 'Exclusive event entrance', included: false },
-        { name: 'Exclusive Cry Out gift', included: false },
-        { name: 'Access to VIP Lounge', included: false },
-        { name: 'VIP event w/ Pastor and Lady Henderson', included: false }
-      ]
-    }
+        { name: "Access to conference program", included: true },
+        { name: "General registration badge", included: true },
+        { name: "Seating in General section", included: true },
+        { name: "Conference tote", included: false },
+        { name: "Exclusive event entrance", included: false },
+        { name: "Exclusive Cry Out gift", included: false },
+        { name: "Access to VIP Lounge", included: false },
+        { name: "VIP event w/ Pastor and Lady Henderson", included: false },
+      ],
+    },
+    {
+      name: "PREMIER",
+      price: 249,
+      features: [
+        { name: "Premier conference tote", included: true },
+        { name: "Access to conference program", included: true },
+        { name: "Premier registration badge", included: true },
+        { name: "Seating in Premier section", included: true },
+        { name: "Exclusive conference entrance", included: false },
+        { name: "Exclusive Cry Out gift", included: false },
+        { name: "Access to VIP Lounge", included: false },
+        { name: "VIP event w/ Pastor and Lady Henderson", included: false },
+      ],
+    },
+    {
+      name: "VIP",
+      price: 349,
+      features: [
+        { name: "VIP event w/ Pastor and Lady Henderson", included: true },
+        { name: "Access to VIP Lounge", included: true },
+        { name: "Exclusive Cry Out gift", included: true },
+        { name: "Exclusive conference entrance", included: true },
+        { name: "VIP conference tote", included: true },
+        { name: "Access to conference program", included: true },
+        { name: "VIP registration badge", included: true },
+        { name: "Seating in VIP section", included: true },
+      ],
+    },
   ];
 
-  const handlePlanSelection = (planName: string) => {
-    setSelectedPlan(planName);
-    window.open('https://brushfire.com/tlhc/cryout25/578593/register', '_blank');
+  const handleRegistration = () => {
+    window.open(
+      "https://brushfire.com/tlhc/cryout25/578593/register",
+      "_blank"
+    );
+  };
+
+  const getPlanBackground = (planName: string) => {
+    switch (planName) {
+      case "VIP":
+        return "bg-purple-900/40 border-purple-500/30 hover:border-purple-500/50";
+      case "PREMIER":
+        return "bg-fuchsia-900/40 border-fuchsia-500/30 hover:border-fuchsia-500/50";
+      case "GENERAL":
+        return "bg-white/95 border-white/30 hover:border-white/50";
+      default:
+        return "bg-white/10 border-white/10 hover:border-white/20";
+    }
+  };
+
+  const getPlanShadow = (planName: string) => {
+    switch (planName) {
+      case "VIP":
+        return "0 20px 40px rgba(147, 51, 234, 0.3)";
+      case "PREMIER":
+        return "0 20px 40px rgba(236, 72, 153, 0.3)";
+      case "GENERAL":
+        return "0 20px 40px rgba(255, 255, 255, 0.1)";
+      default:
+        return "0 20px 40px rgba(124, 58, 237, 0.2)";
+    }
   };
 
   return (
-    <motion.section 
+    <motion.section
       ref={sectionRef}
-      className="py-32 relative overflow-hidden"
+      className="py-12 relative overflow-hidden"
       style={{ opacity }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-primary/50 via-primary to-primary/50" />
       <FluidWaveBackground />
       <SpotlightEffect sectionRef={sectionRef} color="purple" delay={0.4} />
-      
+
       <div className="container mx-auto px-4 relative z-10">
-        <SectionTitle 
+        <SectionTitle
           title="REGISTRATION"
           subtitle="Choose the perfect plan for your conference experience"
           gradient="from-pink-500 via-purple-500 to-blue-500"
         />
 
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto"
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-7 max-w-5xl mx-auto"
           style={{ scale }}
         >
           {plans.map((plan, index) => (
@@ -98,31 +135,65 @@ const Registration = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <motion.div
-                className={`relative p-8 rounded-2xl backdrop-blur-sm border transition-all duration-500 ${
+                className={`relative p-4 rounded-xl backdrop-blur-sm border transition-all duration-500 ${
                   selectedPlan === plan.name
-                    ? 'bg-white/15 border-white/20 shadow-[0_0_30px_rgba(124,58,237,0.3)]'
-                    : 'bg-white/10 border-white/10 hover:border-white/20'
+                    ? "bg-white/15 border-white/20 shadow-[0_0_30px_rgba(124,58,237,0.3)]"
+                    : getPlanBackground(plan.name)
                 }`}
-                whileHover={{ 
+                whileHover={{
                   y: -5,
                   scale: 1.02,
-                  boxShadow: '0 20px 40px rgba(124, 58, 237, 0.2)'
+                  boxShadow: getPlanShadow(plan.name),
                 }}
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-2xl opacity-0 transition-opacity duration-300"
                   whileHover={{ opacity: 1 }}
                 />
-                
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold mb-4 text-purple-400 to-purple-600">{plan.name}</h3>
-                  <div className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-pink-600">
+
+                <div className="text-center mb-4">
+                  <h3
+                    className={`text-2xl font-bold mb-2 ${
+                      plan.name === "VIP"
+                        ? "text-purple-400"
+                        : plan.name === "PREMIER"
+                          ? "text-fuchsia-400"
+                          : "text-gray-800"
+                    }`}
+                  >
+                    {plan.name}
+                  </h3>
+                  <div
+                    className={`text-5xl font-bold bg-clip-text text-transparent ${
+                      plan.name === "VIP"
+                        ? "bg-gradient-to-r from-purple-400 to-purple-600"
+                        : plan.name === "PREMIER"
+                          ? "bg-gradient-to-r from-fuchsia-400 to-fuchsia-600"
+                          : "bg-gradient-to-r from-gray-700 to-gray-900"
+                    }`}
+                  >
                     <span className="text-5xl">$</span>
                     {plan.price}
                   </div>
                 </div>
 
-                <div className="space-y-4">
+                <div className="relative z-20">
+                  <button
+                    onClick={handleRegistration}
+                    type="button"
+                    className={`w-full mb-2 py-4 rounded-xl font-semibold hover:cursor-pointer transition-all duration-300 ${
+                      plan.name === "VIP"
+                        ? "bg-gradient-to-r from-purple-400 to-purple-600 hover:from-purple-500 hover:to-purple-700"
+                        : plan.name === "PREMIER"
+                          ? "bg-gradient-to-r from-fuchsia-400 to-fuchsia-600 hover:from-fuchsia-500 hover:to-fuchsia-700"
+                          : "bg-gradient-to-r from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800"
+                    }`}
+                  >
+                    CHOOSE {plan.name}
+                  </button>
+                </div>
+
+                <div className="space-y-2">
                   {plan.features.map((feature) => (
                     <motion.div
                       key={feature.name}
@@ -134,25 +205,20 @@ const Registration = () => {
                       ) : (
                         <X className="w-5 h-5 text-gray-500 flex-shrink-0" />
                       )}
-                      <span className={feature.included ? 'text-white' : 'text-gray-500'}>
+                      <span
+                        className={
+                          feature.included
+                            ? plan.name === "GENERAL"
+                              ? "text-gray-800"
+                              : "text-white"
+                            : "text-gray-500"
+                        }
+                      >
                         {feature.name}
                       </span>
                     </motion.div>
                   ))}
                 </div>
-
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => handlePlanSelection(plan.name)}
-                  className={`w-full mt-8 py-4 rounded-xl font-semibold transition-all duration-300 ${
-                    selectedPlan === plan.name
-                      ? 'bg-gradient-to-r from-purple-400 to-purple-600'
-                      : 'bg-gradient-to-r from-purple-400 to-purple-600'
-                  }`}
-                >
-                  CHOOSE {plan.name}
-                </motion.button>
               </motion.div>
             </motion.div>
           ))}

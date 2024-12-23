@@ -60,12 +60,14 @@ export const Keynotes = () => {
     },
     {
       name: "Dr. Eric Thomas",
+      title: "Pastor",
       image: thomas,
       instagram: "https://www.instagram.com/etthehiphoppreacher?igsh=MTVwbW43am85dHFs",
       website: "https://ericthomas.com/"
     },
     {
       name: "Evangelist Latrice Ryan", 
+      title: "Evangelist",
       image: latrice,
       instagram: "https://www.instagram.com/latriceryan?igsh=bXV5Njd3eXRueGZ6",
       website: "https://latrice-ryan-ministries-82cd.mykajabi.com/KSI22"
@@ -131,7 +133,7 @@ export const Keynotes = () => {
                 </div>
                 
                 <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-2xl font-bold mb-2">{speaker.name}</h3>
+                  <h3 className="text-xl font-bold mb-2">{speaker.name}</h3>
                   <p className="text-gray-300">{speaker.title}</p>
                 </div>
               </motion.div>

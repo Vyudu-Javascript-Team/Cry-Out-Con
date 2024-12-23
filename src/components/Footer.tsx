@@ -5,22 +5,23 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { Facebook, Instagram} from "lucide-react";
+import { Facebook, Instagram } from "lucide-react";
 import SunrayEffect from "./SunrayEffect";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/primary-logo-whiteback.jpg";
+import logo from "../assets/cryoutcon.jpg";
+
+const gradient = "from-blue-400 via-purple-500 to-pink-500";
 
 const Footer: React.FC = () => {
   const { scrollY } = useScroll();
   const navigate = useNavigate();
 
   return (
-    <footer className="bg-primary pb-8 relative">
+    <footer className="bg-primary py-8 relative">
       <SunrayEffect />
 
-      <div className="container max-w-7xl mx-auto px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          <div>
+      <div className="max-w-7xl mx-auto px-8 relative z-10">
+        <div className="flex flex-col space-y-4 items-center mb-8">
             <motion.div
               onClick={() => navigate("/")}
               initial={{ opacity: 0, x: -20 }}
@@ -31,93 +32,17 @@ const Footer: React.FC = () => {
               <motion.img
                 src={logo}
                 alt="Cry Out Conference Logo"
-                className="md:h-full md:w-auto md:max-h-[40px] w-20 object-contain "
+                className="h-full md:w-auto md:max-h-[40px] w-40 object-contain "
                 style={{
                   scale: useTransform(scrollY, [0, 100], [1.3, 1]),
                 }}
               />
             </motion.div>
-            {/* <ul className="space-y-2 text-gray-300">
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#contact"
-                  className="hover:text-white transition-colors"
-                >
-                  Contact
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Press
-                </a>
-              </li>
-            </ul> */}
-          </div>
-
-          <div>
-            <h3 className="text-xl font-bold text-white mb-4">Ministries</h3>
-            <ul className="space-y-2 text-gray-300">
-              <li>
-                <a
-                  href="https://lhhouston.church/"
-                  target="_blank"
-                  className="hover:text-white transition-colors"
-                >
-                  Lighthouse Church
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#partners"
-                  className="hover:text-white transition-colors"
-                >
-                  Sponsorship
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Venue Map
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-bold text-white mb-4">Attendees</h3>
-            <ul className="space-y-2 text-gray-300">
-              <li>
-                <a
-                  href="https://brushfire.com/tlhc/cryout25/578593"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors"
-                >
-                  Registration
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#hotels"
-                  className="hover:text-white transition-colors"
-                >
-                  Hotels
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Schedule
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-bold text-white mb-4">Connect</h3>
+            <div className="flex space-x-4">
+              <a href="#contact" className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}>
+                Contact Us
+              </a>
+            </div>
             <div className="flex space-x-4">
               <a
                 href="https://www.facebook.com/cryoutexperience"
@@ -126,9 +51,6 @@ const Footer: React.FC = () => {
               >
                 <Facebook className="w-6 h-6" />
               </a>
-              {/* <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                <Twitter className="w-6 h-6" />
-              </a> */}
               <a
                 href="https://www.instagram.com/cryoutexperience/"
                 target="_blank"
@@ -136,11 +58,24 @@ const Footer: React.FC = () => {
               >
                 <Instagram className="w-6 h-6" />
               </a>
-              {/* <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                <Linkedin className="w-6 h-6" />
-              </a> */}
             </div>
-          </div>
+            <div className="">
+              <a
+                href="https://lhhouston.church/"
+                target="_blank"
+                className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
+              >
+                Lighthouse Church
+              </a>
+            </div>
+            {/* <div className="flex space-x-4">
+              <a
+                href="#partners"
+                className="hover:text-white transition-colors"
+              >
+                Sponsorship
+              </a>
+            </div> */}
         </div>
 
         <div className="border-t border-gray-700 pt-8">
@@ -153,21 +88,21 @@ const Footer: React.FC = () => {
               <a
                 href="https://cryoutexperience.com/refund-policy/"
                 target="_blank"
-                className="text-gray-300 hover:text-white text-sm transition-colors"
+                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
               >
                 Refund Policy
               </a>
               <a
                 href="https://cryoutexperience.com/faq/"
                 target="_blank"
-                className="text-gray-300 hover:text-white text-sm transition-colors"
+                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
               >
                 FAQ's
               </a>
               <a
                 href="https://cryoutexperience.com/privacy-policy/"
                 target="_blank"
-                className="text-gray-300 hover:text-white text-sm transition-colors"
+                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
               >
                 Privacy Policy
               </a>

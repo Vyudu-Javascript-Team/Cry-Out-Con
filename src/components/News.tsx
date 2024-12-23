@@ -1,141 +1,161 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import SectionTitle from './SectionTitle';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+import image1 from "../assets/images/DSC01895-1.jpg";
+import image2 from "../assets/images/DSC06746.jpg";
+import image3 from "../assets/images/DSC07000-1.jpg";
+import image4 from "../assets/images/IMG_1737.jpg";
+import { image } from "framer-motion/client";
 
 export const News = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+
   const news = [
     {
-      title: 'Cry Out Con 2025 Innovation Awards',
-      description: 'Celebrating groundbreaking ministries and innovative solutions that are transforming lives.',
-      date: 'March 15, 2024',
-      category: 'Awards'
+      title: "Cry Out Con 2025 Innovation Awards",
+      description:
+        "Celebrating groundbreaking ministries and innovative solutions.",
+      date: "March 15, 2024",
+      category: "Awards",
+      image: image1,
     },
     {
-      title: 'New Speakers Announced',
-      description: 'Meet the latest ministry leaders and worship artists joining our growing conference community.',
-      date: 'March 14, 2024',
-      category: 'Speakers'
+      title: "New Speakers Announced",
+      description: "Meet the latest ministry leaders joining our conference.",
+      date: "March 14, 2024",
+      category: "Speakers",
+      image: image2,
     },
     {
-      title: 'Ministry Showcase Preview',
-      description: 'Get a first look at the revolutionary ideas from emerging ministry leaders.',
-      date: 'March 13, 2024',
-      category: 'Ministry'
+      title: "Ministry Showcase Preview",
+      description: "Revolutionary ideas from emerging ministry leaders.",
+      date: "March 13, 2024",
+      category: "Ministry",
+      image: image3,
     },
     {
-      title: 'Spiritual Growth Report',
-      description: 'Comprehensive analysis of spiritual transformation and its impact on various communities.',
-      date: 'March 12, 2024',
-      category: 'Research'
-    }
+      title: "Spiritual Growth Report",
+      description: "Analysis of spiritual transformation impact.",
+      date: "March 12, 2024",
+      category: "Research",
+      image: image4,
+    },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? "100%" : "-100%",
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { x: -50, opacity: 0 },
-    visible: {
+    }),
+    center: {
+      zIndex: 1,
       x: 0,
       opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12
-      }
-    }
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? "100%" : "-100%",
+      opacity: 1,
+    }),
   };
 
+  const swipeConfidenceThreshold = 10000;
+  const swipePower = (offset: number, velocity: number) => {
+    return Math.abs(offset) * velocity;
+  };
+
+  const paginate = (newDirection: number) => {
+    setDirection(newDirection);
+    setCurrentIndex((prevIndex) => {
+      const nextIndex = prevIndex + newDirection;
+
+      if (nextIndex >= news.length) {
+        return 0;
+      }
+      if (nextIndex < 0) {
+        return news.length - 1;
+      }
+      return nextIndex;
+    });
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      paginate(1);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [currentIndex]);
+
   return (
-    <section className="py-8 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/50 to-primary" />
-      
-      <div className="container mx-auto px-4 relative">
-        <SectionTitle 
-          title="Latest News"
-          subtitle="Stay updated with announcements and developments from Cry Out Con 2025"
-          gradient="from-purple-400 via-pink-400 to-blue-400"
-        />
-
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
-        >
-          {news.map((item) => (
-            <motion.div
-              key={item.title}
-              variants={itemVariants}
-              whileHover={{ y: -5, x: 5 }}
-              className="group relative"
-            >
-              <motion.div 
-                className="absolute -inset-1 rounded-xl bg-gradient-to-r from-purple-500/20 to-blue-500/20 opacity-0 blur-xl transition-all duration-500 group-hover:opacity-100"
-              />
-              
-              <motion.div 
-                className="relative bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div className="flex justify-between items-start mb-4">
-                  <span className="px-3 py-1 text-sm bg-white/10 rounded-full text-white/80">
-                    {item.category}
-                  </span>
-                  <span className="text-sm text-white/60">{item.date}</span>
-                </div>
-                
-                <h3 className="text-xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
-                  {item.title}
-                </h3>
-                
-                <p className="text-gray-300 mb-4">{item.description}</p>
-                
-                <motion.button
-                  className="flex items-center gap-2 text-white/80 hover:text-white group/btn"
-                  whileHover={{ x: 5 }}
-                >
-                  Read more 
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                </motion.button>
-              </motion.div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-
-      {/* Decorative elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(3)].map((_, i) => (
+    <section className="relative h-[500px] w-screen overflow-hidden">
+      <div className="relative h-full w-full overflow-hidden">
+        <AnimatePresence initial={false} custom={direction}>
           <motion.div
-            key={i}
-            className="absolute w-32 h-32 rounded-full"
-            style={{
-              background: `radial-gradient(circle, ${i % 2 === 0 ? 'rgba(139, 92, 246, 0.1)' : 'rgba(59, 130, 246, 0.1)'} 0%, transparent 70%)`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.6, 0.3],
-            }}
+            key={currentIndex}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
             transition={{
-              duration: 4 + i,
-              repeat: Infinity,
-              ease: "easeInOut",
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
             }}
-          />
-        ))}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = swipePower(offset.x, velocity.x);
+              if (swipe < -swipeConfidenceThreshold) {
+                paginate(1);
+              } else if (swipe > swipeConfidenceThreshold) {
+                paginate(-1);
+              }
+            }}
+            className="absolute w-full h-full"
+          >
+            <div
+              className="w-full h-full relative"
+              style={{
+                backgroundImage: `url(${news[currentIndex].image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            >
+              <div className="absolute inset-0 bg-black/50" />
+              <div className="absolute bottom-0 left-0 right-0 p-12 bg-gradient-to-t from-black/80 to-transparent">
+                <div className="container mx-auto">
+                  <span className="px-4 py-2 text-sm bg-white/10 rounded-full text-white/80 mb-4 inline-block">
+                    {news[currentIndex].category}
+                  </span>
+                  <h3 className="text-4xl font-bold mb-4 text-white max-w-3xl">
+                    {news[currentIndex].title}
+                  </h3>
+                  <p className="text-white/80 mb-4 text-lg max-w-2xl">
+                    {news[currentIndex].description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+          {news.map((_, index) => (
+            <button
+              key={index}
+              className={`w-3 h-3 rounded-full transition-colors ${
+                index === currentIndex ? "bg-white" : "bg-white/30"
+              }`}
+              onClick={() => {
+                setDirection(index > currentIndex ? 1 : -1);
+                setCurrentIndex(index);
+              }}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
