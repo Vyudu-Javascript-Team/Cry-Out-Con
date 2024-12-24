@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const SunrayEffect = () => {
   return (
-    <div className="absolute bottom-0 left-0 right-0 overflow-hidden h-[33vh] pointer-events-none">
+    <div className="absolute bottom-0 left-0 right-0 overflow-hidden h-[26vh] pointer-events-none">
       {/* Main sun glow */}
       <motion.div
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120vw] aspect-square rounded-[50%]"
