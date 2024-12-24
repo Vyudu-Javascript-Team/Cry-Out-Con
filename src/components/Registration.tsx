@@ -29,17 +29,17 @@ const Registration = () => {
 
   const plans = [
     {
-      name: "GENERAL",
-      price: 149,
+      name: "VIP",
+      price: 349,
       features: [
+        { name: "VIP event w/ Pastor and Lady Henderson", included: true },
+        { name: "Access to VIP Lounge", included: true },
+        { name: "Exclusive Cry Out gift", included: true },
+        { name: "Exclusive conference entrance", included: true },
+        { name: "VIP conference tote", included: true },
         { name: "Access to conference program", included: true },
-        { name: "General registration badge", included: true },
-        { name: "Seating in General section", included: true },
-        { name: "Conference tote", included: false },
-        { name: "Exclusive event entrance", included: false },
-        { name: "Exclusive Cry Out gift", included: false },
-        { name: "Access to VIP Lounge", included: false },
-        { name: "VIP event w/ Pastor and Lady Henderson", included: false },
+        { name: "VIP registration badge", included: true },
+        { name: "Seating in VIP section", included: true },
       ],
     },
     {
@@ -57,19 +57,19 @@ const Registration = () => {
       ],
     },
     {
-      name: "VIP",
-      price: 349,
+      name: "GENERAL",
+      price: 149,
       features: [
-        { name: "VIP event w/ Pastor and Lady Henderson", included: true },
-        { name: "Access to VIP Lounge", included: true },
-        { name: "Exclusive Cry Out gift", included: true },
-        { name: "Exclusive conference entrance", included: true },
-        { name: "VIP conference tote", included: true },
         { name: "Access to conference program", included: true },
-        { name: "VIP registration badge", included: true },
-        { name: "Seating in VIP section", included: true },
+        { name: "General registration badge", included: true },
+        { name: "Seating in General section", included: true },
+        { name: "Conference tote", included: false },
+        { name: "Exclusive event entrance", included: false },
+        { name: "Exclusive Cry Out gift", included: false },
+        { name: "Access to VIP Lounge", included: false },
+        { name: "VIP event w/ Pastor and Lady Henderson", included: false },
       ],
-    },
+    }
   ];
 
   const handleRegistration = () => {

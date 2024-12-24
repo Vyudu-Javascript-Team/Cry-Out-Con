@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
     <footer className="bg-primary py-8 relative">
       <SunrayEffect />
 
-      <div className="max-w-7xl px-8 relative z-10">
+      <div className="max-w-8xl mx-auto items-center justify-center px-8 relative z-10">
         <div className="flex flex-col md:flex-row items-center md:justify-between space-y-4 md:space-y-0 mb-8">
           <motion.div
             onClick={() => navigate("/")}
@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
             />
           </motion.div>
           <div className="flex space-x-4">
-            <a href="#contact" className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}>
+            <a href="#contact" className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors ease-in-out duration-50`}>
               Contact Us
             </a>
           </div>
@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
             <a
               href="https://lhhouston.church/"
               target="_blank"
-              className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
+              className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors ease-in-out duration-50`}
             >
               Lighthouse Church
             </a>
@@ -81,21 +81,21 @@ const Footer: React.FC = () => {
               <a
                 href="https://cryoutexperience.com/refund-policy/"
                 target="_blank"
-                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
+                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors ease-in-out duration-50`}
               >
                 Refund Policy
               </a>
               <a
                 href="https://cryoutexperience.com/faq/"
                 target="_blank"
-                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
+                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors ease-in-out duration-50`}
               >
                 FAQ's
               </a>
               <a
                 href="https://cryoutexperience.com/privacy-policy/"
                 target="_blank"
-                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
+                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors ease-in-out duration-50`}
               >
                 Privacy Policy
               </a>
