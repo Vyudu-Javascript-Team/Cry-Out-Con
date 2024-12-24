@@ -58,7 +58,7 @@ const Agenda = () => {
 
         <p className="text-center text-gray-300 mb-8">{agenda.announcement}</p>
 
-        <div className="bg-white max-w-3xl mx-auto rounded-2xl border border-gray-200 shadow-lg p-6">
+        <div className="bg-white w-full max-w-3xl mx-auto rounded-2xl border border-gray-200 shadow-lg p-4 md:p-6">
           {agenda.days.map((day, index) => (
             <div key={index} className="mb-4">
               <h3 className="text-xl font-semibold text-purple-600 mb-2">
@@ -67,10 +67,10 @@ const Agenda = () => {
               <hr className="border-t border-gray-300 mb-4" />
               {day.sessions.map((session, idx) => (
                 <div key={idx} className="flex space-x-7 mb-2">
-                  <span className="text-md font-semibold text-gray-700 w-[30%]">
+                  <span className="md:text-md text-sm font-semibold text-gray-700 min-w-[150px]">
                     {session.time}
                   </span>
-                  <p className="text-gray-700 text-md">{session.title}</p>
+                  <p className="text-gray-700 text-sm md:text-md">{session.title}</p>
                 </div>
               ))}
             </div>
