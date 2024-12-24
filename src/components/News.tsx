@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import image1 from "../assets/sectionimages/IMG_6984.jpg";
-import image2 from "../assets/sectionimages/6N7A9961.jpg";
-import image3 from "../assets/sectionimages/IMG_6543.jpg";
-import image4 from "../assets/sectionimages/IMG_1392.jpg";
-import image5 from "../assets/sectionimages/IMG_8152.jpg";
-import { image } from "framer-motion/client";
+import image1 from "../assets/cryout24/IMG_6529.jpg";
+import image2 from "../assets/cryout24/IMG_6543.jpg";
+import image3 from "../assets/cryout24/IMG_6947.jpg";
+import image4 from "../assets/cryout24/IMG_7087.jpg";
+import image5 from "../assets/cryout24/IMG_8085.jpg";
+import image6 from "../assets/cryout24/IMG_8090.jpg";
 
 export const News = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,24 +14,22 @@ export const News = () => {
 
   const news = [
     {
-      title: "Captivating Conversations",
       image: image1,
     },
     {
-      title: "Dynamic Keynotes",
       image: image2,
     },
     {
-      title: "Powerful Praise",
       image: image3,
     },
     {
-      title: "Transformative Breakouts",
       image: image4,
     },
     {
-      title: "Release & Revelation",
       image: image5,
+    },
+    {
+      image: image6,
     },
   ];
 
@@ -139,13 +137,13 @@ export const News = () => {
               }}
             >
               <div className="absolute inset-0 bg-black/50" />
-              <div className="absolute bottom-0 left-0 right-0 p-12 bg-gradient-to-t from-black/80 to-transparent">
+              {/* <div className="absolute bottom-0 left-0 right-0 p-12 bg-gradient-to-t from-black/80 to-transparent">
                 <div className="container mx-auto">
                   <h3 className="text-4xl font-bold mb-4 text-white max-w-3xl">
                     {news[currentIndex].title}
                   </h3>
                 </div>
-              </div>
+              </div> */}
             </div>
           </motion.div>
         </AnimatePresence>

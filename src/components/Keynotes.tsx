@@ -1,76 +1,40 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import { motion } from 'framer-motion';
 import SpotlightEffect from './SpotlightEffect';
 import { Instagram, Globe } from 'lucide-react';
 import SectionTitle from './SectionTitle';
-import latrice from "../assets/images/latrice.png";
+import john from "../assets/images/JohnHannah.jpg";
 import thomas from "../assets/images/thomas.png";
 import keion from "../assets/images/PASTOR-KEION.png";
 import { useNavigate } from 'react-router-dom';
 
-const GradientText = ({ children, className = "" }) => (
-  <motion.span
-    className={`bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-300 to-white bg-[length:200%_auto] ${className}`}
-    animate={{
-      backgroundPosition: ["0%", "200%"],
-    }}
-    transition={{
-      duration: 8,
-      repeat: Infinity,
-      ease: "linear",
-    }}
-  >
-    {children}
-  </motion.span>
-);
-
-// const AnimatedLetter = ({ letter, index }) => (
-//   <motion.span
-//     className="inline-block"
-//     initial={{ opacity: 0, y: 50 }}
-//     whileInView={{ opacity: 1, y: 0 }}
-//     viewport={{ once: true }}
-//     transition={{
-//       duration: 0.5,
-//       delay: index * 0.05,
-//       type: "spring",
-//       stiffness: 100,
-//     }}
-//   >
-//     {letter}
-//   </motion.span>
-// );
 
 export const Keynotes = () => {
   const navigate = useNavigate();
   const sectionRef = useRef<HTMLElement>(null);
   
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
 
   const speakers = [
     {
-      name: "Pastor Keion Henderson",
-      title: "Founder and CEO, The Lighthouse Church",
-      image: keion,
-      instagram: "https://www.instagram.com/pastorkeion/",
-      website: "https://keionhenderson.com/about-us/"
-    },
-    {
-      name: "Dr. Eric Thomas",
+      name: "Eric Thomas",
       title: "Pastor",
       image: thomas,
       instagram: "https://www.instagram.com/etthehiphoppreacher?igsh=MTVwbW43am85dHFs",
       website: "https://ericthomas.com/"
     },
     {
-      name: "Evangelist Latrice Ryan", 
-      title: "Evangelist",
-      image: latrice,
-      instagram: "https://www.instagram.com/latriceryan?igsh=bXV5Njd3eXRueGZ6",
-      website: "https://latrice-ryan-ministries-82cd.mykajabi.com/KSI22"
+      name: "Pastor John F. Hannah", 
+      title: "Sr. Pastor, New Life Covenant Church Southeast",
+      image: john,
+      instagram: "https://www.instagram.com/pastorhannah",
+      website: ""
+    },
+    {
+      name: "Pastor Keion Henderson",
+      title: "Founder and CEO, The Lighthouse Church",
+      image: keion,
+      instagram: "https://www.instagram.com/pastorkeion/",
+      website: "https://keionhenderson.com/about-us/"
     }
   ];
 
@@ -114,7 +78,7 @@ export const Keynotes = () => {
                     href={speaker.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-purple-500/50 transition-colors duration-300 group/icon"
+                    className="p-2 backdrop-blur-sm rounded-full bg-purple-500/50 transition-colors duration-300 group/icon"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -124,7 +88,7 @@ export const Keynotes = () => {
                     href={speaker.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-purple-500/50 transition-colors duration-300 group/icon"
+                    className="p-2 backdrop-blur-sm rounded-full bg-purple-500/50 transition-colors duration-300 group/icon"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >

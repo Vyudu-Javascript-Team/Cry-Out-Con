@@ -26,38 +26,38 @@ const AllSpeakers = () => {
 
   const allSpeakers = [
     {
-        name: "Pastor Keion Henderson",
-        title: "Founder and CEO, The Lighthouse Church",
-        image: keion,
-        instagram: "https://www.instagram.com/pastorkeion/",
-        website: "https://keionhenderson.com/about-us/"
-      },
-      {
-        name: "Dr. Eric Thomas",
-        title: "Pastor",
-        image: thomas,
-        instagram: "https://www.instagram.com/etthehiphoppreacher?igsh=MTVwbW43am85dHFs",
-        website: "https://ericthomas.com/"
-      },
-      {
-        name: "Evangelist Latrice Ryan", 
-        title: "Evangelist",
-        image: latrice,
+      name: "Eric Thomas",
+      title: "Pastor",
+      image: thomas,
+      instagram: "https://www.instagram.com/etthehiphoppreacher?igsh=MTVwbW43am85dHFs",
+      website: "https://ericthomas.com/"
+    },
+    {
+      name: "Pastor John F. Hannah", 
+      title: "Sr. Pastor, New Life Covenant Church Southeast",
+      image: john,
+      instagram: "https://www.instagram.com/pastorhannah",
+      website: ""
+    },
+    {
+      name: "Pastor Keion Henderson",
+      title: "Founder and CEO, The Lighthouse Church",
+      image: keion,
+      instagram: "https://www.instagram.com/pastorkeion/",
+      website: "https://keionhenderson.com/about-us/"
+    },
+    {
+      name: "Lacey Tezino", 
+      title: "Founder & CEO of Passport Journeys",
+      image: lacey,
+      instagram: "https://www.instagram.com/Lacey.tezino",
+      website: ""
+    },
+    {
+      name: "Latrice Ryan", 
+      title: "Evangelist",
+      image: latrice,
         instagram: "https://www.instagram.com/latriceryan?igsh=bXV5Njd3eXRueGZ6",
-        website: "https://latrice-ryan-ministries-82cd.mykajabi.com/KSI22"
-      },
-      {
-        name: "Dr. Shana D. Lewis",
-        title: "Mental Health Expert/Exec Wellness Coach", 
-        image: shana,
-        instagram: "https://www.instagram.com/iamdrshana",
-        website: "https://latrice-ryan-ministries-82cd.mykajabi.com/KSI22"
-      },
-      {
-        name: "Vincent A. Casey", 
-        title: "Relationship Mediator",
-        image: vincent,
-        instagram: "https://www.instagram.com/notyouraverageminister",
         website: "https://latrice-ryan-ministries-82cd.mykajabi.com/KSI22"
       },
       {
@@ -65,20 +65,6 @@ const AllSpeakers = () => {
         title: "Pastor",
         image: blakes,
         instagram: "https://www.instagram.com/rcblakes",
-        website: "https://latrice-ryan-ministries-82cd.mykajabi.com/KSI22"
-      },
-      {
-        name: "Pastor John F. Hannah", 
-        title: "Sr. Pastor, New Life Covenant Church Southeast",
-        image: john,
-        instagram: "https://www.instagram.com/pastorhannah",
-        website: ""
-      },
-      {
-        name: "Lacey Tezino", 
-        title: "Founder & CEO of Passport Journeys",
-        image: lacey,
-        instagram: "https://www.instagram.com/Lacey.tezino",
         website: ""
       },
       {
@@ -86,6 +72,13 @@ const AllSpeakers = () => {
         title: "Lead Pastor of New Season, President of National Hispanic Christian Leadership Conference", 
         image: samuel,
         instagram: "https://www.instagram.com/pastorsamuelrodriguez",
+        website: ""
+      },
+    {
+      name: "Dr. Shana D. Lewis",
+      title: "Mental Health Expert/Exec Wellness Coach", 
+      image: shana,
+      instagram: "https://www.instagram.com/iamdrshana",
         website: ""
       },
       {
@@ -109,21 +102,28 @@ const AllSpeakers = () => {
         instagram: "https://www.instagram.com/stephanspeaks",
         website: ""
       },
+        {
+        name: "Vincent A. Casey Sr", 
+        title: "Relationship Mediator",
+        image: vincent,
+        instagram: "https://www.instagram.com/notyouraverageminister",
+        website: ""
+      },  
     ];
     
     const artists = [ 
-      {
-        name: "Jordan G. Welch",
-        title: "Artist", 
-        image: jordan,
-        instagram: "https://www.instagram.com/jordan.g.welch",
-        website: ""
-      },
       {
         name: "Houston Mass Choir",
         title: "Choir", 
         image: choir,
         instagram: "https://www.instagram.com/houstonmasschoir",
+        website: ""
+      },
+      {
+        name: "Jordan G. Welch",
+        title: "Artist", 
+        image: jordan,
+        instagram: "https://www.instagram.com/jordan.g.welch",
         website: ""
       },
       {
@@ -165,6 +165,7 @@ const AllSpeakers = () => {
                 <img
                   src={speaker.image}
                   alt={speaker.name}
+                  loading='lazy'
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent" />
@@ -175,7 +176,7 @@ const AllSpeakers = () => {
                     href={speaker.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-purple-500/50 transition-colors duration-300 group/icon"
+                    className="p-2 backdrop-blur-sm rounded-full bg-purple-500/50 transition-colors duration-300 group/icon"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -185,7 +186,7 @@ const AllSpeakers = () => {
                     href={speaker.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-purple-500/50 transition-colors duration-300 group/icon"
+                    className="p-2 backdrop-blur-sm rounded-full bg-purple-500/50 transition-colors duration-300 group/icon"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -238,7 +239,7 @@ const AllSpeakers = () => {
                     href={artist.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-purple-500/50 transition-colors duration-300 group/icon"
+                    className="p-2 backdrop-blur-sm rounded-full bg-purple-500/50 transition-colors duration-300 group/icon"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -248,7 +249,7 @@ const AllSpeakers = () => {
                     href={artist.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-purple-500/50 transition-colors duration-300 group/icon"
+                    className="p-2 backdrop-blur-sm rounded-full bg-purple-500/50 transition-colors duration-300 group/icon"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >

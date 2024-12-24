@@ -14,7 +14,7 @@ export const initBarba = () => {
             const done = this.async();
             gsap.to(data.current.container, {
               opacity: 0,
-              duration: 0.5,
+              duration: 0.2,
               ease: 'power2.inOut',
               onComplete: done
             });
@@ -23,7 +23,7 @@ export const initBarba = () => {
             const done = this.async();
             gsap.from(data.next.container, {
               opacity: 0,
-              duration: 0.5,
+              duration: 0.2,
               ease: 'power2.inOut',
               onComplete: done
             });
@@ -48,7 +48,7 @@ const initializeComponents = () => {
     gsap.from(element, {
       opacity: 0,
       y: 50,
-      duration: 1,
+      duration: 0.1,
       scrollTrigger: {
         trigger: element,
         start: 'top 80%',

@@ -29,12 +29,7 @@ export const Hero = () => {
       }}
       className="relative py-8 flex items-center justify-center overflow-hidden w-full"
     >
-      {/* Background container with higher z-index than -10 to ensure it's always visible */}
-      {/* <div className="absolute inset-0 z-0">
-        <AnimatedBackground />
-      </div> */}
-
-      {/* Content with higher z-index */}
+      
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -79,7 +74,7 @@ export const Hero = () => {
             className="text-center"
           >
             <div className="flex flex-col items-center space-y-4">
-              <p className="text-lg leading-normal text-gray-300 max-w-2xl mx-auto my-1">
+              <p className="text-lg leading-normal backdrop-blur-sm text-gray-300 max-w-2xl mx-auto my-1">
                 Join a transformative journey of healing and spiritual growth
                 through the power of surrender and connection with God.
               </p>

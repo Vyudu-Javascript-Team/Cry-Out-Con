@@ -20,17 +20,17 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="bg-gray-50 w-full py-8 px-4">
+    <section className="bg-gray-50 w-full py-8 px-16 md:flex items-center">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">
-          Get Updates
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          GET UPDATES
         </h2>
-        <p className="text-lg text-gray-600 mb-8">
+        <p className="text-lg text-gray-600 mb-2">
           Subscribe to receive the latest announcements and news
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+      <form onSubmit={handleSubmit} className="max-w-md mx-auto ">
         <div className="flex flex-col sm:flex-row gap-4">
           <input
             type="email"
@@ -43,7 +43,7 @@ const Newsletter = () => {
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors disabled:bg-blue-400"
+            className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white font-semibold rounded-lg "
           >
             {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
           </button>

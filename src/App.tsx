@@ -6,7 +6,7 @@ import { News } from './components/News';
 // import DiveIn from './components/DiveIn';
 // import EmpowermentResources from './components/ExhibitorInfo';
 import Registration from './components/Registration';
-import Hotels from './components/Hotels';
+// import Hotels from './components/Hotels';
 import Footer from './components/Footer';
 import { FluidCanvas } from './components/FluidCanvas';
 import VideoSection from './components/VideoSection';
@@ -18,6 +18,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HotelDetails from './components/HotelDetails';
 import AllSpeakers from './components/AllSpeakers';
 import Newsletter from './components/Newsletter';
+import Agenda from './components/Agenda';
+import Conference from './components/Conference';
 
 function Home() {
   const { scrollYProgress } = useScroll();
@@ -50,17 +52,15 @@ function Home() {
         className="relative pt-16"
       >
         <div id="hero"><Hero /></div>
-        {/* <div id="dive-in"><DiveIn /></div> */}
         <div id="video"><VideoSection /></div>
         <div id="keynotes"><Keynotes /></div>
         <div id="registration"><Registration /></div>
-        {/* <div id="exhibitor-info"><EmpowermentResources /></div> */}
-        <div id="hotels"><Hotels /></div>
-        {/* <div id="insights"><Insights /></div> */}
+        <div id="agenda"><Agenda /></div>
+        <div id="conference"><Conference /></div>
+        
         <div id="news"><News /></div>
         <div id="newsletter"><Newsletter /></div>
         {/* <div id="partners"><Partners /></div> */}
-        {/* <div id="contact"><LiveChat /></div> */}
         
       </motion.div>
     </div>

@@ -88,7 +88,7 @@ export const Navbar = () => {
     >
       <div className="flex flex-col space-y-4">
         <NavLink to="/speakers">Speakers</NavLink>
-        <a href="#a">Agenda</a>
+        <a href="#agenda">Agenda</a>
         <NavLink to="/hotel-details">Travel Info</NavLink>
         {/* <NavLink to="#">Sponsors</NavLink>
         <a href="#">Get App</a> */}
@@ -129,25 +129,26 @@ export const Navbar = () => {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="relative md:ml-8 hover:cursor-pointer"
+          className="flex-1 hover:cursor-pointer"
         >
           <motion.img
             src={logo}
             alt="Cry Out Conference Logo"
-            className="md:w-auto md:max-h-[30px] w-20 object-contain"
+            className="md:w-auto md:max-h-[40px] w-40 object-contain"
             style={{
               scale: useTransform(scrollY, [0, 100], [1.1, 1]),
             }}
           />
         </motion.div>
 
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden md:flex items-center justify-center space-x-8">
           <NavLink to="/speakers">Speakers</NavLink>
-          <a href="#">Agenda</a>
+          <a href="#agenda">Agenda</a>
           <NavLink to="/hotel-details">Travel Info</NavLink>
-          {/* <NavLink to="#">Sponsors</NavLink>
-          <a href="#">Get App</a> */}
+          {/* <NavLink to="">Sponsors</NavLink> */}
+        </div>
 
+        <div className="hidden md:flex items-center justify-end flex-1 space-x-4">
           <motion.a
             href="https://brushfire.com/tlhc/cryout25/578593"
             target="_blank"
@@ -159,6 +160,14 @@ export const Navbar = () => {
             className="md:px-4 md:py-2 px-2 bg-white text-primary rounded font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-white/25"
           >
             Register Now
+          </motion.a>
+          <motion.a
+            href="#"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-4 py-2 text-white border border-white/20 rounded font-semibold hover:bg-white hover:text-primary transition-all duration-200"
+          >
+            Get App
           </motion.a>
         </div>
 
