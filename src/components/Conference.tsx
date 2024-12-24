@@ -20,6 +20,7 @@ const Conference = () => {
                 <img 
                   src={offering.image} 
                   alt={offering.title} 
+                  loading="lazy"
                   className="w-full h-48 object-cover"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
