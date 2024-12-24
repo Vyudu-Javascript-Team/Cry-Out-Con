@@ -1,33 +1,38 @@
-import React from "react";
+import dynamicKeynotes from "/src/assets/sectionimages/6N7A9961.jpg";
+import powerfulPraise from "/src/assets/sectionimages/IMG_6543.jpg";
+import releaseRevelation from "/src/assets/sectionimages/IMG_8152.jpg";
+import captivatingConversations from "/src/assets/sectionimages/IMG_6984.jpg";
+import transformativeBreakouts from "/src/assets/sectionimages/IMG_1392.jpg";
+
 
 const offerings = [
   {
     title: "Dynamic Keynotes",
-    image: "src/assets/sectionimages/6N7A9961.jpg",
+    image: dynamicKeynotes,
     description:
       "Listen to world renowned speakers share empowering messages to transform your life!",
   },
   {
     title: "Powerful Praise",
-    image: "src/assets/sectionimages/IMG_6543.jpg",
+    image: powerfulPraise,
     description:
       "Nourish your spirit as you connect with God through high praise led by gifted worship leaders, singers & musicians. ",
   },
   {
     title: "Release & Revelation",
-    image: "src/assets/sectionimages/IMG_8152.jpg",
+    image: releaseRevelation,
     description:
       "Prepare your open heart & mind to be poured into, and leave clear minded and with new revelations about your lifes journey.",
   },
   {
     title: "Captivating Conversations",
-    image: "src/assets/sectionimages/IMG_6984.jpg",
+    image: captivatingConversations,
     description:
       "Gain wisdom from people we admire who live by faith, who have been tried by fire, and conquered.",
   },
   {
     title: "Transformative Breakouts",
-    image: "src/assets/sectionimages/IMG_1392.jpg",
+    image: transformativeBreakouts,
     description:
       "Dedicate time in breakout sessions to get wisdom and tools to improve your mindset, relationships, mental health, finances and more.",
   },
@@ -53,7 +58,7 @@ const Conference = () => {
                   loading="lazy"
                   className="w-full h-48 object-cover"
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:cursor-pointer group-hover:opacity-100 transition-opacity ease-in duration-50">
+                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:cursor-pointer group-hover:opacity-100 transition-opacity ease-in-out duration-50">
                   <p className="text-xl font-semibold text-white text-center px-2">
                     {offering.description}
                   </p>
