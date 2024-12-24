@@ -88,7 +88,7 @@ export const Navbar = () => {
     >
       <div className="flex flex-col space-y-4">
         <a href="#conference">Experiences</a>
-        <NavLink to="/speakers">Speakers</NavLink>
+        <NavLink to="/speakers">Speakers & Musical Guests</NavLink>
         <a href="#agenda">Agenda</a>
         <NavLink to="/hotel-details">Travel Info</NavLink>
         {/* <NavLink to="#">Sponsors</NavLink>
@@ -124,7 +124,7 @@ export const Navbar = () => {
       }}
       className="fixed top-0 left-0 right-0 z-[9999] will-change-transform"
     >
-      <nav className="flex items-center justify-between mx-auto md:px-12 px-8 h-full ">
+      <nav className="flex items-center space-x-8 justify-between mx-auto md:px-12 px-8 h-full ">
         <motion.div
           onClick={() => navigate("/")}
           initial={{ opacity: 0, x: -20 }}
@@ -135,22 +135,22 @@ export const Navbar = () => {
           <motion.img
             src={logo}
             alt="Cry Out Conference Logo"
-            className="md:w-auto md:max-h-[40px] w-40 object-contain"
+            className="md:w-auto md:max-h-[50px] w-40 object-contain"
             style={{
               scale: useTransform(scrollY, [0, 100], [1.1, 1]),
             }}
           />
         </motion.div>
 
-        <div className="hidden md:flex items-center justify-center space-x-8">
+        <div className="hidden md:flex space-x-8">
           <a href="#conference">Experiences</a>
-          <NavLink to="/speakers">Speakers</NavLink>
+          <NavLink to="/speakers">Speakers & Musical Guests</NavLink>
           <a href="#agenda">Agenda</a>
           <NavLink to="/hotel-details">Travel Info</NavLink>
           {/* <NavLink to="">Sponsors</NavLink> */}
         </div>
 
-        <div className="hidden md:flex items-center justify-end flex-1 space-x-4">
+        <div className="hidden md:flex justify-end space-x-4">
           <motion.a
             href="https://brushfire.com/tlhc/cryout25/578593"
             target="_blank"

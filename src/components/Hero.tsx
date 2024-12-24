@@ -4,7 +4,7 @@ import { motion} from "framer-motion";
 // import AnimatedBackground from "./AnimatedBackground";
 import VideoGallery from "./VideoGallery";
 import Countdown from "./Countdown";
-import logo from "../assets/cryoutcon.jpg";
+// import logo from "../assets/cryoutcon.jpg";
 import background from "../assets/backgroundimages/6N7A3736.jpg";
 
 export const Hero = () => {
@@ -37,13 +37,13 @@ export const Hero = () => {
           transition={{ duration: 0.3 }}
           className="space-y-4 max-w-5xl mx-auto"
         >
-          <div className="flex justify-center">
+          {/* <div className="flex justify-center">
             <img
               src={logo}
               alt="Cry Out Con Logo"
               className="w-[70%] object-contain"
             />
-          </div>
+          </div> */}
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
