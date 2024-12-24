@@ -1,3 +1,4 @@
+import bgImage from "../assets/backgroundimages/IMG_6543.jpg";
 interface AgendaDay {
   day: string;
   sessions: { time: string; title: string }[];
@@ -45,7 +46,7 @@ const Agenda = () => {
     <section
       className="py-16 relative overflow-hidden"
       style={{
-        backgroundImage: "url(src/assets/backgroundimages/IMG_6543.jpg)",
+        backgroundImage: `url(${bgImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
