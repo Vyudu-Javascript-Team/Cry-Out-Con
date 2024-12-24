@@ -87,10 +87,10 @@ export const Navbar = () => {
       className="md:hidden absolute top-full left-0 right-0 bg-primary p-4"
     >
       <div className="flex flex-col space-y-4">
+        <a href="#conference">Experiences</a>
         <NavLink to="/speakers">Speakers</NavLink>
         <a href="#agenda">Agenda</a>
         <NavLink to="/hotel-details">Travel Info</NavLink>
-        <a href="#conference">Experiences</a>
         {/* <NavLink to="#">Sponsors</NavLink>
         <a href="#">Get App</a> */}
 
@@ -143,10 +143,10 @@ export const Navbar = () => {
         </motion.div>
 
         <div className="hidden md:flex items-center justify-center space-x-8">
+          <a href="#conference">Experiences</a>
           <NavLink to="/speakers">Speakers</NavLink>
           <a href="#agenda">Agenda</a>
           <NavLink to="/hotel-details">Travel Info</NavLink>
-          <a href="#conference">Experiences</a>
           {/* <NavLink to="">Sponsors</NavLink> */}
         </div>
 
