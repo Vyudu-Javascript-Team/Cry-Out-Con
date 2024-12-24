@@ -124,13 +124,13 @@ export const Navbar = () => {
       }}
       className="fixed top-0 left-0 right-0 z-[9999] will-change-transform"
     >
-      <nav className="flex items-center space-x-8 justify-between mx-auto md:px-12 px-8 h-full ">
+      <nav className="flex items-center justify-between md:px-12 px-8 h-full ">
         <motion.div
           onClick={() => navigate("/")}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex-1 hover:cursor-pointer"
+          className="flex-shrink-0 hover:cursor-pointer"
         >
           <motion.img
             src={logo}
@@ -142,7 +142,7 @@ export const Navbar = () => {
           />
         </motion.div>
 
-        <div className="hidden md:flex space-x-8">
+        <div className="hidden md:flex items-center justify-center text-xl  space-x-8">
           <a href="#conference">Experiences</a>
           <NavLink to="/speakers">Speakers & Musical Guests</NavLink>
           <a href="#agenda">Agenda</a>
@@ -150,7 +150,7 @@ export const Navbar = () => {
           {/* <NavLink to="">Sponsors</NavLink> */}
         </div>
 
-        <div className="hidden md:flex justify-end space-x-4">
+        <div className="hidden md:flex justify-end space-x-4 flex-shrink-0">
           <motion.a
             href="https://brushfire.com/tlhc/cryout25/578593"
             target="_blank"
