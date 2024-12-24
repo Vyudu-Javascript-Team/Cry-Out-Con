@@ -53,10 +53,10 @@ function Home() {
       >
         <div id="hero"><Hero /></div>
         <div id="video"><VideoSection /></div>
+        <div id="conference"><Conference /></div>
         <div id="keynotes"><Keynotes /></div>
         <div id="registration"><Registration /></div>
         <div id="agenda"><Agenda /></div>
-        <div id="conference"><Conference /></div>
         
         <div id="news"><News /></div>
         <div id="newsletter"><Newsletter /></div>

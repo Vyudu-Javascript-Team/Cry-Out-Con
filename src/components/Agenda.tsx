@@ -4,16 +4,16 @@ interface AgendaDay {
 }
 
 const agenda: { announcement: string; days: AgendaDay[] } = {
-  announcement: "Full Schedule To Be Announced on February 1, 2025",
+  announcement: "Full Schedule To Be Announced on February 28, 2025",
   days: [
     {
-      day: "Thursday",
+      day: "Thursday May 01",
       sessions: [
         { time: "7:30 PM - 10:00 PM", title: "Opening Night Session" },
       ],
     },
     {
-      day: "Friday",
+      day: "Friday May 02",
       sessions: [
         {
           time: "10:00 AM - 5:00 PM",
@@ -23,9 +23,9 @@ const agenda: { announcement: string; days: AgendaDay[] } = {
       ],
     },
     {
-      day: "Saturday",
+      day: "Saturday May 03",
       sessions: [
-        { time: "8:00 AM", title: "The Release Wellness Session" },
+        { time: "8:00 AM", title: "Wellness Session" },
         {
           time: "10:00 AM - 5:00 PM",
           title: "Praise & Worship, Breakouts, Keynote Addresses",
@@ -34,7 +34,7 @@ const agenda: { announcement: string; days: AgendaDay[] } = {
       ],
     },
     {
-      day: "Sunday",
+      day: "Sunday May 04",
       sessions: [{ time: "10:00 AM", title: "Closing Session" }],
     },
   ],
@@ -61,15 +61,15 @@ const Agenda = () => {
           {agenda.days.map((day, index) => (
             <div key={index} className="mb-4">
               <h3 className="text-xl font-semibold text-purple-600 mb-2">
-                {day.day} {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                {day.day} 
               </h3>
               <hr className="border-t border-gray-300 mb-4" />
               {day.sessions.map((session, idx) => (
                 <div key={idx} className="flex space-x-7 mb-2">
-                  <span className="text-sm font-semibold text-gray-700 w-[30%]">
+                  <span className="text-md font-semibold text-gray-700 w-[30%]">
                     {session.time}
                   </span>
-                  <p className="text-gray-700 text-sm">{session.title}</p>
+                  <p className="text-gray-700 text-md">{session.title}</p>
                 </div>
               ))}
             </div>

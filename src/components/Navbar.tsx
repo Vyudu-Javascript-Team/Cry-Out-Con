@@ -90,6 +90,7 @@ export const Navbar = () => {
         <NavLink to="/speakers">Speakers</NavLink>
         <a href="#agenda">Agenda</a>
         <NavLink to="/hotel-details">Travel Info</NavLink>
+        <a href="#conference">Experiences</a>
         {/* <NavLink to="#">Sponsors</NavLink>
         <a href="#">Get App</a> */}
 
@@ -145,6 +146,7 @@ export const Navbar = () => {
           <NavLink to="/speakers">Speakers</NavLink>
           <a href="#agenda">Agenda</a>
           <NavLink to="/hotel-details">Travel Info</NavLink>
+          <a href="#conference">Experiences</a>
           {/* <NavLink to="">Sponsors</NavLink> */}
         </div>
 

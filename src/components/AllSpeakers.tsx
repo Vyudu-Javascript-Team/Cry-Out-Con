@@ -142,7 +142,7 @@ const AllSpeakers = () => {
       
       <div className="container relative max-w-6xl mx-auto px-4">
         <SectionTitle 
-          title="Conference Speakers"
+          title="Speakers & Musical Guests"
           subtitle="Meet all our amazing speakers"
           gradient="from-blue-400 via-purple-400 to-pink-400"
         />
