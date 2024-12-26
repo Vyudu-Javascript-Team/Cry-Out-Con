@@ -67,7 +67,7 @@ export const Keynotes = () => {
                   alt={speaker.name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                {/* <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent" /> */}
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent" />
                 
                 {/* Social Icons */}
                 <div className="absolute top-3 right-4 flex gap-2 opacity-100">
@@ -93,9 +93,14 @@ export const Keynotes = () => {
                   </motion.a>
                 </div>
                 
-                <div className="absolute bottom-0 left-0 right-0 p-6">
+                {/* <div className="absolute bottom-0 left-0 right-0 p-6">
                   <h3 className="text-xl font-bold mb-2">{speaker.name}</h3>
                   <p className="text-gray-300">{speaker.title}</p>
+                </div> */}
+
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 className="text-xl font-bold mb-2">{speaker.name}</h3>
+                  <p className="text-gray-300 leading-none">{speaker.title}</p>
                 </div>
              
             </motion.div>
