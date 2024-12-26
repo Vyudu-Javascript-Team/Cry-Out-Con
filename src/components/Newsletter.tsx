@@ -23,10 +23,10 @@ const Newsletter = () => {
     <section className="bg-gray-50 w-full py-8 px-4">
       <div className="text-center">
         <h2 className="text-3xl font-bold text-gray-900 mb-4">
-          Get Updates
+          GET UPDATES
         </h2>
         <p className="text-lg text-gray-600 mb-8">
-          Share your email for Cry Out Con Updates and news
+          Share your email for Cry Out Con updates and news
         </p>
       </div>
 

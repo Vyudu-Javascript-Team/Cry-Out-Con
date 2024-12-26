@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import VideoGallery from "./VideoGallery";
 import Countdown from "./Countdown";
 // import logo from "../assets/cryoutcon.jpg";
-import background from "../assets/backgroundimages/6N7A8285.jpg";
+import background from "../assets/backgroundimages/6N7A3736.jpg";
 import LazyImage from "./LazyImage";
 
 export const Hero = () => {
@@ -37,12 +37,12 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="w-full mx-auto max-w-3xl px-4 py-8 md:absolute md:top-0 md:left-0 md:h-full md:py-20">
+      <div className="w-full mx-auto max-w-3xl lg:top-[15%] md:top-[50%] px-4 py-8 md:absolute  md:left-0 md:h-full md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="space-y-4 max-w-xl p-8 rounded-lg bg-black/30 backdrop-blur-md"
+          className="space-y-4 max-w-xl p-8 rounded-lg bg-fuchsia-500/30 backdrop-blur-md"
         >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -50,7 +50,7 @@ export const Hero = () => {
             transition={{ duration: 0.5 }}
             className="flex flex-row items-center md:gap-3 text-white/90"
           >
-            <div className="flex items-center space-x-2 px-4 py-3">
+            <div className="flex items-center space-x-2 px-2 py-3">
               <Calendar className="w-6 h-6" />
               <span>May 1 - 4, 2025</span>
             </div>
