@@ -64,7 +64,7 @@ const Agenda = () => {
       </div>
       <div className="container mx-auto px-4 relative">
         <SectionTitle
-          title="Conference Schedule"
+          title="CONFERENCE SCHEDULE"
           subtitle="Detailed schedule to be announced on March 17"
         />
 

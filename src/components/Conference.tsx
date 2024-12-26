@@ -46,10 +46,10 @@ const Conference = () => {
     <section id="conference" className="py-16 h-full bg-primary">
       <div className="container mx-auto px-4">
         <SectionTitle
-          title="Explore Cry Out Con"
+          title="EXPLORE CRY OUT CON"
           gradient="from-pink-500 via-purple-500 to-blue-500"
         />
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
           {offerings.map((offering, index) => (
             <div
               key={index}

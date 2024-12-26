@@ -94,7 +94,7 @@ export const Navbar = () => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.2 }}
-      className="md:hidden absolute top-full left-0 right-0 bg-primary p-4"
+      className="absolute top-full left-0 right-0 bg-primary p-4"
     >
       <div className="flex flex-col space-y-4">
       <a onClick={() => handleNavigation('/', '#conference')} className="hover:text-gray-200 transition-colors">Experiences</a>
@@ -147,7 +147,7 @@ export const Navbar = () => {
           />
         </motion.div>
 
-        <div className="hidden md:flex items-center justify-center text-xl  space-x-8">
+        <div className="hidden lg:flex items-center justify-center text-xl  space-x-8">
           <a onClick={() => handleNavigation('/', '#conference')} className="hover:text-gray-200 transition-colors cursor-pointer">Experiences</a>
           <NavLink to="/speakers" >Speakers & Musical Guests</NavLink>
           <a onClick={() => handleNavigation('/', '#agenda')} className="hover:text-gray-200 transition-colors cursor-pointer">Agenda</a>
@@ -155,7 +155,7 @@ export const Navbar = () => {
           {/* <NavLink to="">Sponsors</NavLink> */}
         </div>
 
-        <div className="hidden md:flex justify-end space-x-4 flex-shrink-0">
+        <div className="hidden lg:flex justify-end space-x-4 flex-shrink-0">
           <motion.a
             href="https://brushfire.com/tlhc/cryout25/578593"
             target="_blank"
@@ -179,7 +179,7 @@ export const Navbar = () => {
         </div>
 
         <button
-          className="md:hidden"
+          className="lg:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle mobile menu"
         >

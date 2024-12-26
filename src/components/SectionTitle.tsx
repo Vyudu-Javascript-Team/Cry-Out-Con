@@ -37,7 +37,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
       // Split title into characters for individual animation when it's a string
       const titleChars = title.split("");
       return (
-        <h2 className="text-3xl md:text-7xl font-bold mb-6 flex justify-center flex-wrap">
+        <h2 className="text-3xl md:text-5xl space-x-1 lg:text-7xl font-bold mb-6 flex justify-center">
           {titleChars.map((char, i) => (
             <motion.span
               key={i}
@@ -65,7 +65,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
         transition={{
           duration: 0.5,
         }}
-        className="text-5xl md:text-7xl font-bold mb-6"
+        className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6"
       >
         {title}
       </motion.h2>
