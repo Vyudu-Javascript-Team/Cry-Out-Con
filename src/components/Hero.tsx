@@ -1,11 +1,12 @@
 import { useState, useRef } from "react";
-import { Calendar, MapPin } from "lucide-react";
-import { motion} from "framer-motion";
+import { ArrowRight, Calendar, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
 // import AnimatedBackground from "./AnimatedBackground";
 import VideoGallery from "./VideoGallery";
 import Countdown from "./Countdown";
 // import logo from "../assets/cryoutcon.jpg";
-import background from "../assets/backgroundimages/6N7A3736.jpg";
+import background from "../assets/backgroundimages/6N7A5136.jpg";
+import LazyImage from "./LazyImage";
 
 export const Hero = () => {
   const containerRef = useRef(null);
@@ -21,49 +22,48 @@ export const Hero = () => {
   return (
     <section
       ref={containerRef}
-      style={{
-        backgroundImage: `url(${background})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
-      className="relative py-8 flex items-center justify-center overflow-hidden w-full"
+      className="relative min-h-screen w-full flex flex-col lg:block"
     >
-      
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="h-[50vh] lg:h-screen w-full relative">
+        <LazyImage
+          src={background}
+          alt="Background"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+      </div>
+
+      <div className="w-full px-4 py-8 lg:absolute lg:top-0 lg:left-0 lg:h-full lg:py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="space-y-4 max-w-5xl mx-auto"
+          className="space-y-4 max-w-xl p-8 rounded-lg bg-black/30 backdrop-blur-md"
         >
-          {/* <div className="flex justify-center">
-            <img
-              src={logo}
-              alt="Cry Out Con Logo"
-              className="w-[70%] object-contain"
-            />
-          </div> */}
-
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex justify-center items-center gap-5  text-white/90"
+            className="flex flex-row items-center md:gap-3 text-white/90"
           >
-            <div className="flex items-center space-x-2 backdrop-blur-sm px-4 py-3">
+            <div className="flex items-center space-x-2 px-4 py-3">
               <Calendar className="w-6 h-6" />
-              <span className="">May 1 - 4, 2025</span>
+              <span>May 1 - 4, 2025</span>
             </div>
-            <div className="flex items-center space-x-2 backdrop-blur-sm px-6 py-3">
+            <div className="flex items-center space-x-2 px-6 py-3">
               <MapPin className="w-6 h-6" />
-              <div className="flex flex-col md:items-center">
+              <div className="flex flex-col">
                 <p>George R. Brown Convention Centre</p>
                 <p>Houston, Texas</p>
               </div>
             </div>
           </motion.div>
-          <div className="">
+
+          <div>
             <Countdown />
           </div>
 
@@ -71,10 +71,9 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-center"
           >
-            <div className="flex flex-col items-center space-y-4">
-              <p className="text-lg leading-normal backdrop-blur-sm text-gray-300 max-w-2xl mx-auto my-1">
+            <div className="flex flex-col space-y-4">
+              <p className="text-lg leading-normal text-gray-300 max-w-2xl my-1">
                 Join a transformative journey of healing and spiritual growth
                 through the power of surrender and connection with God.
               </p>
@@ -85,14 +84,14 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-center"
           >
             <button
               onClick={handleRegistration}
               type="button"
-              className="bg-white relative z-20 text-primary px-8 py-4 rounded-xl text-xl font-semibold transition-all shadow-lg hover:cursor-pointer hover:shadow-white/25"
+              className="bg-white relative z-20 text-primary px-8 py-4 text-xl font-semibold transition-all shadow-lg hover:cursor-pointer hover:shadow-white/25 flex items-center gap-2 group"
             >
               Register Now
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </button>
           </motion.div>
         </motion.div>

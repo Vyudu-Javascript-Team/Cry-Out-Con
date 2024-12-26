@@ -1,9 +1,12 @@
+import { Suspense } from "react";
+
 import dynamicKeynotes from "/src/assets/sectionimages/6N7A9961.jpg";
 import powerfulPraise from "/src/assets/sectionimages/IMG_6543.jpg";
 import releaseRevelation from "/src/assets/sectionimages/IMG_8152.jpg";
 import captivatingConversations from "/src/assets/sectionimages/IMG_6984.jpg";
 import transformativeBreakouts from "/src/assets/sectionimages/IMG_1392.jpg";
-
+import LazyImage from "./LazyImage";
+import SectionTitle from "./SectionTitle";
 
 const offerings = [
   {
@@ -40,11 +43,12 @@ const offerings = [
 
 const Conference = () => {
   return (
-    <section className="py-16 bg-primary">
+    <section id="conference" className="py-16 h-full bg-primary">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-transparent bg-clip-text">
-          Explore Cry Out Con
-        </h2>
+        <SectionTitle
+          title="Explore Cry Out Con"
+          gradient="from-pink-500 via-purple-500 to-blue-500"
+        />
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {offerings.map((offering, index) => (
             <div
@@ -52,19 +56,25 @@ const Conference = () => {
               className="rounded-lg shadow-lg h-full overflow-hidden"
             >
               <div className="relative group">
-                <img
-                  src={offering.image}
-                  alt={offering.title}
-                  loading="lazy"
-                  className="w-full h-48 object-cover"
-                />
+                <Suspense
+                  fallback={
+                    <div className="w-full h-64 bg-gray-200 animate-pulse" />
+                  }
+                >
+                  <LazyImage
+                    src={offering.image}
+                    alt={offering.title}
+                    className="w-full h-64 object-cover"
+                  />
+                </Suspense>
+
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:cursor-pointer group-hover:opacity-100 transition-opacity ease-in-out duration-50">
                   <p className="text-xl font-semibold text-white text-center px-2">
                     {offering.description}
                   </p>
                 </div>
               </div>
-              <div className="p-4">
+              <div className="py-3">
                 <h2 className="text-xl space-x-3 font-semibold text-center">
                   {offering.title}
                 </h2>

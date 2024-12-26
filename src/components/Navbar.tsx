@@ -7,26 +7,36 @@ import {
 import logo from "../assets/cryoutcon.jpg";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useLoading } from "./contexts/LoadingContext";
 
 export const Navbar = () => {
   const { scrollY } = useScroll();
+  const { setLoading } = useLoading();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const headerBackground = useTransform(
-    scrollY,
-    [0, 100],
-    ["rgba(15, 15, 42, 0)", "rgba(15, 15, 42, 0.75)"]
-  );
 
-  const headerHeight = useTransform(scrollY, [0, 100], ["4.5rem", "4rem"]);
+  const headerHeight = useTransform(scrollY, [0, 100], ["4rem", "4rem"]);
 
   const backdropBlur = useTransform(
     scrollY,
     [0, 100],
-    ["blur(4px)", "blur(8px)"]
+    ["blur(0px)", "blur(8px)"]
   );
+
+  const handleNavigation = (path: string, hash: string) => {
+    setLoading(true);
+    navigate(path);
+    setTimeout(() => {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+      setLoading(false);
+      setIsMobileMenuOpen(false);
+    }, 100);
+  };
 
   const borderOpacity = useTransform(scrollY, [0, 100], [0, 0.1]);
 
@@ -87,10 +97,10 @@ export const Navbar = () => {
       className="md:hidden absolute top-full left-0 right-0 bg-primary p-4"
     >
       <div className="flex flex-col space-y-4">
-        <a href="#conference">Experiences</a>
-        <NavLink to="/speakers">Speakers & Musical Guests</NavLink>
-        <a href="#agenda">Agenda</a>
-        <NavLink to="/hotel-details">Travel Info</NavLink>
+      <a onClick={() => handleNavigation('/', '#conference')} className="hover:text-gray-200 transition-colors">Experiences</a>
+          <NavLink to="/speakers">Speakers & Musical Guests</NavLink>
+          <a onClick={() => handleNavigation('/', '#agenda')} className="hover:text-gray-200 transition-colors">Agenda</a>
+          <NavLink to="/hotel-details" >Travel Info</NavLink>
         {/* <NavLink to="#">Sponsors</NavLink>
         <a href="#">Get App</a> */}
 
@@ -114,15 +124,11 @@ export const Navbar = () => {
   return (
     <motion.header
       style={{
-        backgroundColor: headerBackground,
         height: headerHeight,
         backdropFilter: backdropBlur,
-        borderBottom: useTransform(
-          borderOpacity,
-          (opacity) => `1px solid rgba(255, 255, 255, ${opacity})`
-        ),
+        borderBottom: `1px solid rgba(255, 255, 255, ${borderOpacity.get()})`
       }}
-      className="fixed top-0 left-0 right-0 z-[9999] will-change-transform"
+      className="fixed top-0 left-0 right-0 bg-primary z-[9999] will-change-transform"
     >
       <nav className="flex items-center justify-between md:px-12 px-8 h-full ">
         <motion.div
@@ -137,16 +143,14 @@ export const Navbar = () => {
             alt="Cry Out Conference Logo"
             loading="lazy"
             className="md:w-auto md:max-h-[50px] w-40 object-contain"
-            style={{
-              scale: useTransform(scrollY, [0, 100], [1.1, 1]),
-            }}
+            
           />
         </motion.div>
 
         <div className="hidden md:flex items-center justify-center text-xl  space-x-8">
-          <a href="#conference">Experiences</a>
-          <NavLink to="/speakers">Speakers & Musical Guests</NavLink>
-          <a href="#agenda">Agenda</a>
+          <a onClick={() => handleNavigation('/', '#conference')} className="hover:text-gray-200 transition-colors cursor-pointer">Experiences</a>
+          <NavLink to="/speakers" >Speakers & Musical Guests</NavLink>
+          <a onClick={() => handleNavigation('/', '#agenda')} className="hover:text-gray-200 transition-colors cursor-pointer">Agenda</a>
           <NavLink to="/hotel-details">Travel Info</NavLink>
           {/* <NavLink to="">Sponsors</NavLink> */}
         </div>

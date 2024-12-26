@@ -14,18 +14,18 @@ const Registration = () => {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
+  // const { scrollYProgress } = useScroll({
+  //   target: sectionRef,
+  //   offset: ["start end", "end start"],
+  // });
 
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const scale = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.8, 1],
-    [0.8, 1, 1, 0.8]
-  );
+  // const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  // const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  // const scale = useTransform(
+  //   scrollYProgress,
+  //   [0, 0.2, 0.8, 1],
+  //   [0.8, 1, 1, 0.8]
+  // );
 
   const plans = [
     {
@@ -109,10 +109,9 @@ const Registration = () => {
     <motion.section
       ref={sectionRef}
       className="py-12 relative overflow-hidden"
-      style={{ opacity }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-primary/50 via-primary to-primary/50" />
-      <FluidWaveBackground />
+      {/* <FluidWaveBackground /> */}
       <SpotlightEffect sectionRef={sectionRef} color="purple" delay={0.4} />
 
       <div className="container mx-auto px-4 relative z-10">
@@ -122,19 +121,12 @@ const Registration = () => {
           gradient="from-pink-500 via-purple-500 to-blue-500"
         />
 
-        <motion.div
+        <div
           className="grid grid-cols-1 md:grid-cols-3 gap-7 max-w-5xl mx-auto"
-          style={{ scale }}
         >
           {plans.map((plan, index) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
               <motion.div
+              key={plan.name}
                 className={`relative p-4 rounded-xl backdrop-blur-sm border transition-all duration-500 ${
                   selectedPlan === plan.name
                     ? "bg-white/15 border-white/20 shadow-[0_0_30px_rgba(124,58,237,0.3)]"
@@ -220,9 +212,9 @@ const Registration = () => {
                   ))}
                 </div>
               </motion.div>
-            </motion.div>
+            // </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </motion.section>
   );

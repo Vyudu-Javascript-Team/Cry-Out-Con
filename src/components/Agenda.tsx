@@ -1,11 +1,13 @@
 import bgImage from "../assets/backgroundimages/IMG_6543.jpg";
+import LazyImage from "./LazyImage";
+import SectionTitle from "./SectionTitle";
 interface AgendaDay {
   day: string;
   sessions: { time: string; title: string }[];
 }
 
 const agenda: { announcement: string; days: AgendaDay[] } = {
-  announcement: "Full Schedule To Be Announced on February 28, 2025",
+  announcement: "Detailed Schedule to be announced on March 17",
   days: [
     {
       day: "Thursday May 01",
@@ -18,9 +20,13 @@ const agenda: { announcement: string; days: AgendaDay[] } = {
       sessions: [
         {
           time: "10:00 AM - 5:00 PM",
-          title: "Praise & Worship, Breakouts, Keynote Addresses, Conversations",
+          title:
+            "Praise & Worship, Breakouts, Keynote Addresses, Conversations",
         },
-        { time: "7:00 PM - 10:00 PM", title: "Evening Keynote Session with Musical Guest" },
+        {
+          time: "7:00 PM - 10:00 PM",
+          title: "Evening Keynote Session with Musical Guest",
+        },
       ],
     },
     {
@@ -43,26 +49,30 @@ const agenda: { announcement: string; days: AgendaDay[] } = {
 
 const Agenda = () => {
   return (
-    <section
-      className="py-16 relative overflow-hidden"
-      style={{
-        backgroundImage: `url(${bgImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
+    <section id="agenda" className="py-16 relative overflow-hidden">
+      <div className="absolute inset-0">
+        <LazyImage
+          src={bgImage}
+          alt="Background"
+          className="w-full h-full object-cover"
+          style={{
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+      </div>
       <div className="container mx-auto px-4 relative">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-white bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-          Conference Schedule
-        </h2>
-
-        <p className="text-center text-gray-300 mb-8">{agenda.announcement}</p>
+        <SectionTitle
+          title="Conference Schedule"
+          subtitle="Detailed Schedule to be announced on March 17"
+        />
 
         <div className="bg-white w-full max-w-3xl mx-auto rounded-2xl border border-gray-200 shadow-lg p-4 md:p-6">
           {agenda.days.map((day, index) => (
             <div key={index} className="mb-4">
               <h3 className="text-xl font-semibold text-purple-600 mb-2">
-                {day.day} 
+                {day.day}
               </h3>
               <hr className="border-t border-gray-300 mb-4" />
               {day.sessions.map((session, idx) => (
@@ -70,7 +80,9 @@ const Agenda = () => {
                   <span className="md:text-md text-sm font-semibold text-gray-700 min-w-[150px]">
                     {session.time}
                   </span>
-                  <p className="text-gray-700 text-sm md:text-md">{session.title}</p>
+                  <p className="text-gray-700 text-sm md:text-md">
+                    {session.title}
+                  </p>
                 </div>
               ))}
             </div>

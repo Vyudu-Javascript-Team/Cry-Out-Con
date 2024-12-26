@@ -241,14 +241,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
             </motion.button>
           </div>
 
-          <motion.button
+          {/* <motion.button
             onClick={toggleFullscreen}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors"
           >
             <Maximize2 className="w-5 h-5 text-white" />
-          </motion.button>
+          </motion.button> */}
         </div>
       </motion.div>
     </motion.div>

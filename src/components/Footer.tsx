@@ -20,8 +20,8 @@ const Footer: React.FC = () => {
     <footer className="bg-primary py-8 relative">
       <SunrayEffect />
 
-      <div className="max-w-8xl mx-auto items-center justify-center px-8 relative z-10">
-        <div className="flex flex-col md:flex-row items-center md:justify-between space-y-4 md:space-y-0 mb-8">
+      <div className="max-w-8xl mx-auto px-8 text-xl relative z-10">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 mb-8">
           <motion.div
             onClick={() => navigate("/")}
             initial={{ opacity: 0, x: -20 }}
@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
             />
           </motion.div>
           <div className="flex space-x-4">
-            <a href="#contact" className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors ease-in-out duration-50`}>
+            <a href="#contact" className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}>
               Contact Us
             </a>
           </div>
@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
             <a
               href="https://lhhouston.church/"
               target="_blank"
-              className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors ease-in-out duration-50`}
+              className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
             >
               Lighthouse Church
             </a>
@@ -73,29 +73,29 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-gray-700 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-300 text-sm">
+            <p className="text-gray-300">
               &copy; {new Date().getFullYear()} Cry Out Con. All rights
               reserved.
             </p>
-            <div className="flex space-x-4 mt-4 md:mt-0">
+            <div className="flex space-x-7 gap-5 mt-4 md:mt-0">
               <a
                 href="https://cryoutexperience.com/refund-policy/"
                 target="_blank"
-                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors ease-in-out duration-50`}
+                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
               >
                 Refund Policy
               </a>
               <a
                 href="https://cryoutexperience.com/faq/"
                 target="_blank"
-                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors ease-in-out duration-50`}
+                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
               >
                 FAQ's
               </a>
               <a
                 href="https://cryoutexperience.com/privacy-policy/"
                 target="_blank"
-                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors ease-in-out duration-50`}
+                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
               >
                 Privacy Policy
               </a>

@@ -11,6 +11,7 @@ import {
   Utensils,
 } from "lucide-react";
 import SectionTitle from "./SectionTitle";
+import LazyImage from "./LazyImage";
 
 const HotelDetails = () => {
   const hotels = [
@@ -88,7 +89,7 @@ const HotelDetails = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* Hotel Image Section */}
                 <div className="relative h-[400px]">
-                  <img
+                  <LazyImage
                     src={hotel.image}
                     alt={hotel.name}
                     className="w-full h-full object-cover"

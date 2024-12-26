@@ -14,12 +14,14 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 // import FloatingNav from './components/FloatingNav';
 // import LiveChat from './components/LiveChat';
 import Keynotes from './components/Keynotes';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import HotelDetails from './components/HotelDetails';
 import AllSpeakers from './components/AllSpeakers';
 import Newsletter from './components/Newsletter';
 import Agenda from './components/Agenda';
 import Conference from './components/Conference';
+import DiveIn from './components/DiveIn';
+import LoadingSpinner from './components/LoadingSpinner';
 
 function Home() {
   const { scrollYProgress } = useScroll();
@@ -52,6 +54,7 @@ function Home() {
         className="relative pt-16"
       >
         <div id="hero"><Hero /></div>
+        <div id="dive"><DiveIn /></div>
         <div id="video"><VideoSection /></div>
         <div id="conference"><Conference /></div>
         <div id="keynotes"><Keynotes /></div>
@@ -72,11 +75,12 @@ function App(){
     <BrowserRouter>
       <div className="relative min-h-screen bg-primary text-white overflow-x-hidden">
         <Navbar />
-        
+        <LoadingSpinner />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/hotel-details" element={<HotelDetails />} />
           <Route path="/speakers" element={<AllSpeakers />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         
         <Footer />

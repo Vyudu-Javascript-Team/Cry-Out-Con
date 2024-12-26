@@ -7,6 +7,7 @@ import image3 from "../assets/cryout24/IMG_6947.jpg";
 import image4 from "../assets/cryout24/IMG_7087.jpg";
 import image5 from "../assets/cryout24/IMG_8085.jpg";
 import image6 from "../assets/cryout24/IMG_8090.jpg";
+import LazyImage from "./LazyImage";
 
 export const News = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -129,21 +130,13 @@ export const News = () => {
           >
             <div
               className="w-full h-full relative"
-              style={{
-                backgroundImage: `url(${news[currentIndex].image})`,
-                backgroundSize: "contain",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-              }}
             >
+              <LazyImage
+              src={news[currentIndex].image}
+              alt={`News ${currentIndex + 1}`}
+              className="w-full h-full object-contain"
+            />
               <div className="absolute inset-0 bg-black/50" />
-              {/* <div className="absolute bottom-0 left-0 right-0 p-12 bg-gradient-to-t from-black/80 to-transparent">
-                <div className="container mx-auto">
-                  <h3 className="text-4xl font-bold mb-4 text-white max-w-3xl">
-                    {news[currentIndex].title}
-                  </h3>
-                </div>
-              </div> */}
             </div>
           </motion.div>
         </AnimatePresence>

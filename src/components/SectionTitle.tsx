@@ -41,14 +41,12 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
           {titleChars.map((char, i) => (
             <motion.span
               key={i}
-              initial={{ opacity: 0, y: 50, rotateX: 90 }}
-              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1}}
               viewport={{ once: true }}
               transition={{
-                duration: 0.8,
-                delay: i * 0.05,
-                type: "spring",
-                stiffness: 100,
+                duration: 0.3,
+                delay: i * 0.02,
               }}
               className={`inline-block bg-clip-text text-transparent bg-gradient-to-r ${gradient}`}
             >
@@ -61,13 +59,11 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
 
     return (
       <motion.h2
-        initial={{ opacity: 0, y: 50, rotateX: 90 }}
-        whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{
-          duration: 0.8,
-          type: "spring",
-          stiffness: 100,
+          duration: 0.5,
         }}
         className="text-5xl md:text-7xl font-bold mb-6"
       >

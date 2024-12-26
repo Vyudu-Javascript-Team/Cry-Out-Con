@@ -71,4 +71,9 @@ export default {
     },
   },
   plugins: [],
+  variants: {
+    extend: {
+      backdropFilter: ['responsive'],
+    },
+  },
 };

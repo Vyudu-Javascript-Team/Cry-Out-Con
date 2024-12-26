@@ -7,6 +7,7 @@ import john from "../assets/images/JohnHannah.jpg";
 import thomas from "../assets/images/thomas.png";
 import keion from "../assets/images/PASTOR-KEION.png";
 import { useNavigate } from 'react-router-dom';
+import LazyImage from './LazyImage';
 
 
 export const Keynotes = () => {
@@ -57,21 +58,16 @@ export const Keynotes = () => {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative group"
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+              className="relative group overflow-hidden rounded-xl aspect-[3/4] max-w-[300px] mx-auto"
             >
-              <motion.div
-                className="relative overflow-hidden rounded-xl aspect-[3/4] max-w-[300px] mx-auto"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <img
+             
+                <LazyImage
                   src={speaker.image}
                   alt={speaker.name}
-                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent" />
+                {/* <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent" /> */}
                 
                 {/* Social Icons */}
                 <div className="absolute top-3 right-4 flex gap-2 opacity-100">
@@ -101,7 +97,7 @@ export const Keynotes = () => {
                   <h3 className="text-xl font-bold mb-2">{speaker.name}</h3>
                   <p className="text-gray-300">{speaker.title}</p>
                 </div>
-              </motion.div>
+             
             </motion.div>
           ))}
         </div>
@@ -119,7 +115,7 @@ export const Keynotes = () => {
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            View More Speakers
+            View All Speakers & Musical Guests
           </motion.a>
         </motion.div>
       </div>
