@@ -57,7 +57,7 @@ export const Hero = () => {
             <div className="flex items-center space-x-2 px-6 py-3">
               <MapPin className="w-6 h-6" />
               <div className="flex flex-col">
-                <p>George R. Brown Convention Centre</p>
+                <p>George R. Brown Convention Center</p>
                 <p>Houston, Texas</p>
               </div>
             </div>
