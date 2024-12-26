@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import VideoGallery from "./VideoGallery";
 import Countdown from "./Countdown";
 // import logo from "../assets/cryoutcon.jpg";
-import background from "../assets/backgroundimages/6N7A5136.jpg";
+import background from "../assets/backgroundimages/6N7A8285.jpg";
 import LazyImage from "./LazyImage";
 
 export const Hero = () => {
@@ -22,9 +22,9 @@ export const Hero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen w-full flex flex-col lg:block"
+      className="relative min-h-screen w-full flex flex-col md:block"
     >
-      <div className="h-[50vh] lg:h-screen w-full relative">
+      <div className="h-[50vh] md:h-screen w-full relative">
         <LazyImage
           src={background}
           alt="Background"
@@ -37,7 +37,7 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="w-full mx-auto max-w-3xl px-4 py-8 lg:absolute lg:top-0 lg:left-0 lg:h-full lg:py-20">
+      <div className="w-full mx-auto max-w-3xl px-4 py-8 md:absolute md:top-0 md:left-0 md:h-full md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
