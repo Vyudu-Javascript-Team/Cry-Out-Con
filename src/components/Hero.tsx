@@ -37,7 +37,7 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="w-full mx-auto max-w-3xl lg:top-[15%] md:top-[50%] px-4 py-8 md:absolute  md:left-0 md:h-full md:py-20">
+      <div className="w-full text-xl mx-auto max-w-3xl lg:top-[15%] md:top-[50%] px-4 py-8 md:absolute  md:left-0 md:h-full md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

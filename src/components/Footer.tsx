@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
             />
           </motion.div>
           <div className="flex space-x-4">
-            <a href="#contact" className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}>
+            <a href="https://form.jotform.com/243611671514048" target="_blank" className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}>
               Contact Us
             </a>
           </div>
