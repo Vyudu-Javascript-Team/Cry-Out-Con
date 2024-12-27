@@ -21,10 +21,10 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
   });
 
   // 3D transform values
-  const titleY = useTransform(scrollYProgress, [0, 0.5], [100, 0]);
-  const titleRotateX = useTransform(scrollYProgress, [0, 0.5], [45, 0]);
-  const titleScale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+  const titleY = useTransform(scrollYProgress, [0, 0.2], [100, 0]);
+  const titleRotateX = useTransform(scrollYProgress, [0, 0.2], [45, 0]);
+  const titleScale = useTransform(scrollYProgress, [0, 0.2], [0.8, 1]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
 
   // Perspective container style for 3D effect
   const perspective = {
@@ -45,8 +45,8 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
               whileInView={{ opacity: 1}}
               viewport={{ once: true }}
               transition={{
-                duration: 0.3,
-                delay: i * 0.02,
+                duration: 0.1,
+                delay: i * 0.01,
               }}
               className={`inline-block bg-clip-text text-transparent bg-gradient-to-r ${gradient}`}
             >
@@ -63,7 +63,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{
-          duration: 0.5,
+          duration: 0.2,
         }}
         className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6"
       >
@@ -107,7 +107,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.2, delay: 0.1 }}
             className="text-xl text-gray-300 max-w-2xl mx-auto"
           >
             {subtitle}
@@ -121,7 +121,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
           viewport={{ once: true }}
           transition={{
             duration: 1,
-            delay: 0.5,
+            delay: 0.2,
             type: "spring",
             stiffness: 50,
           }}
@@ -158,7 +158,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
           transition={{
             duration: 2 + Math.random() * 2,
             repeat: Infinity,
-            delay: i * 0.2,
+            delay: i * 0.1,
           }}
         />
       ))}
