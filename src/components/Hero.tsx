@@ -37,63 +37,56 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="w-full text-xl mx-auto max-w-3xl lg:top-[15%] md:top-[50%] px-4 py-8 md:absolute  md:left-0 md:h-full md:py-20">
+      <div className="w-full text-xl mx-auto max-w-3xl lg:top-[15%] md:top-[30%] md:transform px-4 py-8 md:absolute md:left-10 md:rounded-xl md:py-10 space-y-4 md:max-w-sm p-8 bg-fuchsia-500/30 backdrop-blur-md">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="space-y-4 max-w-xl p-8 rounded-lg bg-fuchsia-500/30 backdrop-blur-md"
+          transition={{ duration: 0.5 }}
+          className="flex md:flex-row flex-col md:space-x-2 items-start md:items-center gap-3 text-white/90"
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-row items-center md:gap-3 text-white/90"
-          >
-            <div className="flex items-center space-x-2 px-2 py-3">
-              <Calendar className="w-6 h-6" />
-              <span>May 1 - 4, 2025</span>
-            </div>
-            <div className="flex items-center space-x-2 px-6 py-3">
-              <MapPin className="w-6 h-6" />
-              <div className="flex flex-col">
-                <p>George R. Brown Convention Center</p>
-                <p>Houston, Texas</p>
-              </div>
-            </div>
-          </motion.div>
-
-          <div>
-            <Countdown />
+          <div className="flex items-center text-sm space-x-2 px-1">
+            <Calendar className="w-8 h-8" />
+            <span>May 1 - 4, 2025</span>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <div className="flex flex-col space-y-4">
-              <p className="text-lg leading-normal text-gray-300 max-w-2xl my-1">
-                Join a transformative journey of healing and spiritual growth
-                through the power of surrender and connection with God.
-              </p>
+          <div className="flex items-center text-sm space-x-2 px-1">
+            <MapPin className="w-8 h-8" />
+            <div className="flex flex-col">
+              <p>George R. Brown Convention Center</p>
+              <p>Houston, Texas</p>
             </div>
-          </motion.div>
+          </div>
+        </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+        <div>
+          <Countdown />
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <div className="flex flex-col space-y-4">
+            <p className="text-lg leading-normal text-gray-300 max-w-2xl my-1">
+              Join a transformative journey of healing and spiritual growth
+              through the power of surrender and connection with God.
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <button
+            onClick={handleRegistration}
+            type="button"
+            className="bg-white relative z-20 text-primary px-8 py-4 text-xl font-semibold transition-all shadow-lg hover:cursor-pointer hover:shadow-white/25 flex items-center gap-2 group"
           >
-            <button
-              onClick={handleRegistration}
-              type="button"
-              className="bg-white relative z-20 text-primary px-8 py-4 text-xl font-semibold transition-all shadow-lg hover:cursor-pointer hover:shadow-white/25 flex items-center gap-2 group"
-            >
-              Register Now
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </button>
-          </motion.div>
+            Register Now
+            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+          </button>
         </motion.div>
       </div>
 

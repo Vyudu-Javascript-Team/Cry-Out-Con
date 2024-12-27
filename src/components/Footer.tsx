@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="border-t border-gray-700 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="flex flex-col md:flex-row text-sm md:text-xl justify-between items-center">
             <p className="text-gray-300">
               &copy; {new Date().getFullYear()} Cry Out Con. All rights
               reserved.
