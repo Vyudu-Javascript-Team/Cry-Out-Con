@@ -26,7 +26,7 @@ const Newsletter = () => {
           GET UPDATES
         </h2>
         <p className="text-lg text-gray-600 mb-8">
-          Share your email for Cry Out Con updates and news
+          Share your email for Cry Out Con updates and news.
         </p>
       </div>
 

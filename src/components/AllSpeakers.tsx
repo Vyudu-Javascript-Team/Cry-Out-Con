@@ -15,7 +15,7 @@ import john from "../assets/images/JohnHannah.jpg";
 import lacey from "../assets/images/LaceyTezino.jpeg";
 import samuel from "../assets/images/Samuel Rodríguez Main Headshot.png";
 import shaunie from "../assets/images/LadyShaunieHenderson1.jpg";
-import seion from "../assets/images/BishopSieonRobertsSr.jpg";
+import seion from "../assets/images/IMG_9638.jpg";
 import stephan from "../assets/images/StefanSpeaks.jpeg";
 import choir from "../assets/images/HoustonMassChoir.png";
 import todd from "../assets/images/Todd Dulaney.jpeg";
