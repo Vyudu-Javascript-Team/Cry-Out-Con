@@ -96,7 +96,7 @@ export const Navbar = () => {
       transition={{ duration: 0.2 }}
       className="absolute top-full left-0 right-0 bg-primary p-4"
     >
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col items-center space-y-4">
       <a onClick={() => handleNavigation('/', '#conference')} className="hover:text-gray-200 transition-colors">Experiences</a>
           <NavLink to="/speakers">Speakers & Musical Guests</NavLink>
           <a onClick={() => handleNavigation('/', '#agenda')} className="hover:text-gray-200 transition-colors">Agenda</a>

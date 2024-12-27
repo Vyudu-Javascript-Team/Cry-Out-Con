@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
     <footer className="bg-primary py-8 relative">
       <SunrayEffect />
 
-      <div className="max-w-8xl mx-auto px-8 text-xl relative z-10">
+      <div className="max-w-8xl mx-auto px-8 md:text-xl relative z-10">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 mb-8">
           <motion.div
             onClick={() => navigate("/")}
