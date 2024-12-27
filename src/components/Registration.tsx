@@ -2,30 +2,14 @@ import { useState, useRef } from "react";
 import { Check, X } from "lucide-react";
 import {
   motion,
-  useScroll,
-  useTransform,
-  AnimatePresence,
 } from "framer-motion";
 import SpotlightEffect from "./SpotlightEffect";
-import FluidWaveBackground from "./FluidWaveBackground";
 import SectionTitle from "./SectionTitle";
 
 const Registration = () => {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // const { scrollYProgress } = useScroll({
-  //   target: sectionRef,
-  //   offset: ["start end", "end start"],
-  // });
-
-  // const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  // const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  // const scale = useTransform(
-  //   scrollYProgress,
-  //   [0, 0.2, 0.8, 1],
-  //   [0.8, 1, 1, 0.8]
-  // );
 
   const plans = [
     {
@@ -117,7 +101,7 @@ const Registration = () => {
       <div className="container mx-auto px-4 relative z-10">
         <SectionTitle
           title="REGISTRATION"
-          subtitle="Choose the perfect plan for your conference experience"
+          subtitle="Choose the perfect plan for your conference experience."
           gradient="from-pink-500 via-purple-500 to-blue-500"
         />
 

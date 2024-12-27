@@ -127,9 +127,9 @@ export const Navbar = () => {
         backdropFilter: backdropBlur,
         borderBottom: `1px solid rgba(255, 255, 255, ${borderOpacity.get()})`,
       }}
-      className="fixed top-0 left-0 right-0 bg-primary z-[9999] will-change-transform"
+      className="fixed top-0 left-0 right-0 bg-primary z-[9999] will-change-transform font-sans"
     >
-      <nav className="flex items-center font-sans justify-between md:px-12 px-8 h-full ">
+      <nav className="flex items-center justify-between md:px-12 px-8 h-full ">
         <motion.div
           onClick={() => navigate("/")}
           initial={{ opacity: 0, x: -20 }}
