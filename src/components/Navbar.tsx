@@ -16,7 +16,6 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-
   const headerHeight = useTransform(scrollY, [0, 100], ["4rem", "4rem"]);
 
   const backdropBlur = useTransform(
@@ -31,7 +30,7 @@ export const Navbar = () => {
     setTimeout(() => {
       const element = document.querySelector(hash);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
       }
       setLoading(false);
       setIsMobileMenuOpen(false);
@@ -97,10 +96,10 @@ export const Navbar = () => {
       className="absolute top-full left-0 right-0 bg-primary p-4"
     >
       <div className="flex flex-col items-center space-y-4">
-      <a onClick={() => handleNavigation('/', '#conference')} className="hover:text-gray-200 transition-colors">Experiences</a>
-          <NavLink to="/speakers">Speakers & Musical Guests</NavLink>
-          <a onClick={() => handleNavigation('/', '#agenda')} className="hover:text-gray-200 transition-colors">Agenda</a>
-          <NavLink to="/hotel-details" >Travel Info</NavLink>
+      <a onClick={() => handleNavigation('/', '#conference')} className="hover:text-gray-200 transition-colors cursor-pointer">EXPERIENCES</a>
+          <NavLink to="/speakers" >SPEAKERS & MUSICAL GUESTS</NavLink>
+          <a onClick={() => handleNavigation('/', '#agenda')} className="hover:text-gray-200 transition-colors cursor-pointer">SCHEDULE</a>
+          <NavLink to="/hotel-details">TRAVEL INFO</NavLink>
         {/* <NavLink to="#">Sponsors</NavLink>
         <a href="#">Get App</a> */}
 
@@ -115,7 +114,7 @@ export const Navbar = () => {
           }}
           className="px-4 py-2 bg-white text-primary rounded font-semibold"
         >
-          Register Now
+          REGISTER NOW
         </motion.a>
       </div>
     </motion.div>
@@ -126,11 +125,11 @@ export const Navbar = () => {
       style={{
         height: headerHeight,
         backdropFilter: backdropBlur,
-        borderBottom: `1px solid rgba(255, 255, 255, ${borderOpacity.get()})`
+        borderBottom: `1px solid rgba(255, 255, 255, ${borderOpacity.get()})`,
       }}
       className="fixed top-0 left-0 right-0 bg-primary z-[9999] will-change-transform"
     >
-      <nav className="flex items-center justify-between md:px-12 px-8 h-full ">
+      <nav className="flex items-center font-sans justify-between md:px-12 px-8 h-full ">
         <motion.div
           onClick={() => navigate("/")}
           initial={{ opacity: 0, x: -20 }}
@@ -143,15 +142,24 @@ export const Navbar = () => {
             alt="Cry Out Conference Logo"
             loading="lazy"
             className="md:w-auto md:max-h-[50px] w-40 object-contain"
-            
           />
         </motion.div>
 
         <div className="hidden lg:flex items-center justify-center text-xl  space-x-8">
-          <a onClick={() => handleNavigation('/', '#conference')} className="hover:text-gray-200 transition-colors cursor-pointer">Experiences</a>
-          <NavLink to="/speakers" >Speakers & Musical Guests</NavLink>
-          <a onClick={() => handleNavigation('/', '#agenda')} className="hover:text-gray-200 transition-colors cursor-pointer">Agenda</a>
-          <NavLink to="/hotel-details">Travel Info</NavLink>
+          <a
+            onClick={() => handleNavigation("/", "#conference")}
+            className="hover:text-gray-200 transition-colors cursor-pointer"
+          >
+            EXPERIENCES
+          </a>
+          <NavLink to="/speakers">SPEAKERS & MUSICAL GUESTS</NavLink>
+          <a
+            onClick={() => handleNavigation("/", "#agenda")}
+            className="hover:text-gray-200 transition-colors cursor-pointer"
+          >
+            SCHEDULE
+          </a>
+          <NavLink to="/hotel-details">TRAVEL INFO</NavLink>
           {/* <NavLink to="">Sponsors</NavLink> */}
         </div>
 
@@ -166,7 +174,7 @@ export const Navbar = () => {
             whileTap={{ scale: 0.95 }}
             className="md:px-4 md:py-2 px-2 bg-white text-primary rounded font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-white/25"
           >
-            Register Now
+            REGISTER NOW
           </motion.a>
           <motion.a
             href="#"
@@ -174,7 +182,7 @@ export const Navbar = () => {
             whileTap={{ scale: 0.95 }}
             className="px-4 py-2 text-white border border-white/20 rounded font-semibold hover:bg-white hover:text-primary transition-all duration-200"
           >
-            Get App
+            GET APP
           </motion.a>
         </div>
 
