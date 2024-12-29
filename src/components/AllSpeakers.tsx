@@ -55,7 +55,7 @@ const AllSpeakers = () => {
       website: "",
     },
     {
-      name: "Latrice Ryan",
+      name: "LaTrice Ryan",
       title: "Evangelist",
       image: latrice,
       instagram: "https://www.instagram.com/latriceryan?igsh=bXV5Njd3eXRueGZ6",
@@ -91,7 +91,7 @@ const AllSpeakers = () => {
       website: "",
     },
     {
-      name: "Bishop Seion Roberts",
+      name: "Seion Roberts",
       title: "Chief of Ministries, Lighthouse Church & Ministries",
       image: seion,
       instagram: "https://www.instagram.com/seionrobertsministries",
