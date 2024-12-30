@@ -26,6 +26,19 @@ export const Navbar = () => {
 
   const handleNavigation = (path: string, hash: string) => {
     setLoading(true);
+    setIsMobileMenuOpen(false);
+  
+    // If we're already on the home page
+    if (location.pathname === '/') {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+      setLoading(false);
+      return;
+    }
+  
+    // If we're on a different page
     navigate(path);
     setTimeout(() => {
       const element = document.querySelector(hash);
@@ -33,8 +46,7 @@ export const Navbar = () => {
         element.scrollIntoView({ behavior: "smooth" });
       }
       setLoading(false);
-      setIsMobileMenuOpen(false);
-    }, 100);
+    }, 1000); 
   };
 
   const borderOpacity = useTransform(scrollY, [0, 100], [0, 0.1]);
@@ -52,8 +64,12 @@ export const Navbar = () => {
     return (
       <div className="relative">
         <motion.div
-          onClick={() => navigate(to)}
-          className="text-white hover:cursor-pointer hover:text-gray-300 transition-colors"
+          onClick={() => {
+            navigate(to);
+            setIsMobileMenuOpen(false);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          className="text-white hover:cursor-pointer hover:text-gray-300 transition-colors whitespace-nowrap"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
@@ -129,9 +145,12 @@ export const Navbar = () => {
       }}
       className="fixed top-0 left-0 right-0 bg-primary z-[9999] will-change-transform font-sans"
     >
-      <nav className="flex items-center justify-between md:px-12 px-8 h-full ">
+      <nav className="flex items-center w-full mx-auto justify-between md:px-12 px-8 h-full ">
         <motion.div
-          onClick={() => navigate("/")}
+          onClick={() => {
+            navigate("/");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
@@ -145,7 +164,7 @@ export const Navbar = () => {
           />
         </motion.div>
 
-        <div className="hidden lg:flex items-center justify-center text-xl  space-x-8">
+        <div className="hidden lg:flex items-center justify-center space-x-4 xl:space-x-6 2xl:space-x-8 flex-grow px-2">
           <a
             onClick={() => handleNavigation("/", "#conference")}
             className="hover:text-gray-200 transition-colors cursor-pointer"
