@@ -196,7 +196,6 @@ const Registration = () => {
                   ))}
                 </div>
               </motion.div>
-            // </motion.div>
           ))}
         </div>
       </div>

@@ -44,6 +44,7 @@ const Hotels = () => {
             </p>
             <motion.button
               onClick={() => navigate("/hotel-details")}
+              type="button"
               className="flex items-center gap-2 mx-auto px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl text-white font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}

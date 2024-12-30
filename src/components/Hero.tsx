@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, Suspense } from "react";
 import { ArrowRight, Calendar, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 // import AnimatedBackground from "./AnimatedBackground";
@@ -25,6 +25,9 @@ export const Hero = () => {
       className="relative min-h-screen w-full flex flex-col md:block"
     >
       <div className="h-[50vh] md:h-screen w-full relative">
+      <Suspense fallback={
+          <div className="absolute inset-0 w-full h-full bg-gray-900 animate-pulse" />
+        }>
         <LazyImage
           src={background}
           alt="Background"
@@ -35,6 +38,7 @@ export const Hero = () => {
             backgroundRepeat: "no-repeat",
           }}
         />
+        </Suspense>
       </div>
 
       <div className="w-full text-xl mx-auto max-w-3xl lg:top-[15%] md:top-[30%] md:transform px-4 py-8 md:absolute md:left-10 md:rounded-xl md:py-10 space-y-4 md:max-w-sm p-8 bg-fuchsia-500/30 backdrop-blur-md">

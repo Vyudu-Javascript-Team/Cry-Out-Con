@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import bgImage from "../assets/backgroundimages/IMG_6543.jpg";
 import LazyImage from "./LazyImage";
 import SectionTitle from "./SectionTitle";
@@ -51,16 +52,22 @@ const Agenda = () => {
   return (
     <section id="agenda" className="py-16 relative overflow-hidden">
       <div className="absolute inset-0">
-        <LazyImage
-          src={bgImage}
-          alt="Background"
-          className="w-full h-full object-cover"
-          style={{
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        />
+        <Suspense
+          fallback={
+            <div className="absolute inset-0 w-full h-full bg-gray-900 animate-pulse" />
+          }
+        >
+          <LazyImage
+            src={bgImage}
+            alt="Background"
+            className="w-full h-full object-cover"
+            style={{
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          />
+        </Suspense>
       </div>
       <div className="container mx-auto px-4 relative">
         <SectionTitle

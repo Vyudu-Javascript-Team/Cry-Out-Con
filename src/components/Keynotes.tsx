@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { Suspense, useRef } from "react";
 import { motion } from "framer-motion";
 import SpotlightEffect from "./SpotlightEffect";
 import { Instagram, Globe } from "lucide-react";
@@ -56,11 +56,17 @@ export const Keynotes = () => {
               key={speaker.name}
               className="relative group overflow-hidden rounded-xl aspect-[3/4] max-w-[300px] mx-auto"
             >
-              <LazyImage
-                src={speaker.image}
-                alt={speaker.name}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
+              <Suspense
+                fallback={
+                  <div className="absolute inset-0 w-full h-full bg-gray-900 animate-pulse" />
+                }
+              >
+                <LazyImage
+                  src={speaker.image}
+                  alt={speaker.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </Suspense>
               <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent" />
 
               {/* Social Icons */}

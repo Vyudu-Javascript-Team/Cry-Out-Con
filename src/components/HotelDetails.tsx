@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 import LazyImage from "./LazyImage";
+import { Suspense } from "react";
 
 const HotelDetails = () => {
   const hotels = [
@@ -49,7 +50,8 @@ const HotelDetails = () => {
         "Downtown luxury hotel with skyline views and direct access to the George R. Brown Convention Center.",
       address: "1600 Lamar St, Houston, TX 77010",
       phone: "+1 (713) 739-8000",
-      website: "https://book.passkey.com/gt/220475741?gtid=a12b4ac2d9c17f6187cd3142d1ce7032",
+      website:
+        "https://book.passkey.com/gt/220475741?gtid=a12b4ac2d9c17f6187cd3142d1ce7032",
       rating: 4.4,
       price: 179,
       amenities: [
@@ -72,7 +74,7 @@ const HotelDetails = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary via-primary/95 to-primary py-20">
       <div className="container relative max-w-7xl mx-auto px-4">
-        <SectionTitle 
+        <SectionTitle
           title="Hotels"
           subtitle="Here is a list of hotels you can get accommodation"
           gradient="from-blue-400 via-purple-400 to-pink-400"
@@ -89,11 +91,17 @@ const HotelDetails = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* Hotel Image Section */}
                 <div className="relative h-[400px]">
-                  <LazyImage
-                    src={hotel.image}
-                    alt={hotel.name}
-                    className="w-full h-full object-cover"
-                  />
+                  <Suspense
+                    fallback={
+                      <div className="absolute inset-0 w-full h-full bg-gray-900 animate-pulse" />
+                    }
+                  >
+                    <LazyImage
+                      src={hotel.image}
+                      alt={hotel.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </Suspense>
                   <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
                     <span className="text-lg font-bold text-white">
                       ${hotel.price}
