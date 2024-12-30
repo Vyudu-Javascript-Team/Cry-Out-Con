@@ -95,7 +95,7 @@ const Registration = () => {
       className="py-12 relative overflow-hidden"
     >
       <div className="absolute inset-0 bg-gradient-to-b from-primary/50 via-primary to-primary/50" />
-      {/* <FluidWaveBackground /> */}
+      
       <SpotlightEffect sectionRef={sectionRef} color="purple" delay={0.4} />
 
       <div className="container mx-auto px-4 relative z-10">

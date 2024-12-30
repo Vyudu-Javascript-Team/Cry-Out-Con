@@ -27,9 +27,9 @@ export const Navbar = () => {
   const handleNavigation = (path: string, hash: string) => {
     setLoading(true);
     setIsMobileMenuOpen(false);
-  
+
     // If we're already on the home page
-    if (location.pathname === '/') {
+    if (location.pathname === "/") {
       const element = document.querySelector(hash);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
@@ -37,7 +37,7 @@ export const Navbar = () => {
       setLoading(false);
       return;
     }
-  
+
     // If we're on a different page
     navigate(path);
     setTimeout(() => {
@@ -46,7 +46,7 @@ export const Navbar = () => {
         element.scrollIntoView({ behavior: "smooth" });
       }
       setLoading(false);
-    }, 1000); 
+    }, 1000);
   };
 
   const borderOpacity = useTransform(scrollY, [0, 100], [0, 0.1]);
@@ -63,7 +63,7 @@ export const Navbar = () => {
 
     return (
       <div className="relative">
-        <motion.div
+        <motion.a
           onClick={() => {
             navigate(to);
             setIsMobileMenuOpen(false);
@@ -74,7 +74,7 @@ export const Navbar = () => {
           whileTap={{ scale: 0.98 }}
         >
           {children}
-        </motion.div>
+        </motion.a>
 
         {isActive && (
           <motion.div
@@ -112,10 +112,21 @@ export const Navbar = () => {
       className="absolute top-full left-0 right-0 bg-primary p-4"
     >
       <div className="flex flex-col items-center space-y-4">
-      <a onClick={() => handleNavigation('/', '#conference')} className="hover:text-gray-200 transition-colors cursor-pointer">EXPERIENCES</a>
-          <NavLink to="/speakers" >SPEAKERS & MUSICAL GUESTS</NavLink>
-          <a onClick={() => handleNavigation('/', '#agenda')} className="hover:text-gray-200 transition-colors cursor-pointer">SCHEDULE</a>
-          <NavLink to="/hotel-details">TRAVEL INFO</NavLink>
+        <a
+          href="/#conference"
+          onClick={() => handleNavigation("/", "#conference")}
+          className="hover:text-gray-200 transition-colors cursor-pointer"
+        >
+          EXPERIENCES
+        </a>
+        <NavLink to="/speakers">SPEAKERS & MUSICAL GUESTS</NavLink>
+        <a
+          onClick={() => handleNavigation("/", "#agenda")}
+          className="hover:text-gray-200 transition-colors cursor-pointer"
+        >
+          SCHEDULE
+        </a>
+        <NavLink to="/hotel-details">TRAVEL INFO</NavLink>
         {/* <NavLink to="#">Sponsors</NavLink>
         <a href="#">Get App</a> */}
 
@@ -146,7 +157,8 @@ export const Navbar = () => {
       className="fixed top-0 left-0 right-0 bg-primary z-[9999] will-change-transform font-sans"
     >
       <nav className="flex items-center w-full mx-auto justify-between md:px-12 px-8 h-full ">
-        <motion.div
+        <motion.a
+          href="/"
           onClick={() => {
             navigate("/");
             window.scrollTo({ top: 0, behavior: "smooth" });
@@ -162,7 +174,7 @@ export const Navbar = () => {
             loading="lazy"
             className="md:w-auto md:max-h-[50px] w-40 object-contain"
           />
-        </motion.div>
+        </motion.a>
 
         <div className="hidden lg:flex items-center justify-center space-x-4 xl:space-x-6 2xl:space-x-8 flex-grow px-2">
           <a

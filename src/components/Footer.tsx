@@ -22,8 +22,13 @@ const Footer: React.FC = () => {
 
       <div className="max-w-8xl mx-auto px-8 md:text-xl relative z-10">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 mb-8">
-          <motion.div
-            onClick={() => navigate("/")}
+          <motion.a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
@@ -37,7 +42,7 @@ const Footer: React.FC = () => {
                 scale: useTransform(scrollY, [0, 100], [1.3, 1]),
               }}
             />
-          </motion.div>
+          </motion.a>
           <div className="flex space-x-4">
             <a href="https://form.jotform.com/243611671514048" target="_blank" className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}>
               Contact Us
