@@ -49,7 +49,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
       ref={imgRef}
       alt={alt}
       src={priority ? src : 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='}
-      className={`transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'} ${className}`}
+      className={`transition-opacity duration-50 ${isLoaded ? 'opacity-100' : 'opacity-0'} ${className}`}
       style={style}
       onLoad={() => setIsLoaded(true)}
       loading={priority ? 'eager' : 'lazy'}
