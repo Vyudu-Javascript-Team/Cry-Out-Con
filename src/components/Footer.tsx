@@ -1,77 +1,108 @@
-import React from 'react';
-import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
-import SunrayEffect from './SunrayEffect';
+import React from "react";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { Facebook, Instagram } from "lucide-react";
+import SunrayEffect from "./SunrayEffect";
+import { useNavigate } from "react-router-dom";
+import logo from "../assets/cryoutcon.jpg";
+
+const gradient = "from-blue-400 via-purple-500 to-pink-500";
 
 const Footer: React.FC = () => {
+  const { scrollY } = useScroll();
+  const navigate = useNavigate();
+
   return (
-    <footer className="bg-primary py-12 relative">
+    <footer className="bg-primary py-8 relative">
       <SunrayEffect />
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          <div>
-            <h3 className="text-xl font-bold text-white mb-4">About Cry Out Con</h3>
-            <ul className="space-y-2 text-gray-300">
-              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Press</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-            </ul>
+
+      <div className="max-w-8xl mx-auto px-8 md:text-xl relative z-10">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 mb-8">
+          <motion.a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="relative md:ml-8 hover:cursor-pointer"
+          >
+            <motion.img
+              src={logo}
+              alt="Cry Out Conference Logo"
+              className="h-full md:w-auto md:max-h-[40px] w-40 object-contain "
+              style={{
+                scale: useTransform(scrollY, [0, 100], [1.3, 1]),
+              }}
+            />
+          </motion.a>
+          <div className="flex space-x-4">
+            <a href="https://form.jotform.com/243611671514048" target="_blank" className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}>
+              Contact Us
+            </a>
+          </div>
+          <div className="">
+            <a
+              href="https://lhhouston.church/"
+              target="_blank"
+              className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
+            >
+              Lighthouse Church
+            </a>
+          </div>
+          <div className="flex space-x-4">
+            <a
+              href="https://www.facebook.com/cryoutexperience"
+              target="_blank"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
+              <Facebook className="w-6 h-6" />
+            </a>
+            <a
+              href="https://www.instagram.com/cryoutexperience/"
+              target="_blank"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
+              <Instagram className="w-6 h-6" />
+            </a>
           </div>
           
-          <div>
-            <h3 className="text-xl font-bold text-white mb-4">Ministries</h3>
-            <ul className="space-y-2 text-gray-300">
-              <li><a href="#" className="hover:text-white transition-colors">Join as Ministry</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Ministry Portal</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Sponsorship</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Venue Map</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-xl font-bold text-white mb-4">Attendees</h3>
-            <ul className="space-y-2 text-gray-300">
-              <li><a href="#" className="hover:text-white transition-colors">Registration</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Travel & Hotels</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Schedule</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">FAQs</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-xl font-bold text-white mb-4">Connect</h3>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                <Facebook className="w-6 h-6" />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                <Twitter className="w-6 h-6" />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                <Instagram className="w-6 h-6" />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
-                <Linkedin className="w-6 h-6" />
-              </a>
-            </div>
-          </div>
         </div>
-        
+
         <div className="border-t border-gray-700 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-300 text-sm">
-              © 2025 Cry Out Con. All rights reserved.
+          <div className="flex flex-col md:flex-row text-sm md:text-xl justify-between items-center">
+            <p className="text-gray-300">
+              &copy; {new Date().getFullYear()} Cry Out Con. All rights
+              reserved.
             </p>
-            <div className="flex space-x-4 mt-4 md:mt-0">
-              <a href="#" className="text-gray-300 hover:text-white text-sm transition-colors">
+            <div className="flex space-x-7 gap-5 mt-4 md:mt-0">
+              <a
+                href="https://cryoutexperience.com/refund-policy/"
+                target="_blank"
+                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
+              >
+                Refund Policy
+              </a>
+              <a
+                href="https://cryoutexperience.com/faq/"
+                target="_blank"
+                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
+              >
+                FAQ's
+              </a>
+              <a
+                href="https://cryoutexperience.com/privacy-policy/"
+                target="_blank"
+                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
+              >
                 Privacy Policy
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white text-sm transition-colors">
-                Terms of Service
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white text-sm transition-colors">
-                Cookie Policy
               </a>
             </div>
           </div>

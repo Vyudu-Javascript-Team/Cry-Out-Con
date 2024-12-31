@@ -3,6 +3,24 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          'Founders Grotesk Condensed',
+          'system-ui',
+          '-apple-system',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+          'Noto Sans',
+          'Liberation Sans',
+          'sans-serif',
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          'Segoe UI Symbol',
+          '"Noto Color Emoji"'
+        ],
+      },
       colors: {
         primary: '#0f0f2a',
         secondary: '#1a1a3a',
@@ -53,4 +71,9 @@ export default {
     },
   },
   plugins: [],
+  variants: {
+    extend: {
+      backdropFilter: ['responsive'],
+    },
+  },
 };

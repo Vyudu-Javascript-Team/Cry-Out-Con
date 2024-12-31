@@ -82,7 +82,7 @@ const Featured = () => {
   };
 
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-8 relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary/95 to-primary" />
       
