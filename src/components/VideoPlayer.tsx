@@ -12,7 +12,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
   const [isMuted, setIsMuted] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLIFrameElement>(null);
+  const videoRef = useRef<HTMLVideoElement | HTMLIFrameElement>(null);
 
   const getEmbedUrl = (url: string, type: string) => {
     switch (type) {
@@ -27,9 +27,97 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
     }
   };
 
+  // Add intersection observer to handle scroll-based autoplay
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!videoRef.current) return;
+
+          if (entry.isIntersecting) {
+            // Video is in view - play
+            if (type === "direct") {
+              const video = videoRef.current as HTMLVideoElement;
+              video.play().catch(error => {
+                console.log("Autoplay failed:", error);
+              });
+            } else {
+              const iframe = videoRef.current as HTMLIFrameElement;
+              if (type === 'youtube') {
+                iframe.contentWindow?.postMessage(
+                  JSON.stringify({
+                    event: 'command',
+                    func: 'playVideo'
+                  }),
+                  '*'
+                );
+              } else if (type === 'vimeo') {
+                iframe.contentWindow?.postMessage(
+                  JSON.stringify({
+                    method: 'play'
+                  }),
+                  '*'
+                );
+              }
+            }
+            setIsPlaying(true);
+          } else {
+            // Video is out of view - pause
+            if (type === "direct") {
+              const video = videoRef.current as HTMLVideoElement;
+              video.pause();
+            } else {
+              const iframe = videoRef.current as HTMLIFrameElement;
+              if (type === 'youtube') {
+                iframe.contentWindow?.postMessage(
+                  JSON.stringify({
+                    event: 'command',
+                    func: 'pauseVideo'
+                  }),
+                  '*'
+                );
+              } else if (type === 'vimeo') {
+                iframe.contentWindow?.postMessage(
+                  JSON.stringify({
+                    method: 'pause'
+                  }),
+                  '*'
+                );
+              }
+            }
+            setIsPlaying(false);
+          }
+        });
+      },
+      {
+        threshold: 0.5, // 50% of video must be visible
+        rootMargin: '-50px 0px' // Adds margin to top and bottom
+      }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    // Cleanup observer on component unmount
+    return () => observer.disconnect();
+  }, [type]);
+  
+
   const togglePlay = () => {
-    if (videoRef.current) {
-      const iframe = videoRef.current;
+    if (!videoRef.current) return;
+
+    if (type === "direct"){
+      const video = videoRef.current as HTMLVideoElement;
+      if (isPlaying) {
+        video.pause();
+      } else {
+        video.play();
+      }
+
+      setIsPlaying(!isPlaying);
+    } else {
+      const iframe = videoRef.current as HTMLIFrameElement;
       if (type === 'youtube') {
         iframe.contentWindow?.postMessage(
           JSON.stringify({
@@ -46,13 +134,20 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
           '*'
         );
       }
+
       setIsPlaying(!isPlaying);
     }
   };
 
   const toggleMute = () => {
-    if (videoRef.current) {
-      const iframe = videoRef.current;
+    if (!videoRef.current) return; 
+
+    if (type === "direct"){
+      const video = videoRef.current as HTMLVideoElement;
+      video.muted = !video.muted;
+      setIsMuted(!isMuted);
+    } else {
+      const iframe = videoRef.current as HTMLIFrameElement;
       if (type === 'youtube') {
         iframe.contentWindow?.postMessage(
           JSON.stringify({
@@ -69,7 +164,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
           }),
           '*'
         );
-      }
+      } 
       setIsMuted(!isMuted);
     }
   };
@@ -93,13 +188,24 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
     >
-      <iframe
-        ref={videoRef}
+      {type === "direct" ? (
+        <video
+        ref={videoRef as React.RefObject<HTMLVideoElement>}
+        src={url}
+        className="w-full h-full"
+        muted={isMuted}
+        playsInline
+      />
+      ) : (
+        <iframe
+        ref={videoRef as React.RefObject<HTMLIFrameElement>}
         src={getEmbedUrl(url, type)}
         className="w-full h-full"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       />
+      )}
+      
 
       {/* Controls overlay */}
       <motion.div
@@ -135,14 +241,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
             </motion.button>
           </div>
 
-          <motion.button
+          {/* <motion.button
             onClick={toggleFullscreen}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors"
           >
             <Maximize2 className="w-5 h-5 text-white" />
-          </motion.button>
+          </motion.button> */}
         </div>
       </motion.div>
     </motion.div>

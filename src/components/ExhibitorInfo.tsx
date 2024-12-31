@@ -94,7 +94,7 @@ const EmpowermentResources = () => {
   return (
     <motion.section 
       ref={sectionRef}
-      className="py-32 relative overflow-hidden"
+      className="py-8 relative overflow-hidden"
       style={{ opacity }}
     >
       <SpotlightEffect sectionRef={sectionRef} color="purple" delay={0.3} />

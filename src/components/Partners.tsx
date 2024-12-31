@@ -1,10 +1,15 @@
 import React from 'react';
+import SectionTitle from './SectionTitle';
 
 export const Partners = () => {
   return (
-    <section className="py-20 bg-white/5">
+    <section className="py-8">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-white mb-12 text-center">Our Partners</h2>
+      <SectionTitle 
+            title="Our Partners"
+            subtitle=""
+            gradient="from-purple-400 to-purple-600"
+          />
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {['Microsoft', 'Apple', 'Google', 'Amazon'].map((partner) => (
             <div key={partner} className="bg-white/10 p-6 rounded-lg backdrop-blur-sm flex items-center justify-center">

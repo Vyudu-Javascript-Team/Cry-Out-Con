@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 interface SectionTitleProps {
   title: React.ReactNode;
@@ -8,69 +8,64 @@ interface SectionTitleProps {
   className?: string;
 }
 
-const SectionTitle: React.FC<SectionTitleProps> = ({ 
-  title, 
+const SectionTitle: React.FC<SectionTitleProps> = ({
+  title,
   subtitle,
   gradient = "from-white via-white/80 to-white/60",
-  className = ""
+  className = "",
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   });
 
   // 3D transform values
-  const titleY = useTransform(scrollYProgress, [0, 0.5], [100, 0]);
-  const titleRotateX = useTransform(scrollYProgress, [0, 0.5], [45, 0]);
-  const titleScale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+  const titleY = useTransform(scrollYProgress, [0, 0.2], [100, 0]);
+  const titleRotateX = useTransform(scrollYProgress, [0, 0.2], [45, 0]);
+  const titleScale = useTransform(scrollYProgress, [0, 0.2], [0.8, 1]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
 
   // Perspective container style for 3D effect
   const perspective = {
     perspective: "1000px",
-    transformStyle: "preserve-3d" as const
+    transformStyle: "preserve-3d" as const,
   };
 
   const renderTitle = () => {
-    if (typeof title === 'string') {
+    if (typeof title === "string") {
       // Split title into characters for individual animation when it's a string
-      const titleChars = title.split('');
+      const titleChars = title.split("");
       return (
-        <h2 className="text-5xl md:text-7xl font-bold mb-6 flex justify-center gap-[0.2em] flex-wrap">
+        <h2 className="text-2xl md:text-5xl lg:text-7xl font-bold mb-6 flex justify-center">
           {titleChars.map((char, i) => (
             <motion.span
               key={i}
-              initial={{ opacity: 0, y: 50, rotateX: 90 }}
-              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1}}
               viewport={{ once: true }}
               transition={{
-                duration: 0.8,
-                delay: i * 0.05,
-                type: "spring",
-                stiffness: 100
+                duration: 0.1,
+                delay: i * 0.01,
               }}
               className={`inline-block bg-clip-text text-transparent bg-gradient-to-r ${gradient}`}
             >
-              {char === ' ' ? '\u00A0' : char}
+              {char === " " ? "\u00A0" : char}
             </motion.span>
           ))}
         </h2>
       );
     }
 
-    // When title is a ReactNode, render it directly
     return (
       <motion.h2
-        initial={{ opacity: 0, y: 50, rotateX: 90 }}
-        whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{
-          duration: 0.8,
-          type: "spring",
-          stiffness: 100
+          duration: 0.2,
         }}
-        className="text-5xl md:text-7xl font-bold mb-6"
+        className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6"
       >
         {title}
       </motion.h2>
@@ -90,7 +85,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
           opacity: titleOpacity,
           scale: titleScale,
           filter: "blur(40px)",
-          background: `radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%)`
+          background: `radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%)`,
         }}
       />
 
@@ -100,7 +95,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
           y: titleY,
           rotateX: titleRotateX,
           scale: titleScale,
-          opacity: titleOpacity
+          opacity: titleOpacity,
         }}
         className="relative"
       >
@@ -112,7 +107,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.2, delay: 0.1 }}
             className="text-xl text-gray-300 max-w-2xl mx-auto"
           >
             {subtitle}
@@ -126,9 +121,9 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
           viewport={{ once: true }}
           transition={{
             duration: 1,
-            delay: 0.5,
+            delay: 0.2,
             type: "spring",
-            stiffness: 50
+            stiffness: 50,
           }}
           className="relative h-1 mx-auto mt-6"
         >
@@ -136,7 +131,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
           <motion.div
             className="absolute inset-0 blur-lg"
             style={{
-              background: `linear-gradient(to right, ${gradient.split(' ')[1]}, ${gradient.split(' ')[gradient.split(' ').length - 1]})`
+              background: `linear-gradient(to right, ${gradient.split(" ")[1]}, ${gradient.split(" ")[gradient.split(" ").length - 1]})`,
             }}
           />
           {/* Main line */}
@@ -153,17 +148,17 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
           className="absolute w-1 h-1 bg-purple-500 rounded-full"
           style={{
             left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`
+            top: `${Math.random() * 100}%`,
           }}
           animate={{
             y: [-20, 20],
             opacity: [0, 1, 0],
-            scale: [0, 1, 0]
+            scale: [0, 1, 0],
           }}
           transition={{
             duration: 2 + Math.random() * 2,
             repeat: Infinity,
-            delay: i * 0.2
+            delay: i * 0.1,
           }}
         />
       ))}

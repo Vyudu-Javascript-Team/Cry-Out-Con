@@ -25,6 +25,7 @@
     "payload": "^2.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^7.0.2",
     "three": "^0.162.0"
   },
   "devDependencies": {
@@ -39,11 +40,14 @@
     "eslint": "^8.56.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "file-loader": "^6.2.0",
+    "image-webpack-loader": "^8.1.0",
     "nodemon": "^3.1.0",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.2.2",
+    "url-loader": "^4.1.1",
     "vite": "^5.1.4"
   }
 }
