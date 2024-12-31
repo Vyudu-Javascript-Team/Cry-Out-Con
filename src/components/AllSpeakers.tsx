@@ -165,7 +165,6 @@ const AllSpeakers = () => {
       <SpotlightEffect sectionRef={sectionRef} color="blue" delay={0.1} />
 
       {/* keynote speakers */}
-
       <div className="container relative max-w-6xl mx-auto px-4">
         <SectionTitle
           title="Keynote Speakers"
