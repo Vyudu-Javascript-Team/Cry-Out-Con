@@ -22,7 +22,6 @@ import Agenda from './components/Agenda';
 import Conference from './components/Conference';
 import DiveIn from './components/DiveIn';
 import LoadingSpinner from './components/LoadingSpinner';
-import AIsection from './components/AIsection';
 
 function Home() {
   const { scrollYProgress } = useScroll();
@@ -56,7 +55,6 @@ function Home() {
       >
         <div id="hero"><Hero /></div>
         <div id="dive"><DiveIn /></div>
-        <div id="aisection"><AIsection /></div>
         <div id="video"><VideoSection /></div>
         <div id="conference"><Conference /></div>
         <div id="keynotes"><Keynotes /></div>

@@ -74,7 +74,7 @@ const AllSpeakers = () => {
       website: "",
     },
     {
-      name: "Seion Roberts",
+      name: "Bishop Seion Roberts, Sr",
       title: "Chief of Ministries, Lighthouse Church & Ministries",
       image: seion,
       instagram: "https://www.instagram.com/seionrobertsministries",
