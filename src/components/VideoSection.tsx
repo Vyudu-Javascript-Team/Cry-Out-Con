@@ -2,6 +2,7 @@ import React, { useState, useRef, lazy, useEffect, Suspense } from "react";
 import { useInView } from "framer-motion";
 const VideoPlayer = lazy(() => import("./VideoPlayer"));
 import introVideo from "../assets/videos/0622 - CRYOUT 2025 REVEAL REV.mp4";
+import fallbackImage from '../assets/images/NYE_AD24.png';
 
 const VideoSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -19,13 +20,20 @@ const VideoSection = () => {
       ref={sectionRef}
       className="w-full relative"
     >
-      <div className="w-full">
+      
         <div className="w-full">
           <div className="relative w-full aspect-video">
             <Suspense
-              fallback={
-                <div className="w-full h-full bg-gray-800 animate-pulse flex items-center justify-center">
-                  <span className="text-white">Loading video...</span>
+               fallback={
+                <div className="w-full h-full relative">
+                  <img
+                    src={fallbackImage}
+                    alt="AI logo"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <span className="text-white">Loading video...</span>
+                  </div>
                 </div>
               }
             >
@@ -35,7 +43,6 @@ const VideoSection = () => {
             </Suspense>
           </div>
         </div>
-      </div>
     </div>
   );
 };
