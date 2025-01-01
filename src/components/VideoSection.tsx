@@ -24,7 +24,7 @@ const VideoSection = () => {
           <div className="relative w-full aspect-video">
             <Suspense
               fallback={
-                <div className="w-full h-full bg-gray-800 animate-pulse rounded-xl flex items-center justify-center">
+                <div className="w-full h-full bg-gray-800 animate-pulse flex items-center justify-center">
                   <span className="text-white">Loading video...</span>
                 </div>
               }
