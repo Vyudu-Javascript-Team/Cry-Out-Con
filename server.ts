@@ -2,6 +2,7 @@ import express from 'express';
 import payload from 'payload';
 import { resolve } from 'path';
 import dotenv from 'dotenv';
+import { registerEndpoints } from './src/api/endpoints';
 
 dotenv.config();
 
@@ -17,14 +18,25 @@ payload.init({
   },
 });
 
+// Register API endpoints
+registerEndpoints(payload);
+
+// Enable CORS for your frontend
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', process.env.FRONTEND_URL || 'http://localhost:5173');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 // Serve admin panel
 app.use('/admin', payload.authenticate);
 
 // Redirect root to Admin panel
-app.get('/', (_, res) => {
-  res.redirect('/admin');
-});
+// app.get('/', (_, res) => {
+//   res.redirect('/admin');
+// });
 
-app.listen(3000, async () => {
-  payload.logger.info(`Server running on http://localhost:3000`);
+app.listen(3000, () => {
+  console.log('Server running at http://localhost:3000');
 });
