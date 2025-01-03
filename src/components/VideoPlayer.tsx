@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Pause, Maximize2, Volume2, VolumeX } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 
 interface VideoPlayerProps {
   url: string;
@@ -10,7 +10,6 @@ interface VideoPlayerProps {
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement | HTMLIFrameElement>(null);
 
@@ -169,22 +168,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
     }
   };
 
-  const toggleFullscreen = () => {
-    if (containerRef.current) {
-      if (!document.fullscreenElement) {
-        containerRef.current.requestFullscreen();
-        setIsFullscreen(true);
-      } else {
-        document.exitFullscreen();
-        setIsFullscreen(false);
-      }
-    }
-  };
-
   return (
     <motion.div
       ref={containerRef}
-      className="relative aspect-video rounded-xl overflow-hidden bg-black/90 group"
+      className="relative aspect-video rounded-sm overflow-hidden bg-black/90 group"
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
     >
@@ -240,15 +227,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
               )}
             </motion.button>
           </div>
-
-          {/* <motion.button
-            onClick={toggleFullscreen}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors"
-          >
-            <Maximize2 className="w-5 h-5 text-white" />
-          </motion.button> */}
         </div>
       </motion.div>
     </motion.div>

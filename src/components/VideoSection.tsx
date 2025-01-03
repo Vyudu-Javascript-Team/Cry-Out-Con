@@ -1,8 +1,9 @@
-import React, { useState, useRef, lazy, useEffect, Suspense } from "react";
+import { useState, useRef, lazy, useEffect, Suspense } from "react";
 import { useInView } from "framer-motion";
 const VideoPlayer = lazy(() => import("./VideoPlayer"));
 import introVideo from "../assets/videos/0622 - CRYOUT 2025 REVEAL REV.mp4";
 import fallbackImage from '../assets/images/NYE_AD24.png';
+import SectionTitle from "./SectionTitle";
 
 const VideoSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -18,14 +19,18 @@ const VideoSection = () => {
   return (
     <div
       ref={sectionRef}
-      className="w-full relative"
+      className="w-full py-16 relative"
     >
+      <SectionTitle
+          title="ARE YOU READY TO GO ALL IN?"
+          gradient="from-pink-500 via-purple-500 to-blue-500"
+        />
       
-        <div className="w-full">
-          <div className="relative w-full aspect-video">
+        
+          <div className="relative aspect-video">
             <Suspense
                fallback={
-                <div className="w-full h-full relative">
+                <div className="relative">
                   <img
                     src={fallbackImage}
                     alt="AI logo"
@@ -42,7 +47,6 @@ const VideoSection = () => {
               )}
             </Suspense>
           </div>
-        </div>
     </div>
   );
 };

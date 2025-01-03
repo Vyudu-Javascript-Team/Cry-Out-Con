@@ -32,12 +32,6 @@ function Home() {
     [1, 0.8, 0.6]
   );
 
-  const contentScale = useTransform(
-    scrollYProgress,
-    [0, 0.2],
-    [1, 0.95]
-  );
-
   return (
     <div className="relative min-h-screen bg-primary text-white overflow-x-hidden">
       <FluidCanvas />
@@ -54,8 +48,8 @@ function Home() {
         className="relative pt-16"
       >
         <div id="hero"><Hero /></div>
-        <div id="dive"><DiveIn /></div>
         <div id="video"><VideoSection /></div>
+        <div id="dive"><DiveIn /></div>
         <div id="conference"><Conference /></div>
         <div id="keynotes"><Keynotes /></div>
         <div id="registration"><Registration /></div>
