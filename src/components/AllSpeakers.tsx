@@ -15,7 +15,7 @@ import alicia from "../assets/images/IMG_1173.jpeg";
 
 import lacey from "../assets/images/LaceyTezino.jpeg";
 import samuel from "../assets/images/Samuel Rodríguez Main Headshot.png";
-import shaunie from "../assets/images/LadyShaunieHenderson1.jpg";
+import shaunie from "../assets/images/LadyShaunieHenderson2.jpg";
 import seion from "../assets/images/IMG_9638.jpg";
 // import stephan from "../assets/images/StefanSpeaks.jpeg";
 import choir from "../assets/images/HoustonMassChoir.png";
@@ -70,14 +70,14 @@ const AllSpeakers = () => {
       name: "Shaunie Henderson",
       title: "First Lady of Lighthouse Church & Ministries",
       image: shaunie,
-      instagram: "https://www.instagram.com/pastorsamuelrodriguez",
+      instagram: "https://www.instagram.com/iamshaunie/?hl=en",
       website: "",
     },
     {
       name: "Bishop Seion Roberts, Sr",
       title: "Chief of Ministries, Lighthouse Church & Ministries",
       image: seion,
-      instagram: "https://www.instagram.com/seionrobertsministries",
+      instagram: "https://www.instagram.com/bishopsieon/",
       website: "",
     },
     // {
