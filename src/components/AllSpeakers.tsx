@@ -17,9 +17,10 @@ import lacey from "../assets/images/LaceyTezino.jpeg";
 import samuel from "../assets/images/Samuel Rodríguez Main Headshot.png";
 import shaunie from "../assets/images/LadyShaunieHenderson2.jpg";
 import seion from "../assets/images/IMG_9638.jpg";
-// import stephan from "../assets/images/StefanSpeaks.jpeg";
+import stephan from "../assets/images/StephanSpeaks.jpeg";
 import choir from "../assets/images/HoustonMassChoir.png";
 import todd from "../assets/images/Todd Dulaney.jpeg";
+import leandria from "../assets/images/LeAndriaJohnson.jpeg";
 import LazyImage from "./LazyImage";
 
 const AllSpeakers = () => {
@@ -74,19 +75,19 @@ const AllSpeakers = () => {
       website: "",
     },
     {
+      name: "Stephan Speaks",
+      title: "Certified Dating and Relationship Coach, Author/Speaker",
+      image: stephan,
+      instagram: "https://www.instagram.com/stephanspeaks/",
+      website: "",
+    },
+    {
       name: "Bishop Seion Roberts, Sr",
       title: "Chief of Ministries, Lighthouse Church & Ministries",
       image: seion,
       instagram: "https://www.instagram.com/bishopsieon/",
       website: "",
     },
-    // {
-    //   name: "Stephan Speaks",
-    //   title: "Certified dating and relationship coach, author and speaker",
-    //   image: stephan,
-    //   instagram: "https://www.instagram.com/stephanspeaks",
-    //   website: "",
-    // },
     {
       name: "Vincent A. Casey Sr",
       title: "Relationship Mediator",
@@ -137,6 +138,13 @@ const AllSpeakers = () => {
   ];
 
   const artists = [
+    {
+      name: "Le'Andria Johnson",
+      title: "Grammy Award Winner/Singer",
+      image: leandria,
+      instagram: "https://www.instagram.com/leandriaj/",
+      website: "",
+    },
     {
       name: "Houston Mass Choir",
       title: "Choir",
