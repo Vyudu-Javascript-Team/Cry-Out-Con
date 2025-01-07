@@ -4,7 +4,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import logo from "../assets/cryoutcon.jpg";
+import logo from "../assets/CRY_OUT_CON_LOGO-21.png";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useLoading } from "./contexts/LoadingContext";
@@ -69,7 +69,7 @@ export const Navbar = () => {
             setIsMobileMenuOpen(false);
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
-          className="text-white hover:cursor-pointer hover:text-gray-300 transition-colors whitespace-nowrap"
+          className={`md:text-primary text-white hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors whitespace-nowrap`}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
@@ -115,14 +115,14 @@ export const Navbar = () => {
         <a
           href="/#conference"
           onClick={() => handleNavigation("/", "#conference")}
-          className="hover:text-gray-200 transition-colors cursor-pointer"
+          className="hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors"
         >
           EXPERIENCES
         </a>
         <NavLink to="/speakers">SPEAKERS & MUSICAL GUESTS</NavLink>
         <a
           onClick={() => handleNavigation("/", "#agenda")}
-          className="hover:text-gray-200 transition-colors cursor-pointer"
+          className="hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors"
         >
           SCHEDULE
         </a>
@@ -153,7 +153,7 @@ export const Navbar = () => {
         backdropFilter: backdropBlur,
         borderBottom: `1px solid rgba(255, 255, 255, ${borderOpacity.get()})`,
       }}
-      className="fixed top-0 left-0 right-0 bg-primary z-[9999] will-change-transform font-sans"
+      className="fixed top-0 left-0 right-0 bg-white z-[9999] will-change-transform font-sans"
     >
       <nav className="flex items-center w-full mx-auto justify-between md:px-12 px-8 h-full ">
         <motion.a
@@ -175,17 +175,17 @@ export const Navbar = () => {
           />
         </motion.a>
 
-        <div className="hidden lg:flex items-center justify-center space-x-4 xl:space-x-6 2xl:space-x-8 flex-grow px-2">
+        <div className={`hidden lg:flex items-center text-primary justify-center space-x-4 xl:space-x-6 2xl:space-x-8 flex-grow px-2   whitespace-nowrap`}>
           <a
             onClick={() => handleNavigation("/", "#conference")}
-            className="hover:text-gray-200 transition-colors cursor-pointer"
+            className="hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors"
           >
             EXPERIENCES
           </a>
           <NavLink to="/speakers">SPEAKERS & MUSICAL GUESTS</NavLink>
           <a
             onClick={() => handleNavigation("/", "#agenda")}
-            className="hover:text-gray-200 transition-colors cursor-pointer"
+            className="hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors"
           >
             SCHEDULE
           </a>
@@ -202,7 +202,7 @@ export const Navbar = () => {
             animate={{ opacity: 1, scale: 1 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="md:px-4 md:py-2 px-2 bg-white text-primary rounded font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-white/25"
+            className="md:px-4 md:py-2 px-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-white/25"
           >
             REGISTER NOW
           </motion.a>
@@ -214,7 +214,7 @@ export const Navbar = () => {
           aria-label="Toggle mobile menu"
         >
           <svg
-            className="w-6 h-6 text-white"
+            className="w-6 h-6 text-primary"
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
