@@ -15,6 +15,13 @@ export const Keynotes = () => {
 
   const speakers = [
     {
+      name: "Pastor Keion Henderson",
+      title: "Founder and CEO, The Lighthouse Church",
+      image: keion,
+      instagram: "https://www.instagram.com/pastorkeion/",
+      website: "https://keionhenderson.com/about-us/",
+    },
+    {
       name: "Eric Thomas",
       title: "Pastor",
       image: thomas,
@@ -28,13 +35,6 @@ export const Keynotes = () => {
       image: john,
       instagram: "https://www.instagram.com/pastorhannah",
       website: "",
-    },
-    {
-      name: "Pastor Keion Henderson",
-      title: "Founder and CEO, The Lighthouse Church",
-      image: keion,
-      instagram: "https://www.instagram.com/pastorkeion/",
-      website: "https://keionhenderson.com/about-us/",
     },
   ];
 
