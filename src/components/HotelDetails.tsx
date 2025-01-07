@@ -14,16 +14,17 @@ import SectionTitle from "./SectionTitle";
 import LazyImage from "./LazyImage";
 import { Suspense } from "react";
 
+import marriot from "../assets/sectionimages/marriott.jpg.webp";
+import hilton from "../assets/sectionimages/hilton.jpg";
+
 const HotelDetails = () => {
   const hotels = [
     {
       name: "Marriott Marquis Houston",
-      image:
-        "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80",
+      image: marriot,
       description:
         "Connected to the George R. Brown Convention Center, featuring a rooftop Texas-shaped lazy river and infinity pool.",
       address: "1777 Walker St, Houston, TX 77010",
-      phone: "+1 (713) 654-1777",
       website: "https://book.passkey.com/e/50935226",
       rating: 4.5,
       price: 189,
@@ -44,12 +45,10 @@ const HotelDetails = () => {
     },
     {
       name: "Hilton Americas-Houston",
-      image:
-        "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&q=80",
+      image: hilton,
       description:
         "Downtown luxury hotel with skyline views and direct access to the George R. Brown Convention Center.",
       address: "1600 Lamar St, Houston, TX 77010",
-      phone: "+1 (713) 739-8000",
       website:
         "https://book.passkey.com/gt/220475741?gtid=a12b4ac2d9c17f6187cd3142d1ce7032",
       rating: 4.4,
@@ -75,8 +74,8 @@ const HotelDetails = () => {
     <div className="min-h-screen bg-gradient-to-b from-primary via-primary/95 to-primary py-20">
       <div className="container relative max-w-7xl mx-auto px-4">
         <SectionTitle
-          title="Hotels"
-          subtitle="Here is a list of hotels you can get accommodation"
+          title="Accomodations"
+          subtitle="Here is a list of Cry Out Con preferred hotels with discounted rates."
           gradient="from-blue-400 via-purple-400 to-pink-400"
         />
 
@@ -130,21 +129,6 @@ const HotelDetails = () => {
                     <div className="flex items-center gap-3 text-gray-300">
                       <MapPin className="w-5 h-5" />
                       <span>{hotel.address}</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-gray-300">
-                      <Phone className="w-5 h-5" />
-                      <span>{hotel.phone}</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-gray-300">
-                      <Globe className="w-5 h-5" />
-                      <a
-                        href={hotel.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-purple-400 hover:text-purple-300 transition-colors"
-                      >
-                        Book on Official Website
-                      </a>
                     </div>
                   </div>
 

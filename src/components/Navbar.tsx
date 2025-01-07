@@ -126,9 +126,8 @@ export const Navbar = () => {
         >
           SCHEDULE
         </a>
-        <NavLink to="/hotel-details">TRAVEL INFO</NavLink>
-        {/* <NavLink to="#">Sponsors</NavLink>
-        <a href="#">Get App</a> */}
+        <NavLink to="/hotel-details">ACCOMODATIONS</NavLink>
+        {/* <NavLink to="#">Sponsors</NavLink> */}
 
         <motion.a
           href="https://brushfire.com/tlhc/cryout25/578593"
@@ -190,7 +189,7 @@ export const Navbar = () => {
           >
             SCHEDULE
           </a>
-          <NavLink to="/hotel-details">TRAVEL INFO</NavLink>
+          <NavLink to="/hotel-details">ACCOMODATIONS</NavLink>
           {/* <NavLink to="">Sponsors</NavLink> */}
         </div>
 
@@ -206,14 +205,6 @@ export const Navbar = () => {
             className="md:px-4 md:py-2 px-2 bg-white text-primary rounded font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-white/25"
           >
             REGISTER NOW
-          </motion.a>
-          <motion.a
-            href="#"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-4 py-2 text-white border border-white/20 rounded font-semibold hover:bg-white hover:text-primary transition-all duration-200"
-          >
-            GET APP
           </motion.a>
         </div>
 
