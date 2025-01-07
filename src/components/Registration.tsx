@@ -157,7 +157,7 @@ const Registration = () => {
                   <button
                     onClick={handleRegistration}
                     type="button"
-                    className={`w-full mb-2 py-4 rounded-xl font-semibold hover:cursor-pointer transition-all duration-300 ${
+                    className={`w-full mb-2 py-4 rounded font-semibold hover:cursor-pointer transition-all duration-300 ${
                       plan.name === "VIP"
                         ? "bg-gradient-to-r from-purple-400 to-purple-600 hover:from-purple-500 hover:to-purple-700"
                         : plan.name === "PREMIER"

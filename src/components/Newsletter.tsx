@@ -38,14 +38,14 @@ const Newsletter = () => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
             required
-            className="flex-1 px-4 py-3 text-gray-500 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+            className="flex-1 px-4 py-3 text-gray-500 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-pink-500 outline-none"
           />
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors disabled:bg-blue-400"
+            className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white font-semibold rounded-lg hover:cursor-pointer hover:shadow-lg hover:shadow-purple-500/25 transition-colors disabled:bg-purple-300"
           >
-            {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
+            {status === 'loading' ? 'SUBSCRIBING...' : 'SUBSCRIBE'}
           </button>
         </div>
 

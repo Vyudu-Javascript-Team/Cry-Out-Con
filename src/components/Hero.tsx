@@ -37,7 +37,7 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="w-full text-xl mx-auto max-w-3xl lg:top-[15%] md:top-[30%] md:transform px-4 py-8 md:absolute md:left-10 md:rounded-xl md:py-10 space-y-4 md:max-w-sm p-8 bg-fuchsia-500/30 backdrop-blur-md">
+      <div className="w-full text-xl mx-auto max-w-3xl lg:top-[15%] md:top-[30%] md:transform px-4 py-8 md:absolute md:left-10 md:rounded-xl md:py-10 space-y-4 md:max-w-md p-8 bg-fuchsia-500/30 backdrop-blur-md">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -46,7 +46,7 @@ export const Hero = () => {
         >
           <div className="flex items-center text-sm space-x-2 px-1">
             <Calendar className="w-8 h-8" />
-            <span>May 1 - 4, 2025</span>
+            <span>May 1 - 3, 2025</span>
           </div>
           <div className="flex items-center text-sm space-x-2 px-1">
             <MapPin className="w-8 h-8" />
@@ -82,7 +82,7 @@ export const Hero = () => {
           <button
             onClick={handleRegistration}
             type="button"
-            className="bg-white relative z-20 text-primary px-8 py-4 text-xl font-semibold transition-all shadow-lg hover:cursor-pointer hover:shadow-white/25 flex items-center gap-2 group"
+            className="bg-white relative z-20 text-primary px-8 py-4 text-xl font-semibold transition-all rounded shadow-lg hover:cursor-pointer hover:shadow-white/25 flex items-center gap-2 group"
           >
             Register Now
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />

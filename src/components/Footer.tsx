@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  AnimatePresence,
-  motion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Facebook, Instagram } from "lucide-react";
 import SunrayEffect from "./SunrayEffect";
 import { useNavigate } from "react-router-dom";
@@ -43,46 +38,46 @@ const Footer: React.FC = () => {
               }}
             />
           </motion.a>
-          <div className="flex space-x-4">
-            <a href="https://form.jotform.com/243611671514048" target="_blank" className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}>
-              Contact Us
-            </a>
-          </div>
-          <div className="">
-            <a
-              href="https://lhhouston.church/"
-              target="_blank"
-              className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
-            >
-              Lighthouse Church
-            </a>
-          </div>
-          <div className="flex space-x-4">
+
+          <div className="flex space-x-2">
             <a
               href="https://www.facebook.com/cryoutexperience"
               target="_blank"
-              className="text-gray-300 hover:text-white transition-colors"
+              className="text-gray-300 rounded-full bg-purple-500/50 p-2 transition-colors"
             >
               <Facebook className="w-6 h-6" />
             </a>
             <a
               href="https://www.instagram.com/cryoutexperience/"
               target="_blank"
-              className="text-gray-300 hover:text-white transition-colors"
+              className="text-gray-300 rounded-full bg-purple-500/50 p-2 transition-colors"
             >
               <Instagram className="w-6 h-6" />
             </a>
           </div>
-          
-        </div>
 
-        <div className="border-t border-gray-700 pt-8">
-          <div className="flex flex-col md:flex-row text-sm md:text-xl justify-between items-center">
-            <p className="text-gray-300">
-              &copy; {new Date().getFullYear()} Cry Out Con. All rights
-              reserved.
-            </p>
-            <div className="flex space-x-7 gap-5 mt-4 md:mt-0">
+          <div className="md:flex md:space-x-7">
+            <div className="">
+              <a
+                href="https://form.jotform.com/243611671514048"
+                target="_blank"
+                className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
+              >
+                Contact Us
+              </a>
+            </div>
+
+            <div className="">
+              <a
+                href="https://lhhouston.church/"
+                target="_blank"
+                className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
+              >
+                Lighthouse Church
+              </a>
+            </div>
+
+            <div className="">
               <a
                 href="https://cryoutexperience.com/refund-policy/"
                 target="_blank"
@@ -90,6 +85,9 @@ const Footer: React.FC = () => {
               >
                 Refund Policy
               </a>
+            </div>
+
+            <div className="">
               <a
                 href="https://cryoutexperience.com/faq/"
                 target="_blank"
@@ -97,6 +95,9 @@ const Footer: React.FC = () => {
               >
                 FAQ's
               </a>
+            </div>
+
+            <div className="">
               <a
                 href="https://cryoutexperience.com/privacy-policy/"
                 target="_blank"
@@ -105,6 +106,15 @@ const Footer: React.FC = () => {
                 Privacy Policy
               </a>
             </div>
+          </div>
+        </div>
+
+        <div className="border-t border-gray-700 pt-8">
+          <div className="flex flex-col md:flex-row text-sm md:text-xl justify-center items-center">
+            <p className="text-gray-300">
+              &copy; {new Date().getFullYear()} Cry Out Con. All rights
+              reserved.
+            </p>
           </div>
         </div>
       </div>
