@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
               <Facebook className="w-6 h-6" />
             </a>
             <a
-              href="https://www.instagram.com/cryoutexperience/"
+              href="https://www.instagram.com/cryoutcon/"
               target="_blank"
               className="text-gray-300 rounded-full bg-purple-500/50 p-2 transition-colors"
             >
