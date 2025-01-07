@@ -51,7 +51,7 @@ export const Keynotes = () => {
 
         {/* Keynote speakers grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
-          {speakers.map((speaker, index) => (
+          {speakers.map((speaker) => (
             <div
               key={speaker.name}
               className="relative group overflow-hidden rounded-xl aspect-[3/4] max-w-[300px] mx-auto"
