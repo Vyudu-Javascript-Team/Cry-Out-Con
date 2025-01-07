@@ -126,7 +126,7 @@ export const Navbar = () => {
         >
           SCHEDULE
         </a>
-        <NavLink to="/hotel-details">ACCOMODATIONS</NavLink>
+        <NavLink to="/hotel-details">ACCOMMODATIONS</NavLink>
         {/* <NavLink to="#">Sponsors</NavLink> */}
 
         <motion.a
@@ -189,7 +189,7 @@ export const Navbar = () => {
           >
             SCHEDULE
           </a>
-          <NavLink to="/hotel-details">ACCOMODATIONS</NavLink>
+          <NavLink to="/hotel-details">ACCOMMODATIONS</NavLink>
           {/* <NavLink to="">Sponsors</NavLink> */}
         </div>
 

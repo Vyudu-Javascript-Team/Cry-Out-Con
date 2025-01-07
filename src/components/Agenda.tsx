@@ -70,9 +70,9 @@ const agenda: { announcement: string; days: AgendaDay[] } = {
         {
           time: "10:00 AM",
           activities: [
-            {title: "Church service with The Lighthouse Church & Ministries"},
+            {title: "Worship experience with The Lighthouse Church & Ministries"},
             {title: "Word by Pastor Keion Henderson"},
-            {title: "Music by Lighthouse Music", note: "Session open to all, conference attendees and non-conference attendees"},
+            {title: "Praise & Worship by Lighthouse Music", note: "Session open to all, conference attendees and non-conference attendees"},
 
           ],
         },
@@ -105,7 +105,7 @@ const Agenda = () => {
       <div className="container mx-auto px-4 relative">
         <SectionTitle
           title="CONFERENCE SCHEDULE"
-          subtitle="Detailed schedule to be announced on March 17"
+          subtitle="Detailed schedule to be announced on March 17."
           gradient="from-blue-400 via-purple-400 to-pink-400"
         />
 
