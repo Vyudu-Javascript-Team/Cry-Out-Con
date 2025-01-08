@@ -138,7 +138,7 @@ export const Navbar = () => {
           onClick={() => {
             setIsMobileMenuOpen(false);
           }}
-          className="px-4 py-2 bg-white text-primary rounded font-semibold"
+          className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded font-semibold font-semibold"
         >
           REGISTER NOW
         </motion.a>

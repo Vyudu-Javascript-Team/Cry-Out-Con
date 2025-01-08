@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
             </a>
           </div>
 
-          <div className="md:flex md:space-x-7">
+          <div className="lg:flex lg:space-x-7">
             <div className="">
               <a
                 href="https://form.jotform.com/243611671514048"
