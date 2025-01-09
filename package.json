@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "cms:dev": "nodemon --watch ./server.ts --watch ./payload.config.ts --exec ts-node ./server.ts",
     "cms:build": "payload build",
-    "optimize-images": "node src/utils/optimize-images.js"
+    "optimize-images": "node src/utils/optimize-images.js",
+    "cleanup-images": "node src/utils/cleanup-optimized.js"
   },
   "dependencies": {
     "@barba/core": "^2.9.7",

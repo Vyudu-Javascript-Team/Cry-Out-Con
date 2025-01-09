@@ -8,7 +8,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function optimizeImages() {
-  // Adjust this path to point to your assets folder
   const assetsDir = path.join(__dirname, '../assets');
   
   // Supported image formats
@@ -27,14 +26,22 @@ async function optimizeImages() {
           await processDirectory(filePath);
         } else {
           const ext = path.extname(file).toLowerCase();
-          if (imageExtensions.includes(ext)) {
+          if (imageExtensions.includes(ext) && 
+              !file.includes('-optimized') && 
+              !file.includes('-blur')) {
+
             const outputPath = filePath.replace(ext, `-optimized${ext}`);
+            const blurPath = filePath.replace(ext, `-blur${ext}`);
             
             try {
+                const metadata = await sharp(filePath).metadata();
+
               await sharp(filePath)
-                .resize(1920, 1080, {
-                  fit: 'inside',
-                  withoutEnlargement: true
+                .resize({
+                  width: metadata.width > 1920 ? 1920 : metadata.width, 
+                  height: metadata.height > 1920 ? 1920 : metadata.height, 
+                  fit: 'inside', 
+                  withoutEnlargement: true 
                 })
                 .jpeg({
                   quality: 80,
@@ -43,10 +50,13 @@ async function optimizeImages() {
                 })
                 .toFile(outputPath);
 
-              // Create blur placeholder
-              const blurPath = filePath.replace(ext, `-blur${ext}`);
+              
               await sharp(filePath)
-                .resize(20)
+              .resize({
+                width: Math.round(metadata.width / 20),
+                height: Math.round(metadata.height / 20),
+                fit: 'inside'
+              })
                 .blur(5)
                 .jpeg({
                   quality: 30
