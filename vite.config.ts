@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
+import { PreRenderedAsset } from 'rollup';
 
 export default defineConfig({
   plugins: [
@@ -20,8 +21,12 @@ export default defineConfig({
       }
     })
   ],
+  assetsInclude: ['**/*.jpg', '**/*.jpeg', '**/*.png', '**/*.gif', '**/*.svg', '**/*.webp', '**/*.ico', '**/*.woff', '**/*.woff2', '**/*.eot', '**/*.ttf', '**/*.otf'],
   build: {
     rollupOptions: {
+      input: {
+        main: 'index.html',
+      },
       output: {
         manualChunks: {
           vendor: [
@@ -33,34 +38,36 @@ export default defineConfig({
             'framer-motion'
           ]
         },
-        assetFileNames: (assetInfo) => {
-          // Get the file extension
-          const extType = assetInfo.name?.split('.').pop()?.toLowerCase();
+        assetFileNames: (assetInfo: PreRenderedAsset) => {
+          const filePath = assetInfo.originalFileNames?.[0] || assetInfo.name || '';
           
-          // Get the full path parts
-          const pathParts = assetInfo.name?.split('/') || [];
-          const fileName = pathParts.pop() || '';
-          const directory = pathParts.join('/');
+          if (!filePath) {
+            return 'assets/[name][extname]';
+          }
 
-          // Handle different asset types
-          if (/\.(mp4|webm|ogg)$/i.test(assetInfo.name || '')) {
-            return `assets/media/${fileName}`;
+          const cleanPath = filePath.replace(/^src\//, '');
+
+          switch (true) {
+            // Images - maintain original structure
+            case /\.(png|jpe?g|gif|svg|webp|ico)$/i.test(filePath):
+              return cleanPath;
+
+            // Fonts
+            case /\.(woff2?|eot|ttf|otf)$/i.test(filePath):
+              return cleanPath.includes('fonts/') 
+                ? cleanPath 
+                : `assets/fonts/${cleanPath.split('/').pop()}`;
+
+            // Videos
+            case /\.(mp4|webm|ogg)$/i.test(filePath):
+              return cleanPath.includes('videos/') 
+                ? cleanPath 
+                : `assets/videos/${cleanPath.split('/').pop()}`;
+
+            // Default case for other assets
+            default:
+              return `assets/${cleanPath.split('/').pop()}`;
           }
-          
-          if (/\.(woff|woff2|eot|ttf|otf)$/i.test(assetInfo.name || '')) {
-            return `assets/fonts/${fileName}`;
-          }
-          
-          if (/\.(png|jpe?g|gif|svg|webp|ico)$/i.test(assetInfo.name || '')) {
-            // Preserve the original directory structure for images
-            if (directory) {
-              return `${directory}/${fileName}`;
-            }
-            return `assets/images/${fileName}`;
-          }
-          
-          
-          return `assets/${fileName}`;
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',

@@ -2,15 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+html, body {
     @apply font-sans;
   }
 
   @font-face {
     font-family: 'Founders Grotesk Condensed';
-    src: url('src/assets/fonts/FoundersGroteskWeb-Regular.woff2') format('woff2'),
-         url('src/assets/fonts/FoundersGroteskWeb-Regular.woff') format('woff'),
-         url('src/assets/fonts/FoundersGroteskWeb-Regular.eot') format('truetype');
+    src: url('./assets/fonts/FoundersGroteskWeb-Regular.woff2') format('woff2'),
+         url('./assets/fonts/FoundersGroteskWeb-Regular.woff') format('woff'),
+         url('./assets/fonts/FoundersGroteskWeb-Regular.eot') format('truetype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -18,18 +18,18 @@ html {
   
     @font-face {
         font-family: 'Founders Grotesk Condensed';
-        src: url('src/assets/fonts/FoundersGroteskWeb-Medium.woff2') format('woff2'),
-             url('src/assets/fonts/FoundersGroteskWeb-Medium.woff') format('woff'),
-             url('src/assets/fonts/FoundersGroteskWeb-Medium.eot') format('truetype');
+        src: url('./assets/fonts/FoundersGroteskWeb-Medium.woff2') format('woff2'),
+             url('./assets/fonts/FoundersGroteskWeb-Medium.woff') format('woff'),
+             url('./assets/fonts/FoundersGroteskWeb-Medium.eot') format('truetype');
         font-weight: 500;
         font-style: normal;
         font-display: swap;
     }
   @font-face {
     font-family: 'Founders Grotesk Condensed';
-    src: url('src/assets/fonts/FoundersGroteskWeb-Bold.woff2') format('woff2'),
-         url('src/assets/fonts/FoundersGroteskWeb-Bold.woff') format('woff'),
-         url('src/assets/fonts/FoundersGroteskWeb-Bold.eot') format('truetype');
+    src: url('./assets/fonts/FoundersGroteskWeb-Bold.woff2') format('woff2'),
+         url('./assets/fonts/FoundersGroteskWeb-Bold.woff') format('woff'),
+         url('./assets/fonts/FoundersGroteskWeb-Bold.eot') format('truetype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;

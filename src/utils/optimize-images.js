@@ -80,7 +80,6 @@ async function optimizeImages() {
   }
 
   try {
-    // Check if assets directory exists
     await fs.access(assetsDir);
     console.log('Starting image optimization...');
     console.log('Assets directory:', assetsDir);

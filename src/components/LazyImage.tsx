@@ -14,10 +14,10 @@ const LazyImage = ({ src, alt, className, style }: LazyImageProps) => {
     // Remove any leading slash and handle Vite's asset URLs
     const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
     
-    // Extract the full path components
-    const pathParts = cleanPath.split('/');
-    const fileName = pathParts[pathParts.length - 1];
-    const directory = pathParts.slice(0, -1).join('/');
+    // Get the directory path and filename
+  const lastSlashIndex = cleanPath.lastIndexOf('/');
+  const directory = lastSlashIndex !== -1 ? cleanPath.substring(0, lastSlashIndex) : '';
+  const fileName = lastSlashIndex !== -1 ? cleanPath.substring(lastSlashIndex + 1) : cleanPath;
     
     // Handle the file name and extension
     const ext = fileName.substring(fileName.lastIndexOf('.'));
