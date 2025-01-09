@@ -3,14 +3,13 @@ import path from 'path';
 import { promises as fs } from 'fs';
 import { fileURLToPath } from 'url';
 
-// Get __dirname equivalent in ES modules
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function optimizeImages() {
   const assetsDir = path.join(__dirname, '../assets');
   
-  // Supported image formats
   const imageExtensions = ['.jpg', '.jpeg', '.png', '.webp'];
   
   async function processDirectory(directoryPath) {
@@ -50,7 +49,7 @@ async function optimizeImages() {
                 })
                 .toFile(outputPath);
 
-              
+              // create blur version
               await sharp(filePath)
               .resize({
                 width: Math.round(metadata.width / 20),
