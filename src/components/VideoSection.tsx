@@ -19,7 +19,7 @@ const VideoSection = () => {
   return (
     <div
       ref={sectionRef}
-      className="w-full py-16 relative"
+      className="w-full pt-16 relative"
     >
       <SectionTitle
           title="ARE YOU READY TO GO ALL IN?"

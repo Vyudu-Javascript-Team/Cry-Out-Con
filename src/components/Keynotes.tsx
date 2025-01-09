@@ -42,7 +42,7 @@ export const Keynotes = () => {
     <section ref={sectionRef} className="relative py-8 overflow-hidden">
       <SpotlightEffect sectionRef={sectionRef} color="blue" delay={0.2} />
 
-      <div className="container mx-auto px-4 relative">
+      <div className="container mx-auto md:max-w-8xl px-4 relative">
         <SectionTitle
           title="KEYNOTE SPEAKERS"
           subtitle="Meet our distinguished speakers"
@@ -104,7 +104,7 @@ export const Keynotes = () => {
         <div className="text-center mt-16">
           <motion.a
             onClick={() => navigate("/speakers")}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded text-white font-semibold hover:cursor-pointer hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
+            className="inline-flex items-center gap-2 md:text-xl px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-600 rounded text-white font-semibold hover:cursor-pointer hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >

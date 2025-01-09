@@ -98,7 +98,7 @@ const Registration = () => {
       
       <SpotlightEffect sectionRef={sectionRef} color="purple" delay={0.4} />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className=" mx-auto md:max-w-6xl px-4 relative z-10">
         <SectionTitle
           title="REGISTRATION"
           subtitle="Choose the perfect plan for your conference experience."
@@ -108,7 +108,7 @@ const Registration = () => {
         <div
           className="grid grid-cols-1 md:grid-cols-3 gap-7 max-w-5xl mx-auto"
         >
-          {plans.map((plan, index) => (
+          {plans.map((plan) => (
               <motion.div
               key={plan.name}
                 className={`relative p-4 rounded-xl backdrop-blur-sm border transition-all duration-500 ${

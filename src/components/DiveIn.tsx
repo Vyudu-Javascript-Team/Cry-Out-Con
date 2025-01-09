@@ -2,8 +2,8 @@ import SectionTitle from "./SectionTitle";
 
 const DiveIn = () => {
   return (
-    <section className="py-16 relative overflow-hidden">
-      <div className="container max-w-4xl mx-auto px-8 space-y-6">
+    <section className="py-8 relative overflow-hidden">
+      <div className="container md:max-w-5xl mx-auto px-8 space-y-6">
         <SectionTitle
           title="GET READY TO CRY OUT"
           gradient="from-pink-500 via-purple-500 to-blue-500"

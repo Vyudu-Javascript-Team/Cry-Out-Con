@@ -171,11 +171,11 @@ export const Navbar = () => {
             src={logo}
             alt="Cry Out Conference Logo"
             loading="lazy"
-            className="md:w-auto md:max-h-[50px] w-40 object-contain"
+            className="md:w-auto md:max-h-[90px] w-40 object-contain"
           />
         </motion.a>
 
-        <div className={`hidden lg:flex items-center text-primary justify-center space-x-4 xl:space-x-6 2xl:space-x-8 flex-grow px-2   whitespace-nowrap`}>
+        <div className={`hidden lg:flex items-center md:max-w-xl text-primary md:text-xl justify-center space-x-4 xl:space-x-6 2xl:space-x-8 flex-grow px-2  whitespace-nowrap`}>
           <a
             onClick={() => handleNavigation("/", "#conference")}
             className="hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors"
@@ -202,7 +202,7 @@ export const Navbar = () => {
             animate={{ opacity: 1, scale: 1 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="md:px-4 md:py-2 px-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-white/25"
+            className="md:px-4 md:py-2 md:text-xl px-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-white/25"
           >
             REGISTER NOW
           </motion.a>
