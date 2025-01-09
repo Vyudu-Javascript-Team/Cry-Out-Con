@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import image1 from "../assets/cryout24/IMG_6529.jpg";
-import image2 from "../assets/cryout24/IMG_6543.jpg";
-import image3 from "../assets/cryout24/IMG_6947.jpg";
-import image4 from "../assets/cryout24/IMG_7087.jpg";
-import image5 from "../assets/cryout24/IMG_8085.jpg";
-import image6 from "../assets/cryout24/IMG_8090.jpg";
+import image1 from "/assets/cryout24/IMG_6529.jpg";
+import image2 from "/assets/cryout24/IMG_6543.jpg";
+import image3 from "/assets/cryout24/IMG_6947.jpg";
+import image4 from "/assets/cryout24/IMG_7087.jpg";
+import image5 from "/assets/cryout24/IMG_8085.jpg";
+import image6 from "/assets/cryout24/IMG_8090.jpg";
 import LazyImage from "./LazyImage";
 
 export const News = () => {

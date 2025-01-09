@@ -14,8 +14,8 @@ import SectionTitle from "./SectionTitle";
 import LazyImage from "./LazyImage";
 import { Suspense } from "react";
 
-import marriot from "../assets/sectionimages/marriott.jpg.webp";
-import hilton from "../assets/sectionimages/hilton.jpg";
+import marriot from "/assets/sectionimages/marriott.jpg.webp";
+import hilton from "/assets/sectionimages/hilton.jpg";
 
 const HotelDetails = () => {
   const hotels = [

@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import SpotlightEffect from "./SpotlightEffect";
 import { Instagram, Globe } from "lucide-react";
 import SectionTitle from "./SectionTitle";
-import john from "../assets/images/JohnHannah.jpg";
-import thomas from "../assets/images/thomas.png";
-import keion from "../assets/images/PASTOR-KEION.png";
+import john from "/assets/images/JohnHannah.jpg";
+import thomas from "/assets/images/thomas.png";
+import keion from "/assets/images/PASTOR-KEION.png";
 import { useNavigate } from "react-router-dom";
 import LazyImage from "./LazyImage";
 

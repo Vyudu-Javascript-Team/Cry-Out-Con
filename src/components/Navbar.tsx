@@ -4,7 +4,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import logo from "../assets/CRY_OUT_CON_LOGO-21.png";
+import logo from "/assets/logos/CRY_OUT_CON_LOGO-21.png";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useLoading } from "./contexts/LoadingContext";

@@ -1,8 +1,8 @@
 import { useState, useRef, lazy, useEffect, Suspense } from "react";
 import { useInView } from "framer-motion";
 const VideoPlayer = lazy(() => import("./VideoPlayer"));
-import introVideo from "../assets/videos/0622 - CRYOUT 2025 REVEAL REV_1.mp4";
-import fallbackImage from '../assets/images/NYE_AD24.png';
+import introVideo from "/assets/videos/0622 - CRYOUT 2025 REVEAL REV_1.mp4";
+import fallbackImage from '/assets/images/NYE_AD24.png';
 import SectionTitle from "./SectionTitle";
 
 const VideoSection = () => {

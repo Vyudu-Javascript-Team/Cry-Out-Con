@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 
-import dynamicKeynotes from "/src/assets/sectionimages/6N7A9961.jpg";
-import powerfulPraise from "/src/assets/sectionimages/IMG_6543.jpg";
-import releaseRevelation from "/src/assets/sectionimages/IMG_8152.jpg";
-import captivatingConversations from "/src/assets/sectionimages/IMG_6984.jpg";
-import transformativeBreakouts from "/src/assets/cryout24/IMG_6947.jpg";
+import dynamicKeynotes from "/assets/sectionimages/6N7A9961.jpg";
+import powerfulPraise from "/assets/sectionimages/IMG_6543.jpg";
+import releaseRevelation from "/assets/sectionimages/IMG_8152.jpg";
+import captivatingConversations from "/assets/sectionimages/IMG_6984.jpg";
+import transformativeBreakouts from "/assets/cryout24/IMG_6947.jpg";
 import LazyImage from "./LazyImage";
 import SectionTitle from "./SectionTitle";
 

@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function cleanupOptimized() {
-  const assetsDir = path.join(__dirname, '../assets');
+  const assetsDir = path.join(__dirname, '../../public/assets');
 
   async function cleanDirectory(directoryPath) {
     try {

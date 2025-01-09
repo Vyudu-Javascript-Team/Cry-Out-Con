@@ -4,8 +4,7 @@ import { motion } from "framer-motion";
 // import AnimatedBackground from "./AnimatedBackground";
 import VideoGallery from "./VideoGallery";
 import Countdown from "./Countdown";
-// import logo from "../assets/cryoutcon.jpg";
-import background from "../assets/backgroundimages/6N7A3736.jpg";
+import background from "/assets/backgroundimages/6N7A3736.jpg";
 import LazyImage from "./LazyImage";
 
 export const Hero = () => {

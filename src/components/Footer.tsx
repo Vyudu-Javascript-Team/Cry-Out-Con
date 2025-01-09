@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Facebook, Instagram } from "lucide-react";
 import SunrayEffect from "./SunrayEffect";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/cryoutcon.jpg";
+import logo from "/assets/logos/cryoutcon.jpg";
 
 const gradient = "from-blue-400 via-purple-500 to-pink-500";
 

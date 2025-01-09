@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import bgImage from "../assets/backgroundimages/IMG_6543.jpg";
+import bgImage from "/assets/backgroundimages/IMG_6543.jpg";
 import LazyImage from "./LazyImage";
 import SectionTitle from "./SectionTitle";
 interface AgendaDay {

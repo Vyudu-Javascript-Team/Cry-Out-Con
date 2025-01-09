@@ -57,7 +57,6 @@ function Home() {
         
         <div id="news"><News /></div>
         <div id="newsletter"><Newsletter /></div>
-        {/* <div id="partners"><Partners /></div> */}
         
       </motion.div>
     </div>
