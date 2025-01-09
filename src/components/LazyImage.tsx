@@ -26,7 +26,7 @@ const LazyImage = ({ src, alt, className, style }: LazyImageProps) => {
     // Remove any Vite hash if present
     const nameWithoutHash = baseNameWithoutExt.split('-')[0];
     
-    // Reconstruct the path maintaining the original directory structure
+    
     return directory 
       ? `/${directory}/${nameWithoutHash}${suffix}${ext}`
       : `/${nameWithoutHash}${suffix}${ext}`;
@@ -34,13 +34,6 @@ const LazyImage = ({ src, alt, className, style }: LazyImageProps) => {
 
   const optimizedSrc = getImagePath(src, '-optimized');
   const blurSrc = getImagePath(src, '-blur');
-
-  console.log({
-    original: src,
-    optimized: optimizedSrc,
-    blur: blurSrc,
-    directory: src.split('/').slice(0, -1).join('/')
-  });
 
   return (
     <div className={`relative ${className}`} style={style}>
