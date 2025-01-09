@@ -74,7 +74,7 @@ const HotelDetails = () => {
     <div className="min-h-screen bg-gradient-to-b from-primary via-primary/95 to-primary py-20">
       <div className="container relative max-w-7xl mx-auto px-4">
         <SectionTitle
-          title="Accomodations"
+          title="Accommodations"
           subtitle="Here is a list of Cry Out Con preferred hotels with discounted rates."
           gradient="from-blue-400 via-purple-400 to-pink-400"
         />
