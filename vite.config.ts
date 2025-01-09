@@ -46,7 +46,7 @@ export default defineConfig({
           if (/\.(png|jpe?g|gif|svg|webp|ico)$/i.test(assetInfo.name)) {
             return `assets/images/[name]-[hash][extname]`;
           }
-          return `assets/[name]-[hash][extname]`;
+          return `assets/[name].[ext]`
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',

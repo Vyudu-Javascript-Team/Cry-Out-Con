@@ -10,14 +10,18 @@ interface LazyImageProps {
 const LazyImage = ({ src, alt, className, style }: LazyImageProps) => {
   const [loaded, setLoaded] = useState(false);
   
-  // Generate paths for optimized and blur versions
-  const ext = src.substring(src.lastIndexOf('.'));
-  const optimizedSrc = src.replace(ext, `-optimized${ext}`);
-  const blurSrc = src.replace(ext, `-blur${ext}`);
+  // Handle both development and production paths
+  const getImagePath = (imagePath: string, suffix: string) => {
+    const ext = imagePath.substring(imagePath.lastIndexOf('.'));
+    const basePath = imagePath.substring(0, imagePath.lastIndexOf('.'));
+    return `${basePath}${suffix}${ext}`;
+  };
+
+  const optimizedSrc = getImagePath(src, '-optimized');
+  const blurSrc = getImagePath(src, '-blur');
 
   return (
     <div className={`relative ${className}`} style={style}>
-      {/* Blur placeholder */}
       <div
         className="absolute inset-0"
         style={{
@@ -30,7 +34,6 @@ const LazyImage = ({ src, alt, className, style }: LazyImageProps) => {
           transition: 'opacity 0.3s ease-in-out'
         }}
       />
-      {/* Main image */}
       <img
         src={optimizedSrc}
         alt={alt}
@@ -38,6 +41,11 @@ const LazyImage = ({ src, alt, className, style }: LazyImageProps) => {
           loaded ? 'opacity-100' : 'opacity-0'
         }`}
         onLoad={() => setLoaded(true)}
+        onError={(e) => {
+          // Fallback to original image if optimized version fails to load
+          const imgElement = e.target as HTMLImageElement;
+          imgElement.src = src;
+        }}
       />
     </div>
   );
