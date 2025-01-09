@@ -9,19 +9,24 @@ const DiveIn = () => {
           gradient="from-pink-500 via-purple-500 to-blue-500"
         />
         <p className="text-xl">
-          Cry Out is dedicated to fostering a profound practice of surrender and
-          submission, leading us on a transformative journey of healing and
-          restoration. Through the exercise of faith, courage, and wisdom, and a
-          fervent desire to manifest inner strength, we create the atmosphere
-          needed for every person to discover and unleash their inherent
-          abilities, gifts, and talents.
+          Cry Out Con is an empowerment experience dedicated to fostering a
+          profound practice of surrender and submission, leading us on a
+          transformative journey of healing & restoration — emotionally,
+          mentally and financially.
         </p>
         <p className="text-xl">
-          Fostered in a space of intentional action, Cry Out brings each of us
-          closer to God in authentic recognition of His Spirit and an unwavering
-          desire to shift the seasons of life. Through the act of “Crying Out,”
-          we inspire a resolute commitment to embrace a higher calling, overcome
-          obstacles, and ascend to a destiny of beautiful purpose and spiritual
+          Through the exercise of faith, courage, and wisdom, and a fervent
+          desire to manifest inner strength, we create the atmosphere needed for
+          every person to discover and unleash their inherent abilities, gifts,
+          and talents to significantly advance their lives.
+        </p>
+        <p className="text-xl">
+          Fostered in a space of intentional action, Cry Out is am empowering
+          experience designed to bring each of us closer to God in authentic
+          recognition of His Spirit and an unwavering desire to shift the
+          seasons of life. Through the act of “Crying Out,” we inspire a
+          resolute commitment to embrace a higher calling, overcome obstacles,
+          and ascend to a destiny of beautiful purpose and spiritual
           fulfillment.
         </p>
       </div>
