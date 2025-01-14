@@ -1,10 +1,11 @@
 const { createClient } = require('@sanity/client')
+require('dotenv').config()
 
 const client = createClient({
   projectId: 'l96yh15e',
   dataset: 'production',
   useCdn: false,
-  token: 'sksGAigfxFFnG0wpMkde0PeOOClu5Q3EjLfGZMvuEIUuBOCJxei9VzRJFG4KbxgP7rUxh2hH2EACDH1NOHYtGdmEwsBWiWahtOwr6kNi9GOiWWys99jJYxs57vBiuwlKQenlQkyestSiiF5A916Fh1EVyzyluBJXEpFKEJ7VC5l1GPWkI4V7'
+  token: process.env.SANITY_STUDIO_API_TOKEN
 })
 
 async function deploy() {
