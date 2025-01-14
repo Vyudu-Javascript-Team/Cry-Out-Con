@@ -1,24 +1,37 @@
-import { Request, Response } from 'express';
-import { getContent, getSiteSettings } from '../services/sanityContent';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { getPageContent, getSettings, getSpeakers } from '../services/sanityContent';
 
-export const registerEndpoints = (app: any): void => {
-  app.get('/api/content', async (req: Request, res: Response) => {
-    try {
-      const content = await getContent();
-      res.json(content);
-    } catch (error) {
-      console.error('Error in /api/content:', error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  });
+export async function getContentHandler(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    const content = await getPageContent();
+    res.status(200).json(content);
+  } catch (error) {
+    console.error('Error in getContentHandler:', error);
+    res.status(500).json({ error: 'Failed to fetch content' });
+  }
+}
 
-  app.get('/api/settings', async (req: Request, res: Response) => {
-    try {
-      const settings = await getSiteSettings();
-      res.json(settings);
-    } catch (error) {
-      console.error('Error in /api/settings:', error);
-      res.status(500).json({ error: 'Internal server error' });
+export async function getSettingsHandler(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    const settings = await getSettings();
+    if (!settings) {
+      res.status(404).json({ error: 'Settings not found' });
+      return;
     }
-  });
-};
+    res.status(200).json(settings);
+  } catch (error) {
+    console.error('Error in getSettingsHandler:', error);
+    res.status(500).json({ error: 'Failed to fetch settings' });
+  }
+}
+
+export async function getSpeakersHandler(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    const { category } = req.query;
+    const speakers = await getSpeakers(category as string);
+    res.status(200).json(speakers);
+  } catch (error) {
+    console.error('Error in getSpeakersHandler:', error);
+    res.status(500).json({ error: 'Failed to fetch speakers' });
+  }
+}
