@@ -5,5 +5,5 @@ export default defineCliConfig({
     projectId: 'l96yh15e',
     dataset: 'production'
   },
-  studioHost: 'https://cryoutcon-cms.sanity.studio'
+  studioHost: 'cryoutcon'
 })
