@@ -33,9 +33,11 @@
     "payload": "^3.12.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-is": "^19.0.0",
     "react-router-dom": "^6.22.3",
     "sanity": "^3.69.0",
     "sharp": "^0.33.5",
+    "styled-components": "^6.1.14",
     "three": "^0.162.0"
   },
   "devDependencies": {
