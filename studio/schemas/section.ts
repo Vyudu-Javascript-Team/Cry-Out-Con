@@ -11,10 +11,16 @@ export default {
         list: [
           { title: 'Hero', value: 'hero' },
           { title: 'Keynotes', value: 'keynotes' },
+          { title: 'Thought Leaders', value: 'thought-leaders' },
+          { title: 'Workshop Leaders', value: 'workshop-leaders' },
+          { title: 'Artists', value: 'artists' },
+          { title: 'Registration', value: 'registration' },
+          { title: 'Hotels', value: 'hotels' },
           { title: 'About', value: 'about' },
           { title: 'Schedule', value: 'schedule' }
         ]
-      }
+      },
+      validation: Rule => Rule.required()
     },
     {
       name: 'isEnabled',
@@ -25,7 +31,8 @@ export default {
     {
       name: 'order',
       title: 'Display Order',
-      type: 'number'
+      type: 'number',
+      validation: Rule => Rule.required()
     },
     {
       name: 'content',
@@ -35,7 +42,8 @@ export default {
         {
           name: 'title',
           title: 'Title',
-          type: 'string'
+          type: 'string',
+          validation: Rule => Rule.required()
         },
         {
           name: 'subtitle',
@@ -53,9 +61,30 @@ export default {
           type: 'image',
           options: {
             hotspot: true
-          }
+          },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative Text',
+              description: 'Important for SEO and accessibility.'
+            }
+          ]
         }
       ]
     }
-  ]
+  ],
+  preview: {
+    select: {
+      title: 'content.title',
+      subtitle: 'type',
+      enabled: 'isEnabled'
+    },
+    prepare({ title, subtitle, enabled }) {
+      return {
+        title: title || 'Untitled Section',
+        subtitle: `${subtitle} ${enabled ? '(Enabled)' : '(Disabled)'}`,
+      }
+    }
+  }
 }

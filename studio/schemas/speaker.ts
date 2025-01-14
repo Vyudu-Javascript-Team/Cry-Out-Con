@@ -20,12 +20,34 @@ export default {
       type: 'string'
     },
     {
+      name: 'category',
+      title: 'Speaker Category',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Keynote Speaker', value: 'keynote' },
+          { title: 'Thought Leader', value: 'thought-leader' },
+          { title: 'Workshop Leader', value: 'workshop' },
+          { title: 'Artist', value: 'artist' }
+        ]
+      },
+      validation: Rule => Rule.required()
+    },
+    {
       name: 'image',
       title: 'Profile Image',
       type: 'image',
       options: {
         hotspot: true
-      }
+      },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+          description: 'Important for SEO and accessibility.'
+        }
+      ]
     },
     {
       name: 'bio',
@@ -44,21 +66,23 @@ export default {
       type: 'object',
       fields: [
         {
-          name: 'twitter',
-          title: 'Twitter URL',
+          name: 'instagram',
+          title: 'Instagram URL',
           type: 'url'
         },
         {
-          name: 'linkedin',
-          title: 'LinkedIn URL',
-          type: 'url'
-        },
-        {
-          name: 'github',
-          title: 'GitHub URL',
+          name: 'website',
+          title: 'Personal Website',
           type: 'url'
         }
       ]
     }
-  ]
+  ],
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'title',
+      media: 'image'
+    }
+  }
 }
