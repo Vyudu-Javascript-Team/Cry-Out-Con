@@ -1,6 +1,15 @@
 const { createClient } = require('@sanity/client')
 require('dotenv').config()
 
+// Validate required environment variables
+const requiredEnvVars = ['SANITY_STUDIO_API_TOKEN', 'SANITY_STUDIO_PROJECT_ID']
+for (const envVar of requiredEnvVars) {
+  if (!process.env[envVar]) {
+    console.error(`Error: ${envVar} is required but not set`)
+    process.exit(1)
+  }
+}
+
 const client = createClient({
   projectId: process.env.SANITY_STUDIO_PROJECT_ID,
   dataset: 'production',
