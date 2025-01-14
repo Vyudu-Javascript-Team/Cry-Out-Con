@@ -2,7 +2,7 @@ const { createClient } = require('@sanity/client')
 require('dotenv').config()
 
 const client = createClient({
-  projectId: 'l96yh15e',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID,
   dataset: 'production',
   useCdn: false,
   token: process.env.SANITY_STUDIO_API_TOKEN
@@ -11,7 +11,7 @@ const client = createClient({
 async function deploy() {
   try {
     const result = await client.request({
-      url: '/projects/l96yh15e/studios',
+      url: `/projects/${process.env.SANITY_STUDIO_PROJECT_ID}/studios`,
       method: 'POST',
       body: {
         hostname: 'cryoutcon-cms',
