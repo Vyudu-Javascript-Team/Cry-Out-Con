@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
             <motion.img
               src={logo}
               alt="Cry Out Conference Logo"
-              className="h-full md:w-auto md:max-h-[40px] w-40 object-contain "
+              className="h-full md:w-auto md:max-h-[40px] w-40 object-contain"
               style={{
                 scale: useTransform(scrollY, [0, 100], [1.3, 1]),
               }}
