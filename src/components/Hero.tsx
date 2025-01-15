@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import { ArrowRight, Calendar, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
-// import AnimatedBackground from "./AnimatedBackground";
 import VideoGallery from "./VideoGallery";
 import Countdown from "./Countdown";
 import background from "/assets/backgroundimages/6N7A3736.jpg";
@@ -83,7 +82,7 @@ export const Hero = () => {
             type="button"
             className="bg-white relative md:text-2xl z-20 text-primary px-8 py-4 text-xl font-semibold transition-all rounded shadow-lg hover:cursor-pointer hover:shadow-white/25 flex items-center gap-2 group"
           >
-            Register Now
+            REGISTER NOW
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
           </button>
         </motion.div>
