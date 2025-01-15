@@ -1,16 +1,26 @@
 const { createClient } = require('@sanity/client')
+require('dotenv').config()
+
+// Validate required environment variables
+const requiredEnvVars = ['SANITY_STUDIO_API_TOKEN', 'SANITY_STUDIO_PROJECT_ID']
+for (const envVar of requiredEnvVars) {
+  if (!process.env[envVar]) {
+    console.error(`Error: ${envVar} is required but not set`)
+    process.exit(1)
+  }
+}
 
 const client = createClient({
-  projectId: 'l96yh15e',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID,
   dataset: 'production',
   useCdn: false,
-  token: 'sksGAigfxFFnG0wpMkde0PeOOClu5Q3EjLfGZMvuEIUuBOCJxei9VzRJFG4KbxgP7rUxh2hH2EACDH1NOHYtGdmEwsBWiWahtOwr6kNi9GOiWWys99jJYxs57vBiuwlKQenlQkyestSiiF5A916Fh1EVyzyluBJXEpFKEJ7VC5l1GPWkI4V7'
+  token: process.env.SANITY_STUDIO_API_TOKEN
 })
 
 async function deploy() {
   try {
     const result = await client.request({
-      url: '/projects/l96yh15e/studios',
+      url: `/projects/${process.env.SANITY_STUDIO_PROJECT_ID}/studios`,
       method: 'POST',
       body: {
         hostname: 'cryoutcon-cms',
