@@ -10,14 +10,14 @@ export default {
       options: {
         list: [
           { title: 'Hero', value: 'hero' },
-          { title: 'Keynotes', value: 'keynotes' },
-          { title: 'Thought Leaders', value: 'thought-leaders' },
-          { title: 'Workshop Leaders', value: 'workshop-leaders' },
-          { title: 'Artists', value: 'artists' },
-          { title: 'Registration', value: 'registration' },
-          { title: 'Hotels', value: 'hotels' },
-          { title: 'About', value: 'about' },
-          { title: 'Schedule', value: 'schedule' }
+          { title: 'ARE YOU READY TO GO ALL IN', value: 'video' },
+          { title: 'GET READY TO CRY OUT', value: 'dive' },
+          { title: 'EXPLORE CRY OUT CON', value: 'conference' },
+          { title: 'KEYNOTE SPEAKERS', value: 'keynotes' },
+          { title: 'REGISTRATION', value: 'registration' },
+          { title: 'CONFERENCE SCHEDULE', value: 'agenda' },
+          { title: 'News', value: 'news' },
+          { title: 'GET UPDATES', value: 'newsletter' },
         ]
       },
       validation: Rule => Rule.required()
