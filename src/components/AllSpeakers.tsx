@@ -82,14 +82,14 @@ const AllSpeakers = () => {
       website: "",
     },
     {
-      name: "Bishop Seion Roberts, Sr",
+      name: "Bishop Seion Roberts, Sr.",
       title: "Chief of Ministries, Lighthouse Church & Ministries",
       image: seion,
       instagram: "https://www.instagram.com/bishopsieon/",
       website: "",
     },
     {
-      name: "Vincent A. Casey Sr",
+      name: "Vincent A. Casey Sr.",
       title: "Relationship Mediator",
       image: vincent,
       instagram: "https://www.instagram.com/notyouraverageminister",
@@ -99,7 +99,7 @@ const AllSpeakers = () => {
 
   const workshopLeaders = [
     {
-      name: "Alicia Dugar Stephenson, ERYT",
+      name: "Alicia Dugar Stevenson",
       title: "Lead Teacher Trainer",
       image: alicia,
       instagram: "https://www.instagram.com/afroyogaqueen",
@@ -121,7 +121,7 @@ const AllSpeakers = () => {
     },
 
     {
-      name: "RC Blakes",
+      name: "Bishop R.C. Blakes, Jr.",
       title: "Pastor",
       image: blakes,
       instagram: "https://www.instagram.com/rcblakes",
@@ -146,7 +146,7 @@ const AllSpeakers = () => {
       website: "",
     },
     {
-      name: "Houston Mass Choir",
+      name: "GMWA Houston Mass Choir",
       title: "Choir",
       image: choir,
       instagram: "https://www.instagram.com/houstonmasschoir",
@@ -160,7 +160,7 @@ const AllSpeakers = () => {
       website: "",
     },
     {
-      name: "Todd Dulaney",
+      name: "Pastor Todd Dulaney",
       title: "Artist",
       image: todd,
       instagram: "https://www.instagram.com/todddulaney1",
