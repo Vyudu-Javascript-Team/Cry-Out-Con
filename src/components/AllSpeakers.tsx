@@ -75,17 +75,17 @@ const AllSpeakers = () => {
       website: "",
     },
     {
+      name: "Bishop Seion Roberts",
+      title: "Chief of Ministries, Lighthouse Church & Ministries",
+      image: seion,
+      instagram: "https://www.instagram.com/bishopsieon/",
+      website: "",
+    },
+    {
       name: "Stephan Speaks",
       title: "Certified Dating and Relationship Coach, Author/Speaker",
       image: stephan,
       instagram: "https://www.instagram.com/stephanspeaks/",
-      website: "",
-    },
-    {
-      name: "Bishop Seion Roberts, Sr.",
-      title: "Chief of Ministries, Lighthouse Church & Ministries",
-      image: seion,
-      instagram: "https://www.instagram.com/bishopsieon/",
       website: "",
     },
     {
@@ -99,7 +99,7 @@ const AllSpeakers = () => {
 
   const workshopLeaders = [
     {
-      name: "Alicia Dugar Stevenson",
+      name: "Alicia Dugar Stevenson, ERYT",
       title: "Lead Teacher Trainer",
       image: alicia,
       instagram: "https://www.instagram.com/afroyogaqueen",
@@ -119,7 +119,6 @@ const AllSpeakers = () => {
       instagram: "https://www.instagram.com/Lacey.tezino",
       website: "",
     },
-
     {
       name: "Bishop R.C. Blakes, Jr.",
       title: "Pastor",
@@ -139,17 +138,17 @@ const AllSpeakers = () => {
 
   const artists = [
     {
+      name: "Todd Dulaney",
+      title: "Artist",
+      image: todd,
+      instagram: "https://www.instagram.com/todddulaney1",
+      website: "",
+    },
+    {
       name: "Le'Andria Johnson",
       title: "Grammy Award Winner/Singer",
       image: leandria,
       instagram: "https://www.instagram.com/leandriaj/",
-      website: "",
-    },
-    {
-      name: "GMWA Houston Mass Choir",
-      title: "Choir",
-      image: choir,
-      instagram: "https://www.instagram.com/houstonmasschoir",
       website: "",
     },
     {
@@ -160,10 +159,10 @@ const AllSpeakers = () => {
       website: "",
     },
     {
-      name: "Pastor Todd Dulaney",
-      title: "Artist",
-      image: todd,
-      instagram: "https://www.instagram.com/todddulaney1",
+      name: "Houston Mass Choir",
+      title: "Choir",
+      image: choir,
+      instagram: "https://www.instagram.com/houstonmasschoir",
       website: "",
     },
   ];
