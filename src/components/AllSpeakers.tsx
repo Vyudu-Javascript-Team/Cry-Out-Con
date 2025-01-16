@@ -39,7 +39,7 @@ const AllSpeakers = () => {
       title: "Pastor",
       image: thomas,
       instagram:
-        "https://www.instagram.com/etthehiphoppreacher?igsh=MTVwbW43am85dHFs",
+        "https://www.instagram.com/etthehiphoppreacher/",
       website: "https://ericthomas.com/",
     },
     {
@@ -53,7 +53,7 @@ const AllSpeakers = () => {
       name: "LaTrice Ryan",
       title: "Evangelist",
       image: latrice,
-      instagram: "https://www.instagram.com/latriceryan?igsh=bXV5Njd3eXRueGZ6",
+      instagram: "https://www.instagram.com/latriceryan/",
       website: "https://latrice-ryan-ministries-82cd.mykajabi.com/KSI22",
     },
     {
@@ -68,14 +68,14 @@ const AllSpeakers = () => {
 
   const thoughtLeaders = [
     {
-      name: "Shaunie Henderson",
+      name: "Lady Shaunie Henderson",
       title: "First Lady of Lighthouse Church & Ministries",
       image: shaunie,
-      instagram: "https://www.instagram.com/iamshaunie/?hl=en",
+      instagram: "https://www.instagram.com/iamshaunie/",
       website: "",
     },
     {
-      name: "Bishop Seion Roberts",
+      name: "Bishop Seion Roberts, Sr.",
       title: "Chief of Ministries, Lighthouse Church & Ministries",
       image: seion,
       instagram: "https://www.instagram.com/bishopsieon/",
@@ -138,7 +138,7 @@ const AllSpeakers = () => {
 
   const artists = [
     {
-      name: "Todd Dulaney",
+      name: "Pastor Todd Dulaney",
       title: "Artist",
       image: todd,
       instagram: "https://www.instagram.com/todddulaney1",
@@ -159,7 +159,7 @@ const AllSpeakers = () => {
       website: "",
     },
     {
-      name: "Houston Mass Choir",
+      name: "GWMA Houston Mass Choir",
       title: "Choir",
       image: choir,
       instagram: "https://www.instagram.com/houstonmasschoir",
