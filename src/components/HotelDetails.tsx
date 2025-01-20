@@ -27,7 +27,7 @@ const HotelDetails = () => {
       address: "1777 Walker St, Houston, TX 77010",
       website: "https://book.passkey.com/e/50935226",
       rating: 4.5,
-      price: 189,
+      price: 284,
       amenities: [
         { icon: <Waves className="w-5 h-5" />, label: "Rooftop Pool" },
         { icon: <Wifi className="w-5 h-5" />, label: "Free WiFi" },
@@ -52,7 +52,7 @@ const HotelDetails = () => {
       website:
         "https://book.passkey.com/gt/220475741?gtid=a12b4ac2d9c17f6187cd3142d1ce7032",
       rating: 4.4,
-      price: 179,
+      price: 219,
       amenities: [
         { icon: <Waves className="w-5 h-5" />, label: "Indoor Pool" },
         { icon: <Wifi className="w-5 h-5" />, label: "Free WiFi" },
