@@ -8,6 +8,7 @@ import imageUrlBuilder from "@sanity/image-url";
 
 const builder = imageUrlBuilder(client);
 
+
 function urlFor(source: any) {
   return builder.image(source);
 }
@@ -77,7 +78,7 @@ const HotelDetails = ({ hotel }: { hotel: Hotel }) => {
             <div className="grid grid-cols-2 gap-4">
               {hotel.amenities.map((amenity: any) => (
                 <div
-                  key={amenity.label}
+                  key={amenity.icon}
                   className="flex items-center gap-2 text-gray-300"
                 >
                   <i className={`fa-solid ${amenity.icon} md:text-2xl`}></i>
