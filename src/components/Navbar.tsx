@@ -175,7 +175,7 @@ export const Navbar = () => {
           />
         </motion.a>
 
-        <div className="hidden lg:flex items-center justify-center flex-grow px-4">
+        <div className="hidden xl:flex items-center justify-center flex-grow px-4">
           <div className="flex items-center justify-center space-x-3 xl:space-x-6 2xl:space-x-8 text-sm xl:text-base 2xl:text-lg">
             <a
               onClick={() => handleNavigation("/", "#conference")}
@@ -198,7 +198,7 @@ export const Navbar = () => {
           </div>
         </div>
 
-        <div className="hidden lg:flex justify-end flex-shrink-0 ml-4">
+        <div className="hidden xl:flex justify-end flex-shrink-0 ml-4">
           <motion.a
             href="https://brushfire.com/tlhc/cryout25/578593"
             target="_blank"
@@ -207,14 +207,14 @@ export const Navbar = () => {
             animate={{ opacity: 1, scale: 1 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="md:px-4 md:py-2 md:text-xl px-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-white/25"
+            className="md:px-4 md:py-2 px-3 py-1.5 text-sm md:text-base xl:text-lg bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-white/25"
           >
             REGISTER NOW
           </motion.a>
         </div>
 
         <button
-          className="lg:hidden"
+          className="xl:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle mobile menu"
         >
