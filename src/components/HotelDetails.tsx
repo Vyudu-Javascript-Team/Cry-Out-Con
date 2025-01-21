@@ -71,15 +71,15 @@ const HotelDetails = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary via-primary/95 to-primary py-20">
-      <div className="container relative max-w-7xl mx-auto px-4">
+    <div className="min-h-screen bg-gradient-to-b from-primary via-primary/95 to-primary py-12 sm:py-20">
+      <div className="container relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
           title="Accommodations"
           subtitle="Here is a list of Cry Out Con preferred hotels with discounted rates."
           gradient="from-blue-400 via-purple-400 to-pink-400"
         />
 
-        <div className="grid grid-cols-1 gap-12 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 gap-8 sm:gap-12 max-w-7xl mx-auto">
           {hotels.map((hotel) => (
             <motion.div
               key={hotel.name}
@@ -89,7 +89,7 @@ const HotelDetails = () => {
             >
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* Hotel Image Section */}
-                <div className="relative h-[400px]">
+                <div className="relative h-[300px] sm:h-[350px] lg:h-[400px]">
                   <Suspense
                     fallback={
                       <div className="absolute inset-0 w-full h-full bg-gray-900 animate-pulse" />
@@ -102,7 +102,7 @@ const HotelDetails = () => {
                     />
                   </Suspense>
                   <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-                    <span className="text-lg font-bold text-white">
+                    <span className="text-base sm:text-lg font-bold text-white">
                       ${hotel.price}
                     </span>
                     <span className="text-sm text-white/80">/night</span>
@@ -112,7 +112,7 @@ const HotelDetails = () => {
                 {/* Hotel Details Section */}
                 <div className="p-8">
                   <div className="flex items-start justify-between mb-4">
-                    <h2 className="text-3xl font-bold text-white">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-white">
                       {hotel.name}
                     </h2>
                     <div className="flex items-center gap-1">
@@ -137,7 +137,7 @@ const HotelDetails = () => {
                     <h3 className="text-white text-xl font-semibold mb-4">
                       Amenities
                     </h3>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 xs:grid-cols-2 gap-4">
                       {hotel.amenities.map((amenity) => (
                         <div
                           key={amenity.label}
@@ -155,7 +155,7 @@ const HotelDetails = () => {
                     <h3 className="text-white text-xl font-semibold mb-4">
                       Features
                     </h3>
-                    <ul className="list-disc list-inside text-gray-300 grid grid-cols-2 gap-2">
+                    <ul className="list-disc list-inside text-gray-300 grid grid-cols-1 xs:grid-cols-2 gap-2">
                       {hotel.features.map((feature) => (
                         <li key={feature}>{feature}</li>
                       ))}

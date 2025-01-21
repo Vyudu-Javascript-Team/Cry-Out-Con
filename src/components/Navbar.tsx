@@ -109,20 +109,20 @@ export const Navbar = () => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.2 }}
-      className="absolute top-full left-0 right-0 bg-primary p-4"
+      className="absolute top-full left-0 right-0 bg-primary p-4 border-t border-white/10"
     >
-      <div className="flex flex-col items-center space-y-4">
+      <div className="flex flex-col items-center space-y-6 py-4">
         <a
           href="/#conference"
           onClick={() => handleNavigation("/", "#conference")}
-          className="hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors"
+          className="text-lg hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors"
         >
           EXPERIENCES
         </a>
         <NavLink to="/speakers">SPEAKERS & MUSICAL GUESTS</NavLink>
         <a
           onClick={() => handleNavigation("/", "#agenda")}
-          className="hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors"
+          className="text-lg hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors"
         >
           SCHEDULE
         </a>
@@ -138,7 +138,7 @@ export const Navbar = () => {
           onClick={() => {
             setIsMobileMenuOpen(false);
           }}
-          className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded font-semibold font-semibold"
+          className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded font-semibold"
         >
           REGISTER NOW
         </motion.a>
@@ -155,7 +155,7 @@ export const Navbar = () => {
       }}
       className="fixed top-0 left-0 right-0 bg-white z-[9999] will-change-transform font-sans"
     >
-      <nav className="flex items-center w-full mx-auto justify-between md:px-12 px-8 h-full ">
+      <nav className="flex items-center w-full max-w-[2000px] mx-auto justify-between px-4 sm:px-6 md:px-8 lg:px-12 h-full">
         <motion.a
           href="/"
           onClick={() => {
@@ -171,29 +171,34 @@ export const Navbar = () => {
             src={logo}
             alt="Cry Out Conference Logo"
             loading="lazy"
-            className="md:w-auto md:max-h-[90px] w-40 object-contain"
+            className="h-12 sm:h-16 md:h-20 w-auto object-contain"
           />
         </motion.a>
 
-        <div className={`hidden lg:flex items-center md:max-w-xl text-primary md:text-xl justify-center space-x-4 xl:space-x-6 2xl:space-x-8 flex-grow px-2  whitespace-nowrap`}>
-          <a
-            onClick={() => handleNavigation("/", "#conference")}
-            className="hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors"
-          >
-            EXPERIENCES
-          </a>
-          <NavLink to="/speakers">SPEAKERS & MUSICAL GUESTS</NavLink>
-          <a
-            onClick={() => handleNavigation("/", "#agenda")}
-            className="hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors"
-          >
-            SCHEDULE
-          </a>
-          <NavLink to="/hotel-details">ACCOMMODATIONS</NavLink>
-          {/* <NavLink to="">Sponsors</NavLink> */}
+        <div className="hidden lg:flex items-center justify-center flex-grow px-4">
+          <div className="flex items-center justify-center space-x-3 xl:space-x-6 2xl:space-x-8 text-sm xl:text-base 2xl:text-lg">
+            <a
+              onClick={() => handleNavigation("/", "#conference")}
+              className="hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors whitespace-nowrap"
+            >
+              EXPERIENCES
+            </a>
+            <NavLink to="/speakers">
+              <span className="whitespace-nowrap">SPEAKERS & MUSICAL GUESTS</span>
+            </NavLink>
+            <a
+              onClick={() => handleNavigation("/", "#agenda")}
+              className="hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors whitespace-nowrap"
+            >
+              SCHEDULE
+            </a>
+            <NavLink to="/hotel-details">
+              <span className="whitespace-nowrap">ACCOMMODATIONS</span>
+            </NavLink>
+          </div>
         </div>
 
-        <div className="hidden lg:flex justify-end space-x-4 flex-shrink-0">
+        <div className="hidden lg:flex justify-end flex-shrink-0 ml-4">
           <motion.a
             href="https://brushfire.com/tlhc/cryout25/578593"
             target="_blank"
