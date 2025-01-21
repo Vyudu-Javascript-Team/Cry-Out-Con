@@ -179,7 +179,7 @@ export const Navbar = () => {
           <div className="flex items-center justify-center space-x-3 xl:space-x-6 2xl:space-x-8 text-sm xl:text-base 2xl:text-lg">
             <a
               onClick={() => handleNavigation("/", "#conference")}
-              className="hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors whitespace-nowrap"
+              className="hover:cursor-pointer text-primary hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors whitespace-nowrap"
             >
               EXPERIENCES
             </a>
@@ -188,7 +188,7 @@ export const Navbar = () => {
             </NavLink>
             <a
               onClick={() => handleNavigation("/", "#agenda")}
-              className="hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors whitespace-nowrap"
+              className="hover:cursor-pointer text-primary hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors whitespace-nowrap"
             >
               SCHEDULE
             </a>
