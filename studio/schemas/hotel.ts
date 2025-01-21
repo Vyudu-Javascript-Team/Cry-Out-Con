@@ -22,8 +22,20 @@ const hotel = {
             name: 'image',
             title: 'Image',
             type: 'image',
+            options: {
+                hotspot: true
+            },
+            fields: [
+                defineField({
+                    name: 'alt',
+                    title: 'Alt',
+                    type: 'string',
+                })
+            ],
             validation: Rule => Rule.required().error('Image is required'),
         }),
+
+
         defineField({
             name: 'price',
             title: 'Price',
@@ -71,7 +83,7 @@ const hotel = {
             validation: (Rule) => Rule.required().error('Features are required'),
             description: 'Add hotel features as bullet points'
         })
-        
+
     ],
 };
 

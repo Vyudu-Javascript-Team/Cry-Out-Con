@@ -4,15 +4,16 @@ import imageUrlBuilder from '@sanity/image-url'
 export const client = createClient({
   projectId: import.meta.env.VITE_SANITY_PROJECT_ID,
   dataset: import.meta.env.VITE_SANITY_DATASET,
-  apiVersion: '2021-10-21',
-  useCdn: true,
-  token: import.meta.env.VITE_SANITY_TOKEN,
+  apiVersion: '2021-10-21'
 })
 
 
 const builder = imageUrlBuilder(client)
 
 export function urlFor(source: any) {
+  if (!source) {
+    throw new Error('Image source is required');
+  }
   return builder.image(source)
 }
 
@@ -64,7 +65,10 @@ export async function getAllHotels() {
       name,
       description,
       image {
-        "fileUrl": file.asset->url
+        asset->{
+        _id,
+        url
+      }
       },
       price,
       website,

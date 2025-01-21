@@ -19,21 +19,20 @@ const Hotels = () => {
   const [hotels, setHotels] = useState<Hotel[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  
 
   useEffect(() => {
     const fetchHotels = async () => {
       try {
-        setIsLoading(true);
-        setError(null);
-
         const data = await getAllHotels();
         if (!data) {
           throw new Error("No hotels data found");
         }
         setHotels(data);
+        setIsLoading(false);
       } catch (error) {
-        console.error(error);
-      }
+        console.error('Error fetching hotels',error);
+      } 
     };
     fetchHotels();
   }, []);
