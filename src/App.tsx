@@ -8,13 +8,13 @@ import VideoSection from "./components/VideoSection";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Keynotes from "./components/Keynotes";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import HotelDetails from "./components/HotelDetails";
 import AllSpeakers from "./components/AllSpeakers";
 import Newsletter from "./components/Newsletter";
 import Agenda from "./components/Agenda";
 import Conference from "./components/Conference";
 import DiveIn from "./components/DiveIn";
 import LoadingSpinner from "./components/LoadingSpinner";
+import Hotels from "./components/hotels";
 
 function Home() {
   const { scrollYProgress } = useScroll();
@@ -76,7 +76,7 @@ function App() {
         <LoadingSpinner />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/hotel-details" element={<HotelDetails />} />
+          <Route path="/hotel-details" element={<Hotels />} />
           <Route path="/speakers" element={<AllSpeakers />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

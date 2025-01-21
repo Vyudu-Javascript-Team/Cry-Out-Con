@@ -2,11 +2,13 @@ import { createClient } from '@sanity/client'
 import imageUrlBuilder from '@sanity/image-url'
 
 export const client = createClient({
-  projectId: 'i96yh15e',
-  dataset: 'production',
-  apiVersion: '2024-01-13',
-  useCdn: true
+  projectId: import.meta.env.VITE_SANITY_PROJECT_ID,
+  dataset: import.meta.env.VITE_SANITY_DATASET,
+  apiVersion: '2021-10-21',
+  useCdn: true,
+  token: import.meta.env.VITE_SANITY_TOKEN,
 })
+
 
 const builder = imageUrlBuilder(client)
 
@@ -15,42 +17,64 @@ export function urlFor(source: any) {
 }
 
 // Helper function to fetch all sections
-export async function getAllSections() {
-  return client.fetch(`
-    *[_type == "section"] | order(order asc) {
-      _id,
-      type,
-      isEnabled,
-      order,
-      content
-    }
-  `)
-}
+// export async function getAllSections() {
+//   return client.fetch(`
+//     *[_type == "section"] | order(order asc) {
+//       _id,
+//       type,
+//       isEnabled,
+//       order,
+//       content
+//     }
+//   `)
+// }
 
 // Helper function to fetch all speakers
-export async function getAllSpeakers() {
-  return client.fetch(`
-    *[_type == "speaker"] {
-      _id,
-      name,
-      title,
-      company,
-      bio,
-      featured,
-      "image": image.asset->url,
-      socialLinks
-    }
-  `)
-}
+// export async function getAllSpeakers() {
+//   return client.fetch(`
+//     *[_type == "speaker"] {
+//       _id,
+//       name,
+//       title,
+//       company,
+//       bio,
+//       featured,
+//       "image": image.asset->url,
+//       socialLinks
+//     }
+//   `)
+// }
 
 // Helper function to fetch site settings
-export async function getSiteSettings() {
+// export async function getSiteSettings() {
+//   return client.fetch(`
+//     *[_type == "settings"][0] {
+//       siteName,
+//       "logo": logo.asset->url,
+//       navigation,
+//       footer
+//     }
+//   `)
+// }
+
+export async function getAllHotels() {
   return client.fetch(`
-    *[_type == "settings"][0] {
-      siteName,
-      "logo": logo.asset->url,
-      navigation,
-      footer
+    *[_type == "hotel"] {
+      _id,
+      name,
+      description,
+      image {
+        "fileUrl": file.asset->url
+      },
+      price,
+      website,
+      rating,
+      address,
+      amenities[] {
+        icon,
+        amenity
+      },
+      features
     }
   `)
 }

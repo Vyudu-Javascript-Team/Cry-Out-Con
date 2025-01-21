@@ -1,86 +1,35 @@
 import { motion } from "framer-motion";
 import {
   MapPin,
-  Phone,
-  Globe,
   Star,
-  Coffee,
-  Wifi,
-  Waves,
-  Car,
-  Utensils,
 } from "lucide-react";
-import SectionTitle from "./SectionTitle";
 import LazyImage from "./LazyImage";
 import { Suspense } from "react";
 
-import marriot from "/assets/sectionimages/marriott.jpg.webp";
-import hilton from "/assets/sectionimages/hilton.jpg";
+import {client} from "../lib/sanity";
+import imageUrlBuilder from "@sanity/image-url";
 
-const HotelDetails = () => {
-  const hotels = [
-    {
-      name: "Marriott Marquis Houston",
-      image: marriot,
-      description:
-        "Connected to the George R. Brown Convention Center, featuring a rooftop Texas-shaped lazy river and infinity pool.",
-      address: "1777 Walker St, Houston, TX 77010",
-      website: "https://book.passkey.com/e/50935226",
-      rating: 4.5,
-      price: 284,
-      amenities: [
-        { icon: <Waves className="w-5 h-5" />, label: "Rooftop Pool" },
-        { icon: <Wifi className="w-5 h-5" />, label: "Free WiFi" },
-        { icon: <Coffee className="w-5 h-5" />, label: "Restaurant" },
-        { icon: <Car className="w-5 h-5" />, label: "Valet Parking" },
-        { icon: <Utensils className="w-5 h-5" />, label: "Room Service" },
-      ],
-      features: [
-        "Connected to Convention Center",
-        "Texas-shaped Lazy River",
-        "Infinity Pool",
-        "Luxury Spa",
-        "Multiple Restaurants",
-      ],
-    },
-    {
-      name: "Hilton Americas-Houston",
-      image: hilton,
-      description:
-        "Downtown luxury hotel with skyline views and direct access to the George R. Brown Convention Center.",
-      address: "1600 Lamar St, Houston, TX 77010",
-      website:
-        "https://book.passkey.com/gt/220475741?gtid=a12b4ac2d9c17f6187cd3142d1ce7032",
-      rating: 4.4,
-      price: 219,
-      amenities: [
-        { icon: <Waves className="w-5 h-5" />, label: "Indoor Pool" },
-        { icon: <Wifi className="w-5 h-5" />, label: "Free WiFi" },
-        { icon: <Coffee className="w-5 h-5" />, label: "Restaurant" },
-        { icon: <Car className="w-5 h-5" />, label: "Parking" },
-        { icon: <Utensils className="w-5 h-5" />, label: "Room Service" },
-      ],
-      features: [
-        "Skyline Views",
-        "Convention Center Access",
-        "Full-Service Spa",
-        "Executive Lounge",
-        "Health Club",
-      ],
-    },
-  ];
+const builder = imageUrlBuilder(client);
 
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-primary via-primary/95 to-primary py-20">
-      <div className="container relative max-w-7xl mx-auto px-4">
-        <SectionTitle
-          title="Accommodations"
-          subtitle="Here is a list of Cry Out Con preferred hotels with discounted rates."
-          gradient="from-blue-400 via-purple-400 to-pink-400"
-        />
+function urlFor(source: any) {
+	return builder.image(source);
+}
 
-        <div className="grid grid-cols-1 gap-12 max-w-7xl mx-auto">
-          {hotels.map((hotel) => (
+interface Hotel {
+  name: string;
+  image: any;
+  price: number;
+  rating: number;
+  description: string;
+  address: string;
+  amenities: { label: string; icon: JSX.Element }[];
+  features: string[];
+  website: string;
+}
+
+const HotelDetails = ({ hotel }: { hotel: Hotel }) => {
+
+  return (       
             <motion.div
               key={hotel.name}
               initial={{ opacity: 0, y: 20 }}
@@ -96,7 +45,7 @@ const HotelDetails = () => {
                     }
                   >
                     <LazyImage
-                      src={hotel.image}
+                      src={urlFor(hotel.image).url()}
                       alt={hotel.name}
                       className="w-full h-full object-cover"
                     />
@@ -138,12 +87,12 @@ const HotelDetails = () => {
                       Amenities
                     </h3>
                     <div className="grid grid-cols-2 gap-4">
-                      {hotel.amenities.map((amenity) => (
+                      {hotel.amenities.map((amenity: any,) => (
                         <div
                           key={amenity.label}
                           className="flex items-center gap-2 text-gray-300"
                         >
-                          {amenity.icon}
+                          <i className={`fa-solid ${amenity.icon} md:text-2xl`}></i>
                           <span>{amenity.label}</span>
                         </div>
                       ))}
@@ -156,7 +105,7 @@ const HotelDetails = () => {
                       Features
                     </h3>
                     <ul className="list-disc list-inside text-gray-300 grid grid-cols-2 gap-2">
-                      {hotel.features.map((feature) => (
+                      {hotel.features.map((feature: any) => (
                         <li key={feature}>{feature}</li>
                       ))}
                     </ul>
@@ -175,10 +124,6 @@ const HotelDetails = () => {
                 </div>
               </div>
             </motion.div>
-          ))}
-        </div>
-      </div>
-    </div>
   );
 };
 
