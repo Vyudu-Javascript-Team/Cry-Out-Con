@@ -130,7 +130,7 @@ export async function getAgenda() {
 
 export async function getSliderImages() {
   return client.fetch(`
-    *[_type == "news"][0] {
+    *[_type == "imageSlider"][0] {
       title,
       slides[] | order(order asc) {
         "imageUrl": image.asset->url,

@@ -25,7 +25,9 @@ export const News = () => {
     const fetchNews = async () => {
       try {
         const data = await getSliderImages();
-        setImages(data);
+        if (data && data.slides && data.slides.length > 0) {
+          setImages(data);
+        }
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching news:", error);
@@ -106,7 +108,7 @@ export const News = () => {
   return (
     <section className="relative h-[500px] w-screen overflow-hidden">
       <div
-        className="absolute w-full h-full"
+        className="absolute inset-0 w-full h-full"
         style={{
           backgroundImage: `url(${images.slides[currentIndex === 0 ? images.slides.length - 1 : currentIndex - 1].imageUrl})`,
           backgroundSize: "cover",
