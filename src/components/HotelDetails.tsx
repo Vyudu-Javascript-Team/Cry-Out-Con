@@ -2,11 +2,22 @@ import { motion } from "framer-motion";
 import { MapPin, Star } from "lucide-react";
 import LazyImage from "./LazyImage";
 import { Suspense } from "react";
+import * as LucideIcons from "lucide-react";
 
 import { client } from "../lib/sanity";
 import imageUrlBuilder from "@sanity/image-url";
 
 const builder = imageUrlBuilder(client);
+
+const DynamicLucideIcon = ({ iconName, className }: { iconName: string; className?: string }) => {
+  const IconComponent = (LucideIcons as any)[iconName];
+
+  if (!IconComponent) {
+    return <div className={className}>Icon not found</div>;
+  }
+
+  return <IconComponent className={className} />;
+};
 
 
 function urlFor(source: any) {
@@ -81,8 +92,8 @@ const HotelDetails = ({ hotel }: { hotel: Hotel }) => {
                   key={amenity.icon}
                   className="flex items-center gap-2 text-gray-300"
                 >
-                  <i className={`fa-solid ${amenity.icon} md:text-2xl`}></i>
-                  <span>{amenity.label}</span>
+                  <DynamicLucideIcon iconName={amenity.icon} className="md:text-2xl" />
+                  <span>{amenity.amenity}</span>
                 </div>
               ))}
             </div>

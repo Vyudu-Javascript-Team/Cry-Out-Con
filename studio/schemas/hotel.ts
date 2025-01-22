@@ -34,8 +34,6 @@ const hotel = {
             ],
             validation: Rule => Rule.required().error('Image is required'),
         }),
-
-
         defineField({
             name: 'price',
             title: 'Price',
