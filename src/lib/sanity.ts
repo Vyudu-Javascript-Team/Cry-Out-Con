@@ -110,6 +110,24 @@ export async function getConference() {
       }`)
 }
 
+export async function getAgenda() {
+  return client.fetch(`
+    *[_type == "agenda"][0] {
+      announcement,
+      days[] {
+        day,
+        sessions[] {
+          time,
+          activities[] {
+            title,
+            note
+          }
+        }
+      }
+    }
+  `);
+}
+
 export async function getAllHotels() {
   return client.fetch(`
     *[_type == "hotel"] {
