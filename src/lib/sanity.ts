@@ -30,21 +30,58 @@ export function urlFor(source: any) {
 //   `)
 // }
 
-// Helper function to fetch all speakers
-// export async function getAllSpeakers() {
-//   return client.fetch(`
-//     *[_type == "speaker"] {
-//       _id,
-//       name,
-//       title,
-//       company,
-//       bio,
-//       featured,
-//       "image": image.asset->url,
-//       socialLinks
-//     }
-//   `)
-// }
+
+// Function to get all speakers
+export async function getAllSpeakers() {
+  return client.fetch(`
+    *[_type == "speaker"] {
+      _id,
+      name,
+      title,
+      company,
+      category,
+      bio,
+      featured,
+      image {
+        asset->{
+          _id,
+          url
+        },
+        alt
+      },
+      socialLinks {
+        instagram,
+        website
+      }
+    }
+  `)
+}
+
+// Function to get featured speakers
+export async function getFeaturedSpeakers() {
+  return client.fetch(`
+    *[_type == "speaker" && featured == true] {
+      _id,
+      name,
+      title,
+      company,
+      category,
+      bio,
+      featured,
+      image {
+        asset->{
+          _id,
+          url
+        },
+        alt
+      },
+      socialLinks {
+        instagram,
+        website
+      }
+    }
+  `)
+}
 
 // Helper function to fetch site settings
 // export async function getSiteSettings() {

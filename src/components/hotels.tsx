@@ -18,7 +18,6 @@ interface Hotel {
 const Hotels = () => {
   const [hotels, setHotels] = useState<Hotel[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   
 
   useEffect(() => {
