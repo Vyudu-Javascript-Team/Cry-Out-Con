@@ -37,9 +37,18 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
             // Video is in view - play
             if (type === "direct") {
               const video = videoRef.current as HTMLVideoElement;
-              video.play().catch(error => {
-                console.log("Autoplay failed:", error);
-              });
+              const playPromise = video.play();
+              
+              if (playPromise !== undefined) {
+                playPromise
+                  .then(() => {
+                    setIsPlaying(true);
+                  })
+                  .catch(error => {
+                    console.log("Autoplay failed:", error);
+                    setIsPlaying(false);
+                  });
+              }
             } else {
               const iframe = videoRef.current as HTMLIFrameElement;
               if (type === 'youtube') {
@@ -64,7 +73,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
             // Video is out of view - pause
             if (type === "direct") {
               const video = videoRef.current as HTMLVideoElement;
-              video.pause();
+              if (!video.paused) {
+                video.pause();
+                setIsPlaying(false);
+              }
             } else {
               const iframe = videoRef.current as HTMLIFrameElement;
               if (type === 'youtube') {
