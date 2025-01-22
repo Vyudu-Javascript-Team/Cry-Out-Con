@@ -4,14 +4,14 @@ import SpotlightEffect from "./SpotlightEffect";
 import { Instagram, Globe } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 import LazyImage from "./LazyImage";
-import { getAllSpeakers} from "../lib/sanity";
+import { getAllSpeakers } from "../lib/sanity";
 
 export interface Speaker {
   _id: string;
   name: string;
   title?: string;
   company?: string;
-  category: 'keynote' | 'thought-leader' | 'workshop' | 'artist';
+  category: "keynote" | "thought-leader" | "workshop" | "artist";
   bio?: string;
   featured: boolean;
   image?: {
@@ -27,8 +27,13 @@ export interface Speaker {
   };
 }
 
-
-const SpeakerCard = ({ speaker, index }: { speaker: Speaker; index: number }) => (
+const SpeakerCard = ({
+  speaker,
+  index,
+}: {
+  speaker: Speaker;
+  index: number;
+}) => (
   <motion.div
     key={speaker._id}
     initial={{ opacity: 0, y: 50 }}
@@ -92,12 +97,14 @@ const SpeakerCard = ({ speaker, index }: { speaker: Speaker; index: number }) =>
 const AllSpeakers = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [speakers, setSpeakers] = useState<Speaker[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchSpeakers = async () => {
       try {
         const allSpeakers = await getAllSpeakers();
         setSpeakers(allSpeakers);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching speakers:", error);
       }
@@ -106,12 +113,17 @@ const AllSpeakers = () => {
     fetchSpeakers();
   }, []);
 
-   // Filter speakers by category
-   const keynoteSpeakers = speakers.filter(speaker => speaker.category === 'keynote');
-   const thoughtLeaders = speakers.filter(speaker => speaker.category === 'thought-leader');
-   const workshopLeaders = speakers.filter(speaker => speaker.category === 'workshop');
-   const artists = speakers.filter(speaker => speaker.category === 'artist');
- 
+  // Filter speakers by category
+  const keynoteSpeakers = speakers.filter(
+    (speaker) => speaker.category === "keynote"
+  );
+  const thoughtLeaders = speakers.filter(
+    (speaker) => speaker.category === "thought-leader"
+  );
+  const workshopLeaders = speakers.filter(
+    (speaker) => speaker.category === "workshop"
+  );
+  const artists = speakers.filter((speaker) => speaker.category === "artist");
 
   return (
     <section ref={sectionRef} className="relative py-32 overflow-hidden">
@@ -126,11 +138,21 @@ const AllSpeakers = () => {
               gradient="from-blue-400 via-purple-400 to-pink-400"
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 mx-auto">
-              {keynoteSpeakers.map((speaker, index) => (
-                <SpeakerCard key={speaker._id} speaker={speaker} index={index} />
-              ))}
-            </div>
+            {isLoading ? (
+              <div className="text-center">
+                <h2>Loading speakers...</h2>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 mx-auto">
+                {keynoteSpeakers.map((speaker, index) => (
+                  <SpeakerCard
+                    key={speaker._id}
+                    speaker={speaker}
+                    index={index}
+                  />
+                ))}
+              </div>
+            )}
           </>
         )}
 
@@ -144,7 +166,11 @@ const AllSpeakers = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
               {thoughtLeaders.map((speaker: Speaker, index: number) => (
-                <SpeakerCard key={speaker._id} speaker={speaker} index={index} />
+                <SpeakerCard
+                  key={speaker._id}
+                  speaker={speaker}
+                  index={index}
+                />
               ))}
             </div>
           </div>
@@ -160,7 +186,11 @@ const AllSpeakers = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
               {workshopLeaders.map((speaker: Speaker, index: number) => (
-                <SpeakerCard key={speaker._id} speaker={speaker} index={index} />
+                <SpeakerCard
+                  key={speaker._id}
+                  speaker={speaker}
+                  index={index}
+                />
               ))}
             </div>
           </div>
@@ -176,7 +206,11 @@ const AllSpeakers = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
               {artists.map((speaker: Speaker, index: number) => (
-                <SpeakerCard key={speaker._id} speaker={speaker} index={index} />
+                <SpeakerCard
+                  key={speaker._id}
+                  speaker={speaker}
+                  index={index}
+                />
               ))}
             </div>
           </div>
@@ -184,6 +218,6 @@ const AllSpeakers = () => {
       </div>
     </section>
   );
-}
+};
 
 export default AllSpeakers;
