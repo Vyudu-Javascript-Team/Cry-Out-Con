@@ -95,6 +95,21 @@ export async function getFeaturedSpeakers() {
 //   `)
 // }
 
+export async function getConference() {
+  return client.fetch(`*[_type == "conference"] | order(order asc) {
+        _id,
+        title,
+        description,
+        image {
+          asset->{
+            url
+          },
+          alt
+        },
+        order
+      }`)
+}
+
 export async function getAllHotels() {
   return client.fetch(`
     *[_type == "hotel"] {
