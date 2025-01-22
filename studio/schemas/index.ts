@@ -5,5 +5,6 @@ import settings from './settings'
 import hotel from './hotel'
 import conference from './conference'
 import agenda from './agenda'
+import imageSlider from './imageSlider'
 
-export const schemaTypes = [section, speaker, page, settings, conference, agenda, hotel]
+export const schemaTypes = [section, speaker, page, settings, conference, agenda, imageSlider, hotel]
