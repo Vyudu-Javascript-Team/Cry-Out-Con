@@ -39,10 +39,7 @@ const VideoSection = () => {
   if (isLoading) {
     return (
       <div className="w-full pt-16 text-center">
-        <SectionTitle
-          title="Loading..."
-          gradient="from-pink-500 via-purple-500 to-blue-500"
-        />
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
       </div>
     );
   }

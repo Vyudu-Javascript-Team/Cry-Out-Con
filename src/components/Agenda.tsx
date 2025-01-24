@@ -66,7 +66,9 @@ const Agenda = () => {
         />
 
         {isLoading ? (
-          <div className="text-center text-white">Loading agenda...</div>
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
+          </div>
         ) : !agendaData ? (
           <div className="text-center text-white">No agenda data available</div>
         ) : (

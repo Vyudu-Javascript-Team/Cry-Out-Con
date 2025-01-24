@@ -129,7 +129,7 @@ const AllSpeakers = () => {
       <div className="container relative max-w-6xl mx-auto px-4">
         {isLoading ? (
           <div className="text-center">
-            <h2>Loading speakers...</h2>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
           </div>
         ) : categories && categories.length > 0 ? (
           categories.map((category) => (

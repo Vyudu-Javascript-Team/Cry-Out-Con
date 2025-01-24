@@ -36,6 +36,12 @@ const DiveIn = () => {
 
   if (!content) return null;
 
+  if (isLoading) {
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
+      </div>
+  }
+
   const sortedParagraphs = [...content.paragraphs].sort((a, b) => a.order - b.order);
 
 

@@ -49,7 +49,7 @@ const Conference = () => {
 
         {isLoading ? (
           <div className="text-center">
-            <h2>Loading conference offerings...</h2>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">

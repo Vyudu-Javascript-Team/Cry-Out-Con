@@ -89,7 +89,7 @@ export const News = () => {
     return (
       <section className="relative h-[500px] w-screen overflow-hidden bg-gray-900">
         <div className="flex items-center justify-center h-full">
-          <p className="text-white">Loading images...</p>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
         </div>
       </section>
     );

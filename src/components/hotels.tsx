@@ -47,7 +47,7 @@ const Hotels = () => {
 
         {isLoading ? (
           <div className="text-center">
-            <h2>Loading hotels...</h2>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-12 max-w-7xl mx-auto">
