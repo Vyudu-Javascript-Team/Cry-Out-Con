@@ -1,34 +1,56 @@
+import { useEffect, useState } from "react";
 import SectionTitle from "./SectionTitle";
+import { getDiveInContent } from "../lib/sanity";
+
+type Paragraph = {
+  text: string;
+  order: number;
+};
+
+type DiveInContent = {
+  _id: string;
+  sectionTitle: string;
+  titleGradient: string;
+  paragraphs: Paragraph[];
+  isVisible: boolean;
+};
 
 const DiveIn = () => {
+  const [content, setContent] = useState<DiveInContent | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDiveInContent = async () => {
+      try {
+        const data = await getDiveInContent();
+        setContent(data);
+      } catch (error) {
+        console.error("Error fetching dive in content:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchDiveInContent();
+  }, []);
+
+  if (!content) return null;
+
+  const sortedParagraphs = [...content.paragraphs].sort((a, b) => a.order - b.order);
+
+
   return (
     <section className="py-8 relative overflow-hidden">
       <div className="container md:max-w-5xl mx-auto px-8 space-y-6">
         <SectionTitle
-          title="GET READY TO CRY OUT"
+          title={content.sectionTitle}
           gradient="from-pink-500 via-purple-500 to-blue-500"
         />
-        <p className="text-xl">
-          Cry Out Con is an empowerment experience dedicated to fostering a
-          profound practice of surrender and submission, leading us on a
-          transformative journey of healing & restoration — emotionally,
-          mentally and financially.
-        </p>
-        <p className="text-xl">
-          Through the exercise of faith, courage, and wisdom, and a fervent
-          desire to manifest inner strength, we create the atmosphere needed for
-          every person to discover and unleash their inherent abilities, gifts,
-          and talents to significantly advance their lives.
-        </p>
-        <p className="text-xl">
-          Fostered in a space of intentional action, Cry Out is am empowering
-          experience designed to bring each of us closer to God in authentic
-          recognition of His Spirit and an unwavering desire to shift the
-          seasons of life. Through the act of “Crying Out,” we inspire a
-          resolute commitment to embrace a higher calling, overcome obstacles,
-          and ascend to a destiny of beautiful purpose and spiritual
-          fulfillment.
-        </p>
+        {sortedParagraphs.map((paragraph, index) => (
+          <p key={`paragraph-${index}`} className="text-xl">
+            {paragraph.text}
+          </p>
+        ))}
       </div>
     </section>
   );

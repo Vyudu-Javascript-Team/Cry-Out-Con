@@ -17,6 +17,21 @@ export function urlFor(source: any) {
   return builder.image(source)
 }
 
+export async function getDiveInContent() {
+  return client.fetch(`
+    *[_type == "diveIn" && isVisible == true][0] {
+      _id,
+      sectionTitle,
+      paragraphs[] {
+        text,
+        order
+      },
+      isVisible
+    }
+  `)
+}
+
+
 // If you need to get all categories
 export async function getAllSpeakerCategories() {
   return client.fetch(`

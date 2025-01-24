@@ -4,5 +4,6 @@ import conference from './conference'
 import agenda from './agenda'
 import imageSlider from './imageSlider'
 import speakerCategory from './speakerCategory'
+import getReady from './getReady'
 
-export const schemaTypes = [speaker, conference, agenda, imageSlider, hotel, speakerCategory]
+export const schemaTypes = [getReady, speaker, conference, agenda, imageSlider, hotel, speakerCategory]
