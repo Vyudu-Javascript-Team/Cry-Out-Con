@@ -1,42 +1,69 @@
-import { Suspense, useRef } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import SpotlightEffect from "./SpotlightEffect";
 import { Instagram, Globe } from "lucide-react";
 import SectionTitle from "./SectionTitle";
-import john from "/assets/images/JohnHannah.jpg";
-import thomas from "/assets/images/thomas.png";
-import keion from "/assets/images/PASTOR-KEION.png";
 import { useNavigate } from "react-router-dom";
 import LazyImage from "./LazyImage";
+import { getKeynoteSpeakers } from "../lib/sanity";
+
+type Speaker = {
+  _id: string;
+  name: string;
+  title?: string;
+  company?: string;
+  image?: {
+    asset: {
+      _id: string;
+      url: string;
+    };
+    alt?: string;
+  };
+  socialLinks?: {
+    instagram?: string;
+    website?: string;
+  };
+};
 
 export const Keynotes = () => {
   const navigate = useNavigate();
   const sectionRef = useRef<HTMLElement>(null);
+  const [keynotes, setKeynotes] = useState<Speaker[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const speakers = [
-    {
-      name: "Pastor Keion Henderson",
-      title: "Founder and CEO, The Lighthouse Church",
-      image: keion,
-      instagram: "https://www.instagram.com/pastorkeion/",
-      website: "https://keionhenderson.com/about-us/",
-    },
-    {
-      name: "Eric Thomas",
-      title: "Pastor",
-      image: thomas,
-      instagram:
-        "https://www.instagram.com/etthehiphoppreacher?igsh=MTVwbW43am85dHFs",
-      website: "https://ericthomas.com/",
-    },
-    {
-      name: "Pastor John F. Hannah",
-      title: "Sr. Pastor, New Life Covenant Church Southeast",
-      image: john,
-      instagram: "https://www.instagram.com/pastorhannah",
-      website: "",
-    },
-  ];
+
+  useEffect(() => {
+    const fetchKeynotes = async () => {
+      try {
+        
+        const data = await getKeynoteSpeakers();
+
+        if (data && data.speakers) {
+          setKeynotes(data.speakers);
+        }
+      } catch (error) {
+        console.error("Error fetching keynote speakers:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchKeynotes();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <section className="relative py-8 overflow-hidden">
+        <div className="text-center">Loading keynote speakers...</div>
+      </section>
+    );
+  }
+
+  if (keynotes.length === 0) {
+    return null; 
+  }
+
+  
 
   return (
     <section ref={sectionRef} className="relative py-8 overflow-hidden">
@@ -51,7 +78,7 @@ export const Keynotes = () => {
 
         {/* Keynote speakers grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
-          {speakers.map((speaker) => (
+          {keynotes.map((speaker) => (
             <div
               key={speaker.name}
               className="relative group overflow-hidden rounded-xl aspect-[3/4] max-w-[300px] mx-auto"
@@ -62,8 +89,8 @@ export const Keynotes = () => {
                 }
               >
                 <LazyImage
-                  src={speaker.image}
-                  alt={speaker.name}
+                  src={speaker.image?.asset.url || ""}
+                  alt={speaker.image?.alt || speaker.name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </Suspense>
@@ -71,8 +98,9 @@ export const Keynotes = () => {
 
               {/* Social Icons */}
               <div className="absolute top-3 right-4 flex gap-2 opacity-100">
+              {speaker.socialLinks?.instagram && (
                 <motion.a
-                  href={speaker.instagram}
+                href={speaker.socialLinks.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 backdrop-blur-sm rounded-full bg-purple-500/50 transition-colors duration-300 group/icon"
@@ -81,8 +109,10 @@ export const Keynotes = () => {
                 >
                   <Instagram className="w-5 h-5 text-white group-hover/icon:text-white group-hover/icon:drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]" />
                 </motion.a>
+              )}
+                {speaker.socialLinks?.website && (
                 <motion.a
-                  href={speaker.website}
+                href={speaker.socialLinks.website}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 backdrop-blur-sm rounded-full bg-purple-500/50 transition-colors duration-300 group/icon"
@@ -91,11 +121,15 @@ export const Keynotes = () => {
                 >
                   <Globe className="w-5 h-5 text-white group-hover/icon:text-white group-hover/icon:drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]" />
                 </motion.a>
+                )}
               </div>
 
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <h3 className="text-xl font-bold mb-2">{speaker.name}</h3>
-                <p className="text-gray-300 leading-none">{speaker.title}</p>
+                <p className="text-gray-300 leading-none">
+                  {speaker.title}
+                  {speaker.company && `, ${speaker.company}`}
+                </p>
               </div>
             </div>
           ))}

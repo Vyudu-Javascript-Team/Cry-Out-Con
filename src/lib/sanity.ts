@@ -17,31 +17,71 @@ export function urlFor(source: any) {
   return builder.image(source)
 }
 
-// Helper function to fetch all sections
-// export async function getAllSections() {
-//   return client.fetch(`
-//     *[_type == "section"] | order(order asc) {
-//       _id,
-//       type,
-//       isEnabled,
-//       order,
-//       content
-//     }
-//   `)
-// }
+// If you need to get all categories
+export async function getAllSpeakerCategories() {
+  return client.fetch(`
+    *[_type == "speakerCategory" && isVisible == true] {
+      _id,
+      title,
+      slug,
+      description,
+      displayOrder,
+      "speakerCount": count(*[_type == "speaker" && references(^._id) && isVisible == true])
+    } | order(displayOrder asc)
+  `)
+}
+
+// If you need speakers grouped by categories
+export async function getSpeakersGroupedByCategory() {
+  return client.fetch(`
+    {
+      "categories": *[_type == "speakerCategory" && isVisible == true] | order(displayOrder asc) {
+        _id,
+        title,
+        displayOrder,
+        isVisible,
+        "speakers": *[_type == "speaker" && references(^._id) && isVisible == true] | order(orderInCategory asc) {
+          _id,
+          name,
+          title,
+          company,
+          orderInCategory,
+          image {
+            asset->{
+              _id,
+              url
+            },
+            alt
+          },
+          socialLinks {
+            instagram,
+            website
+          }
+        }
+      }
+    }
+  `)
+}
 
 
-// Function to get all speakers
+// Function to get all speakers with categories
 export async function getAllSpeakers() {
   return client.fetch(`
-    *[_type == "speaker"] {
+    *[_type == "speaker" && isVisible == true] {
       _id,
       name,
       title,
       company,
-      category,
+      "category": category->{
+        _id,
+        title,
+        slug,
+        description,
+        displayOrder
+      },
       bio,
       featured,
+      orderInCategory,
       image {
         asset->{
           _id,
@@ -53,47 +93,36 @@ export async function getAllSpeakers() {
         instagram,
         website
       }
-    }
+    } | order(category->displayOrder asc, orderInCategory asc)
   `)
 }
 
-// Function to get featured speakers
-export async function getFeaturedSpeakers() {
+// Query to get first 3 keynote speakers
+export async function getKeynoteSpeakers() {
   return client.fetch(`
-    *[_type == "speaker" && featured == true] {
-      _id,
-      name,
-      title,
-      company,
-      category,
-      bio,
-      featured,
-      image {
-        asset->{
-          _id,
-          url
+    *[_type == "speakerCategory" && title == "Keynote Speakers" && isVisible == true][0] {
+      "speakers": *[_type == "speaker" && references(^._id) && isVisible == true] | order(orderInCategory asc) [0...3] {
+        _id,
+        name,
+        title,
+        company,
+        image {
+          asset->{
+            _id,
+            url
+          },
+          alt
         },
-        alt
-      },
-      socialLinks {
-        instagram,
-        website
+        socialLinks {
+          instagram,
+          website
+        }
       }
     }
   `)
 }
 
-// Helper function to fetch site settings
-// export async function getSiteSettings() {
-//   return client.fetch(`
-//     *[_type == "settings"][0] {
-//       siteName,
-//       "logo": logo.asset->url,
-//       navigation,
-//       footer
-//     }
-//   `)
-// }
+
 
 export async function getConference() {
   return client.fetch(`*[_type == "conference"] | order(order asc) {

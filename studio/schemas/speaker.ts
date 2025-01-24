@@ -22,15 +22,8 @@ export default {
     {
       name: 'category',
       title: 'Speaker Category',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Keynote Speaker', value: 'keynote' },
-          { title: 'Thought Leader', value: 'thought-leader' },
-          { title: 'Workshop Leader', value: 'workshop' },
-          { title: 'Artist', value: 'artist' }
-        ]
-      },
+      type: 'reference',
+      to: [{ type: 'speakerCategory' }],
       validation: Rule => Rule.required()
     },
     {
@@ -50,17 +43,6 @@ export default {
       ]
     },
     {
-      name: 'bio',
-      title: 'Biography',
-      type: 'text'
-    },
-    {
-      name: 'featured',
-      title: 'Featured Speaker',
-      type: 'boolean',
-      initialValue: false
-    },
-    {
       name: 'socialLinks',
       title: 'Social Links',
       type: 'object',
@@ -76,13 +58,28 @@ export default {
           type: 'url'
         }
       ]
-    }
+    },
+    {
+      name: 'orderInCategory',
+      title: 'Display Order (within category)',
+      type: 'number',
+      description: 'Lower numbers will be displayed first',
+      validation: Rule => Rule.required().min(0)
+    },
+    {
+      name: 'isVisible',
+      title: 'Visible on Website',
+      type: 'boolean',
+      description: 'Toggle to show/hide this speaker on the website',
+      initialValue: true
+    },
   ],
   preview: {
     select: {
       title: 'name',
       subtitle: 'title',
-      media: 'image'
+      media: 'image',
+      visible: 'isVisible'
     }
   }
 }

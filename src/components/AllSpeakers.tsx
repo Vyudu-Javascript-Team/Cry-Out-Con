@@ -4,16 +4,15 @@ import SpotlightEffect from "./SpotlightEffect";
 import { Instagram, Globe } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 import LazyImage from "./LazyImage";
-import { getAllSpeakers } from "../lib/sanity";
+import { getSpeakersGroupedByCategory } from "../lib/sanity";
 
 export interface Speaker {
   _id: string;
   name: string;
   title?: string;
   company?: string;
-  category: "keynote" | "thought-leader" | "workshop" | "artist";
-  bio?: string;
-  featured: boolean;
+  orderInCategory: number;
+  isVisible: boolean;
   image?: {
     asset: {
       _id: string;
@@ -26,6 +25,14 @@ export interface Speaker {
     website?: string;
   };
 }
+
+type Category = {
+  _id: string;
+  title: string;
+  displayOrder: number;
+  isVisible: boolean;
+  speakers: Speaker[];
+};
 
 const SpeakerCard = ({
   speaker,
@@ -96,14 +103,16 @@ const SpeakerCard = ({
 
 const AllSpeakers = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const [speakers, setSpeakers] = useState<Speaker[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchSpeakers = async () => {
       try {
-        const allSpeakers = await getAllSpeakers();
-        setSpeakers(allSpeakers);
+        const data = await getSpeakersGroupedByCategory();
+        if (data) {
+          setCategories(data.categories);
+        }
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching speakers:", error);
@@ -113,106 +122,38 @@ const AllSpeakers = () => {
     fetchSpeakers();
   }, []);
 
-  // Filter speakers by category
-  const keynoteSpeakers = speakers.filter(
-    (speaker) => speaker.category === "keynote"
-  );
-  const thoughtLeaders = speakers.filter(
-    (speaker) => speaker.category === "thought-leader"
-  );
-  const workshopLeaders = speakers.filter(
-    (speaker) => speaker.category === "workshop"
-  );
-  const artists = speakers.filter((speaker) => speaker.category === "artist");
-
   return (
     <section ref={sectionRef} className="relative py-32 overflow-hidden">
       <SpotlightEffect sectionRef={sectionRef} color="blue" delay={0.1} />
 
       <div className="container relative max-w-6xl mx-auto px-4">
-        {/* Keynote Speakers */}
-        {keynoteSpeakers.length > 0 && (
-          <>
-            <SectionTitle
-              title="Keynote Speakers"
-              gradient="from-blue-400 via-purple-400 to-pink-400"
-            />
+        {isLoading ? (
+          <div className="text-center">
+            <h2>Loading speakers...</h2>
+          </div>
+        ) : categories && categories.length > 0 ? (
+          categories.map((category) => (
+            <div key={category._id} className="mb-20 last:mb-0">
+              <SectionTitle
+                title={category.title}
+                gradient="from-blue-400 via-purple-400 to-pink-400"
+              />
 
-            {isLoading ? (
-              <div className="text-center">
-                <h2>Loading speakers...</h2>
-              </div>
-            ) : (
               <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 mx-auto">
-                {keynoteSpeakers.map((speaker, index) => (
-                  <SpeakerCard
-                    key={speaker._id}
-                    speaker={speaker}
-                    index={index}
-                  />
-                ))}
+                {category.speakers &&
+                  category.speakers.map((speaker, index) => (
+                    <SpeakerCard
+                      key={speaker._id}
+                      speaker={speaker}
+                      index={index}
+                    />
+                  ))}
               </div>
-            )}
-          </>
-        )}
-
-        {/* thought leaders */}
-        {thoughtLeaders.length > 0 && (
-          <div className="mt-20">
-            <SectionTitle
-              title="Thought Leaders & Speakers"
-              gradient="from-purple-400 via-pink-400 to-red-400"
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
-              {thoughtLeaders.map((speaker: Speaker, index: number) => (
-                <SpeakerCard
-                  key={speaker._id}
-                  speaker={speaker}
-                  index={index}
-                />
-              ))}
             </div>
-          </div>
-        )}
-
-        {/* workshop leaders */}
-        {workshopLeaders.length > 0 && (
-          <div className="mt-20">
-            <SectionTitle
-              title="Workshop Leaders"
-              gradient="from-red-400 via-orange-400 to-yellow-400"
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
-              {workshopLeaders.map((speaker: Speaker, index: number) => (
-                <SpeakerCard
-                  key={speaker._id}
-                  speaker={speaker}
-                  index={index}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* artists */}
-        {artists.length > 0 && (
-          <div className="mt-20">
-            <SectionTitle
-              title="Artists"
-              gradient="from-yellow-400 via-green-400 to-blue-400"
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
-              {artists.map((speaker: Speaker, index: number) => (
-                <SpeakerCard
-                  key={speaker._id}
-                  speaker={speaker}
-                  index={index}
-                />
-              ))}
-            </div>
+          ))
+        ) : (
+          <div className="text-center">
+            <h2>No speakers found</h2>
           </div>
         )}
       </div>
