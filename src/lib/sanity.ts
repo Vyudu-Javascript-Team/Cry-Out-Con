@@ -17,6 +17,17 @@ export function urlFor(source: any) {
   return builder.image(source)
 }
 
+export async function getVideo() {
+  return client.fetch(`
+    *[_type == "video" && isActive == true][0] {
+      _id,
+      title,
+      "videoUrl": videoFile.asset->url,
+      isActive
+    }
+  `);
+}
+
 export async function getDiveInContent() {
   return client.fetch(`
     *[_type == "diveIn" && isVisible == true][0] {
@@ -32,21 +43,7 @@ export async function getDiveInContent() {
 }
 
 
-// If you need to get all categories
-export async function getAllSpeakerCategories() {
-  return client.fetch(`
-    *[_type == "speakerCategory" && isVisible == true] {
-      _id,
-      title,
-      slug,
-      description,
-      displayOrder,
-      "speakerCount": count(*[_type == "speaker" && references(^._id) && isVisible == true])
-    } | order(displayOrder asc)
-  `)
-}
-
-// If you need speakers grouped by categories
+// speakers grouped by categories
 export async function getSpeakersGroupedByCategory() {
   return client.fetch(`
     {
@@ -75,40 +72,6 @@ export async function getSpeakersGroupedByCategory() {
         }
       }
     }
-  `)
-}
-
-
-// Function to get all speakers with categories
-export async function getAllSpeakers() {
-  return client.fetch(`
-    *[_type == "speaker" && isVisible == true] {
-      _id,
-      name,
-      title,
-      company,
-      "category": category->{
-        _id,
-        title,
-        slug,
-        description,
-        displayOrder
-      },
-      bio,
-      featured,
-      orderInCategory,
-      image {
-        asset->{
-          _id,
-          url
-        },
-        alt
-      },
-      socialLinks {
-        instagram,
-        website
-      }
-    } | order(category->displayOrder asc, orderInCategory asc)
   `)
 }
 
