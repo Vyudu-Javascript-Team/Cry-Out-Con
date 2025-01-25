@@ -7,6 +7,26 @@ import logo from "/assets/logos/cryoutcon.jpg";
 
 const gradient = "from-blue-400 via-purple-500 to-pink-500";
 
+interface FooterData {
+  logo: {
+    asset: {
+      url: string;
+    };
+    alt: string;
+  };
+  socialLinks: {
+    platform: string;
+    url: string;
+    icon: string;
+  }[];
+  navigationLinks: {
+    title: string;
+    url: string;
+    order: number;
+  }[];
+  copyright: string;
+}
+
 const Footer: React.FC = () => {
   const { scrollY } = useScroll();
   const navigate = useNavigate();

@@ -200,3 +200,25 @@ export async function getAllHotels() {
     }
   `)
 }
+
+
+export async function getFooterContent() {
+  return client.fetch(`
+    *[_type == "footer"][0]{
+  logo{
+    asset->{url},
+    alt
+  },
+  socialLinks[]{
+    platform,
+    url,
+    icon
+  },
+  navigationLinks[]{
+    title,
+    url,
+    order
+  },
+  copyright
+}`)
+};
