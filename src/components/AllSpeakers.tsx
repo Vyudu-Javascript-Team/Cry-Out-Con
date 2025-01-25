@@ -95,7 +95,6 @@ const SpeakerCard = ({
       <h3 className="text-lg font-bold mb-2">{speaker.name}</h3>
       <p className="text-gray-300 leading-none">
         {speaker.title}
-        {speaker.company && `, ${speaker.company}`}
       </p>
     </div>
   </motion.div>
