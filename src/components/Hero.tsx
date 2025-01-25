@@ -1,20 +1,69 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ArrowRight, Calendar, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import VideoGallery from "./VideoGallery";
 import Countdown from "./Countdown";
-import background from "/assets/backgroundimages/6N7A3736.jpg";
 import LazyImage from "./LazyImage";
+import { getHeroContent } from "../lib/sanity";
+
+interface HeroData {
+  _id: string;
+  description: string;
+  eventDate: {
+    startDate: string;
+    endDate: string;
+  };
+  venue: {
+    name: string;
+    city: string;
+    state: string;
+  };
+  backgroundImage: string;
+  backgroundImageAlt: string;
+  registrationButton: {
+    text: string;
+    url: string;
+  };
+}
 
 export const Hero = () => {
   const containerRef = useRef(null);
   const [isVideoGalleryOpen, setIsVideoGalleryOpen] = useState(false);
+  const [heroData, setHeroData] = useState<HeroData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadHeroContent = async () => {
+      try {
+        const data = await getHeroContent();
+        if (data) {
+          setHeroData(data);
+        }
+        setIsLoading(false);
+      } catch (err) {
+        setError("Failed to load hero content");
+        console.error("Error loading hero content:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadHeroContent();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
+      </div>
+    ); 
+  }
 
   const handleRegistration = () => {
-    window.open(
-      "https://brushfire.com/tlhc/cryout25/578593/register",
-      "_blank"
-    );
+    if (heroData?.registrationButton.url) {
+      window.open(heroData.registrationButton.url, "_blank");
+    }
   };
 
   return (
@@ -24,8 +73,8 @@ export const Hero = () => {
     >
       <div className="h-[50vh] md:h-screen w-full relative">
         <LazyImage
-          src={background}
-          alt="Background"
+          src={heroData.backgroundImage}
+          alt={heroData.backgroundImageAlt}
           className="absolute inset-0 w-full h-full object-cover"
           style={{
             backgroundSize: "cover",
@@ -44,13 +93,27 @@ export const Hero = () => {
         >
           <div className="flex items-center text-sm space-x-2 px-1">
             <Calendar className="w-8 h-8" />
-            <span>May 1 - 3, 2025</span>
+            {new Date(heroData.eventDate.startDate).toLocaleDateString(
+              "en-US",
+              {
+                month: "long",
+                day: "numeric",
+              }
+            )}{" "}
+            -{" "}
+            {new Date(heroData.eventDate.endDate).toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}
           </div>
           <div className="flex items-center text-sm space-x-2 px-1">
             <MapPin className="w-8 h-8" />
             <div className="flex flex-col">
-              <p>George R. Brown Convention Center</p>
-              <p>Houston, Texas</p>
+              <p>{heroData.venue.name}</p>
+              <p>
+                {heroData.venue.city}, {heroData.venue.state}
+              </p>
             </div>
           </div>
         </motion.div>
@@ -66,8 +129,7 @@ export const Hero = () => {
         >
           <div className="flex flex-col space-y-4">
             <p className="text-lg leading-normal text-gray-300 max-w-2xl my-1">
-              Join a transformative journey of healing and spiritual growth
-              through the power of surrender and connection with God.
+              {heroData.description}
             </p>
           </div>
         </motion.div>
@@ -82,7 +144,7 @@ export const Hero = () => {
             type="button"
             className="bg-white relative md:text-2xl z-20 text-primary px-8 py-4 text-xl font-semibold transition-all rounded shadow-lg hover:cursor-pointer hover:shadow-white/25 flex items-center gap-2 group"
           >
-            REGISTER NOW
+            {heroData.registrationButton.text}
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
           </button>
         </motion.div>

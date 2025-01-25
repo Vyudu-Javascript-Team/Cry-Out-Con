@@ -44,18 +44,7 @@ const VideoSection = () => {
     );
   }
 
-  if (error) {
-    return (
-      <div className="w-full pt-16 text-center text-red-500">
-        <SectionTitle
-          title="Error Loading Content"
-          gradient="from-pink-500 via-purple-500 to-blue-500"
-        />
-        {error}
-      </div>
-    );
-  }
-
+ 
   if (!videoData) {
     return (
       <div className="w-full pt-16 text-center">

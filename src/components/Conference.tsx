@@ -6,31 +6,33 @@ import { getConference } from "../lib/sanity";
 
 interface ConferenceOffering {
   _id: string;
-  title: string;
-  description: string;
-  image: {
-    asset: {
-      url: string;
-    };
-    alt?: string;
-  };
-  order: number;
+  sectionTitle: string;
+  content: {
+    title: string;
+    imageUrl: string;
+    imageAlt: string;
+    description: string;
+    order: number;
+  }[];
+  isVisible: boolean;
 }
 
 const Conference = () => {
   const [offerings, setOfferings] = useState<ConferenceOffering[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchOfferings = async () => {
       try {
         const data = await getConference();
-        if (data && data.length > 0) {
+        
+        if (data) {
           setOfferings(data);
+        } else {
+          setError("No conference data available");
         }
         setIsLoading(false);
-        
-        
       } catch (error) {
         console.error("Error fetching conference offerings:", error);
       }
@@ -43,7 +45,7 @@ const Conference = () => {
     <section id="conference" className="py-16 h-full bg-primary">
       <div className="container mx-auto px-4">
         <SectionTitle
-          title="EXPLORE CRY OUT CON"
+          title={offerings[0]?.sectionTitle}
           gradient="from-pink-500 via-purple-500 to-blue-500"
         />
 
@@ -53,7 +55,9 @@ const Conference = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
-            {offerings.map((offering, index) => (
+            {offerings[0]?.content && offerings[0].content.length > 0 && offerings[0]?.content
+            .sort((a, b) => a.order - b.order)
+            .map((offering, index) => (
               <div
                 key={index}
                 className="rounded-lg shadow-lg h-full overflow-hidden"
@@ -65,8 +69,8 @@ const Conference = () => {
                     }
                   >
                     <LazyImage
-                      src={offering.image.asset.url}
-                      alt={offering.image.alt || offering.title}
+                      src={offering.imageUrl}
+                      alt={offering.imageAlt}
                       className="w-full h-64 object-cover"
                     />
                   </Suspense>

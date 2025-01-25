@@ -43,6 +43,33 @@ export async function getDiveInContent() {
 }
 
 
+// Get Hero section data
+export async function getHeroContent() {
+  return client.fetch(`
+    *[_type == "hero"][0] {
+      _id,
+      description,
+      eventDate {
+        startDate,
+        endDate
+      },
+      venue {
+        name,
+        city,
+        state
+      },
+      "backgroundImage": backgroundImage.asset->url,
+      "backgroundImageAlt": backgroundImage.alt,
+      registrationButton {
+        text,
+        url
+      }
+    }
+  `);
+}
+
+
+
 // speakers grouped by categories
 export async function getSpeakersGroupedByCategory() {
   return client.fetch(`
@@ -103,18 +130,19 @@ export async function getKeynoteSpeakers() {
 
 
 export async function getConference() {
-  return client.fetch(`*[_type == "conference"] | order(order asc) {
+  return client.fetch(`*[_type == "conference" && isVisible == true] | order(content[].order asc) {
         _id,
+        sectionTitle,
+      content[] {
         title,
+        "imageUrl": image.asset->url,
+        "imageAlt": image.alt,
         description,
-        image {
-          asset->{
-            url
-          },
-          alt
-        },
         order
-      }`)
+      },
+      isVisible
+    }
+  `);
 }
 
 export async function getAgenda() {
