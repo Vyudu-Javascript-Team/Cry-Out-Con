@@ -17,7 +17,6 @@ type DiveInContent = {
 
 const DiveIn = () => {
   const [content, setContent] = useState<DiveInContent | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchDiveInContent = async () => {
@@ -26,8 +25,6 @@ const DiveIn = () => {
         setContent(data);
       } catch (error) {
         console.error("Error fetching dive in content:", error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -35,12 +32,6 @@ const DiveIn = () => {
   }, []);
 
   if (!content) return null;
-
-  if (isLoading) {
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
-      </div>
-  }
 
   const sortedParagraphs = [...content.paragraphs].sort((a, b) => a.order - b.order);
 

@@ -29,7 +29,6 @@ export const Keynotes = () => {
   const navigate = useNavigate();
   const sectionRef = useRef<HTMLElement>(null);
   const [keynotes, setKeynotes] = useState<Speaker[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
 
   useEffect(() => {
@@ -43,21 +42,11 @@ export const Keynotes = () => {
         }
       } catch (error) {
         console.error("Error fetching keynote speakers:", error);
-      } finally {
-        setIsLoading(false);
-      }
+      } 
     };
 
     fetchKeynotes();
   }, []);
-
-  if (isLoading) {
-    return (
-      <section className="relative py-8 overflow-hidden">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
-      </section>
-    );
-  }
 
   if (keynotes.length === 0) {
     return null; 

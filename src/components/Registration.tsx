@@ -1,66 +1,57 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Check, X } from "lucide-react";
 import {
   motion,
 } from "framer-motion";
 import SpotlightEffect from "./SpotlightEffect";
 import SectionTitle from "./SectionTitle";
+import { getRegistrationData } from "../lib/sanity";
+
+export interface RegistrationFeature {
+  feature: string;
+  included: boolean;
+}
+
+export interface RegistrationPlan {
+  title: string;
+  price: number;
+  features: RegistrationFeature[];
+  order: number;
+  backgroundColor: string;
+}
+
+export interface RegistrationData {
+  sectionTitle: string;
+  sectionSubTitle: string;
+  plans: RegistrationPlan[];
+  regLink: string;
+}
 
 const Registration = () => {
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
+  const [registrationData, setRegistrationData] = useState<RegistrationData | null>(null);
 
-  const plans = [
-    {
-      name: "VIP",
-      price: 349,
-      features: [
-        { name: "VIP event w/ Pastor and Lady Henderson", included: true },
-        { name: "Access to VIP Lounge", included: true },
-        { name: "Exclusive Cry Out gift", included: true },
-        { name: "Exclusive conference entrance", included: true },
-        { name: "VIP conference tote", included: true },
-        { name: "Access to conference program", included: true },
-        { name: "VIP registration badge", included: true },
-        { name: "Seating in VIP section", included: true },
-      ],
-    },
-    {
-      name: "PREMIER",
-      price: 249,
-      features: [
-        { name: "Premier conference tote", included: true },
-        { name: "Access to conference program", included: true },
-        { name: "Premier registration badge", included: true },
-        { name: "Seating in Premier section", included: true },
-        { name: "Exclusive conference entrance", included: false },
-        { name: "Exclusive Cry Out gift", included: false },
-        { name: "Access to VIP Lounge", included: false },
-        { name: "VIP event w/ Pastor and Lady Henderson", included: false },
-      ],
-    },
-    {
-      name: "GENERAL",
-      price: 149,
-      features: [
-        { name: "Access to conference program", included: true },
-        { name: "General registration badge", included: true },
-        { name: "Seating in General section", included: true },
-        { name: "Conference tote", included: false },
-        { name: "Exclusive event entrance", included: false },
-        { name: "Exclusive Cry Out gift", included: false },
-        { name: "Access to VIP Lounge", included: false },
-        { name: "VIP event w/ Pastor and Lady Henderson", included: false },
-      ],
-    }
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getRegistrationData();
+        if(data){
+          setRegistrationData(data);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleRegistration = () => {
-    window.open(
-      "https://brushfire.com/tlhc/cryout25/578593/register",
-      "_blank"
-    );
+    if (registrationData?.regLink) {
+      window.open(registrationData.regLink, "_blank");
+    }
   };
 
   const getPlanBackground = (planName: string) => {
@@ -108,18 +99,18 @@ const Registration = () => {
         <div
           className="grid grid-cols-1 md:grid-cols-3 gap-7 max-w-5xl mx-auto"
         >
-          {plans.map((plan) => (
+          {registrationData?.plans.map((plan) => (
               <motion.div
-              key={plan.name}
+              key={plan.title}
                 className={`relative p-4 rounded-xl backdrop-blur-sm border transition-all duration-500 ${
-                  selectedPlan === plan.name
+                  selectedPlan === plan.title
                     ? "bg-white/15 border-white/20 shadow-[0_0_30px_rgba(124,58,237,0.3)]"
-                    : getPlanBackground(plan.name)
+                    : getPlanBackground(plan.title)
                 }`}
                 whileHover={{
                   y: -5,
                   scale: 1.02,
-                  boxShadow: getPlanShadow(plan.name),
+                  boxShadow: getPlanShadow(plan.title),
                 }}
               >
                 <motion.div
@@ -130,20 +121,20 @@ const Registration = () => {
                 <div className="text-center mb-4">
                   <h3
                     className={`text-2xl font-bold mb-2 ${
-                      plan.name === "VIP"
+                      plan.title === "VIP"
                         ? "text-purple-400"
-                        : plan.name === "PREMIER"
+                        : plan.title === "PREMIER"
                           ? "text-fuchsia-400"
                           : "text-gray-800"
                     }`}
                   >
-                    {plan.name}
+                    {plan.title}
                   </h3>
                   <div
                     className={`text-5xl font-bold bg-clip-text text-transparent ${
-                      plan.name === "VIP"
+                      plan.title === "VIP"
                         ? "bg-gradient-to-r from-purple-400 to-purple-600"
-                        : plan.name === "PREMIER"
+                        : plan.title === "PREMIER"
                           ? "bg-gradient-to-r from-fuchsia-400 to-fuchsia-600"
                           : "bg-gradient-to-r from-gray-700 to-gray-900"
                     }`}
@@ -158,21 +149,21 @@ const Registration = () => {
                     onClick={handleRegistration}
                     type="button"
                     className={`w-full mb-2 py-4 rounded font-semibold hover:cursor-pointer transition-all duration-300 ${
-                      plan.name === "VIP"
+                      plan.title === "VIP"
                         ? "bg-gradient-to-r from-purple-400 to-purple-600 hover:from-purple-500 hover:to-purple-700"
-                        : plan.name === "PREMIER"
+                        : plan.title === "PREMIER"
                           ? "bg-gradient-to-r from-fuchsia-400 to-fuchsia-600 hover:from-fuchsia-500 hover:to-fuchsia-700"
                           : "bg-gradient-to-r from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800"
                     }`}
                   >
-                    CHOOSE {plan.name}
+                    CHOOSE {plan.title}
                   </button>
                 </div>
 
                 <div className="space-y-2">
                   {plan.features.map((feature) => (
                     <motion.div
-                      key={feature.name}
+                      key={feature.feature}
                       className="flex items-center space-x-3"
                       whileHover={{ x: 5 }}
                     >
@@ -184,13 +175,13 @@ const Registration = () => {
                       <span
                         className={
                           feature.included
-                            ? plan.name === "GENERAL"
+                            ? plan.title === "GENERAL"
                               ? "text-gray-800"
                               : "text-white"
                             : "text-gray-500"
                         }
                       >
-                        {feature.name}
+                        {feature.feature}
                       </span>
                     </motion.div>
                   ))}

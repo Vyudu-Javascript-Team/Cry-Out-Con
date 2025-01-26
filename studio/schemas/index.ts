@@ -8,5 +8,6 @@ import getReady from './getReady'
 import video from './video'
 import hero from './hero'
 import footer from './footer'
+import registration from './registration'
 
-export const schemaTypes = [hero, video, getReady, speaker, conference, agenda, imageSlider, hotel, speakerCategory, footer]
+export const schemaTypes = [hero, video, getReady, speaker, conference, registration, agenda, imageSlider, hotel, speakerCategory, footer]

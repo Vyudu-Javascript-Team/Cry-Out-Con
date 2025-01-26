@@ -145,6 +145,25 @@ export async function getConference() {
   `);
 }
 
+
+export async function getRegistrationData() {
+  return client.fetch(`*[_type == "registration"][0]{
+    sectionTitle,
+    sectionSubTitle,
+    plans[]{
+      title,
+      price,
+      features[]{
+        feature,
+        included
+      },
+      order,
+      backgroundColor
+    },
+    regLink
+  }`);
+}
+
 export async function getAgenda() {
   return client.fetch(`
     *[_type == "agenda"][0] {

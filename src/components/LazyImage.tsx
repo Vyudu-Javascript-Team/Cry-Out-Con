@@ -11,10 +11,8 @@ const LazyImage = ({ src, alt, className, style }: LazyImageProps) => {
   const [loaded, setLoaded] = useState(false);
   
   const getImagePath = (imagePath: string, suffix: string) => {
-    // Remove any leading slash and handle Vite's asset URLs
     const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
     
-    // Get the directory path and filename
   const lastSlashIndex = cleanPath.lastIndexOf('/');
   const directory = lastSlashIndex !== -1 ? cleanPath.substring(0, lastSlashIndex) : '';
   const fileName = lastSlashIndex !== -1 ? cleanPath.substring(lastSlashIndex + 1) : cleanPath;

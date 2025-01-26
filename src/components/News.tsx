@@ -19,7 +19,6 @@ export const News = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [images, setImages] = useState<NewsData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -28,10 +27,8 @@ export const News = () => {
         if (data && data.slides && data.slides.length > 0) {
           setImages(data);
         }
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching news:", error);
-        setIsLoading(false);
       }
     };
 
@@ -84,16 +81,6 @@ export const News = () => {
 
     return () => clearInterval(timer);
   }, [currentIndex]);
-
-  if (isLoading) {
-    return (
-      <section className="relative h-[500px] w-screen overflow-hidden bg-gray-900">
-        <div className="flex items-center justify-center h-full">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
-        </div>
-      </section>
-    );
-  }
 
   if (!images || !images.slides.length) {
     return (

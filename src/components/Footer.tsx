@@ -61,7 +61,7 @@ const Footer: React.FC = () => {
     (a, b) => a.order - b.order
   ) : [];
 
-  // Helper function to render social media icons
+  
   const getSocialIcon = (icon: string) => {
     switch (icon.toLowerCase()) {
       case "facebook":
@@ -133,7 +133,6 @@ const Footer: React.FC = () => {
           <div className="flex flex-col md:flex-row text-sm md:text-xl justify-center items-center">
             <p className="text-gray-300">
               &copy; {new Date().getFullYear()} {footerDetails.copyright}
-              reserved.
             </p>
           </div>
         </div>

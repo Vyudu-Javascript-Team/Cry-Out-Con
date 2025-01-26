@@ -13,8 +13,8 @@ import Newsletter from "./components/Newsletter";
 import Agenda from "./components/Agenda";
 import Conference from "./components/Conference";
 import DiveIn from "./components/DiveIn";
-import LoadingSpinner from "./components/LoadingSpinner";
 import Hotels from "./components/hotels";
+import { useEffect, useState } from "react";
 
 function Home() {
   const { scrollYProgress } = useScroll();
@@ -69,11 +69,31 @@ function Home() {
 }
 
 function App() {
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); 
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="h-screen w-screen flex items-center justify-center bg-primary">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
+      </div>
+    );
+  }
+
+
+
   return (
     <BrowserRouter>
       <div className="relative min-h-screen bg-primary text-white overflow-x-hidden">
         <Navbar />
-        <LoadingSpinner />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/hotel-details" element={<Hotels />} />
