@@ -44,7 +44,7 @@ const Conference = () => {
         <div className="">
           <div className="container mx-auto px-4">
             <SectionTitle
-              title={offerings[0].sectionTitle}
+              title={offerings[0]?.sectionTitle}
               gradient="from-pink-500 via-purple-500 to-blue-500"
             />
 
