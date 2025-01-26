@@ -117,7 +117,6 @@ export const Keynotes = () => {
                 <h3 className="text-xl font-bold mb-2">{speaker.name}</h3>
                 <p className="text-gray-300 leading-none">
                   {speaker.title}
-                  {speaker.company && `, ${speaker.company}`}
                 </p>
               </div>
             </div>

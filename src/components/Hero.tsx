@@ -30,6 +30,7 @@ export const Hero = () => {
   const containerRef = useRef(null);
   const [isVideoGalleryOpen, setIsVideoGalleryOpen] = useState(false);
   const [heroData, setHeroData] = useState<HeroData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const loadHeroContent = async () => {
@@ -38,6 +39,7 @@ export const Hero = () => {
         if (data) {
           setHeroData(data);
         } 
+        setIsLoading(false);
       } catch (err) {
         console.error("Error loading hero content:", err);
       }
@@ -45,6 +47,14 @@ export const Hero = () => {
 
     loadHeroContent();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
+      </div>
+    );
+  }
 
   const handleRegistration = () => {
     if (heroData?.registrationButton.url) {
