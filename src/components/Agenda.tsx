@@ -21,17 +21,16 @@ interface AgendaData {
 
 const Agenda = () => {
   const [agendaData, setAgendaData] = useState<AgendaData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchAgenda = async () => {
       try {
         const data = await getAgenda();
-        setAgendaData(data);
-        setIsLoading(false);
+        if(data){
+          setAgendaData(data);
+        }
       } catch (error) {
         console.error("Error fetching agenda:", error);
-        setIsLoading(false);
       }
     };
 
@@ -65,15 +64,9 @@ const Agenda = () => {
           gradient="from-blue-400 via-purple-400 to-pink-400"
         />
 
-        {isLoading ? (
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
-          </div>
-        ) : !agendaData ? (
-          <div className="text-center text-white">No agenda data available</div>
-        ) : (
+       
           <div className="bg-white w-full max-w-3xl mx-auto rounded-2xl border border-gray-200 shadow-lg p-4 md:p-6">
-            {agendaData.days.map((day) => (
+            {agendaData && agendaData.days.map((day) => (
               <div key={day.day} className="mb-4">
                 <h3 className="text-xl font-semibold text-purple-600 mb-2">
                   {day.day}
@@ -102,7 +95,6 @@ const Agenda = () => {
               </div>
             ))}
           </div>
-        )}
       </div>
     </section>
   );

@@ -32,8 +32,6 @@ const Footer: React.FC = () => {
   const navigate = useNavigate();
 
   const [footerDetails, setFooterDetails] = useState<FooterData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
   const scaleTransform = useTransform(scrollY, [0, 100], [1.3, 1]);
 
   useEffect(() => {
@@ -46,7 +44,6 @@ const Footer: React.FC = () => {
         } else {
           console.error("No footer details available");
         }
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching footer details:", error);
       }
@@ -54,8 +51,6 @@ const Footer: React.FC = () => {
 
     fetchFooter();
   }, []);
-
-  if (isLoading || !footerDetails) return <div>Loading...</div>;
 
   const sortedNavLinks = footerDetails ? [...footerDetails.navigationLinks].sort(
     (a, b) => a.order - b.order
@@ -77,6 +72,7 @@ const Footer: React.FC = () => {
     <footer className="bg-primary py-8 relative">
       <SunrayEffect />
 
+      {footerDetails && (
       <div className="max-w-8xl mx-auto px-8 md:text-xl relative z-10">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 mb-8">
           <motion.a
@@ -91,12 +87,13 @@ const Footer: React.FC = () => {
             transition={{ duration: 0.5 }}
             className="relative md:ml-8 hover:cursor-pointer"
           >
-            <motion.img
-              src={footerDetails.logo.asset.url}
-              alt={footerDetails.logo.alt}
-              className="h-full md:w-auto md:max-h-[40px] w-40 object-contain"
-              style={{ scale: scaleTransform }}
-            />
+            
+              <motion.img
+                src={footerDetails.logo.asset.url}
+                alt={footerDetails.logo.alt}
+                className="h-full md:w-auto md:max-h-[40px] w-40 object-contain"
+                style={{ scale: scaleTransform }}
+              />
           </motion.a>
 
           <div className="flex space-x-2">
@@ -137,6 +134,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
+      )}
     </footer>
   );
 };
