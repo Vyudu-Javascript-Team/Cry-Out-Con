@@ -20,7 +20,6 @@ interface ConferenceOffering {
 const Conference = () => {
   const [offerings, setOfferings] = useState<ConferenceOffering[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchOfferings = async () => {
@@ -30,7 +29,7 @@ const Conference = () => {
         if (data) {
           setOfferings(data);
         } else {
-          setError("No conference data available");
+          console.error("No conference data available");
         }
         setIsLoading(false);
       } catch (error) {

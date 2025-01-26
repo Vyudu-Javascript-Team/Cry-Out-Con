@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Facebook, Instagram } from "lucide-react";
 import SunrayEffect from "./SunrayEffect";
 import { useNavigate } from "react-router-dom";
-import logo from "/assets/logos/cryoutcon.jpg";
+import { getFooterContent } from "../lib/sanity";
 
 const gradient = "from-blue-400 via-purple-500 to-pink-500";
 
@@ -31,6 +31,48 @@ const Footer: React.FC = () => {
   const { scrollY } = useScroll();
   const navigate = useNavigate();
 
+  const [footerDetails, setFooterDetails] = useState<FooterData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const scaleTransform = useTransform(scrollY, [0, 100], [1.3, 1]);
+
+  useEffect(() => {
+    const fetchFooter = async () => {
+      try {
+        const data = await getFooterContent();
+
+        if (data) {
+          setFooterDetails(data);
+        } else {
+          console.error("No footer details available");
+        }
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching footer details:", error);
+      }
+    };
+
+    fetchFooter();
+  }, []);
+
+  if (isLoading || !footerDetails) return <div>Loading...</div>;
+
+  const sortedNavLinks = footerDetails ? [...footerDetails.navigationLinks].sort(
+    (a, b) => a.order - b.order
+  ) : [];
+
+  // Helper function to render social media icons
+  const getSocialIcon = (icon: string) => {
+    switch (icon.toLowerCase()) {
+      case "facebook":
+        return <Facebook className="w-6 h-6" />;
+      case "instagram":
+        return <Instagram className="w-6 h-6" />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <footer className="bg-primary py-8 relative">
       <SunrayEffect />
@@ -50,89 +92,47 @@ const Footer: React.FC = () => {
             className="relative md:ml-8 hover:cursor-pointer"
           >
             <motion.img
-              src={logo}
-              alt="Cry Out Conference Logo"
+              src={footerDetails.logo.asset.url}
+              alt={footerDetails.logo.alt}
               className="h-full md:w-auto md:max-h-[40px] w-40 object-contain"
-              style={{
-                scale: useTransform(scrollY, [0, 100], [1.3, 1]),
-              }}
+              style={{ scale: scaleTransform }}
             />
           </motion.a>
 
           <div className="flex space-x-2">
-            <a
-              href="https://www.facebook.com/cryoutexperience"
-              target="_blank"
-              className="text-gray-300 rounded-full bg-purple-500/50 p-2 transition-colors"
-            >
-              <Facebook className="w-6 h-6" />
-            </a>
-            <a
-              href="https://www.instagram.com/cryoutcon/"
-              target="_blank"
-              className="text-gray-300 rounded-full bg-purple-500/50 p-2 transition-colors"
-            >
-              <Instagram className="w-6 h-6" />
-            </a>
+            {footerDetails.socialLinks.map((social, index) => (
+              <a
+                key={index}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 rounded-full bg-purple-500/50 p-2 transition-colors hover:bg-purple-500"
+              >
+                {getSocialIcon(social.platform)}
+              </a>
+            ))}
           </div>
 
           <div className="lg:flex lg:space-x-7 md:text-2xl">
-            <div className="">
-              <a
-                href="https://form.jotform.com/243611671514048"
-                target="_blank"
-                className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
-              >
-                Contact Us
-              </a>
-            </div>
-
-            <div className="">
-              <a
-                href="https://lhhouston.church/"
-                target="_blank"
-                className={`hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
-              >
-                Lighthouse Church
-              </a>
-            </div>
-
-            <div className="">
-              <a
-                href="https://cryoutexperience.com/refund-policy/"
-                target="_blank"
-                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
-              >
-                Refund Policy
-              </a>
-            </div>
-
-            <div className="">
-              <a
-                href="https://cryoutexperience.com/faq/"
-                target="_blank"
-                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
-              >
-                FAQ's
-              </a>
-            </div>
-
-            <div className="">
-              <a
-                href="https://cryoutexperience.com/privacy-policy/"
-                target="_blank"
-                className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
-              >
-                Privacy Policy
-              </a>
-            </div>
+            {sortedNavLinks.map((link, index) => (
+              <div key={index}>
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
+                >
+                  {link.title}
+                </a>
+              </div>
+            ))}
           </div>
         </div>
 
         <div className="border-t border-gray-700 pt-8">
           <div className="flex flex-col md:flex-row text-sm md:text-xl justify-center items-center">
             <p className="text-gray-300">
-              &copy; {new Date().getFullYear()} Cry Out Con. All rights
+              &copy; {new Date().getFullYear()} {footerDetails.copyright}
               reserved.
             </p>
           </div>
