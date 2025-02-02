@@ -17,7 +17,6 @@ export interface RegistrationPlan {
   price: number;
   features: RegistrationFeature[];
   order: number;
-  backgroundColor: string;
 }
 
 export interface RegistrationData {

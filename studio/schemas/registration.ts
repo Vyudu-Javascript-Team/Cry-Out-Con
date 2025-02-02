@@ -70,13 +70,6 @@ const registration = {
                             validation: Rule => Rule.required().integer().min(1),
                             initialValue: 1,
                         }),
-                        defineField({
-                            name: 'backgroundColor',
-                            title: 'Background Color',
-                            type: 'string',
-                            description: 'Tailwind CSS background color class',
-                            initialValue: 'bg-gray-900',
-                        }),
                     ]
                 }
             ],

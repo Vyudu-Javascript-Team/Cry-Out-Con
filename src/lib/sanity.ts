@@ -157,8 +157,7 @@ export async function getRegistrationData() {
         feature,
         included
       },
-      order,
-      backgroundColor
+      order
     },
     regLink
   }`);
