@@ -1,4 +1,3 @@
-// schemas/hero.ts
 import { defineField, defineType } from "sanity";
 
 export default defineType({
@@ -93,7 +92,14 @@ export default defineType({
           validation: Rule => Rule.required()
         }
       ]
-    })
+    }),
+    {
+      name: 'isVisible',
+      title: 'Visible on Website',
+      type: 'boolean',
+      description: 'Toggle to show/hide this section on the website',
+      initialValue: true
+    }
   ],
   preview: {
     select: {

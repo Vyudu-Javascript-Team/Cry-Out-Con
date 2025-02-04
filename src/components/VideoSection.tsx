@@ -32,11 +32,11 @@ const VideoSection = () => {
 
 
   return (
-    <div ref={sectionRef} className="w-full pt-16 relative">
-      <SectionTitle
+    <div ref={sectionRef} className="w-full  relative">
+      {/* <SectionTitle
         title={videoData?.title}
         gradient="from-pink-500 via-purple-500 to-blue-500"
-      />
+      /> */}
 
       <div className="relative aspect-video">
         <Suspense

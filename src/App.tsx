@@ -15,6 +15,7 @@ import Conference from "./components/Conference";
 import DiveIn from "./components/DiveIn";
 import Hotels from "./components/hotels";
 import { useEffect, useState } from "react";
+import Countdown from "./components/Countdown";
 
 function Home() {
   const { scrollYProgress } = useScroll();
@@ -40,6 +41,9 @@ function Home() {
         </div>
         <div id="video">
           <VideoSection />
+        </div>
+        <div className="w-full md:min-h-[40vh] flex items-center justify-center py-16 text-3xl bg-fuchsia-950 md:text-5xl lg:text-6xl font-bold">
+        <Countdown />
         </div>
         <div id="dive">
           <DiveIn />

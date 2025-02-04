@@ -46,7 +46,7 @@ export async function getDiveInContent() {
 // Get Hero section data
 export async function getHeroContent() {
   return client.fetch(`
-    *[_type == "hero"][0] {
+    *[_type == "hero" && isVisible == true][0] {
       _id,
       description,
       eventDate {
@@ -63,7 +63,8 @@ export async function getHeroContent() {
       registrationButton {
         text,
         url
-      }
+      },
+      isVisible
     }
   `);
 }

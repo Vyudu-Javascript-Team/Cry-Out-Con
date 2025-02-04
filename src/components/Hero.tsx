@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { ArrowRight, Calendar, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
-import VideoGallery from "./VideoGallery";
 import Countdown from "./Countdown";
 import LazyImage from "./LazyImage";
 import { getHeroContent } from "../lib/sanity";
@@ -24,11 +23,11 @@ interface HeroData {
     text: string;
     url: string;
   };
+  isVisible: boolean;
 }
 
 export const Hero = () => {
   const containerRef = useRef(null);
-  const [isVideoGalleryOpen, setIsVideoGalleryOpen] = useState(false);
   const [heroData, setHeroData] = useState<HeroData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -56,6 +55,10 @@ export const Hero = () => {
     );
   }
 
+  if (!heroData || !heroData.isVisible) {
+    return null;
+  }
+
   const handleRegistration = () => {
     if (heroData?.registrationButton.url) {
       window.open(heroData.registrationButton.url, "_blank");
@@ -70,6 +73,7 @@ export const Hero = () => {
       {heroData && (
         <div className="">
           <div className="h-[50vh] md:h-screen w-full relative">
+          {heroData && heroData.backgroundImage && (
             <LazyImage
               src={heroData.backgroundImage}
               alt={heroData.backgroundImageAlt}
@@ -80,6 +84,7 @@ export const Hero = () => {
                 backgroundRepeat: "no-repeat",
               }}
             />
+          )}
           </div>
 
           <div className="w-full mx-auto max-w-md md:top-[30%] md:transform px-4 py-8 md:absolute md:left-10 md:rounded-xl md:py-10 space-y-4 p-8 bg-fuchsia-500/30 backdrop-blur-md">
@@ -153,10 +158,6 @@ export const Hero = () => {
         </div>
       )}
 
-      <VideoGallery
-        isOpen={isVideoGalleryOpen}
-        onClose={() => setIsVideoGalleryOpen(false)}
-      />
     </section>
   );
 };
