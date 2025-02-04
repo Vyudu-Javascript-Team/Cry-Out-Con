@@ -16,6 +16,7 @@ import DiveIn from "./components/DiveIn";
 import Hotels from "./components/hotels";
 import { useEffect, useState } from "react";
 import Countdown from "./components/Countdown";
+import { ArrowRight } from "lucide-react";
 
 function Home() {
   const { scrollYProgress } = useScroll();
@@ -25,6 +26,13 @@ function Home() {
     [0, 0.8, 1],
     [1, 0.8, 0.6]
   );
+
+  const handleRegistration = () => {
+    window.open(
+      "https://brushfire.com/tlhc/cryout25/578593/register",
+      "_blank"
+    );
+  };
 
   return (
     <div className="relative min-h-screen bg-primary text-white overflow-x-hidden">
@@ -42,8 +50,16 @@ function Home() {
         <div id="video">
           <VideoSection />
         </div>
-        <div className="w-full min-h-[40vh] flex items-center justify-center py-16 text-3xl bg-fuchsia-950 md:text-5xl lg:text-6xl font-bold">
-        <Countdown />
+        <div className="w-full min-h-[20vh] md:flex gap-9 items-center justify-center py-16 px-8 text-3xl bg-fuchsia-500/30 md:text-5xl lg:text-6xl font-bold">
+          <Countdown />
+          <button
+            onClick={() => handleRegistration()}
+            type="button"
+            className="bg-white relative md:mt-0 mt-6 md:text-2xl z-20 text-primary px-4 py-4 text-xl font-semibold transition-all rounded shadow-lg hover:cursor-pointer hover:shadow-white/25 flex items-center gap-2 group"
+          >
+            Register Now
+            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+          </button>
         </div>
         <div id="dive">
           <DiveIn />
@@ -72,13 +88,12 @@ function Home() {
 }
 
 function App() {
-
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000); 
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
