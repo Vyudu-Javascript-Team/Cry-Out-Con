@@ -45,8 +45,8 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
               whileInView={{ opacity: 1}}
               viewport={{ once: true }}
               transition={{
-                duration: 0.1,
-                delay: i * 0.01,
+                duration: 0.05,
+                delay: i * 0.005,
               }}
               className={`inline-block bg-clip-text text-transparent bg-gradient-to-r ${gradient}`}
             >

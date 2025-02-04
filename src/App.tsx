@@ -42,7 +42,7 @@ function Home() {
         <div id="video">
           <VideoSection />
         </div>
-        <div className="w-full md:min-h-[40vh] flex items-center justify-center py-16 text-3xl bg-fuchsia-950 md:text-5xl lg:text-6xl font-bold">
+        <div className="w-full min-h-[40vh] flex items-center justify-center py-16 text-3xl bg-fuchsia-950 md:text-5xl lg:text-6xl font-bold">
         <Countdown />
         </div>
         <div id="dive">
@@ -60,7 +60,6 @@ function Home() {
         <div id="agenda">
           <Agenda />
         </div>
-
         <div id="news">
           <News />
         </div>
@@ -91,8 +90,6 @@ function App() {
       </div>
     );
   }
-
-
 
   return (
     <BrowserRouter>

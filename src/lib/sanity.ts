@@ -241,3 +241,58 @@ export async function getFooterContent() {
   copyright
 }`)
 };
+
+export async function getCountdownData() {
+  const data = await client.fetch(`
+    *[_type == "countdown" && isActive == true][0] {
+      eventName,
+      eventDate,
+      isActive
+    }
+  `);
+
+  if (data) {
+    const date = new Date(data.eventDate);
+    // Format to match '2025-05-01T17:00:00-05:00'
+    const options: Intl.DateTimeFormatOptions = {
+      timeZone: 'America/New_York',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    };
+    
+    const formattedDate = new Date(
+      date.toLocaleString('en-US', options)
+    ).toLocaleString('en-US', {
+      timeZone: 'America/New_York',
+      ...options
+    });
+
+    // Update the eventDate in the returned data
+    data.eventDate = formattedDate.replace(
+      /(\d+)\/(\d+)\/(\d+), (\d+):(\d+):(\d+)/,
+      (_, month, day, year, hour, minute, second) =>
+        `${year}-${month}-${day}T${hour}:${minute}:${second}-05:00`
+    );
+  }
+
+  return data;
+}
+
+export async function getSiteSettings() {
+  return client.fetch(`
+    *[_type == "siteSettings"][0] {
+      sections[] {
+        sectionId,
+        isVisible,
+        order
+      },
+      maintenanceMode
+    }
+  `);
+}
+

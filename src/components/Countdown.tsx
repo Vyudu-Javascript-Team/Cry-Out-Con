@@ -1,4 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { getCountdownData } from '../lib/sanity';
+
+type CountdownData = {
+  eventName: string;
+  eventDate: string;
+  description?: string;
+  isActive: boolean;
+}
 
 const Countdown = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -7,11 +15,22 @@ const Countdown = () => {
     minutes: 0,
     seconds: 0
   });
+  const [eventData, setEventData] = useState<CountdownData | null>(null);
 
   useEffect(() => {
-    const eventDate = new Date('2025-05-01T17:00:00-05:00');
+    const fetchEventData = async () => {
+      const data = await getCountdownData();
+      setEventData(data);
+    };
 
+    fetchEventData();
+  }, []);
+
+  useEffect(() => {
+    if (!eventData?.eventDate) return;
+    
     const calculateTimeLeft = () => {
+      const eventDate = new Date(eventData.eventDate);
       const now = new Date();
       const difference = eventDate.getTime() - now.getTime();
 
@@ -22,6 +41,13 @@ const Countdown = () => {
           minutes: Math.floor((difference / 1000 / 60) % 60),
           seconds: Math.floor((difference / 1000) % 60)
         });
+      } else {
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        });
       }
     };
 
@@ -29,7 +55,11 @@ const Countdown = () => {
     calculateTimeLeft();
 
     return () => clearInterval(timer);
-  }, []);
+  }, [eventData?.eventDate]);
+
+  if (!eventData || !eventData.isActive) {
+    return null;
+  }
 
   return (
     <div className="flex gap-3 text-white">
