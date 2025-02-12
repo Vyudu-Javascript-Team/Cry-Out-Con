@@ -45,7 +45,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
                     setIsPlaying(true);
                   })
                   .catch(error => {
-                    console.log("Autoplay failed:", error);
+                    console.error('Error attempting to play video:', error);
                     setIsPlaying(false);
                   });
               }
