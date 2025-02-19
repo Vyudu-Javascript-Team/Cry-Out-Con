@@ -11,5 +11,6 @@ import footer from './footer'
 import registration from './registration'
 import siteSetting from './siteSetting'
 import countdown from './countdown'
+import headerNavigation from './headerNavigation'
 
-export const schemaTypes = [hero, video, getReady, speaker, conference, registration, agenda, imageSlider, hotel, speakerCategory, siteSetting, countdown, footer]
+export const schemaTypes = [headerNavigation, hero, video, getReady, speaker, conference, registration, agenda, imageSlider, hotel, speakerCategory, siteSetting, countdown, footer]
