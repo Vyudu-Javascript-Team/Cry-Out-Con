@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   AnimatePresence,
   motion,
@@ -8,8 +9,32 @@ import logo from "/assets/logos/CRY_OUT_CON_LOGO-21.png";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useLoading } from "./contexts/LoadingContext";
+import { getHeaderNavigation } from "../lib/sanity";
+
+interface HeaderNavigationData {
+  logo: {
+    asset: {
+      url: string;
+    };
+    alt: string;
+  };
+  navigationLinks: {
+    title: string;
+    path: string;
+    toSection: boolean;
+    order: number;
+  }[];
+  navigationButtons: {
+    title: string;
+    url: string;
+    order: number;
+  }[];
+}
 
 export const Navbar = () => {
+  const [headerNavigation, setHeaderNavigation] =
+    useState<HeaderNavigationData | null>(null);
+
   const { scrollY } = useScroll();
   const { setLoading } = useLoading();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -23,6 +48,26 @@ export const Navbar = () => {
     [0, 100],
     ["blur(0px)", "blur(8px)"]
   );
+
+  useEffect(() => {
+    const fetchHeaderNavigation = async () => {
+      try {
+        const data = await getHeaderNavigation();
+
+        console.log(data);
+
+        if (data) {
+          setHeaderNavigation(data);
+        } else {
+          console.error("No header navigation available");
+        }
+      } catch (error) {
+        console.error("Error fetching header navigation", error);
+      }
+    };
+
+    fetchHeaderNavigation();
+  }, []);
 
   const handleNavigation = (path: string, hash: string) => {
     setLoading(true);
@@ -184,7 +229,9 @@ export const Navbar = () => {
               EXPERIENCES
             </a>
             <NavLink to="/speakers">
-              <span className="whitespace-nowrap">SPEAKERS & MUSICAL GUESTS</span>
+              <span className="whitespace-nowrap">
+                SPEAKERS & MUSICAL GUESTS
+              </span>
             </NavLink>
             <a
               onClick={() => handleNavigation("/", "#agenda")}
