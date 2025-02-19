@@ -242,6 +242,27 @@ export async function getFooterContent() {
 }`)
 };
 
+export async function getHeaderNavigation() {
+  return client.fetch(`
+    *[_type == "headerNavigation"][0]{
+  logo{
+    asset->{url},
+    alt
+  },
+  navigationLinks[]{
+    title,
+    path,
+    toSection,
+    order
+  },
+  navigationButtons[]{
+    title,
+    url,
+    order
+  }
+}`)
+};
+
 export async function getCountdownData() {
   const data = await client.fetch(`
     *[_type == "countdown" && isActive == true][0] {

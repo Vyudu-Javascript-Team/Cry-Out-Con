@@ -1,7 +1,7 @@
 import { defineField } from "sanity";
 
 const headerNavigation = {
-  name: "header-navigation",
+  name: "headerNavigation",
   title: "Header Navigation",
   type: "document",
   fields: [
@@ -48,6 +48,7 @@ const headerNavigation = {
               name: "toSection",
               title: "To Section?",
               type: "boolean",
+              initialValue: false,
               description: "Choose whether to point to a section in a page."
             }),
             defineField({
