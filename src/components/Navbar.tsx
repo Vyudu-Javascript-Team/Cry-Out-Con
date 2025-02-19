@@ -54,8 +54,6 @@ export const Navbar = () => {
       try {
         const data = await getHeaderNavigation();
 
-        console.log(data);
-
         if (data) {
           setHeaderNavigation(data);
         } else {
@@ -148,6 +146,104 @@ export const Navbar = () => {
     );
   };
 
+  function renderNavigationLinks(
+    headerNavigation: HeaderNavigationData,
+    isMobile: boolean = false
+  ) {
+    const { navigationLinks } = headerNavigation;
+    return (
+      <>
+        {navigationLinks.map((link) => {
+          let classes =
+            "hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors";
+
+          if (isMobile) {
+            classes += " text-lg";
+          } else {
+            classes += " text-primary whitespace-nowrap";
+          }
+
+          const title = link.title.trim().toUpperCase();
+
+          let content = null;
+
+          if (!link.toSection && isMobile) {
+            content = (
+              <NavLink to={`/${link.path}`} key={link.path}>
+                {title}
+              </NavLink>
+            );
+          } else if (!link.toSection && !isMobile) {
+            content = (
+              <NavLink to={`/${link.path}`} key={link.path}>
+                <span className="whitespace-nowrap">{title}</span>
+              </NavLink>
+            );
+          } else {
+            content = (
+              <a
+                key={link.path}
+                href={`/#${link.path}`}
+                onClick={() => handleNavigation("/", `#${link.path}`)}
+                className={classes}
+              >
+                {title}
+              </a>
+            );
+          }
+
+          return content;
+        })}
+      </>
+    );
+  }
+
+  function renderNavigationButtons(
+    headerNavigation: HeaderNavigationData,
+    isMobile: boolean = false
+  ) {
+    const { navigationButtons } = headerNavigation;
+
+    return (
+      <>
+        {navigationButtons.map((button) => {
+          const title = button.title.trim().toUpperCase();
+
+          return isMobile ? (
+            <motion.a
+              key={button.url}
+              href={button.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+              }}
+              className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded font-semibold"
+            >
+              {title}
+            </motion.a>
+          ) : (
+            <motion.a
+              key={button.url}
+              href={button.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="md:px-4 md:py-2 px-3 py-1.5 text-sm md:text-base xl:text-lg bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-white/25"
+            >
+              {title}
+            </motion.a>
+          );
+        })}
+      </>
+    );
+  }
+
   const MobileMenu = () => (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -157,135 +253,86 @@ export const Navbar = () => {
       className="absolute top-full left-0 right-0 bg-primary p-4 border-t border-white/10"
     >
       <div className="flex flex-col items-center space-y-6 py-4">
-        <a
-          href="/#conference"
-          onClick={() => handleNavigation("/", "#conference")}
-          className="text-lg hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors"
-        >
-          EXPERIENCES
-        </a>
-        <NavLink to="/speakers">SPEAKERS & MUSICAL GUESTS</NavLink>
-        <a
-          onClick={() => handleNavigation("/", "#agenda")}
-          className="text-lg hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors"
-        >
-          SCHEDULE
-        </a>
-        <NavLink to="/hotel-details">ACCOMMODATIONS</NavLink>
+        {headerNavigation && renderNavigationLinks(headerNavigation, true)}
         {/* <NavLink to="#">Sponsors</NavLink> */}
-
-        <motion.a
-          href="https://brushfire.com/tlhc/cryout25/578593"
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => {
-            setIsMobileMenuOpen(false);
-          }}
-          className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded font-semibold"
-        >
-          REGISTER NOW
-        </motion.a>
+        {headerNavigation && renderNavigationButtons(headerNavigation, true)}
       </div>
     </motion.div>
   );
 
+  if (!headerNavigation) {
+    return null;
+  }
+
   return (
-    <motion.header
-      style={{
-        height: headerHeight,
-        backdropFilter: backdropBlur,
-        borderBottom: `1px solid rgba(255, 255, 255, ${borderOpacity.get()})`,
-      }}
-      className="fixed top-0 left-0 right-0 bg-white z-[9999] will-change-transform font-sans"
-    >
-      <nav className="flex items-center w-full max-w-[2000px] mx-auto justify-between px-4 sm:px-6 md:px-8 lg:px-12 h-full">
-        <motion.a
-          href="/"
-          onClick={() => {
-            navigate("/");
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex-shrink-0 hover:cursor-pointer"
-        >
-          <motion.img
-            src={logo}
-            alt="Cry Out Conference Logo"
-            loading="lazy"
-            className="h-12 sm:h-16 md:h-20 w-auto object-contain"
-          />
-        </motion.a>
-
-        <div className="hidden xl:flex items-center justify-center flex-grow px-4">
-          <div className="flex items-center justify-center space-x-3 xl:space-x-6 2xl:space-x-8 text-sm xl:text-base 2xl:text-lg">
-            <a
-              onClick={() => handleNavigation("/", "#conference")}
-              className="hover:cursor-pointer text-primary hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors whitespace-nowrap"
-            >
-              EXPERIENCES
-            </a>
-            <NavLink to="/speakers">
-              <span className="whitespace-nowrap">
-                SPEAKERS & MUSICAL GUESTS
-              </span>
-            </NavLink>
-            <a
-              onClick={() => handleNavigation("/", "#agenda")}
-              className="hover:cursor-pointer text-primary hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors whitespace-nowrap"
-            >
-              SCHEDULE
-            </a>
-            <NavLink to="/hotel-details">
-              <span className="whitespace-nowrap">ACCOMMODATIONS</span>
-            </NavLink>
-          </div>
-        </div>
-
-        <div className="hidden xl:flex justify-end flex-shrink-0 ml-4">
+    headerNavigation && (
+      <motion.header
+        style={{
+          height: headerHeight,
+          backdropFilter: backdropBlur,
+          borderBottom: `1px solid rgba(255, 255, 255, ${borderOpacity.get()})`,
+        }}
+        className="fixed top-0 left-0 right-0 bg-white z-[9999] will-change-transform font-sans"
+      >
+        <nav className="flex items-center w-full max-w-[2000px] mx-auto justify-between px-4 sm:px-6 md:px-8 lg:px-12 h-full">
           <motion.a
-            href="https://brushfire.com/tlhc/cryout25/578593"
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="md:px-4 md:py-2 px-3 py-1.5 text-sm md:text-base xl:text-lg bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-white/25"
+            href="/"
+            onClick={() => {
+              navigate("/");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex-shrink-0 hover:cursor-pointer"
           >
-            REGISTER NOW
+            <motion.img
+              src={headerNavigation.logo.asset.url}
+              alt={headerNavigation.logo.alt}
+              loading="lazy"
+              className="h-12 sm:h-16 md:h-20 w-auto object-contain"
+            />
           </motion.a>
-        </div>
 
-        <button
-          className="xl:hidden"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle mobile menu"
-        >
-          <svg
-            className="w-6 h-6 text-primary"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+          <div className="hidden xl:flex items-center justify-center flex-grow px-4">
+            <div className="flex items-center justify-center space-x-3 xl:space-x-6 2xl:space-x-8 text-sm xl:text-base 2xl:text-lg">
+              {renderNavigationLinks(headerNavigation)}
+            </div>
+          </div>
+
+          <div className="hidden xl:flex justify-end flex-shrink-0 ml-4">
+            {renderNavigationButtons(headerNavigation)}
+          </div>
+
+          <button
+            className="xl:hidden"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle mobile menu"
           >
-            <path
-              d={
-                isMobileMenuOpen
-                  ? "M6 18L18 6M6 6l12 12"
-                  : "M4 6h16M4 12h16M4 18h16"
-              }
-            ></path>
-          </svg>
-        </button>
+            <svg
+              className="w-6 h-6 text-primary"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                d={
+                  isMobileMenuOpen
+                    ? "M6 18L18 6M6 6l12 12"
+                    : "M4 6h16M4 12h16M4 18h16"
+                }
+              ></path>
+            </svg>
+          </button>
 
-        <AnimatePresence>{isMobileMenuOpen && <MobileMenu />}</AnimatePresence>
-      </nav>
-    </motion.header>
+          <AnimatePresence>
+            {isMobileMenuOpen && <MobileMenu />}
+          </AnimatePresence>
+        </nav>
+      </motion.header>
+    )
   );
 };
