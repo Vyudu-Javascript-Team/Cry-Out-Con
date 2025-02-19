@@ -164,27 +164,28 @@ export const Navbar = () => {
           }
 
           const title = link.title.trim().toUpperCase();
+          const path = link.path.trim().toLowerCase();
 
           let content = null;
 
           if (!link.toSection && isMobile) {
             content = (
-              <NavLink to={`/${link.path}`} key={link.path}>
+              <NavLink to={`/${path}`} key={path}>
                 {title}
               </NavLink>
             );
           } else if (!link.toSection && !isMobile) {
             content = (
-              <NavLink to={`/${link.path}`} key={link.path}>
+              <NavLink to={`/${path}`} key={path}>
                 <span className="whitespace-nowrap">{title}</span>
               </NavLink>
             );
           } else {
             content = (
               <a
-                key={link.path}
-                href={`/#${link.path}`}
-                onClick={() => handleNavigation("/", `#${link.path}`)}
+                key={path}
+                href={`/#${path}`}
+                onClick={() => handleNavigation("/", `#${path}`)}
                 className={classes}
               >
                 {title}
