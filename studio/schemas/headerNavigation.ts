@@ -37,11 +37,18 @@ const headerNavigation = {
                 Rule.required().error("Link title is required"),
             }),
             defineField({
-              name: "url",
-              title: "URL",
-              type: "url",
+              name: "path",
+              title: "Path",
+              type: "string",
               validation: (Rule) =>
                 Rule.required().error("Link URL is required"),
+              description: "Enter just the path avoiding the domain. E.g in https://cryoutcon.com/speakers just enter 'speakers'"
+            }),
+            defineField({
+              name: "toSection",
+              title: "To Section?",
+              type: "boolean",
+              description: "Choose whether to point to a section in a page."
             }),
             defineField({
               name: "order",
