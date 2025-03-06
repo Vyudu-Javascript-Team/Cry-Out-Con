@@ -153,11 +153,6 @@ export const Navbar = () => {
     const { navigationLinks } = headerNavigation;
     return (
       <>
-        {/* Static Sponsors link */}
-        <NavLink to="/sponsors" key="sponsors">
-          <span className="whitespace-nowrap">SPONSORS</span>
-        </NavLink>
-
         {/* Dynamic navigation links */}
         {navigationLinks.map((link) => {
           let classes =
@@ -204,6 +199,11 @@ export const Navbar = () => {
 
           return content;
         })}
+
+        {/* Static Sponsors link at the end */}
+        <NavLink to="/sponsors" key="sponsors">
+          <span className="whitespace-nowrap">SPONSORS</span>
+        </NavLink>
       </>
     );
   }
