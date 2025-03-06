@@ -17,6 +17,7 @@ import Hotels from "./components/hotels";
 import { useEffect, useState } from "react";
 import Countdown from "./components/Countdown";
 import { ArrowRight } from "lucide-react";
+import Sponsors from "./pages/Sponsors";
 
 function Home() {
   const { scrollYProgress } = useScroll();
@@ -114,6 +115,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/hotel-details" element={<Hotels />} />
           <Route path="/speakers" element={<AllSpeakers />} />
+          <Route path="/sponsors" element={<Sponsors />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 

@@ -40,8 +40,28 @@ export default {
         'float': 'float 6s ease-in-out infinite',
         'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
         'shine': 'shine 1.5s ease-in-out infinite',
+        'plasma': 'plasma 12s ease-in-out infinite',
+        'plasma-slow': 'plasma 15s ease-in-out infinite alternate',
       },
       keyframes: {
+        plasma: {
+          '0%': {
+            'background-position': '0% 0%',
+            'transform': 'scale(1)'
+          },
+          '33%': {
+            'background-position': '100% 0%',
+            'transform': 'scale(1.1)'
+          },
+          '66%': {
+            'background-position': '0% 100%',
+            'transform': 'scale(1)'
+          },
+          '100%': {
+            'background-position': '0% 0%',
+            'transform': 'scale(1)'
+          },
+        },
         gradient: {
           '0%, 100%': {
             'background-size': '200% 200%',
@@ -50,6 +70,16 @@ export default {
           '50%': {
             'background-size': '200% 200%',
             'background-position': 'right center'
+          },
+        },
+        'pulse-slow': {
+          '0%, 100%': {
+            opacity: 0.7,
+            transform: 'scale(1)',
+          },
+          '50%': {
+            opacity: 0.4,
+            transform: 'scale(1.05)',
           },
         },
         float: {
@@ -70,6 +100,12 @@ export default {
         'glow': '0 0 25px rgba(123, 31, 162, 0.4)',
         'glow-lg': '0 0 35px rgba(123, 31, 162, 0.5)',
         'glow-xl': '0 0 50px rgba(123, 31, 162, 0.6)',
+      },
+      transitionTimingFunction: {
+        'bounce-slow': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      },
+      animationDelay: {
+        '2000': '2000ms',
       },
     },
   },
