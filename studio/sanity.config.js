@@ -15,4 +15,8 @@ export default defineConfig({
     types: schemaTypes,
   },
   useCdn: false,
+  cors: {
+    allowOrigins: ['http://127.0.0.1:52654'],
+    allowCredentials: true
+  }
 })

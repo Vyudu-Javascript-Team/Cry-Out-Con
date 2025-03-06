@@ -3,7 +3,7 @@ import { deskTool } from 'sanity/desk'
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemas'
 
-const allowedOrigins = (process.env.SANITY_STUDIO_ALLOWED_ORIGINS || '').split(',').filter(Boolean)
+const allowedOrigins = ['http://127.0.0.1:52654']
 
 export default defineConfig({
   name: 'default',
