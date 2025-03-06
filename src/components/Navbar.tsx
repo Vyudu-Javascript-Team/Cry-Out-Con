@@ -153,6 +153,12 @@ export const Navbar = () => {
     const { navigationLinks } = headerNavigation;
     return (
       <>
+        {/* Static Sponsors link */}
+        <NavLink to="/sponsors" key="sponsors">
+          <span className="whitespace-nowrap">SPONSORS</span>
+        </NavLink>
+
+        {/* Dynamic navigation links */}
         {navigationLinks.map((link) => {
           let classes =
             "hover:cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 transition-colors";
@@ -165,6 +171,9 @@ export const Navbar = () => {
 
           const title = link.title.trim().toUpperCase();
           const path = link.path.trim().toLowerCase();
+
+          // Skip sponsors link if it exists in CMS to avoid duplication
+          if (path === 'sponsors') return null;
 
           let content = null;
 
