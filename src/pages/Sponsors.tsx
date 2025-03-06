@@ -7,7 +7,7 @@ export default function Sponsors() {
 
 
   const handleEmailClick = () => {
-    window.location.href = "mailto:contact@cryoutcon.com";
+    window.open("mailto:contact@cryoutcon.com", "_blank");
   };
 
   return (
