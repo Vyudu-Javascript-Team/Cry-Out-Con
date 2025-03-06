@@ -11,6 +11,8 @@ export default defineConfig({
 
   projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'l96yh15e',
   dataset: process.env.SANITY_STUDIO_DATASET || 'production',
+  basePath: '/studio',
+  hostname: 'cryoutcon-cms.sanity.studio',
 
   plugins: [deskTool(), visionTool()],
 
