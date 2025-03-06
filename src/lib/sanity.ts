@@ -317,3 +317,18 @@ export async function getSiteSettings() {
   `);
 }
 
+export async function getSponsors() {
+  return client.fetch(`
+    *[_type == "sponsors" && isVisible == true][0] {
+      title,
+      description,
+      audienceImage {
+        asset->{
+          url
+        },
+        alt
+      },
+      isVisible
+    }
+  `);
+}

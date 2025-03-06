@@ -17,6 +17,7 @@ import Hotels from "./components/hotels";
 import { useEffect, useState } from "react";
 import Countdown from "./components/Countdown";
 import { ArrowRight } from "lucide-react";
+import { Sponsors } from "./components/Sponsors";
 
 function Home() {
   const { scrollYProgress } = useScroll();
@@ -78,6 +79,9 @@ function Home() {
         </div>
         <div id="news">
           <News />
+        </div>
+        <div id="sponsors">
+          <Sponsors />
         </div>
         <div id="newsletter">
           <Newsletter />
