@@ -7,7 +7,13 @@ export default function Sponsors() {
 
 
   const handleEmailClick = () => {
-    window.open("mailto:partnership@brandstoryarchitech.com?cc=contact@cryoutcon.com&subject=Cry Out Con Sponsorship Inquiry", "_blank");
+    const email = {
+      to: 'partnership@brandstoryarchitech.com',
+      cc: 'contact@cryoutcon.com',
+      subject: 'Cry Out Con Sponsorship Inquiry'
+    };
+    const mailtoUrl = `mailto:${email.to}?cc=${email.cc}&subject=${encodeURIComponent(email.subject)}`;
+    window.open(mailtoUrl, '_blank');
   };
 
   return (
