@@ -12,4 +12,5 @@ import registration from './registration'
 import siteSetting from './siteSetting'
 import countdown from './countdown'
 import headerNavigation from './headerNavigation'
-export const schemaTypes = [headerNavigation, hero, video, getReady, speaker, conference, registration, agenda, imageSlider, hotel, speakerCategory, siteSetting, countdown, footer]
+import sponsor from './sponsor'
+export const schemaTypes = [headerNavigation, hero, video, getReady, speaker, sponsor, conference, registration, agenda, imageSlider, hotel, speakerCategory, siteSetting, countdown, footer]
