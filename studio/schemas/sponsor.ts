@@ -19,8 +19,8 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
-      name: "button",
-      title: "Button",
+      name: "email",
+      title: "Email",
       type: "object",
       fields: [
         {
@@ -31,11 +31,17 @@ export default {
           validation: (Rule) => Rule.required(),
         },
         {
-          name: "email",
+          name: "to",
           type: "string",
-          title: "Email",
-          initialValue: "contact@cryoutcon.com",
+          title: "To",
+          initialValue: "partnership@brandstoryarchitech.com",
           validation: (Rule) => Rule.required(),
+        },
+        {
+          name: "cc",
+          type: "string",
+          title: "CC",
+          initialValue: "contact@cryoutcon.com"
         },
       ],
     },
@@ -61,6 +67,12 @@ export default {
       title: "Bottom",
       type: "string",
       initialValue: "See you at Cry Out Con.",
+    },
+    {
+      name: "isVisible",
+      title: "Page Visible",
+      type: "boolean",
+      initialValue: true
     },
   ],
 };

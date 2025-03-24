@@ -319,15 +319,21 @@ export async function getSiteSettings() {
 
 export async function getSponsors() {
   return client.fetch(`
-    *[_type == "sponsors" && isVisible == true][0] {
+    *[_type == "sponsorPage" && isVisible == true][0] {
       title,
       description,
-      audienceImage {
+      email {
+        title,
+        to,
+        cc
+      }
+      image {
         asset->{
           url
         },
         alt
       },
+      bottom,
       isVisible
     }
   `);
