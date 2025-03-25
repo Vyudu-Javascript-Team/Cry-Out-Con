@@ -85,7 +85,7 @@ export default function Sponsors() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative max-w-6xl mx-auto"
+            className="relative max-w-6xl mx-auto flex justify-center"
           >
             <div className="group aspect-[16/9] max-h-[70vh] relative overflow-hidden rounded-xl">
               {/* Plasma background effects */}
