@@ -24,9 +24,9 @@ export default {
       type: "object",
       fields: [
         {
-          name: "title",
+          name: "buttonTitle",
           type: "string",
-          title: "Title",
+          title: "Button Title",
           initialValue: "Contact Us",
           validation: (Rule) => Rule.required(),
         },
@@ -41,7 +41,14 @@ export default {
           name: "cc",
           type: "string",
           title: "CC",
-          initialValue: "contact@cryoutcon.com"
+          initialValue: "contact@cryoutcon.com",
+        },
+        {
+          name: "subject",
+          type: "string",
+          title: "Subject",
+          initialValue: "Cry Out Con Sponsorship Inquiry",
+          validation: (Rule) => Rule.required(),
         },
       ],
     },
@@ -72,7 +79,7 @@ export default {
       name: "isVisible",
       title: "Page Visible",
       type: "boolean",
-      initialValue: true
+      initialValue: true,
     },
   ],
 };

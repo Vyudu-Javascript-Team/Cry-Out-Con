@@ -317,16 +317,17 @@ export async function getSiteSettings() {
   `);
 }
 
-export async function getSponsors() {
+export async function getSponsorPage() {
   return client.fetch(`
     *[_type == "sponsorPage" && isVisible == true][0] {
       title,
       description,
       email {
-        title,
+        buttonTitle,
         to,
-        cc
-      }
+        cc,
+        subject
+      },
       image {
         asset->{
           url
