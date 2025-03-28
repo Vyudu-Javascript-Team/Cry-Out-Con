@@ -56,7 +56,6 @@ const Footer: React.FC = () => {
     (a, b) => a.order - b.order
   ) : [];
 
-  
   const getSocialIcon = (icon: string) => {
     switch (icon.toLowerCase()) {
       case "facebook":
@@ -65,6 +64,21 @@ const Footer: React.FC = () => {
         return <Instagram className="w-6 h-6" />;
       default:
         return null;
+    }
+  };
+
+  // Helper function to check if a URL is internal
+  const isInternalLink = (url: string) => {
+    return url.startsWith('/') || url === 'policy' || url === 'faq';
+  };
+
+  // Helper function to handle navigation
+  const handleNavigation = (e: React.MouseEvent, url: string) => {
+    if (isInternalLink(url)) {
+      e.preventDefault();
+      const path = url.startsWith('/') ? url : `/${url}`;
+      navigate(path);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -115,8 +129,9 @@ const Footer: React.FC = () => {
               <div key={index}>
                 <a
                   href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  onClick={(e) => handleNavigation(e, link.url)}
+                  target={isInternalLink(link.url) ? undefined : "_blank"}
+                  rel={isInternalLink(link.url) ? undefined : "noopener noreferrer"}
                   className={`text-gray-300 hover:text-transparent bg-clip-text bg-gradient-to-r ${gradient} transition-colors`}
                 >
                   {link.title}
