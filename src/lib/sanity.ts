@@ -339,3 +339,17 @@ export async function getSponsorPage() {
     }
   `);
 }
+
+export async function getPolicyPage() {
+  return client.fetch(`
+    *[_type == "policyPage" && isVisible == true][0] {
+      heading,
+      items[] {
+        title,
+        content,
+        order
+      }
+      isVisible
+    }
+  `);
+}

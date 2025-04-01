@@ -44,5 +44,11 @@ export default {
         },
       ],
     },
+    {
+      name: "isVisible",
+      title: "Page Visible",
+      type: "boolean",
+      initialValue: true,
+    },
   ],
 };
