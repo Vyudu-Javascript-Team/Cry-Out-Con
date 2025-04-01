@@ -33,7 +33,7 @@ const Policy = () => {
 
         <div className="space-y-6">
           {policyPage.items
-            .sort((item) => item.order)
+            .sort((a, b) => a.order - b.order)
             .map((item) => (
               <section>
                 <h2 className="text-xl font-semibold mb-2">{item.title}</h2>
