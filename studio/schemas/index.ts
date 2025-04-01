@@ -1,16 +1,34 @@
-import speaker from './speaker'
-import hotel from './hotel'
-import conference from './conference'
-import agenda from './agenda'
-import imageSlider from './imageSlider'
-import speakerCategory from './speakerCategory'
-import getReady from './getReady'
-import video from './video'
-import hero from './hero'
-import footer from './footer'
-import registration from './registration'
-import siteSetting from './siteSetting'
-import countdown from './countdown'
-import headerNavigation from './headerNavigation'
-import sponsor from './sponsor'
-export const schemaTypes = [headerNavigation, hero, video, getReady, speaker, sponsor, conference, registration, agenda, imageSlider, hotel, speakerCategory, siteSetting, countdown, footer]
+import speaker from "./speaker";
+import hotel from "./hotel";
+import conference from "./conference";
+import agenda from "./agenda";
+import imageSlider from "./imageSlider";
+import speakerCategory from "./speakerCategory";
+import getReady from "./getReady";
+import video from "./video";
+import hero from "./hero";
+import footer from "./footer";
+import registration from "./registration";
+import siteSetting from "./siteSetting";
+import countdown from "./countdown";
+import headerNavigation from "./headerNavigation";
+import sponsor from "./sponsor";
+import policy from "./policy";
+export const schemaTypes = [
+  headerNavigation,
+  hero,
+  video,
+  getReady,
+  speaker,
+  sponsor,
+  conference,
+  registration,
+  agenda,
+  imageSlider,
+  hotel,
+  speakerCategory,
+  siteSetting,
+  countdown,
+  footer,
+  policy,
+];
