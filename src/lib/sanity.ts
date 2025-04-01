@@ -348,7 +348,7 @@ export async function getPolicyPage() {
         title,
         content,
         order
-      }
+      },
       isVisible
     }
   `);
