@@ -45,7 +45,7 @@ const Hotels = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary via-primary/95 to-primary py-20">
+    <div className="min-h-screen bg-gradient-to-b from-primary via-primary/95 to-primary py-20 mb-20">
       <div className="container relative max-w-7xl mx-auto px-4">
         <SectionTitle
           title="Accommodations"
