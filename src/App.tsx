@@ -114,7 +114,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/hotel-details" element={<Hotels />} />
+          <Route path="/travel" element={<Hotels />} />
           <Route path="/speakers" element={<AllSpeakers />} />
           <Route path="/sponsors" element={<Sponsors />} />
           <Route path="/policy" element={<Policy />} />
