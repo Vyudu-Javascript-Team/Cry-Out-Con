@@ -110,7 +110,7 @@ const Footer: React.FC = () => {
               />
           </motion.a>
 
-          <div className="flex space-x-2">
+          <div className="flex justify-center items-center space-x-4">
             {footerDetails.socialLinks.map((social, index) => (
               <a
                 key={index}
