@@ -83,12 +83,12 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-primary py-8 relative">
+    <footer className="bg-primary py-8 relative mt-20">
       <SunrayEffect />
 
       {footerDetails && (
       <div className="max-w-8xl mx-auto px-8 md:text-xl relative z-10">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 mb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0 mb-8">
           <motion.a
             href="/"
             onClick={(e) => {
@@ -110,7 +110,7 @@ const Footer: React.FC = () => {
               />
           </motion.a>
 
-          <div className="flex justify-center items-center space-x-4">
+          <div className="flex justify-center items-center space-x-4 mx-auto md:mx-0">
             {footerDetails.socialLinks.map((social, index) => (
               <a
                 key={index}
