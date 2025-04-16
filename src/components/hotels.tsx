@@ -48,8 +48,8 @@ const Hotels = () => {
     <div className="min-h-screen bg-gradient-to-b from-primary via-primary/95 to-primary py-20 mb-20">
       <div className="container relative max-w-7xl mx-auto px-4">
         <SectionTitle
-          title="Accommodations"
-          subtitle="Here is a list of Cry Out Con preferred hotels with discounted rates."
+          title="Travel and Accommodations"
+          subtitle="Below, please find Cry Out Con preferred airlines, rental vehicle agencies, and hotels with discounted rates for Cry Out Con attendees!"
           gradient="from-blue-400 via-purple-400 to-pink-400"
         />
 
