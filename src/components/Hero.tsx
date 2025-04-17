@@ -75,6 +75,8 @@ export const Hero = () => {
           <div className="h-[50vh] md:h-screen w-full relative">
           {heroData && heroData.backgroundImage && (
             <LazyImage
+            priority={true}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 100vw"
               src={heroData.backgroundImage}
               alt={heroData.backgroundImageAlt}
               className="absolute inset-0 w-full h-full object-cover"
