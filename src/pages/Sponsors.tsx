@@ -52,14 +52,37 @@ export default function Sponsors() {
       cc: sponsor?.email.cc,
       subject: sponsor?.email.subject,
     };
-    const mailtoUrl = `mailto:${email.to}?cc=${email.cc}&subject=${encodeURIComponent(email.subject)}`;
+    const mailtoUrl = `mailto:${email.to}?${email.cc ? `cc=${email.cc}&` : ''}subject=${encodeURIComponent(email.subject || '')}`;
     window.open(mailtoUrl, "_blank");
   };
 
   return (
     sponsor && (
-      <div className="relative min-h-screen bg-primary text-white overflow-x-hidden">
+      <div className="relative min-h-screen bg-primary text-white overflow-x-hidden overflow-y-hidden">
         <div className="relative pt-24 pb-16 px-4 md:px-8 max-w-7xl mx-auto">
+          {/* Sponsors Logo Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-16"
+          >
+            <div className="flex flex-wrap justify-center items-center gap-8 mb-8">
+              <div className="max-w-[240px]">
+                <LazyImage 
+                  src="/assets/sponsors/mielleBrandmark.jpg" 
+                  alt="Mielle Sponsor Logo" 
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+              {/* Espaço para logos de patrocinadores adicionais no futuro */}
+            </div>
+            
+            {/* Separator Line */}
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent my-8" />
+          </motion.div>
+          
+          {/* Original content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
