@@ -20,6 +20,7 @@ import { ArrowRight } from "lucide-react";
 import Sponsors from "./pages/Sponsors";
 import RefundPolicy from "./pages/RefundPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import FAQ from "./pages/FAQ";
 
 function Home() {
   const { scrollYProgress } = useScroll();
@@ -120,6 +121,7 @@ function App() {
           <Route path="/sponsors" element={<Sponsors />} />
           <Route path="/refund-policy" element={<RefundPolicy />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/faq" element={<FAQ />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
