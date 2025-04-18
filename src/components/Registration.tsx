@@ -52,6 +52,13 @@ const Registration = () => {
     }
   };
 
+  const handlePlanRegistration = (planTitle: string) => {
+    if (planTitle === "VIP") {
+      return; // Prevent registration for VIP plan
+    }
+    handleRegistration();
+  };
+
   const getPlanBackground = (planName: string) => {
     switch (planName) {
       case "VIP":
@@ -119,6 +126,16 @@ const Registration = () => {
                 whileHover={{ opacity: 1 }}
               />
 
+              {plan.title === "VIP" && (
+                <div className="absolute inset-0 flex items-center justify-center z-30">
+                  <img 
+                    src="/assets/cryout24/soldOut.png" 
+                    alt="Sold Out" 
+                    className="w-full h-auto max-w-[180px] transform scale-150"
+                  />
+                </div>
+              )}
+
               <div className="text-center mb-4">
                 <h3
                   className={`text-2xl font-bold mb-2 ${
@@ -151,19 +168,21 @@ const Registration = () => {
 
               <div className="relative z-20">
                 <button
-                  onClick={handleRegistration}
+                  onClick={() => handlePlanRegistration(plan.title)}
                   type="button"
-                  className={`w-full mb-2 py-4 rounded font-semibold hover:cursor-pointer transition-all duration-300 ${
-                    plan.title === "VIP" ||
-                    plan.title === "Single Day Pass (FRIDAY)" ||
-                    plan.title === "Single Day Pass (SATURDAY)"
-                      ? "bg-gradient-to-r from-purple-400 to-purple-600 hover:from-purple-500 hover:to-purple-700"
-                      : plan.title === "PREMIER"
-                        ? "bg-gradient-to-r from-fuchsia-400 to-fuchsia-600 hover:from-fuchsia-500 hover:to-fuchsia-700"
-                        : "bg-gradient-to-r from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800"
+                  className={`w-full mb-2 py-4 rounded font-semibold transition-all duration-300 ${
+                    plan.title === "VIP"
+                      ? "bg-gray-500 cursor-not-allowed opacity-70"
+                      : plan.title === "VIP" ||
+                        plan.title === "Single Day Pass (FRIDAY)" ||
+                        plan.title === "Single Day Pass (SATURDAY)"
+                        ? "bg-gradient-to-r from-purple-400 to-purple-600 hover:from-purple-500 hover:to-purple-700 hover:cursor-pointer"
+                        : plan.title === "PREMIER"
+                          ? "bg-gradient-to-r from-fuchsia-400 to-fuchsia-600 hover:from-fuchsia-500 hover:to-fuchsia-700 hover:cursor-pointer"
+                          : "bg-gradient-to-r from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800 hover:cursor-pointer"
                   }`}
                 >
-                  CHOOSE {plan.title}
+                  {plan.title === "VIP" ? "SOLD OUT" : `CHOOSE ${plan.title}`}
                 </button>
               </div>
 
