@@ -68,12 +68,12 @@ export default function Sponsors() {
             className="mb-16"
           >
             <div className="flex flex-wrap justify-center items-center gap-8 mb-8">
-              <div className="max-w-[240px]">
-                <p className="text-center text-lg font-medium text-fuchsia-400 mb-2">2025 Brand Partner</p>
-                <LazyImage 
+              <div className="flex flex-col items-center">
+                <p className="text-4xl md:text-3xl lg:text-4xl font-bold mb-6 text-center">2025 Brand Partner</p>
+                <img 
                   src="/assets/sponsors/mielleBrandmark.jpg" 
                   alt="Mielle Sponsor Logo" 
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto object-contain max-w-[270px]"
                 />
               </div>
               {/* Espaço para logos de patrocinadores adicionais no futuro */}
