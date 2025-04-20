@@ -1,6 +1,6 @@
 export default {
-  name: "policyPage",
-  title: "Policy Page",
+  name: "refundPolicy",
+  title: "Refund Policy",
   type: "document",
   fields: [
     {

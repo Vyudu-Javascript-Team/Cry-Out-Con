@@ -341,9 +341,9 @@ export async function getSponsorPage() {
   `);
 }
 
-export async function getPolicyPage() {
+export async function getRefundPolicy() {
   return client.fetch(`
-    *[_type == "policyPage" && isVisible == true][0] {
+    *[_type == "refundPolicy" && isVisible == true][0] {
       heading,
       items[] {
         title,

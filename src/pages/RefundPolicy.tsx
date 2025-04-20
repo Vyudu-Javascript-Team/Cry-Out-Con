@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { getPolicyPage } from "../lib/sanity";
+import { getRefundPolicy } from "../lib/sanity";
 
 type PolicyPageData = {
   heading: string;
@@ -13,7 +13,7 @@ const Policy = () => {
   useEffect(() => {
     const fetchPolicyPage = async () => {
       try {
-        const data = await getPolicyPage();
+        const data = await getRefundPolicy();
 
         if (data) {
           setPolicyPage(data);
