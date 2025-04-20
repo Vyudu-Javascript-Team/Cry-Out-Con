@@ -14,6 +14,7 @@ import countdown from "./countdown";
 import headerNavigation from "./headerNavigation";
 import sponsor from "./sponsor";
 import refundPolicy from "./refundPolicy";
+import privacyPolicy from "./privacyPolicy";
 export const schemaTypes = [
   headerNavigation,
   hero,
@@ -31,4 +32,5 @@ export const schemaTypes = [
   countdown,
   footer,
   refundPolicy,
+  privacyPolicy
 ];
