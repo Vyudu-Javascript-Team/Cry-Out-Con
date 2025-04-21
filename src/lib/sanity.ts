@@ -354,3 +354,19 @@ export async function getRefundPolicy() {
     }
   `);
 }
+
+export async function getPrivacyPolicy() {
+  return client.fetch(`
+    *[_type == "privacyPolicy" && isVisible == true][0] {
+      heading,
+      sections[] {
+        title,
+        groupByTitle,
+        paragraphsBeforeList[],
+        list[],
+        paragraphsAfterList[] 
+      },
+      isVisible
+    }
+  `);
+}

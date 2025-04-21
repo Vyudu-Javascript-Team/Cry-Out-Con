@@ -39,7 +39,7 @@ export default {
                 {
                   name: "paragraph",
                   title: "Paragraph",
-                  type: "text",
+                  type: "string",
                 },
               ],
             },
@@ -51,7 +51,7 @@ export default {
                 {
                   name: "item",
                   title: "Item",
-                  type: "text",
+                  type: "string",
                 },
               ],
             },
@@ -63,7 +63,7 @@ export default {
                   {
                     name: "paragraph",
                     title: "Paragraph",
-                    type: "text",
+                    type: "string",
                   },
                 ],
               },
