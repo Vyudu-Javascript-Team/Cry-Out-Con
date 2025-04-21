@@ -71,8 +71,6 @@ export default function FAQ() {
       try {
         const data = await getFAQs();
 
-        console.log(data);
-
         if (data) {
           setFAQs(data);
         }

@@ -70,8 +70,6 @@ const PrivacyPolicy = () => {
                   (el) => el === policy.groupByTitle
                 );
 
-                console.log(inGroupByTitles);
-
                 if (!inGroupByTitles) {
                   groupByTitles.push(policy.groupByTitle);
                   headings = (
