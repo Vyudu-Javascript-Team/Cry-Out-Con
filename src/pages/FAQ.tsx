@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import SectionTitle from "../components/SectionTitle";
+
+import { getFAQs } from "../lib/sanity";
 
 interface FAQItemProps {
   question: string;
@@ -42,7 +44,46 @@ const FAQItem = ({ question, children }: FAQItemProps) => {
   );
 };
 
+type FAQsData = {
+  heading: string;
+  subHeading?: string;
+  questions: [
+    {
+      question: string;
+      answer?: string;
+      aswwerWithLink?: { text: string; link: string };
+      aswwerWithList?: { text: string; list: [] };
+      aswwerWithListButton?: {
+        text: string;
+        list: [];
+        buttonText: string;
+        buttonLink: string;
+      };
+    },
+  ];
+};
+
 export default function FAQ() {
+  const [faqs, setFAQs] = useState<FAQsData | null>(null);
+
+  useEffect(() => {
+    const fetchFAQs = async () => {
+      try {
+        const data = await getFAQs();
+
+        console.log(data);
+
+        if (data) {
+          setFAQs(data);
+        }
+      } catch (error) {
+        console.error("Error fetching policy page: ", error);
+      }
+    };
+
+    fetchFAQs();
+  }, []);
+
   return (
     <div className="relative min-h-screen bg-primary text-white">
       <div className="relative pt-24 pb-16 px-4 md:px-8 max-w-5xl mx-auto">
@@ -51,9 +92,9 @@ export default function FAQ() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <SectionTitle 
-            title="FAQ" 
-            subtitle="Frequently Asked Questions" 
+          <SectionTitle
+            title="FAQ"
+            subtitle="Frequently Asked Questions"
             gradient="from-fuchsia-400 via-purple-400 to-blue-400"
           />
 
@@ -75,8 +116,8 @@ export default function FAQ() {
                 <li>Premier</li>
                 <li>General</li>
               </ul>
-              <a 
-                href="https://brushfire.com/tlhc/cryout25/578593/register" 
+              <a
+                href="https://brushfire.com/tlhc/cryout25/578593/register"
                 className="inline-block bg-fuchsia-500 hover:bg-fuchsia-600 text-white px-4 py-2 rounded-lg transition-colors font-medium"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -87,31 +128,63 @@ export default function FAQ() {
 
             <FAQItem question="Do You have Group Pricing?">
               <p>
-                Please click the "Contact Us" link at the bottom of the page for questions involving group purchases of 10 or more registrations.
+                Please click the "Contact Us" link at the bottom of the page for
+                questions involving group purchases of 10 or more registrations.
               </p>
             </FAQItem>
 
             <FAQItem question="Is Seating Assigned during Main Stage sessions?">
               <p>
-                VIP and Premier Experience tickets include reserved seating sections. All other seating will be open, so large groups should plan to arrive early in order to sit together.
+                VIP and Premier Experience tickets include reserved seating
+                sections. All other seating will be open, so large groups should
+                plan to arrive early in order to sit together.
               </p>
             </FAQItem>
 
             <FAQItem question="Conference Policies">
               <p>
-                Please <a href="https://cryoutcon.com/refund-policy/" className="text-fuchsia-400 hover:underline" target="_blank" rel="noopener noreferrer">click here</a> to view the Cry Out Con policies involving refunds, age restrictions, and other considerations.
+                Please{" "}
+                <a
+                  href="https://cryoutcon.com/refund-policy/"
+                  className="text-fuchsia-400 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  click here
+                </a>{" "}
+                to view the Cry Out Con policies involving refunds, age
+                restrictions, and other considerations.
               </p>
             </FAQItem>
 
             <FAQItem question="Who is Speaking at Cry Out?">
               <p>
-                For a complete list of speakers, performers, and special guests, please <a href="https://cryoutcon.com/speakers" className="text-fuchsia-400 hover:underline" target="_blank" rel="noopener noreferrer">click here</a>.
+                For a complete list of speakers, performers, and special guests,
+                please{" "}
+                <a
+                  href="https://cryoutcon.com/speakers"
+                  className="text-fuchsia-400 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  click here
+                </a>
+                .
               </p>
             </FAQItem>
 
             <FAQItem question="Does Cry Out have Official Airline and Hotel Partners?">
               <p>
-                Please view the available travel and accommodation discounts <a href="https://cryoutcon.com/travel" className="text-fuchsia-400 hover:underline" target="_blank" rel="noopener noreferrer">here</a>.
+                Please view the available travel and accommodation discounts{" "}
+                <a
+                  href="https://cryoutcon.com/travel"
+                  className="text-fuchsia-400 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  here
+                </a>
+                .
               </p>
             </FAQItem>
           </div>
@@ -119,4 +192,4 @@ export default function FAQ() {
       </div>
     </div>
   );
-} 
+}

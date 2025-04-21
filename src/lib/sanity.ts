@@ -370,3 +370,31 @@ export async function getPrivacyPolicy() {
     }
   `);
 }
+
+export async function getFAQs() {
+  return client.fetch(`
+    *[_type == "faqs" && isVisible == true][0] {
+      heading,
+      subHeading,
+      questions[] | order(order asc) {
+        question,
+        answer,
+        answerWithLink {
+          text,
+          link
+        },
+        answerWithList {
+          text,
+          list[]
+        },
+        answerWithListButton {
+          text,
+          list[],
+          buttonText,
+          buttonLink
+        }
+      },
+      isVisible
+    }
+  `);
+}
