@@ -359,7 +359,7 @@ export async function getPrivacyPolicy() {
   return client.fetch(`
     *[_type == "privacyPolicy" && isVisible == true][0] {
       heading,
-      sections[] {
+      sections[] | order(order asc) {
         title,
         groupByTitle,
         paragraphsBeforeList[],
