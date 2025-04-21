@@ -15,6 +15,7 @@ import headerNavigation from "./headerNavigation";
 import sponsor from "./sponsor";
 import refundPolicy from "./refundPolicy";
 import privacyPolicy from "./privacyPolicy";
+import faq from "./faq";
 export const schemaTypes = [
   headerNavigation,
   hero,
@@ -31,6 +32,7 @@ export const schemaTypes = [
   siteSetting,
   countdown,
   footer,
+  faq,
   refundPolicy,
   privacyPolicy
 ];
