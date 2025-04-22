@@ -16,6 +16,7 @@ import sponsor from "./sponsor";
 import refundPolicy from "./refundPolicy";
 import privacyPolicy from "./privacyPolicy";
 import faq from "./faq";
+import discounts from "./discounts";
 export const schemaTypes = [
   headerNavigation,
   hero,
@@ -27,6 +28,7 @@ export const schemaTypes = [
   registration,
   agenda,
   imageSlider,
+  discounts,
   hotel,
   speakerCategory,
   siteSetting,
