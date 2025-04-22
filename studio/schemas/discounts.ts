@@ -31,7 +31,6 @@ export default {
               name: "intro",
               title: "Intro",
               type: "string",
-              validation: (Rule) => Rule.required(),
             },
             {
               name: "items",

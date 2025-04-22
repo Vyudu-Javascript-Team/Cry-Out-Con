@@ -398,3 +398,20 @@ export async function getFAQs() {
     }
   `);
 }
+
+export async function getDiscounts() {
+  return client.fetch(`
+    *[_type == "discounts" && isVisible == true][0] {
+      intro,
+      discounts[] | order(order asc) {
+        title,
+        intro,
+        items[] {
+          name, 
+          code
+        }
+      },
+      isVisible
+    }
+  `);
+}
