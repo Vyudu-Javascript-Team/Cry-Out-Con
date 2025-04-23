@@ -14,6 +14,7 @@ export interface RegistrationPlan {
   title: string;
   price: number;
   features: RegistrationFeature[];
+  soldOut: boolean;
   order: number;
 }
 
@@ -126,7 +127,7 @@ const Registration = () => {
                 whileHover={{ opacity: 1 }}
               />
 
-              {plan.title === "VIP" && (
+              {plan.soldOut && (
                 <div className="absolute inset-0 flex items-center justify-center z-30">
                   <img 
                     src="/assets/cryout24/soldOut.png" 
@@ -182,7 +183,7 @@ const Registration = () => {
                           : "bg-gradient-to-r from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800 hover:cursor-pointer"
                   }`}
                 >
-                  {plan.title === "VIP" ? "SOLD OUT" : `CHOOSE ${plan.title}`}
+                  {plan.soldOut ? "SOLD OUT" : `CHOOSE ${plan.title}`}
                 </button>
               </div>
 

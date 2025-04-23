@@ -159,6 +159,7 @@ export async function getRegistrationData() {
         feature,
         included
       },
+      soldOut,
       order
     },
     regLink

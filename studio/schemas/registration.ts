@@ -62,7 +62,13 @@ const registration = {
                             ],
                             validation: Rule => Rule.required().min(1).error('At least one feature is required'),
                         }),
-
+                        defineField({
+                            name: 'soldOut',
+                            title: 'Sold Out?',
+                            type: 'boolean',
+                            initialValue: false,
+                            validation: Rule => Rule.required().error('Indicate if plan is sold out.'),
+                        }),
                         defineField({
                             name: 'order',
                             title: 'Display Order',
