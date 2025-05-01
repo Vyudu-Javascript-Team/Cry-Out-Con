@@ -85,7 +85,7 @@ const Agenda = () => {
                           <p className="text-sm md:text-md">{activity.title}</p>
                           {activity.note && (
                             <p className="mt-1 text-pink-400 text-sm font-medium">
-                              {activity.title === 'WORKSHOP: Money Management & Debt Reduction In Turbulent Times' ? (
+                              {activity.note === 'RSVP here https://bit.ly/3YSELo4, or in the App' ? (
                                 <>
                                   <a 
                                     href="https://bit.ly/3YSELo4" 
