@@ -88,18 +88,28 @@ const Agenda = () => {
                             const noteText = typeof activity.note === 'string' ? activity.note : 
                                            Array.isArray(activity.note) ? activity.note[0]?.children?.map((child: any) => child.text).join('') : '';
                             
-                            if (noteText?.includes('RSVP here')) {
+                            // Check for both formats of the RSVP text
+                            if (noteText?.includes('RSVP here') || 
+                                (activity.title === 'WORKSHOP: Money Management & Debt Reduction In Turbulent Times' && noteText?.includes('RSVP'))) {
+                              const parts = noteText.split('https://bit.ly/3YSELo4');
+                              const beforeUrl = parts[0];
+                              const afterUrl = parts[1] || '';
+                              
                               return (
                                 <p className="mt-1 text-pink-400 text-sm font-medium">
-                                  <a 
-                                    href="https://bit.ly/3YSELo4" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="underline hover:text-pink-500"
-                                  >
-                                    RSVP here
-                                  </a>
-                                  {' '}
+                                  {beforeUrl.includes('RSVP here') ? (
+                                    <>
+                                      <a 
+                                        href="https://bit.ly/3YSELo4" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="underline hover:text-pink-500"
+                                      >
+                                        RSVP here
+                                      </a>
+                                      {' '}
+                                    </>
+                                  ) : beforeUrl}
                                   <a 
                                     href="https://bit.ly/3YSELo4" 
                                     target="_blank" 
@@ -108,7 +118,7 @@ const Agenda = () => {
                                   >
                                     https://bit.ly/3YSELo4
                                   </a>
-                                  , or in the App
+                                  {afterUrl}
                                 </p>
                               );
                             }
