@@ -26,6 +26,7 @@ const Agenda = () => {
     const fetchAgenda = async () => {
       try {
         const data = await getAgenda();
+        console.log('Agenda Data:', JSON.stringify(data, null, 2));
         if(data){
           setAgendaData(data);
         }
@@ -82,10 +83,13 @@ const Agenda = () => {
                       {session.activities.map((activity, index) => (
                         <div key={index} className="text-gray-700">
                           <p className="text-sm md:text-md">{activity.title}</p>
-                          {activity.note && (
-                            <p className="mt-1 text-pink-400 text-sm font-medium">
-                              {activity.note === 'RSVP here https://bit.ly/3YSELo4, or in the App' ? (
-                                <>
+                          {activity.note && (() => {
+                            const noteText = activity.note[0]?.children?.map((child: any) => child.text).join('');
+                            console.log('Note Text:', noteText);
+                            
+                            if (noteText?.includes('RSVP here')) {
+                              return (
+                                <p className="mt-1 text-pink-400 text-sm font-medium">
                                   <a 
                                     href="https://bit.ly/3YSELo4" 
                                     target="_blank" 
@@ -104,12 +108,16 @@ const Agenda = () => {
                                     https://bit.ly/3YSELo4
                                   </a>
                                   , or in the App
-                                </>
-                              ) : (
-                                activity.note
-                              )}
-                            </p>
-                          )}
+                                </p>
+                              );
+                            }
+                            
+                            return (
+                              <p className="mt-1 text-pink-400 text-sm font-medium">
+                                {noteText}
+                              </p>
+                            );
+                          })()}
                         </div>
                       ))}
                     </div>

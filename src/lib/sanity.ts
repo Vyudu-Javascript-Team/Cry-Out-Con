@@ -177,7 +177,19 @@ export async function getAgenda() {
           time,
           activities[] {
             title,
-            note
+            note[] {
+              ...,
+              _type == "block" => {
+                ...,
+                children[] {
+                  ...,
+                  _type == "span" => {
+                    ...,
+                    text
+                  }
+                }
+              }
+            }
           }
         }
       }
