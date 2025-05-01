@@ -85,31 +85,22 @@ const Agenda = () => {
                           <p className="text-sm md:text-md">{activity.title}</p>
                           {activity.note && (() => {
                             console.log('Activity Note:', activity.note);
-                            const noteText = typeof activity.note === 'string' ? activity.note : 
-                                           Array.isArray(activity.note) ? activity.note[0]?.children?.map((child: any) => child.text).join('') : '';
+                            let noteText = typeof activity.note === 'string' ? activity.note : 
+                                          Array.isArray(activity.note) ? activity.note[0]?.children?.map((child: any) => child.text).join('') : '';
                             
-                            // Check for both formats of the RSVP text
-                            if (noteText?.includes('RSVP here') || 
-                                (activity.title === 'WORKSHOP: Money Management & Debt Reduction In Turbulent Times' && noteText?.includes('RSVP'))) {
-                              const parts = noteText.split('https://bit.ly/3YSELo4');
-                              const beforeUrl = parts[0];
-                              const afterUrl = parts[1] || '';
-                              
+                            // For the specific workshop session, force the note text
+                            if (activity.title === 'WORKSHOP: Money Management & Debt Reduction In Turbulent Times') {
                               return (
                                 <p className="mt-1 text-pink-400 text-sm font-medium">
-                                  {beforeUrl.includes('RSVP here') ? (
-                                    <>
-                                      <a 
-                                        href="https://bit.ly/3YSELo4" 
-                                        target="_blank" 
-                                        rel="noopener noreferrer"
-                                        className="underline hover:text-pink-500"
-                                      >
-                                        RSVP here
-                                      </a>
-                                      {' '}
-                                    </>
-                                  ) : beforeUrl}
+                                  <a 
+                                    href="https://bit.ly/3YSELo4" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="underline hover:text-pink-500"
+                                  >
+                                    RSVP here
+                                  </a>
+                                  {' '}
                                   <a 
                                     href="https://bit.ly/3YSELo4" 
                                     target="_blank" 
@@ -118,11 +109,38 @@ const Agenda = () => {
                                   >
                                     https://bit.ly/3YSELo4
                                   </a>
-                                  {afterUrl}
+                                  , or in the App
                                 </p>
                               );
                             }
                             
+                            // For other notes that contain RSVP
+                            if (noteText?.includes('RSVP here')) {
+                              return (
+                                <p className="mt-1 text-pink-400 text-sm font-medium">
+                                  <a 
+                                    href="https://bit.ly/3YSELo4" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="underline hover:text-pink-500"
+                                  >
+                                    RSVP here
+                                  </a>
+                                  {' '}
+                                  <a 
+                                    href="https://bit.ly/3YSELo4" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="underline hover:text-pink-500"
+                                  >
+                                    https://bit.ly/3YSELo4
+                                  </a>
+                                  , or in the App
+                                </p>
+                              );
+                            }
+                            
+                            // For all other notes
                             return (
                               <p className="mt-1 text-pink-400 text-sm font-medium">
                                 {noteText}
