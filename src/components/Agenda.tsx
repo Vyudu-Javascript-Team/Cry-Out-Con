@@ -83,13 +83,10 @@ const Agenda = () => {
                       {session.activities.map((activity, index) => (
                         <div key={index} className="text-gray-700">
                           <p className="text-sm md:text-md">{activity.title}</p>
-                          {activity.note && (() => {
-                            const noteText = activity.note[0]?.children?.map((child: any) => child.text).join('');
-                            console.log('Note Text:', noteText);
-                            
-                            if (noteText?.includes('RSVP here')) {
-                              return (
-                                <p className="mt-1 text-pink-400 text-sm font-medium">
+                          {activity.note && (
+                            <p className="mt-1 text-pink-400 text-sm font-medium">
+                              {activity.title === 'WORKSHOP: Money Management & Debt Reduction In Turbulent Times' ? (
+                                <>
                                   <a 
                                     href="https://bit.ly/3YSELo4" 
                                     target="_blank" 
@@ -108,16 +105,12 @@ const Agenda = () => {
                                     https://bit.ly/3YSELo4
                                   </a>
                                   , or in the App
-                                </p>
-                              );
-                            }
-                            
-                            return (
-                              <p className="mt-1 text-pink-400 text-sm font-medium">
-                                {noteText}
-                              </p>
-                            );
-                          })()}
+                                </>
+                              ) : (
+                                activity.note
+                              )}
+                            </p>
+                          )}
                         </div>
                       ))}
                     </div>
