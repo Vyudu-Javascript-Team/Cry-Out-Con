@@ -9,7 +9,7 @@ interface AgendaDay {
     time: string;
     activities: {
       title: string;
-      note?: string;
+      note?: any;
     }[];
   }[];
 }
@@ -84,7 +84,22 @@ const Agenda = () => {
                           <p className="text-sm md:text-md">{activity.title}</p>
                           {activity.note && (
                             <p className="mt-1 text-pink-400 text-sm font-medium">
-                              {activity.note}
+                              {activity.note.includes('https://bit.ly/3YSELo4') ? (
+                                <>
+                                  RSVP here{' '}
+                                  <a 
+                                    href="https://bit.ly/3YSELo4" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="underline hover:text-pink-500"
+                                  >
+                                    https://bit.ly/3YSELo4
+                                  </a>
+                                  , or in the App
+                                </>
+                              ) : (
+                                activity.note
+                              )}
                             </p>
                           )}
                         </div>

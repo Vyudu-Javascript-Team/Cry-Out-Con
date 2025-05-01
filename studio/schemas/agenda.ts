@@ -53,7 +53,8 @@ export default {
                               {
                                 name: 'note',
                                 title: 'Additional Note',
-                                type: 'string'
+                                type: 'array',
+                                of: [{type: 'block'}]
                               }
                             ]
                           }
