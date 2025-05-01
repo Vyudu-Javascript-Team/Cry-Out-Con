@@ -2,6 +2,7 @@ import { Suspense, useEffect, useState } from "react";
 import bgImage from "/assets/backgroundimages/IMG_6543.jpg";
 import LazyImage from "./LazyImage";
 import SectionTitle from "./SectionTitle";
+import { PortableText } from "@portabletext/react";
 import { getAgenda } from "../lib/sanity";
 interface AgendaDay {
   day: string;
@@ -84,46 +85,25 @@ const Agenda = () => {
                           <p className="text-sm md:text-md">{activity.title}</p>
                           {activity.note && (
                             <p className="mt-1 text-pink-400 text-sm font-medium">
-                              {activity.note.split(' ').map((word: string, i: number, arr: string[]) => {
-                                if (word === 'RSVP' && arr[i + 1] === 'here') {
-                                  return (
-                                    <span key={i}>
-                                      <a 
-                                        href="https://bit.ly/3YSELo4" 
-                                        target="_blank" 
-                                        rel="noopener noreferrer"
-                                        className="underline hover:text-pink-500"
-                                      >
-                                        RSVP here
-                                      </a>
-                                      {' '}
-                                    </span>
-                                  );
-                                } else if (word === 'here') {
-                                  return null; // Skip 'here' as it's handled above
-                                } else if (word === 'https://bit.ly/3YSELo4,') {
-                                  return (
-                                    <span key={i}>
-                                      <a 
-                                        href="https://bit.ly/3YSELo4" 
-                                        target="_blank" 
-                                        rel="noopener noreferrer"
-                                        className="underline hover:text-pink-500"
-                                      >
-                                        {word.replace(',', '')}
-                                      </a>
-                                      ,{' '}
-                                    </span>
-                                  );
-                                } else {
-                                  return (
-                                    <span key={i}>
-                                      {word}
-                                      {i < arr.length - 1 ? ' ' : ''}
-                                    </span>
-                                  );
-                                }
-                              })}
+                              <PortableText
+                                value={activity.note}
+                                components={{
+                                  marks: {
+                                    link: ({value, children}) => {
+                                      return (
+                                        <a
+                                          href={value?.href || 'https://bit.ly/3YSELo4'}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="underline hover:text-pink-500"
+                                        >
+                                          {children}
+                                        </a>
+                                      )
+                                    }
+                                  }
+                                }}
+                              />
                             </p>
                           )}
                         </div>
