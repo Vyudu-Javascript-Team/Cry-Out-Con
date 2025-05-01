@@ -4,7 +4,7 @@ import imageUrlBuilder from '@sanity/image-url'
 export const client = createClient({
   projectId: 'l96yh15e',
   dataset: 'production',
-  apiVersion: '2021-10-21',
+  apiVersion: '2023-05-01', // Update to latest API version
   useCdn: false, // Disable CDN caching
   perspective: 'published' // Always get the latest published content
 })
@@ -169,32 +169,20 @@ export async function getRegistrationData() {
 
 export async function getAgenda() {
   return client.fetch(`
-    *[_type == "agenda"][0] {
+    *[_type == "agenda" && !(_id in path("drafts.**"))][0] {
       announcement,
       days[] {
         day,
-        sessions[] {
+        "sessions": sessions[] | order(time asc) {
           time,
-          activities[] {
+          "activities": activities[] {
             title,
-            note[] {
-              ...,
-              _type == "block" => {
-                ...,
-                children[] {
-                  ...,
-                  _type == "span" => {
-                    ...,
-                    text
-                  }
-                }
-              }
-            }
+            "note": coalesce(note, null)
           }
         }
-      }
+      } | order(day asc)
     }
-  `);
+  `, {}, { cache: 'no-store' });
 }
 
 export async function getSliderImages() {
