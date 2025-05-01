@@ -5,7 +5,8 @@ export const client = createClient({
   projectId: 'l96yh15e',
   dataset: 'production',
   apiVersion: '2021-10-21',
-  useCdn: false // Disable caching
+  useCdn: false, // Disable CDN caching
+  perspective: 'published' // Always get the latest published content
 })
 
 
