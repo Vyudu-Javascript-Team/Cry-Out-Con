@@ -38,6 +38,22 @@ const Agenda = () => {
     fetchAgenda();
   }, []);
 
+  // Sort days chronologically
+  const getSortedDays = (days: AgendaDay[]) => {
+    return [...days].sort((a, b) => {
+      // Extract dates from day titles
+      const getDayNumber = (dayString: string) => {
+        const match = dayString.match(/(\w+) May (\d+)/);
+        if (match && match[2]) {
+          return parseInt(match[2]);
+        }
+        return 0;
+      };
+      
+      return getDayNumber(a.day) - getDayNumber(b.day);
+    });
+  };
+
   return (
     <section id="agenda" className="py-16 relative overflow-hidden">
       <div className="absolute inset-0">
@@ -67,7 +83,7 @@ const Agenda = () => {
 
        
           <div className="bg-white w-full max-w-3xl mx-auto rounded-2xl border border-gray-200 shadow-lg p-4 md:p-6">
-            {agendaData && agendaData.days.map((day) => (
+            {agendaData && getSortedDays(agendaData.days).map((day) => (
               <div key={day.day} className="mb-4">
                 <h3 className="text-xl font-semibold text-purple-600 mb-2">
                   {day.day}
