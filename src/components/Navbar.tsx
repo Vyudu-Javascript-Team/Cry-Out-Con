@@ -11,6 +11,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useLoading } from "./contexts/LoadingContext";
 import { getHeaderNavigation } from "../lib/sanity";
 
+// Flag to control whether to use Sanity data or 2026 data
+// Set to true to always use 2026 data, false to attempt to fetch from Sanity first
+const use2026OfflineData = true;
+
 interface HeaderNavigationData {
   logo: {
     asset: {
@@ -30,6 +34,27 @@ interface HeaderNavigationData {
     order: number;
   }[];
 }
+
+// Default 2026 navigation data
+const default2026Navigation: HeaderNavigationData = {
+  logo: {
+    asset: {
+      url: logo
+    },
+    alt: "CryOut Con 2026 Logo"
+  },
+  navigationLinks: [
+    { title: "HOME", path: "", toSection: false, order: 1 },
+    { title: "KEYNOTES", path: "keynotes", toSection: true, order: 2 },
+    { title: "REGISTRATION", path: "registration", toSection: true, order: 3 },
+    { title: "AGENDA", path: "agenda", toSection: true, order: 4 },
+    { title: "TRAVEL", path: "travel", toSection: false, order: 5 },
+    { title: "FAQ", path: "faq", toSection: false, order: 6 }
+  ],
+  navigationButtons: [
+    { title: "COMING SOON", url: "#", order: 1 }
+  ]
+};
 
 export const Navbar = () => {
   const [headerNavigation, setHeaderNavigation] =
@@ -52,15 +77,34 @@ export const Navbar = () => {
   useEffect(() => {
     const fetchHeaderNavigation = async () => {
       try {
+        // If use2026OfflineData is true, skip Sanity fetch and use default data
+        if (use2026OfflineData) {
+          setHeaderNavigation(default2026Navigation);
+          return;
+        }
+
+        // Otherwise try to fetch from Sanity
         const data = await getHeaderNavigation();
 
         if (data) {
+          // Add "2026" to the first navigation button if it exists and is for registration
+          if (data.navigationButtons && data.navigationButtons.length > 0) {
+            const firstButton = data.navigationButtons[0];
+            if (firstButton.title.includes("REGISTER")) {
+              firstButton.title = "COMING SOON";
+              firstButton.url = "#";
+            }
+          }
           setHeaderNavigation(data);
         } else {
           console.error("No header navigation available");
+          // Use default 2026 navigation data if no data from Sanity
+          setHeaderNavigation(default2026Navigation);
         }
       } catch (error) {
         console.error("Error fetching header navigation", error);
+        // Use default 2026 navigation data on error
+        setHeaderNavigation(default2026Navigation);
       }
     };
 
@@ -93,6 +137,9 @@ export const Navbar = () => {
   };
 
   const borderOpacity = useTransform(scrollY, [0, 100], [0, 0.1]);
+
+  // Use default navigation if headerNavigation is null
+  const displayNavigation = headerNavigation || default2026Navigation;
 
   const NavLink = ({
     to,
@@ -147,10 +194,10 @@ export const Navbar = () => {
   };
 
   function renderNavigationLinks(
-    headerNavigation: HeaderNavigationData,
+    navigation: HeaderNavigationData,
     isMobile: boolean = false
   ) {
-    const { navigationLinks } = headerNavigation;
+    const { navigationLinks } = navigation;
     return (
       <>
         {/* Dynamic navigation links */}
@@ -209,15 +256,16 @@ export const Navbar = () => {
   }
 
   function renderNavigationButtons(
-    headerNavigation: HeaderNavigationData,
+    navigation: HeaderNavigationData,
     isMobile: boolean = false
   ) {
-    const { navigationButtons } = headerNavigation;
+    const { navigationButtons } = navigation;
 
     return (
       <>
         {navigationButtons.map((button) => {
           const title = button.title.trim().toUpperCase();
+          const isComingSoon = title.includes("COMING SOON");
 
           return isMobile ? (
             <motion.a
@@ -225,12 +273,15 @@ export const Navbar = () => {
               href={button.url}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => {
+              whileHover={{ scale: isComingSoon ? 1 : 1.05 }}
+              whileTap={{ scale: isComingSoon ? 1 : 0.95 }}
+              onClick={(e) => {
+                if (isComingSoon) e.preventDefault();
                 setIsMobileMenuOpen(false);
               }}
-              className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded font-semibold"
+              className={`px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded font-semibold ${
+                isComingSoon ? "opacity-70 cursor-not-allowed" : ""
+              }`}
             >
               {title}
             </motion.a>
@@ -242,9 +293,14 @@ export const Navbar = () => {
               rel="noopener noreferrer"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="md:px-4 md:py-2 px-3 py-1.5 text-sm md:text-base xl:text-lg bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-white/25"
+              whileHover={{ scale: isComingSoon ? 1 : 1.05 }}
+              whileTap={{ scale: isComingSoon ? 1 : 0.95 }}
+              onClick={(e) => {
+                if (isComingSoon) e.preventDefault();
+              }}
+              className={`md:px-4 md:py-2 px-3 py-1.5 text-sm md:text-base xl:text-lg bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-lg hover:shadow-white/25 ${
+                isComingSoon ? "opacity-70 cursor-not-allowed" : ""
+              }`}
             >
               {title}
             </motion.a>
@@ -263,19 +319,19 @@ export const Navbar = () => {
       className="absolute top-full left-0 right-0 bg-primary p-4 border-t border-white/10"
     >
       <div className="flex flex-col items-center space-y-6 py-4">
-        {headerNavigation && renderNavigationLinks(headerNavigation, true)}
+        {displayNavigation && renderNavigationLinks(displayNavigation, true)}
         {/* <NavLink to="#">Sponsors</NavLink> */}
-        {headerNavigation && renderNavigationButtons(headerNavigation, true)}
+        {displayNavigation && renderNavigationButtons(displayNavigation, true)}
       </div>
     </motion.div>
   );
 
-  if (!headerNavigation) {
+  if (!displayNavigation) {
     return null;
   }
 
   return (
-    headerNavigation && (
+    displayNavigation && (
       <motion.header
         style={{
           height: headerHeight,
@@ -297,8 +353,8 @@ export const Navbar = () => {
             className="flex-shrink-0 hover:cursor-pointer"
           >
             <motion.img
-              src={headerNavigation.logo.asset.url}
-              alt={headerNavigation.logo.alt}
+              src={displayNavigation.logo.asset.url}
+              alt={displayNavigation.logo.alt}
               loading="lazy"
               className="h-12 sm:h-16 md:h-20 w-auto object-contain"
             />
@@ -306,12 +362,12 @@ export const Navbar = () => {
 
           <div className="hidden xl:flex items-center justify-center flex-grow px-4">
             <div className="flex items-center justify-center space-x-3 xl:space-x-6 2xl:space-x-8 text-sm xl:text-base 2xl:text-lg">
-              {renderNavigationLinks(headerNavigation)}
+              {renderNavigationLinks(displayNavigation)}
             </div>
           </div>
 
           <div className="hidden xl:flex justify-end flex-shrink-0 ml-4">
-            {renderNavigationButtons(headerNavigation)}
+            {renderNavigationButtons(displayNavigation)}
           </div>
 
           <button

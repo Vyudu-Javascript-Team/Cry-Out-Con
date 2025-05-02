@@ -5,6 +5,10 @@ import SpotlightEffect from "./SpotlightEffect";
 import SectionTitle from "./SectionTitle";
 import { getRegistrationData } from "../lib/sanity";
 
+// Flag to control whether to use Sanity data or 2026 data
+// Set to true to always use 2026 data, false to attempt to fetch from Sanity first
+const use2026OfflineData = true;
+
 export interface RegistrationFeature {
   feature: string;
   included: boolean;
@@ -12,7 +16,7 @@ export interface RegistrationFeature {
 
 export interface RegistrationPlan {
   title: string;
-  price: number;
+  price: number | string;
   features: RegistrationFeature[];
   soldOut: boolean;
   order: number;
@@ -25,6 +29,54 @@ export interface RegistrationData {
   regLink: string;
 }
 
+// Default 2026 registration data
+const default2026Data: RegistrationData = {
+  sectionTitle: "REGISTRATION",
+  sectionSubTitle: "Registration details for CryOut Con 2026 will be available soon.",
+  plans: [
+    {
+      title: "VIP",
+      price: "TBD",
+      features: [
+        { feature: "General conference access", included: true },
+        { feature: "Reserved VIP seating", included: true },
+        { feature: "Exclusive VIP reception", included: true },
+        { feature: "VIP merchandise bundle", included: true },
+        { feature: "Meet & greet with speakers", included: true }
+      ],
+      soldOut: false,
+      order: 1
+    },
+    {
+      title: "PREMIER",
+      price: "Coming Soon",
+      features: [
+        { feature: "General conference access", included: true },
+        { feature: "Premier seating section", included: true },
+        { feature: "Premier attendee gift", included: true },
+        { feature: "Reserved seating at main sessions", included: true },
+        { feature: "Premier check-in line", included: true }
+      ],
+      soldOut: false,
+      order: 2
+    },
+    {
+      title: "GENERAL",
+      price: "Coming Soon",
+      features: [
+        { feature: "General conference access", included: true },
+        { feature: "General seating", included: true },
+        { feature: "Conference materials", included: true },
+        { feature: "Access to all sessions", included: true },
+        { feature: "Access to expo area", included: true }
+      ],
+      soldOut: false,
+      order: 3
+    }
+  ],
+  regLink: "#"
+};
+
 const Registration = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
@@ -35,21 +87,36 @@ const Registration = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // If use2026OfflineData is true, skip Sanity fetch and use default data
+        if (use2026OfflineData) {
+          setRegistrationData(default2026Data);
+          return;
+        }
+
+        // Otherwise try to fetch from Sanity
         const data = await getRegistrationData();
         if (data) {
           setRegistrationData(data);
+        } else {
+          // Use default 2026 data if no data from Sanity
+          setRegistrationData(default2026Data);
         }
       } catch (error) {
         console.error("Error:", error);
+        // Use default 2026 data on error
+        setRegistrationData(default2026Data);
       }
     };
 
     fetchData();
   }, []);
 
+  // Use default data if no registration data is available
+  const displayData = registrationData || default2026Data;
+
   const handleRegistration = () => {
-    if (registrationData?.regLink) {
-      window.open(registrationData.regLink, "_blank");
+    if (displayData.regLink && displayData.regLink !== '#') {
+      window.open(displayData.regLink, "_blank");
     }
   };
 
@@ -102,13 +169,13 @@ const Registration = () => {
 
       <div className=" mx-auto md:max-w-6xl px-4 relative z-10">
         <SectionTitle
-          title="REGISTRATION"
-          subtitle="Choose the perfect plan for your conference experience."
+          title={displayData.sectionTitle}
+          subtitle={displayData.sectionSubTitle}
           gradient="from-pink-500 via-purple-500 to-blue-500"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-7 max-w-5xl mx-auto">
-          {registrationData?.plans.map((plan) => (
+          {displayData.plans.map((plan) => (
             <motion.div
               key={plan.title}
               className={`relative p-4 rounded-xl backdrop-blur-sm border transition-all duration-500 ${
@@ -162,8 +229,14 @@ const Registration = () => {
                         : "bg-gradient-to-r from-gray-700 to-gray-900"
                   }`}
                 >
-                  <span className="text-5xl">$</span>
-                  {plan.price}
+                  {typeof plan.price === 'number' ? (
+                    <>
+                      <span className="text-5xl">$</span>
+                      {plan.price}
+                    </>
+                  ) : (
+                    plan.price
+                  )}
                 </div>
               </div>
 
@@ -172,7 +245,7 @@ const Registration = () => {
                   onClick={() => handlePlanRegistration(plan.title)}
                   type="button"
                   className={`w-full mb-2 py-4 rounded font-semibold transition-all duration-300 ${
-                    plan.title === "VIP"
+                    plan.title === "VIP" || typeof plan.price === 'string'
                       ? "bg-gray-500 cursor-not-allowed opacity-70"
                       : plan.title === "VIP" ||
                         plan.title === "Single Day Pass (FRIDAY)" ||
@@ -183,7 +256,7 @@ const Registration = () => {
                           : "bg-gradient-to-r from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800 hover:cursor-pointer"
                   }`}
                 >
-                  {plan.soldOut ? "SOLD OUT" : `CHOOSE ${plan.title}`}
+                  {plan.soldOut ? "SOLD OUT" : typeof plan.price === 'string' ? "COMING SOON" : `CHOOSE ${plan.title}`}
                 </button>
               </div>
 
