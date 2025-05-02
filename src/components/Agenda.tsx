@@ -26,8 +26,8 @@ const Agenda = () => {
     const fetchAgenda = async () => {
       try {
         const data = await getAgenda();
-        console.log('Agenda Data:', JSON.stringify(data, null, 2));
-        if(data){
+        console.log("Agenda Data:", JSON.stringify(data, null, 2));
+        if (data) {
           setAgendaData(data);
         }
       } catch (error) {
@@ -49,7 +49,7 @@ const Agenda = () => {
         }
         return 0;
       };
-      
+
       return getDayNumber(a.day) - getDayNumber(b.day);
     });
   };
@@ -81,9 +81,9 @@ const Agenda = () => {
           gradient="from-blue-400 via-purple-400 to-pink-400"
         />
 
-       
-          <div className="bg-white w-full max-w-3xl mx-auto rounded-2xl border border-gray-200 shadow-lg p-4 md:p-6">
-            {agendaData && getSortedDays(agendaData.days).map((day) => (
+        <div className="bg-white w-full max-w-3xl mx-auto rounded-2xl border border-gray-200 shadow-lg p-4 md:p-6">
+          {agendaData &&
+            getSortedDays(agendaData.days).map((day) => (
               <div key={day.day} className="mb-4">
                 <h3 className="text-xl font-semibold text-purple-600 mb-2">
                   {day.day}
@@ -99,70 +99,78 @@ const Agenda = () => {
                       {session.activities.map((activity, index) => (
                         <div key={index} className="text-gray-700">
                           <p className="text-sm md:text-md">{activity.title}</p>
-                          {activity.note && (() => {
-                            console.log('Activity Note:', activity.note);
-                            let noteText = typeof activity.note === 'string' ? activity.note : 
-                                          Array.isArray(activity.note) ? activity.note[0]?.children?.map((child: any) => child.text).join('') : '';
-                            
-                            // For the specific workshop session, force the note text
-                            if (activity.title === 'WORKSHOP: Money Management & Debt Reduction In Turbulent Times') {
+                          {activity.note &&
+                            (() => {
+                              console.log("Activity Note:", activity.note);
+                              let noteText =
+                                typeof activity.note === "string"
+                                  ? activity.note
+                                  : Array.isArray(activity.note)
+                                    ? activity.note[0]?.children
+                                        ?.map((child: any) => child.text)
+                                        .join("")
+                                    : "";
+
+                              // For the specific workshop session, force the note text
+                              if (
+                                activity.title ===
+                                "WORKSHOP: Money Management & Debt Reduction In Turbulent Times"
+                              ) {
+                                return (
+                                  <p className="mt-1 text-pink-400 text-sm font-medium">
+                                    <a
+                                      href="https://bit.ly/3YSELo4"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="underline hover:text-pink-500"
+                                    >
+                                      RSVP here
+                                    </a>{" "}
+                                    <a
+                                      href="https://bit.ly/3YSELo4"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="underline hover:text-pink-500"
+                                    >
+                                      https://bit.ly/3YSELo4
+                                    </a>
+                                    , or in the App
+                                  </p>
+                                );
+                              }
+
+                              // For other notes that contain RSVP
+                              if (noteText?.includes("RSVP here")) {
+                                return (
+                                  <p className="mt-1 text-pink-400 text-sm font-medium">
+                                    <a
+                                      href="https://bit.ly/3YSELo4"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="underline hover:text-pink-500"
+                                    >
+                                      RSVP here
+                                    </a>{" "}
+                                    <a
+                                      href="https://bit.ly/3YSELo4"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="underline hover:text-pink-500"
+                                    >
+                                      https://bit.ly/3YSELo4
+                                    </a>
+                                    , or in the App
+                                  </p>
+                                );
+                              }
+
+                              // For all other notes
                               return (
                                 <p className="mt-1 text-pink-400 text-sm font-medium">
-                                  <a 
-                                    href="https://bit.ly/3YSELo4" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="underline hover:text-pink-500"
-                                  >
-                                    RSVP here
-                                  </a>
-                                  {' '}
-                                  <a 
-                                    href="https://bit.ly/3YSELo4" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="underline hover:text-pink-500"
-                                  >
-                                    https://bit.ly/3YSELo4
-                                  </a>
-                                  , or in the App
+                                  {noteText}
                                 </p>
                               );
-                            }
-                            
-                            // For other notes that contain RSVP
-                            if (noteText?.includes('RSVP here')) {
-                              return (
-                                <p className="mt-1 text-pink-400 text-sm font-medium">
-                                  <a 
-                                    href="https://bit.ly/3YSELo4" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="underline hover:text-pink-500"
-                                  >
-                                    RSVP here
-                                  </a>
-                                  {' '}
-                                  <a 
-                                    href="https://bit.ly/3YSELo4" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="underline hover:text-pink-500"
-                                  >
-                                    https://bit.ly/3YSELo4
-                                  </a>
-                                  , or in the App
-                                </p>
-                              );
-                            }
-                            
-                            // For all other notes
-                            return (
-                              <p className="mt-1 text-pink-400 text-sm font-medium">
-                                {noteText}
-                              </p>
-                            );
-                          })()}
+                            })()}
                         </div>
                       ))}
                     </div>
@@ -170,7 +178,7 @@ const Agenda = () => {
                 ))}
               </div>
             ))}
-          </div>
+        </div>
       </div>
     </section>
   );

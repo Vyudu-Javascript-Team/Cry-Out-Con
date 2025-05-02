@@ -71,18 +71,18 @@ function Home() {
         <div id="conference">
           <Conference />
         </div>
-        <div id="keynotes">
+        {/* <div id="keynotes">
           <Keynotes />
-        </div>
+        </div> */}
         <div id="registration">
           <Registration />
         </div>
-        <div id="agenda">
+        {/* <div id="agenda">
           <Agenda />
         </div>
         <div id="news">
           <News />
-        </div>
+        </div> */}
         <div id="newsletter">
           <Newsletter />
         </div>

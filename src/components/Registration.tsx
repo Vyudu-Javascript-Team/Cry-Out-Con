@@ -32,49 +32,50 @@ export interface RegistrationData {
 // Default 2026 registration data
 const default2026Data: RegistrationData = {
   sectionTitle: "REGISTRATION",
-  sectionSubTitle: "Registration details for CryOut Con 2026 will be available soon.",
+  sectionSubTitle:
+    "Registration details for CryOut Con 2026 will be available soon.",
   plans: [
     {
       title: "VIP",
-      price: "TBD",
+      price: "$299.99",
       features: [
         { feature: "General conference access", included: true },
         { feature: "Reserved VIP seating", included: true },
         { feature: "Exclusive VIP reception", included: true },
         { feature: "VIP merchandise bundle", included: true },
-        { feature: "Meet & greet with speakers", included: true }
+        { feature: "Meet & greet with speakers", included: true },
       ],
       soldOut: false,
-      order: 1
+      order: 1,
     },
     {
       title: "PREMIER",
-      price: "Coming Soon",
+      price: "$199.99",
       features: [
         { feature: "General conference access", included: true },
         { feature: "Premier seating section", included: true },
         { feature: "Premier attendee gift", included: true },
         { feature: "Reserved seating at main sessions", included: true },
-        { feature: "Premier check-in line", included: true }
+        { feature: "Premier check-in line", included: true },
       ],
       soldOut: false,
-      order: 2
+      order: 2,
     },
     {
       title: "GENERAL",
-      price: "Coming Soon",
+      price: "$99.99",
       features: [
         { feature: "General conference access", included: true },
         { feature: "General seating", included: true },
         { feature: "Conference materials", included: true },
         { feature: "Access to all sessions", included: true },
-        { feature: "Access to expo area", included: true }
+        { feature: "Access to expo area", included: true },
       ],
       soldOut: false,
-      order: 3
-    }
+      order: 3,
+    },
   ],
-  regLink: "#"
+  regLink: "#",
 };
 
 const Registration = () => {
@@ -115,7 +116,7 @@ const Registration = () => {
   const displayData = registrationData || default2026Data;
 
   const handleRegistration = () => {
-    if (displayData.regLink && displayData.regLink !== '#') {
+    if (displayData.regLink && displayData.regLink !== "#") {
       window.open(displayData.regLink, "_blank");
     }
   };
@@ -196,9 +197,9 @@ const Registration = () => {
 
               {plan.soldOut && (
                 <div className="absolute inset-0 flex items-center justify-center z-30">
-                  <img 
-                    src="/assets/cryout24/soldOut.png" 
-                    alt="Sold Out" 
+                  <img
+                    src="/assets/cryout24/soldOut.png"
+                    alt="Sold Out"
                     className="w-full h-auto max-w-[180px] transform scale-150"
                   />
                 </div>
@@ -229,7 +230,7 @@ const Registration = () => {
                         : "bg-gradient-to-r from-gray-700 to-gray-900"
                   }`}
                 >
-                  {typeof plan.price === 'number' ? (
+                  {typeof plan.price === "number" ? (
                     <>
                       <span className="text-5xl">$</span>
                       {plan.price}
@@ -245,18 +246,22 @@ const Registration = () => {
                   onClick={() => handlePlanRegistration(plan.title)}
                   type="button"
                   className={`w-full mb-2 py-4 rounded font-semibold transition-all duration-300 ${
-                    plan.title === "VIP" || typeof plan.price === 'string'
+                    plan.title === "VIP" || typeof plan.price === "string"
                       ? "bg-gray-500 cursor-not-allowed opacity-70"
                       : plan.title === "VIP" ||
-                        plan.title === "Single Day Pass (FRIDAY)" ||
-                        plan.title === "Single Day Pass (SATURDAY)"
+                          plan.title === "Single Day Pass (FRIDAY)" ||
+                          plan.title === "Single Day Pass (SATURDAY)"
                         ? "bg-gradient-to-r from-purple-400 to-purple-600 hover:from-purple-500 hover:to-purple-700 hover:cursor-pointer"
                         : plan.title === "PREMIER"
                           ? "bg-gradient-to-r from-fuchsia-400 to-fuchsia-600 hover:from-fuchsia-500 hover:to-fuchsia-700 hover:cursor-pointer"
                           : "bg-gradient-to-r from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800 hover:cursor-pointer"
                   }`}
                 >
-                  {plan.soldOut ? "SOLD OUT" : typeof plan.price === 'string' ? "COMING SOON" : `CHOOSE ${plan.title}`}
+                  {plan.soldOut
+                    ? "SOLD OUT"
+                    : typeof plan.price === "string"
+                      ? "COMING SOON"
+                      : `CHOOSE ${plan.title}`}
                 </button>
               </div>
 

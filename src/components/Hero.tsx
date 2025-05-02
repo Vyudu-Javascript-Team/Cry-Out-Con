@@ -32,24 +32,25 @@ interface HeroData {
 
 // Default 2026 event data to use while loading or if Sanity data isn't available
 const default2026Data: HeroData = {
-  _id: 'default-2026',
-  description: "Join us for CryOut Con 2026 as we explore our theme of Collaboration – \"Help Is On the Way\". Connect with fellow believers, engage with inspiring speakers, and experience powerful worship in this life-changing gathering.",
+  _id: "default-2026",
+  description:
+    'Join us for CryOut Con 2026 as we explore our theme of Collaboration – "Help Is On the Way". Connect with fellow believers, engage with inspiring speakers, and experience powerful worship in this life-changing gathering.',
   eventDate: {
-    startDate: '2026-04-23T00:00:00Z',
-    endDate: '2026-04-25T00:00:00Z'
+    startDate: "2026-04-24T00:00:00Z", // ! April 23rd - 25th, not sure why this is 24th in the code
+    endDate: "2026-04-26T00:00:00Z", // ! April 23rd - 25th, not sure why this is 24th in the code
   },
   venue: {
-    name: 'Mississippi Coliseum',
-    city: 'Jackson',
-    state: 'Mississippi'
+    name: "Mississippi Coliseum",
+    city: "Jackson",
+    state: "Mississippi",
   },
-  backgroundImage: '', // Will use existing image if no new one is provided
-  backgroundImageAlt: 'CryOut Con 2026 - Help Is On the Way',
+  backgroundImage: "", // Will use existing image if no new one is provided
+  backgroundImageAlt: "CryOut Con 2026 - Help Is On the Way",
   registrationButton: {
-    text: 'Registration Coming Soon',
-    url: '#'
+    text: "Registration Coming Soon",
+    url: "#",
   },
-  isVisible: true
+  isVisible: true,
 };
 
 export const Hero = () => {
@@ -99,7 +100,10 @@ export const Hero = () => {
   const displayData = heroData || default2026Data;
 
   const handleRegistration = () => {
-    if (displayData?.registrationButton.url && displayData.registrationButton.url !== '#') {
+    if (
+      displayData?.registrationButton.url &&
+      displayData.registrationButton.url !== "#"
+    ) {
       window.open(displayData.registrationButton.url, "_blank");
     }
   };
@@ -112,20 +116,20 @@ export const Hero = () => {
       {displayData && (
         <div className="">
           <div className="h-[50vh] md:h-screen w-full relative">
-          {displayData.backgroundImage && (
-            <LazyImage
-            priority={true}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 100vw"
-              src={displayData.backgroundImage}
-              alt={displayData.backgroundImageAlt}
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-              }}
-            />
-          )}
+            {displayData.backgroundImage && (
+              <LazyImage
+                priority={true}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 100vw"
+                src={displayData.backgroundImage}
+                alt={displayData.backgroundImageAlt}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                }}
+              />
+            )}
           </div>
 
           <div className="w-full mx-auto max-w-md md:top-[30%] md:transform px-4 py-8 md:absolute md:left-10 md:rounded-xl md:py-10 space-y-4 p-8 bg-fuchsia-500/30 backdrop-blur-md">
@@ -198,7 +202,6 @@ export const Hero = () => {
           </div>
         </div>
       )}
-
     </section>
   );
 };

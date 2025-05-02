@@ -39,21 +39,19 @@ interface HeaderNavigationData {
 const default2026Navigation: HeaderNavigationData = {
   logo: {
     asset: {
-      url: logo
+      url: logo,
     },
-    alt: "CryOut Con 2026 Logo"
+    alt: "CryOut Con 2026 Logo",
   },
   navigationLinks: [
     { title: "HOME", path: "", toSection: false, order: 1 },
-    { title: "KEYNOTES", path: "keynotes", toSection: true, order: 2 },
+    // { title: "KEYNOTES", path: "keynotes", toSection: true, order: 2 },
     { title: "REGISTRATION", path: "registration", toSection: true, order: 3 },
-    { title: "AGENDA", path: "agenda", toSection: true, order: 4 },
-    { title: "TRAVEL", path: "travel", toSection: false, order: 5 },
-    { title: "FAQ", path: "faq", toSection: false, order: 6 }
+    // { title: "AGENDA", path: "agenda", toSection: true, order: 4 },
+    // { title: "TRAVEL", path: "travel", toSection: false, order: 5 },
+    { title: "FAQ", path: "faq", toSection: false, order: 6 },
   ],
-  navigationButtons: [
-    { title: "COMING SOON", url: "#", order: 1 }
-  ]
+  navigationButtons: [{ title: "COMING SOON", url: "#", order: 1 }],
 };
 
 export const Navbar = () => {
@@ -215,7 +213,7 @@ export const Navbar = () => {
           const path = link.path.trim().toLowerCase();
 
           // Skip sponsors link if it exists in CMS to avoid duplication
-          if (path === 'sponsors') return null;
+          if (path === "sponsors") return null;
 
           let content = null;
 
@@ -248,9 +246,9 @@ export const Navbar = () => {
         })}
 
         {/* Static Sponsors link at the end */}
-        <NavLink to="/sponsors" key="sponsors">
+        {/* <NavLink to="/sponsors" key="sponsors">
           <span className="whitespace-nowrap">SPONSORS</span>
-        </NavLink>
+        </NavLink> */}
       </>
     );
   }
