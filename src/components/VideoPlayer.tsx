@@ -8,6 +8,7 @@ interface VideoPlayerProps {
 }
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
+  console.log('VideoPlayer received URL:', url);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -194,6 +195,15 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
         className="w-full h-full"
         muted={isMuted}
         playsInline
+        controls
+        autoPlay
+        preload="auto"
+        onError={(e) => {
+          console.error('Video error:', e.currentTarget.error);
+          console.log('Video source URL:', url);
+        }}
+        onLoadStart={() => console.log('Video load started')}
+        onCanPlay={() => console.log('Video can play')}
       />
       ) : (
         <iframe
