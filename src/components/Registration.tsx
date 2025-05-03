@@ -32,11 +32,11 @@ export interface RegistrationData {
 // Default 2026 registration data
 const default2026Data: RegistrationData = {
   sectionTitle: "REGISTRATION",
-  sectionSubTitle: "Registration details for CryOut Con 2026 will be available soon.",
+  sectionSubTitle: "Early Bird pricing for CryOut Con 2026. Register early to lock in these special rates!",
   plans: [
     {
       title: "VIP",
-      price: "TBD",
+      price: 299,
       features: [
         { feature: "General conference access", included: true },
         { feature: "Reserved VIP seating", included: true },
@@ -49,7 +49,7 @@ const default2026Data: RegistrationData = {
     },
     {
       title: "PREMIER",
-      price: "Coming Soon",
+      price: 199,
       features: [
         { feature: "General conference access", included: true },
         { feature: "Premier seating section", included: true },
@@ -62,7 +62,7 @@ const default2026Data: RegistrationData = {
     },
     {
       title: "GENERAL",
-      price: "Coming Soon",
+      price: 99,
       features: [
         { feature: "General conference access", included: true },
         { feature: "General seating", included: true },
@@ -194,15 +194,14 @@ const Registration = () => {
                 whileHover={{ opacity: 1 }}
               />
 
-              {plan.soldOut && (
-                <div className="absolute inset-0 flex items-center justify-center z-30">
-                  <img 
-                    src="/assets/cryout24/soldOut.png" 
-                    alt="Sold Out" 
-                    className="w-full h-auto max-w-[180px] transform scale-150"
-                  />
-                </div>
-              )}
+              {/* Always display sold out image for all plans */}
+              <div className="absolute inset-0 flex items-center justify-center z-30">
+                <img 
+                  src="/assets/cryout24/soldOut.png" 
+                  alt="Sold Out" 
+                  className="w-full h-auto max-w-[180px] transform scale-150"
+                />
+              </div>
 
               <div className="text-center mb-4">
                 <h3
