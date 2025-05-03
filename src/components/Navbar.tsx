@@ -51,7 +51,13 @@ const default2026Navigation: HeaderNavigationData = {
     // { title: "TRAVEL", path: "travel", toSection: false, order: 5 },
     { title: "FAQ", path: "faq", toSection: false, order: 6 },
   ],
-  navigationButtons: [{ title: "COMING SOON", url: "#", order: 1 }],
+  navigationButtons: [
+    {
+      title: "Register Now",
+      url: "https://brushfire.com/tlhc/cryout25/578593/register",
+      order: 1,
+    },
+  ],
 };
 
 export const Navbar = () => {
@@ -263,7 +269,7 @@ export const Navbar = () => {
       <>
         {navigationButtons.map((button) => {
           const title = button.title.trim().toUpperCase();
-          const isComingSoon = title.includes("COMING SOON");
+          const isComingSoon = title.includes("asdasd");
 
           return isMobile ? (
             <motion.a
