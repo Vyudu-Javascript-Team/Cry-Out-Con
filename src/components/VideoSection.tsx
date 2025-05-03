@@ -6,7 +6,7 @@ import { getVideo } from "../lib/sanity";
 
 // ! Flag to control whether to use Sanity data or 2026 data
 // ! Set to true to always use 2026 data, false to attempt to fetch from Sanity first
-const use2026OfflineData = true;
+// const use2026OfflineData = true;
 
 interface VideoData {
   _id: string;
