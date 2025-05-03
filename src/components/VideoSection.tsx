@@ -34,19 +34,16 @@ const VideoSection = () => {
         setLoading(true);
 
         // If use2026OfflineData is true, skip Sanity fetch and use default data
-        if (use2026OfflineData) {
-          setVideoData(placeholder2026Video);
-          setLoading(false);
-          return;
-        }
+        // if (use2026OfflineData) {
+        //   setVideoData(placeholder2026Video);
+        //   setLoading(false);
+        //   return;
+        // }
 
         // Otherwise try to fetch from Sanity
         const data = await getVideo();
         if (data && data.isActive) {
           setVideoData(data);
-        } else {
-          // Use placeholder data if no video from Sanity or video is not active
-          setVideoData(placeholder2026Video);
         }
       } catch (err) {
         console.error("Error loading video:", err);
@@ -60,14 +57,29 @@ const VideoSection = () => {
     loadVideo();
   }, []);
 
-  // Display placeholder for 2026 video
-  const showPlaceholder =
-    !videoData?.videoUrl || videoData._id === placeholder2026Video._id;
+  if (loading) {
+    return (
+      <div ref={sectionRef} className="relative py-8">
+        <SectionTitle
+          title={"CryOut Con 2026 Hype Video"}
+          gradient="from-pink-500 via-purple-500 to-blue-500"
+        />
+        <div className="relative aspect-video max-w-5xl mx-auto flex items-center justify-center">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+            <p className="text-gray-600 dark:text-gray-400 text-lg">
+              Loading video...
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div ref={sectionRef} className="relative py-8">
       <SectionTitle
-        title={videoData?.title || "CryOut Con 2026 Hype Video"}
+        title={"CryOut Con 2026 Hype Video"}
         gradient="from-pink-500 via-purple-500 to-blue-500"
       />
 
@@ -86,7 +98,7 @@ const VideoSection = () => {
             </div>
           }
         >
-          <VideoPlayer url={"/assets/videos/2026-hype.mp4"} type="direct" />
+          <VideoPlayer url={videoData?.videoUrl || ""} type="direct" />
         </Suspense>
       </div>
     </div>

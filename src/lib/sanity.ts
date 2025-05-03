@@ -1,27 +1,26 @@
-import { createClient } from '@sanity/client'
-import imageUrlBuilder from '@sanity/image-url'
+import { createClient } from "@sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
 
 export const client = createClient({
-  projectId: 'l96yh15e',
-  dataset: 'production',
-  apiVersion: '2023-05-01', // Update to latest API version
+  projectId: "l96yh15e",
+  dataset: "production",
+  apiVersion: "2023-05-01", // Update to latest API version
   useCdn: false, // Disable CDN caching
-  perspective: 'published' // Always get the latest published content
-})
+  perspective: "published", // Always get the latest published content
+});
 
-
-const builder = imageUrlBuilder(client)
+const builder = imageUrlBuilder(client);
 
 export function urlFor(source: any) {
   if (!source) {
-    throw new Error('Image source is required');
+    throw new Error("Image source is required");
   }
-  return builder.image(source)
+  return builder.image(source);
 }
 
 export async function getVideo() {
   return client.fetch(`
-    *[_type == "video" && isActive == true][0] {
+    *[_type == "video" && isActive == true][1] {
       _id,
       title,
       "videoUrl": videoFile.asset->url,
@@ -41,9 +40,8 @@ export async function getDiveInContent() {
       },
       isVisible
     }
-  `)
+  `);
 }
-
 
 // Get Hero section data
 export async function getHeroContent() {
@@ -70,8 +68,6 @@ export async function getHeroContent() {
     }
   `);
 }
-
-
 
 // speakers grouped by categories
 export async function getSpeakersGroupedByCategory() {
@@ -102,7 +98,7 @@ export async function getSpeakersGroupedByCategory() {
         }
       }
     }
-  `)
+  `);
 }
 
 // Query to get first 3 keynote speakers
@@ -127,10 +123,8 @@ export async function getKeynoteSpeakers() {
         }
       }
     }
-  `)
+  `);
 }
-
-
 
 export async function getConference() {
   return client.fetch(`*[_type == "conference" && isVisible == true] | order(content[].order asc) {
@@ -147,7 +141,6 @@ export async function getConference() {
     }
   `);
 }
-
 
 export async function getRegistrationData() {
   return client.fetch(`*[_type == "registration"][0]{
@@ -168,7 +161,8 @@ export async function getRegistrationData() {
 }
 
 export async function getAgenda() {
-  return client.fetch(`
+  return client.fetch(
+    `
     *[_type == "agenda" && !(_id in path("drafts.**"))][0] {
       announcement,
       days[] {
@@ -182,7 +176,10 @@ export async function getAgenda() {
         }
       } | order(day asc)
     }
-  `, {}, { cache: 'no-store' });
+  `,
+    {},
+    { cache: "no-store" }
+  );
 }
 
 export async function getSliderImages() {
@@ -220,9 +217,8 @@ export async function getAllHotels() {
       },
       features
     }
-  `)
+  `);
 }
-
 
 export async function getFooterContent() {
   return client.fetch(`
@@ -242,8 +238,8 @@ export async function getFooterContent() {
     order
   },
   copyright
-}`)
-};
+}`);
+}
 
 export async function getHeaderNavigation() {
   return client.fetch(`
@@ -263,8 +259,8 @@ export async function getHeaderNavigation() {
     url,
     order
   }
-}`)
-};
+}`);
+}
 
 export async function getCountdownData() {
   const data = await client.fetch(`
@@ -279,21 +275,21 @@ export async function getCountdownData() {
     const date = new Date(data.eventDate);
     // Format to match '2025-05-01T17:00:00-05:00'
     const options: Intl.DateTimeFormatOptions = {
-      timeZone: 'America/New_York',
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: false
+      timeZone: "America/New_York",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
     };
-    
+
     const formattedDate = new Date(
-      date.toLocaleString('en-US', options)
-    ).toLocaleString('en-US', {
-      timeZone: 'America/New_York',
-      ...options
+      date.toLocaleString("en-US", options)
+    ).toLocaleString("en-US", {
+      timeZone: "America/New_York",
+      ...options,
     });
 
     // Update the eventDate in the returned data
