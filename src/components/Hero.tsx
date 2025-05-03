@@ -48,7 +48,7 @@ const default2026Data: HeroData = {
   backgroundImageAlt: "CryOut Con 2026 - Help Is On the Way",
   registrationButton: {
     text: "Registration Coming Soon",
-    url: "#",
+    url: "https://brushfire.com/tlhc/cryout25/578593/register",
   },
   isVisible: true,
 };

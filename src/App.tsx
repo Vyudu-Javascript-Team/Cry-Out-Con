@@ -56,14 +56,15 @@ function Home() {
         </div>
         <div className="w-full min-h-[20vh] md:flex gap-9 items-center justify-center py-16 px-8 text-3xl bg-fuchsia-500/30 md:text-5xl lg:text-6xl font-bold">
           <Countdown />
-          <button
-            onClick={() => handleRegistration()}
-            type="button"
-            className="bg-white relative md:mt-0 mt-6 md:text-2xl z-20 text-primary px-4 py-4 text-xl font-semibold transition-all rounded shadow-lg hover:cursor-pointer hover:shadow-white/25 flex items-center gap-2 group opacity-75 cursor-not-allowed"
+          <a
+            href="https://brushfire.com/tlhc/cryout25/578593/register"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-white relative md:mt-0 mt-6 md:text-2xl z-20 text-primary px-4 py-4 text-xl font-semibold transition-all rounded shadow-lg hover:cursor-pointer hover:shadow-white/25 flex items-center gap-2 group"
           >
             Registration Coming Soon
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-          </button>
+          </a>
         </div>
         <div id="dive">
           <DiveIn />
