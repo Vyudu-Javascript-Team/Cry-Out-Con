@@ -33,8 +33,9 @@ interface HeroData {
 // Default 2026 event data to use while loading or if Sanity data isn't available
 const default2026Data: HeroData = {
   _id: "default-2026",
+
   description:
-    'Join us for CryOut Con 2026 as we explore our theme of Collaboration – "Help Is On the Way". Connect with fellow believers, engage with inspiring speakers, and experience powerful worship in this life-changing gathering.',
+    'Join us for Cry Out Con 2026 and experience the power of Collaboration – "Help Is On the Way.”  Connect with fellow believers, engage with inspiring speakers, and empower yourself through powerful worship in this life-changing gathering.',
   eventDate: {
     startDate: "2026-04-24T00:00:00Z", // ! April 23rd - 25th, not sure why this is 24th in the code
     endDate: "2026-04-26T00:00:00Z", // ! April 23rd - 25th, not sure why this is 24th in the code
@@ -44,11 +45,11 @@ const default2026Data: HeroData = {
     city: "Jackson",
     state: "Mississippi",
   },
-  backgroundImage: "", // Will use existing image if no new one is provided
+  backgroundImage: "/assets/backgroundimages/hero-bg-color.JPG", // Will use existing image if no new one is provided
   backgroundImageAlt: "CryOut Con 2026 - Help Is On the Way",
   registrationButton: {
     text: "Registration Coming Soon",
-    url: "https://brushfire.com/tlhc/cryout25/578593/register",
+    url: "https://brushfire.com/tlhc/cryout26/604672/register",
   },
   isVisible: true,
 };

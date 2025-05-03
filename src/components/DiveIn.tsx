@@ -21,24 +21,20 @@ type DiveInContent = {
 
 // Default 2026 content
 const default2026Content: DiveInContent = {
-  _id: 'default-2026-dive-in',
-  sectionTitle: 'CryOut Con 2026: Collaboration',
-  titleGradient: 'from-pink-500 via-purple-500 to-blue-500',
+  _id: "default-2026-dive-in",
+  sectionTitle: "CryOut Con 2026: Collaboration",
+  titleGradient: "from-pink-500 via-purple-500 to-blue-500",
   paragraphs: [
     {
-      text: 'Join us for CryOut Con 2026 as we explore our theme of Collaboration – "Help Is On the Way". In a world that often feels divided, we are coming together to discover how we can be the hands and feet of Jesus in our communities.',
-      order: 1
+      text: "Next April, all roads lead you to the Mississippi Coliseum in Jackson, Mississippi for a weekend filled with worship, lifestyle transformation, and collaboration with your friends and neighbors from around the world to live intentionally and powerfully for God.  Together, we will discover how collaborative efforts bring anointed change and spread the message of hope.",
+      order: 1,
     },
     {
-      text: 'At Mississippi Coliseum in Jackson, Mississippi, from April 23-25, 2026, believers from across the nation will gather to worship, learn, and connect. Together, we will explore how collaborative efforts can bring transformative change and spread the message of hope.',
-      order: 2
+      text: "Registration is now open for Cry Out Con 2026—April 23-25!  When God's people work together, help is truly on the way!",
+      order: 2,
     },
-    {
-      text: 'Registration details will be announced soon. Mark your calendars and prepare for a life-changing experience as we demonstrate that when God\'s people work together, help is truly on the way!',
-      order: 3
-    }
   ],
-  isVisible: true
+  isVisible: true,
 };
 
 const DiveIn = () => {
@@ -73,14 +69,19 @@ const DiveIn = () => {
 
   // If no content, use the default 2026 content
   const displayContent = content || default2026Content;
-  const sortedParagraphs = [...displayContent.paragraphs].sort((a, b) => a.order - b.order);
+  const sortedParagraphs = [...displayContent.paragraphs].sort(
+    (a, b) => a.order - b.order
+  );
 
   return (
     <section className="py-8 relative overflow-hidden">
       <div className="container md:max-w-5xl mx-auto px-8 space-y-6">
         <SectionTitle
           title={displayContent.sectionTitle}
-          gradient={displayContent.titleGradient || "from-pink-500 via-purple-500 to-blue-500"}
+          gradient={
+            displayContent.titleGradient ||
+            "from-pink-500 via-purple-500 to-blue-500"
+          }
         />
         {sortedParagraphs.map((paragraph, index) => (
           <p key={`paragraph-${index}`} className="text-xl">

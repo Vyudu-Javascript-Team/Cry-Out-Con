@@ -54,7 +54,7 @@ const default2026Navigation: HeaderNavigationData = {
   navigationButtons: [
     {
       title: "Register Now",
-      url: "https://brushfire.com/tlhc/cryout25/578593/register",
+      url: "https://brushfire.com/tlhc/cryout26/604672/register",
       order: 1,
     },
   ],

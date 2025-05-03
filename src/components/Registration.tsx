@@ -32,8 +32,7 @@ export interface RegistrationData {
 // Default 2026 registration data
 const default2026Data: RegistrationData = {
   sectionTitle: "REGISTRATION",
-  sectionSubTitle:
-    "Registration details for CryOut Con 2026 will be available soon.",
+  sectionSubTitle: "Select your plan below to register for CryOut Con 2026.",
   plans: [
     {
       title: "VIP",
@@ -75,7 +74,7 @@ const default2026Data: RegistrationData = {
       order: 3,
     },
   ],
-  regLink: "#",
+  regLink: "https://brushfire.com/tlhc/cryout26/604672/register",
 };
 
 const Registration = () => {
@@ -122,9 +121,6 @@ const Registration = () => {
   };
 
   const handlePlanRegistration = (planTitle: string) => {
-    if (planTitle === "VIP") {
-      return; // Prevent registration for VIP plan
-    }
     handleRegistration();
   };
 
@@ -246,22 +242,16 @@ const Registration = () => {
                   onClick={() => handlePlanRegistration(plan.title)}
                   type="button"
                   className={`w-full mb-2 py-4 rounded font-semibold transition-all duration-300 ${
-                    plan.title === "VIP" || typeof plan.price === "string"
-                      ? "bg-gray-500 cursor-not-allowed opacity-70"
-                      : plan.title === "VIP" ||
-                          plan.title === "Single Day Pass (FRIDAY)" ||
-                          plan.title === "Single Day Pass (SATURDAY)"
-                        ? "bg-gradient-to-r from-purple-400 to-purple-600 hover:from-purple-500 hover:to-purple-700 hover:cursor-pointer"
-                        : plan.title === "PREMIER"
-                          ? "bg-gradient-to-r from-fuchsia-400 to-fuchsia-600 hover:from-fuchsia-500 hover:to-fuchsia-700 hover:cursor-pointer"
-                          : "bg-gradient-to-r from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800 hover:cursor-pointer"
+                    plan.title === "VIP" ||
+                    plan.title === "Single Day Pass (FRIDAY)" ||
+                    plan.title === "Single Day Pass (SATURDAY)"
+                      ? "bg-gradient-to-r from-purple-400 to-purple-600 hover:from-purple-500 hover:to-purple-700 hover:cursor-pointer"
+                      : plan.title === "PREMIER"
+                        ? "bg-gradient-to-r from-fuchsia-400 to-fuchsia-600 hover:from-fuchsia-500 hover:to-fuchsia-700 hover:cursor-pointer"
+                        : "bg-gradient-to-r from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800 hover:cursor-pointer"
                   }`}
                 >
-                  {plan.soldOut
-                    ? "SOLD OUT"
-                    : typeof plan.price === "string"
-                      ? "COMING SOON"
-                      : `CHOOSE ${plan.title}`}
+                  {plan.soldOut ? "SOLD OUT" : `CHOOSE ${plan.title}`}
                 </button>
               </div>
 
