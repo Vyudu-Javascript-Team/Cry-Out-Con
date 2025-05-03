@@ -9,6 +9,10 @@ import { getRegistrationData } from "../lib/sanity";
 // Set to true to always use 2026 data, false to attempt to fetch from Sanity first
 const use2026OfflineData = true;
 
+// Flag to control whether to display "Sold Out" status across all plans
+// Set to false to use individual plan's soldOut property
+const forceAllSoldOut = false;
+
 export interface RegistrationFeature {
   feature: string;
   included: boolean;
@@ -89,14 +93,40 @@ const Registration = () => {
       try {
         // If use2026OfflineData is true, skip Sanity fetch and use default data
         if (use2026OfflineData) {
-          setRegistrationData(default2026Data);
+          // If forceAllSoldOut is true, override soldOut property for all plans
+          if (forceAllSoldOut) {
+            const updatedData = {
+              ...default2026Data,
+              plans: default2026Data.plans.map((plan: RegistrationPlan) => ({
+                ...plan,
+                soldOut: true // Force all plans to show as sold out
+              }))
+            };
+            setRegistrationData(updatedData);
+          } else {
+            // Use default data without modifications
+            setRegistrationData(default2026Data);
+          }
           return;
         }
 
         // Otherwise try to fetch from Sanity
         const data = await getRegistrationData();
         if (data) {
-          setRegistrationData(data);
+          // If forceAllSoldOut is true, override soldOut property for all plans
+          if (forceAllSoldOut) {
+            const updatedData = {
+              ...data,
+              plans: data.plans.map((plan: RegistrationPlan) => ({
+                ...plan,
+                soldOut: true // Force all plans to show as sold out
+              }))
+            };
+            setRegistrationData(updatedData);
+          } else {
+            // Use data without modifications
+            setRegistrationData(data);
+          }
         } else {
           // Use default 2026 data if no data from Sanity
           setRegistrationData(default2026Data);
@@ -121,9 +151,7 @@ const Registration = () => {
   };
 
   const handlePlanRegistration = (planTitle: string) => {
-    if (planTitle === "VIP") {
-      return; // Prevent registration for VIP plan
-    }
+    // Call registration for any plan, including VIP
     handleRegistration();
   };
 
@@ -194,14 +222,16 @@ const Registration = () => {
                 whileHover={{ opacity: 1 }}
               />
 
-              {/* Always display sold out image for all plans */}
-              <div className="absolute inset-0 flex items-center justify-center z-30">
-                <img 
-                  src="/assets/cryout24/soldOut.png" 
-                  alt="Sold Out" 
-                  className="w-full h-auto max-w-[180px] transform scale-150"
-                />
-              </div>
+              {/* Only display sold out image if the plan is marked as sold out */}
+              {plan.soldOut && (
+                <div className="absolute inset-0 flex items-center justify-center z-30">
+                  <img 
+                    src="/assets/cryout24/soldOut.png" 
+                    alt="Sold Out" 
+                    className="w-full h-auto max-w-[180px] transform scale-150"
+                  />
+                </div>
+              )}
 
               <div className="text-center mb-4">
                 <h3
@@ -244,7 +274,7 @@ const Registration = () => {
                   onClick={() => handlePlanRegistration(plan.title)}
                   type="button"
                   className={`w-full mb-2 py-4 rounded font-semibold transition-all duration-300 ${
-                    plan.title === "VIP" || typeof plan.price === 'string'
+                    typeof plan.price === 'string' || plan.soldOut
                       ? "bg-gray-500 cursor-not-allowed opacity-70"
                       : plan.title === "VIP" ||
                         plan.title === "Single Day Pass (FRIDAY)" ||
@@ -254,6 +284,7 @@ const Registration = () => {
                           ? "bg-gradient-to-r from-fuchsia-400 to-fuchsia-600 hover:from-fuchsia-500 hover:to-fuchsia-700 hover:cursor-pointer"
                           : "bg-gradient-to-r from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800 hover:cursor-pointer"
                   }`}
+                  disabled={plan.soldOut || typeof plan.price === 'string'}
                 >
                   {plan.soldOut ? "SOLD OUT" : typeof plan.price === 'string' ? "COMING SOON" : `CHOOSE ${plan.title}`}
                 </button>

@@ -67,12 +67,13 @@ const Agenda = () => {
   // Process and analyze session times
   const processSessionTimes = (sessions: AgendaDay['sessions'], dayTitle: string): ProcessedSession[] => {
     return sessions.map(session => {
-      const timeString = session.time;
+      // Handle null or undefined time strings
+      const timeString = session.time || '';
       
       // Extract start and end times
       const timeParts = timeString.split('-').map(t => t.trim());
-      const startTimeStr = timeParts[0];
-      const endTimeStr = timeParts[1];
+      const startTimeStr = timeParts[0] || '';
+      const endTimeStr = timeParts.length > 1 ? timeParts[1] : '';
       
       // Parse start time
       const startMatch = startTimeStr.match(/(\d+):?(\d+)?\s*(AM|PM)?/i);
