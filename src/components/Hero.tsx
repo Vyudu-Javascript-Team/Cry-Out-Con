@@ -48,7 +48,7 @@ const default2026Data: HeroData = {
   backgroundImage: "/assets/backgroundimages/hero-bg-color.JPG", // Will use existing image if no new one is provided
   backgroundImageAlt: "CryOut Con 2026 - Help Is On the Way",
   registrationButton: {
-    text: "Registration Coming Soon",
+    text: "Register Now",
     url: "https://brushfire.com/tlhc/cryout26/604672/register",
   },
   isVisible: true,

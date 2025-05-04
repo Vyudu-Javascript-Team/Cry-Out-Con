@@ -49,7 +49,7 @@ const default2026Navigation: HeaderNavigationData = {
     { title: "REGISTRATION", path: "registration", toSection: true, order: 3 },
     // { title: "AGENDA", path: "agenda", toSection: true, order: 4 },
     // { title: "TRAVEL", path: "travel", toSection: false, order: 5 },
-    { title: "FAQ", path: "faq", toSection: false, order: 6 },
+    // { title: "FAQ", path: "faq", toSection: false, order: 6 },
   ],
   navigationButtons: [
     {
