@@ -1,13 +1,9 @@
-import { useRef, lazy, Suspense } from "react";
-const VideoPlayer = lazy(() => import("./VideoPlayer"));
+import { useRef, Suspense } from "react";
 import fallbackImage from "/assets/images/NYE_AD24.png";
 import SectionTitle from "./SectionTitle";
 
 const VideoSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const videoUrl = "https://cdn.sanity.io/files/l96yh15e/production/9e68ecda035ad6060014878c4d41b405aa074cfd.mp4";
-
-
 
   return (
     <div ref={sectionRef} className="relative py-8">
@@ -31,7 +27,16 @@ const VideoSection = () => {
             </div>
           }
         >
-          <VideoPlayer url={videoUrl} type="direct" />
+          <video
+            className="w-full h-full object-cover"
+            controls
+            autoPlay
+            preload="auto"
+            muted
+            playsInline
+          >
+            <source src="/assets/videos/2026-hype.mp4" type="video/mp4" />
+          </video>
         </Suspense>
       </div>
     </div>
