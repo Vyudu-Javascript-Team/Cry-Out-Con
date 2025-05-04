@@ -4,14 +4,14 @@ import SectionTitle from "./SectionTitle";
 
 const VideoSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const videoUrl = "/assets/videos/Jackson Launch Hype.mp4";
 
   return (
     <div ref={sectionRef} className="relative py-8">
       <SectionTitle
-        title={"CryOut Con 2026 Hype Video"}
+        title={"Jackson Launch Hype Video"}
         gradient="from-pink-500 via-purple-500 to-blue-500"
       />
-
       <div className="relative aspect-video max-w-5xl mx-auto">
         <Suspense
           fallback={
@@ -28,14 +28,16 @@ const VideoSection = () => {
           }
         >
           <video
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-lg shadow-xl"
             controls
             autoPlay
             preload="auto"
             muted
             playsInline
+            poster={fallbackImage}
           >
-            <source src="/assets/videos/2026-hype.mp4" type="video/mp4" />
+            <source src={videoUrl} type="video/mp4" />
+            Your browser does not support the video tag.
           </video>
         </Suspense>
       </div>
