@@ -20,10 +20,10 @@ export function urlFor(source: any) {
 
 export async function getVideo() {
   return client.fetch(`
-    *[_type == "video" && isActive == true][1] {
+    *[_type == "video" && title == "Jackson Launch Hype"][0] {
       _id,
       title,
-      "videoUrl": videoFile.asset->url,
+      "videoUrl": videoFile.asset->url + "?dl",
       isActive
     }
   `);
@@ -370,11 +370,12 @@ export async function getPrivacyPolicy() {
 }
 
 export async function getFAQs() {
-  return client.fetch(`
-    *[_type == "faqs" && isVisible == true][0] {
+  console.log('Fetching FAQs from Sanity...');
+  const result = await client.fetch(`
+    *[_type == "faqs"][0] {
       heading,
       subHeading,
-      questions[] | order(order asc) {
+      "questions": questions[].content {
         question,
         answer,
         answerWithLink {
@@ -391,10 +392,11 @@ export async function getFAQs() {
           buttonText,
           buttonLink
         }
-      },
-      isVisible
+      }
     }
   `);
+  console.log('Sanity FAQ result:', result);
+  return result;
 }
 
 export async function getDiscounts() {

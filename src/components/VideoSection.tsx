@@ -1,80 +1,13 @@
-import { useState, useRef, lazy, useEffect, Suspense } from "react";
+import { useRef, lazy, Suspense } from "react";
 const VideoPlayer = lazy(() => import("./VideoPlayer"));
 import fallbackImage from "/assets/images/NYE_AD24.png";
 import SectionTitle from "./SectionTitle";
-import { getVideo } from "../lib/sanity";
-
-// ! Flag to control whether to use Sanity data or 2026 data
-// ! Set to true to always use 2026 data, false to attempt to fetch from Sanity first
-// const use2026OfflineData = true;
-
-interface VideoData {
-  _id: string;
-  title: string;
-  videoUrl: string;
-  isActive: boolean;
-}
-
-// Default placeholder data for 2026 video
-const placeholder2026Video = {
-  _id: "placeholder-2026-video",
-  title: "CryOut Con 2026 Hype Video",
-  videoUrl: "",
-  isActive: true,
-};
 
 const VideoSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [videoData, setVideoData] = useState<VideoData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const videoUrl = "https://cdn.sanity.io/files/l96yh15e/production/9e68ecda035ad6060014878c4d41b405aa074cfd.mp4";
 
-  useEffect(() => {
-    const loadVideo = async () => {
-      try {
-        setLoading(true);
 
-        // If use2026OfflineData is true, skip Sanity fetch and use default data
-        // if (use2026OfflineData) {
-        //   setVideoData(placeholder2026Video);
-        //   setLoading(false);
-        //   return;
-        // }
-
-        // Otherwise try to fetch from Sanity
-        const data = await getVideo();
-        if (data && data.isActive) {
-          setVideoData(data);
-        }
-      } catch (err) {
-        console.error("Error loading video:", err);
-        // Use placeholder data on error
-        setVideoData(placeholder2026Video);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadVideo();
-  }, []);
-
-  if (loading) {
-    return (
-      <div ref={sectionRef} className="relative py-8">
-        <SectionTitle
-          title={"CryOut Con 2026 Hype Video"}
-          gradient="from-pink-500 via-purple-500 to-blue-500"
-        />
-        <div className="relative aspect-video max-w-5xl mx-auto flex items-center justify-center">
-          <div className="flex flex-col items-center gap-4">
-            <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
-            <p className="text-gray-600 dark:text-gray-400 text-lg">
-              Loading video...
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div ref={sectionRef} className="relative py-8">
@@ -98,7 +31,7 @@ const VideoSection = () => {
             </div>
           }
         >
-          <VideoPlayer url={videoData?.videoUrl || ""} type="direct" />
+          <VideoPlayer url={videoUrl} type="direct" />
         </Suspense>
       </div>
     </div>

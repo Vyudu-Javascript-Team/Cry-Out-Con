@@ -67,19 +67,19 @@ export default function FAQ() {
   const [faqs, setFAQs] = useState<FAQsData | null>(null);
 
   useEffect(() => {
-    const fetchFAQs = async () => {
+    const loadFAQs = async () => {
       try {
+        console.log('Fetching FAQs...');
         const data = await getFAQs();
-
-        if (data) {
-          setFAQs(data);
-        }
-      } catch (error) {
-        console.error("Error fetching policy page: ", error);
+        console.log('Raw FAQ data:', data);
+        console.log('FAQ questions:', data?.questions);
+        setFAQs(data);
+      } catch (err) {
+        console.error("Error loading FAQs:", err);
       }
     };
 
-    fetchFAQs();
+    loadFAQs();
   }, []);
 
   return (

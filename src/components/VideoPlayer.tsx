@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 
@@ -8,11 +8,193 @@ interface VideoPlayerProps {
 }
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
-  console.log('VideoPlayer received URL:', url);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement | HTMLIFrameElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Try to play video as soon as it's loaded
+  useEffect(() => {
+    if (type === 'direct' && videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // Handle autoplay error
+        setIsPlaying(false);
+      });
+    }
+  }, [url, type]);
+
+  // Handle video state changes
+  useEffect(() => {
+    const handlePlay = () => {
+      setIsPlaying(true);
+    };
+
+    const handlePause = () => {
+      setIsPlaying(false);
+    };
+
+    if (type === 'direct' && videoRef.current) {
+      videoRef.current.addEventListener('play', handlePlay);
+      videoRef.current.addEventListener('pause', handlePause);
+    }
+
+    return () => {
+      if (type === 'direct' && videoRef.current) {
+        videoRef.current.removeEventListener('play', handlePlay);
+        videoRef.current.removeEventListener('pause', handlePause);
+      }
+    };
+  }, [type]);
+
+  // Handle video end
+  useEffect(() => {
+    const handleEnded = () => {
+      setIsPlaying(false);
+    };
+
+    if (type === 'direct' && videoRef.current) {
+      videoRef.current.addEventListener('ended', handleEnded);
+    }
+
+    return () => {
+      if (type === 'direct' && videoRef.current) {
+        videoRef.current.removeEventListener('ended', handleEnded);
+      }
+    };
+  }, [type]);
+
+  // Handle video error
+  useEffect(() => {
+    const handleError = () => {
+      setIsPlaying(false);
+    };
+
+    if (type === 'direct' && videoRef.current) {
+      videoRef.current.addEventListener('error', handleError);
+    }
+
+    return () => {
+      if (type === 'direct' && videoRef.current) {
+        videoRef.current.removeEventListener('error', handleError);
+      }
+    };
+  }, [type]);
+
+  // Handle click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        // Clicked outside
+      }
+    };
+
+    if (type === 'direct') {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      if (type === 'direct') {
+        document.removeEventListener('mousedown', handleClickOutside);
+      }
+    };
+  }, [type]);
+
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+
+    if (type === 'direct') {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        videoRef.current.play();
+        setIsPlaying(true);
+      }
+    }
+  };
+
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+
+    if (type === 'direct') {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  return (
+    <motion.div
+      ref={containerRef}
+      className="relative w-full h-full group"
+    >
+      {type === 'direct' ? (
+        <video
+          ref={videoRef}
+          src={url}
+          className="w-full h-full object-cover"
+          controls
+          autoPlay
+          preload="auto"
+          muted={isMuted}
+          playsInline
+          crossOrigin="anonymous"
+        />
+      ) : null}
+
+      {/* Controls overlay */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+      >
+        <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-2">
+          <motion.button
+            className="text-white"
+            onClick={togglePlay}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            {isPlaying ? <Pause size={24} /> : <Play size={24} />}
+          </motion.button>
+          <motion.div className="flex items-center">
+            <motion.button
+              className="text-white"
+              onClick={toggleMute}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
+            </motion.button>
+          </motion.div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+export default VideoPlayer;
+
+  // Try to play video as soon as it's loaded
+  useEffect(() => {
+    if (type === 'direct' && videoRef.current) {
+      const video = videoRef.current as HTMLVideoElement;
+      video.load(); // Force reload with new URL
+      const playPromise = video.play();
+      
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            console.log('Video started playing successfully');
+            setIsPlaying(true);
+          })
+          .catch(error => {
+            console.error('Error attempting to play video:', error);
+            setIsPlaying(false);
+          });
+      }
+    }
+  }, [url, type]);
 
   const getEmbedUrl = (url: string, type: string) => {
     switch (type) {
@@ -111,10 +293,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
       observer.observe(containerRef.current);
     }
 
-    // Cleanup observer on component unmount
     return () => observer.disconnect();
   }, [type]);
-  
 
   const togglePlay = () => {
     if (!videoRef.current) return;
@@ -184,38 +364,30 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, type }) => {
   return (
     <motion.div
       ref={containerRef}
-      className="relative aspect-video rounded-sm overflow-hidden bg-black/90 group"
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.2 }}
+      className="w-full h-full object-cover"
     >
-      {type === "direct" ? (
-        <video
-        ref={videoRef as React.RefObject<HTMLVideoElement>}
-        src={url}
-        className="w-full h-full"
-        muted={isMuted}
-        playsInline
-        controls
-        autoPlay
-        preload="auto"
-        onError={(e) => {
-          console.error('Video error:', e.currentTarget.error);
-          console.log('Video source URL:', url);
-        }}
-        onLoadStart={() => console.log('Video load started')}
-        onCanPlay={() => console.log('Video can play')}
-      />
+      {type === 'direct' ? (
+        <motion.video
+          ref={videoRef as React.RefObject<HTMLVideoElement>}
+          src={url}
+          className="w-full h-full object-cover"
+          controls
+          autoPlay
+          preload="auto"
+          muted={isMuted}
+          playsInline
+          crossOrigin="anonymous"
+        />
       ) : (
         <iframe
-        ref={videoRef as React.RefObject<HTMLIFrameElement>}
-        src={getEmbedUrl(url, type)}
-        className="w-full h-full"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      />
+          ref={videoRef as React.RefObject<HTMLIFrameElement>}
+          src={getEmbedUrl(url, type)}
+          className="w-full h-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
       )}
       
-
       {/* Controls overlay */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
