@@ -5,6 +5,10 @@ import Countdown from "./Countdown";
 import LazyImage from "./LazyImage";
 import { getHeroContent } from "../lib/sanity";
 
+// Flag to control whether to use Sanity data or 2026 data
+// Set to true to always use 2026 data, false to attempt to fetch from Sanity first
+const use2026OfflineData = true;
+
 interface HeroData {
   _id: string;
   description: string;
@@ -26,6 +30,30 @@ interface HeroData {
   isVisible: boolean;
 }
 
+// Default 2026 event data to use while loading or if Sanity data isn't available
+const default2026Data: HeroData = {
+  _id: "default-2026",
+
+  description:
+    'Join us for Cry Out Con 2026 and experience the power of Collaboration – "Help Is On the Way.”  Connect with fellow believers, engage with inspiring speakers, and empower yourself through powerful worship in this life-changing gathering.',
+  eventDate: {
+    startDate: "2026-04-24T00:00:00Z", // ! April 23rd - 25th, not sure why this is 24th in the code
+    endDate: "2026-04-26T00:00:00Z", // ! April 23rd - 25th, not sure why this is 24th in the code
+  },
+  venue: {
+    name: "Mississippi Coliseum",
+    city: "Jackson",
+    state: "Mississippi",
+  },
+  backgroundImage: "/assets/backgroundimages/hero-bg-color.JPG", // Will use existing image if no new one is provided
+  backgroundImageAlt: "CryOut Con 2026 - Help Is On the Way",
+  registrationButton: {
+    text: "Register Now",
+    url: "https://brushfire.com/tlhc/cryout26/604672/register",
+  },
+  isVisible: true,
+};
+
 export const Hero = () => {
   const containerRef = useRef(null);
   const [heroData, setHeroData] = useState<HeroData | null>(null);
@@ -34,13 +62,27 @@ export const Hero = () => {
   useEffect(() => {
     const loadHeroContent = async () => {
       try {
+        // If use2026OfflineData is true, skip Sanity fetch and use default data
+        if (use2026OfflineData) {
+          setHeroData(default2026Data);
+          setIsLoading(false);
+          return;
+        }
+
+        // Otherwise try to fetch from Sanity
         const data = await getHeroContent();
         if (data) {
           setHeroData(data);
-        } 
+        } else {
+          // Use default 2026 data if no data from Sanity
+          setHeroData(default2026Data);
+        }
         setIsLoading(false);
       } catch (err) {
         console.error("Error loading hero content:", err);
+        // Use default 2026 data on error
+        setHeroData(default2026Data);
+        setIsLoading(false);
       }
     };
 
@@ -55,13 +97,15 @@ export const Hero = () => {
     );
   }
 
-  if (!heroData || !heroData.isVisible) {
-    return null;
-  }
+  // If no hero data, use the default 2026 data
+  const displayData = heroData || default2026Data;
 
   const handleRegistration = () => {
-    if (heroData?.registrationButton.url) {
-      window.open(heroData.registrationButton.url, "_blank");
+    if (
+      displayData?.registrationButton.url &&
+      displayData.registrationButton.url !== "#"
+    ) {
+      window.open(displayData.registrationButton.url, "_blank");
     }
   };
 
@@ -70,23 +114,23 @@ export const Hero = () => {
       ref={containerRef}
       className="relative min-h-screen w-full flex flex-col md:block"
     >
-      {heroData && (
+      {displayData && (
         <div className="">
           <div className="h-[50vh] md:h-screen w-full relative">
-          {heroData && heroData.backgroundImage && (
-            <LazyImage
-            priority={true}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 100vw"
-              src={heroData.backgroundImage}
-              alt={heroData.backgroundImageAlt}
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-              }}
-            />
-          )}
+            {displayData.backgroundImage && (
+              <LazyImage
+                priority={true}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 100vw"
+                src={displayData.backgroundImage}
+                alt={displayData.backgroundImageAlt}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                }}
+              />
+            )}
           </div>
 
           <div className="w-full mx-auto max-w-md md:top-[30%] md:transform px-4 py-8 md:absolute md:left-10 md:rounded-xl md:py-10 space-y-4 p-8 bg-fuchsia-500/30 backdrop-blur-md">
@@ -98,7 +142,7 @@ export const Hero = () => {
             >
               <div className="flex items-center text-sm space-x-2 px-1">
                 <Calendar className="w-8 h-8" />
-                {new Date(heroData.eventDate.startDate).toLocaleDateString(
+                {new Date(displayData.eventDate.startDate).toLocaleDateString(
                   "en-US",
                   {
                     month: "long",
@@ -106,7 +150,7 @@ export const Hero = () => {
                   }
                 )}{" "}
                 -{" "}
-                {new Date(heroData.eventDate.endDate).toLocaleDateString(
+                {new Date(displayData.eventDate.endDate).toLocaleDateString(
                   "en-US",
                   {
                     month: "long",
@@ -118,9 +162,9 @@ export const Hero = () => {
               <div className="flex items-center text-sm space-x-2 px-1">
                 <MapPin className="w-8 h-8" />
                 <div className="flex flex-col">
-                  <p>{heroData.venue.name}</p>
+                  <p>{displayData.venue.name}</p>
                   <p>
-                    {heroData.venue.city}, {heroData.venue.state}
+                    {displayData.venue.city}, {displayData.venue.state}
                   </p>
                 </div>
               </div>
@@ -137,7 +181,7 @@ export const Hero = () => {
             >
               <div className="flex flex-col space-y-4">
                 <p className="text-lg leading-normal text-gray-300 max-w-2xl my-1">
-                  {heroData.description}
+                  {displayData.description}
                 </p>
               </div>
             </motion.div>
@@ -152,14 +196,13 @@ export const Hero = () => {
                 type="button"
                 className="bg-white relative md:text-2xl z-20 text-primary px-8 py-4 text-xl font-semibold transition-all rounded shadow-lg hover:cursor-pointer hover:shadow-white/25 flex items-center gap-2 group"
               >
-                {heroData.registrationButton.text}
+                {displayData.registrationButton.text}
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </button>
             </motion.div>
           </div>
         </div>
       )}
-
     </section>
   );
 };

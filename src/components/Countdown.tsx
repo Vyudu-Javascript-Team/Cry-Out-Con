@@ -1,12 +1,24 @@
 import { useState, useEffect } from 'react';
 import { getCountdownData } from '../lib/sanity';
 
+// Flag to control whether to use Sanity data or 2026 data
+// Set to true to always use 2026 data, false to attempt to fetch from Sanity first
+const use2026OfflineData = true;
+
 type CountdownData = {
   eventName: string;
   eventDate: string;
   description?: string;
   isActive: boolean;
 }
+
+// Default 2026 event data
+const default2026Data: CountdownData = {
+  eventName: 'CryOut Con 2026',
+  eventDate: '2026-04-23T00:00:00Z',
+  description: 'Collaboration – "Help Is On the Way"',
+  isActive: true
+};
 
 const Countdown = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -19,20 +31,39 @@ const Countdown = () => {
 
   useEffect(() => {
     const fetchEventData = async () => {
-      const data = await getCountdownData();
-      setEventData(data);
+      try {
+        // If use2026OfflineData is true, skip Sanity fetch and use default data
+        if (use2026OfflineData) {
+          setEventData(default2026Data);
+          return;
+        }
+
+        // Otherwise try to fetch from Sanity
+        const data = await getCountdownData();
+        if (data && data.isActive) {
+          setEventData(data);
+        } else {
+          // Use default 2026 data if no data from Sanity or data is not active
+          setEventData(default2026Data);
+        }
+      } catch (err) {
+        console.error("Error loading countdown data:", err);
+        // Use default 2026 data on error
+        setEventData(default2026Data);
+      }
     };
 
     fetchEventData();
   }, []);
 
   useEffect(() => {
-    if (!eventData?.eventDate) return;
+    // Use default event date if eventData not available
+    const eventDate = eventData?.eventDate || default2026Data.eventDate;
     
     const calculateTimeLeft = () => {
-      const eventDate = new Date(eventData.eventDate);
+      const targetDate = new Date(eventDate);
       const now = new Date();
-      const difference = eventDate.getTime() - now.getTime();
+      const difference = targetDate.getTime() - now.getTime();
 
       if (difference > 0) {
         setTimeLeft({
@@ -57,10 +88,7 @@ const Countdown = () => {
     return () => clearInterval(timer);
   }, [eventData?.eventDate]);
 
-  if (!eventData || !eventData.isActive) {
-    return null;
-  }
-
+  // Always render the countdown
   return (
     <div className="flex gap-3 text-pink-500">
       {Object.entries(timeLeft).map(([unit, value]) => (

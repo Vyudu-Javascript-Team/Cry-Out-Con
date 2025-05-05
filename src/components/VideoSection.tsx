@@ -1,44 +1,18 @@
-import { useState, useRef, lazy, useEffect, Suspense } from "react";
-const VideoPlayer = lazy(() => import("./VideoPlayer"));
+import { useRef, Suspense } from "react";
 import fallbackImage from "/assets/images/NYE_AD24.png";
 import SectionTitle from "./SectionTitle";
-import { getVideo } from "../lib/sanity";
-
-interface VideoData {
-  _id: string;
-  title: string;
-  videoUrl: string;
-  isActive: boolean;
-}
 
 const VideoSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [videoData, setVideoData] = useState<VideoData | null>(null);
-
-  useEffect(() => {
-    const loadVideo = async () => {
-      try {
-        const data = await getVideo();
-        if(data){
-          setVideoData(data);
-        }
-      } catch (err) {
-        console.error("Error loading video:", err);
-      } 
-    };
-
-    loadVideo();
-  }, []);
-
+  const videoUrl = "/assets/videos/Jackson Launch Hype.mp4";
 
   return (
-    <div ref={sectionRef} className="relative">
-      {/* <SectionTitle
-        title={videoData?.title}
+    <div ref={sectionRef} className="relative py-8">
+      <SectionTitle
+        title={"Jackson Launch Hype Video"}
         gradient="from-pink-500 via-purple-500 to-blue-500"
-      /> */}
-
-      <div className="relative aspect-video">
+      />
+      <div className="relative aspect-video max-w-5xl mx-auto">
         <Suspense
           fallback={
             <div className="relative">
@@ -53,9 +27,18 @@ const VideoSection = () => {
             </div>
           }
         >
-          {videoData && (
-            <VideoPlayer url={videoData.videoUrl} type="direct" />
-          )}
+          <video
+            className="w-full h-full object-cover rounded-lg shadow-xl"
+            controls
+            autoPlay
+            preload="auto"
+            muted
+            playsInline
+            poster={fallbackImage}
+          >
+            <source src={videoUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </Suspense>
       </div>
     </div>
