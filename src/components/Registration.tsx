@@ -9,6 +9,10 @@ import { getRegistrationData } from "../lib/sanity";
 // Set to true to always use 2026 data, false to attempt to fetch from Sanity first
 const use2026OfflineData = true;
 
+// Flag to control whether to display "Sold Out" status across all plans
+// Set to false to use individual plan's soldOut property
+const forceAllSoldOut = false;
+
 export interface RegistrationFeature {
   feature: string;
   included: boolean;
@@ -89,7 +93,20 @@ const Registration = () => {
       try {
         // If use2026OfflineData is true, skip Sanity fetch and use default data
         if (use2026OfflineData) {
-          setRegistrationData(default2026Data);
+          // If forceAllSoldOut is true, override soldOut property for all plans
+          if (forceAllSoldOut) {
+            const updatedData = {
+              ...default2026Data,
+              plans: default2026Data.plans.map((plan: RegistrationPlan) => ({
+                ...plan,
+                soldOut: true // Force all plans to show as sold out
+              }))
+            };
+            setRegistrationData(updatedData);
+          } else {
+            // Use default data without modifications
+            setRegistrationData(default2026Data);
+          }
           return;
         }
 
@@ -250,6 +267,7 @@ const Registration = () => {
                         ? "bg-gradient-to-r from-fuchsia-400 to-fuchsia-600 hover:from-fuchsia-500 hover:to-fuchsia-700 hover:cursor-pointer"
                         : "bg-gradient-to-r from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800 hover:cursor-pointer"
                   }`}
+                  disabled={plan.soldOut || typeof plan.price === 'string'}
                 >
                   SOLD OUT
                 </button>
