@@ -33,7 +33,7 @@ function Home() {
 
   const handleRegistration = () => {
     window.open(
-      "https://cryoutcon.com/registration",
+      "https://brushfire.com/tlhc/cryout26/604672/register",
       "_blank"
     );
   };
