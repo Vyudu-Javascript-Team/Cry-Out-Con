@@ -33,7 +33,7 @@ function Home() {
 
   const handleRegistration = () => {
     window.open(
-      "#", // Updated to placeholder since 2026 registration isn't available yet
+      "https://cryoutcon.com/registration",
       "_blank"
     );
   };
@@ -59,9 +59,9 @@ function Home() {
           <button
             onClick={() => handleRegistration()}
             type="button"
-            className="bg-white relative md:mt-0 mt-6 md:text-2xl z-20 text-primary px-4 py-4 text-xl font-semibold transition-all rounded shadow-lg hover:cursor-pointer hover:shadow-white/25 flex items-center gap-2 group opacity-75 cursor-not-allowed"
+            className="bg-white relative md:mt-0 mt-6 md:text-2xl z-20 text-primary px-4 py-4 text-xl font-semibold transition-all rounded shadow-lg hover:cursor-pointer hover:shadow-white/25 flex items-center gap-2 group"
           >
-            Registration Coming Soon
+            Register Now
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
           </button>
         </div>
