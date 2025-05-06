@@ -138,7 +138,8 @@ const Registration = () => {
   };
 
   const handlePlanRegistration = (planTitle: string) => {
-    handleRegistration();
+    // Always open the registration link
+    window.open("https://brushfire.com/tlhc/cryout26/604672/register", "_blank");
   };
 
   const getPlanBackground = (planName: string) => {
@@ -208,16 +209,6 @@ const Registration = () => {
                 whileHover={{ opacity: 1 }}
               />
 
-              {plan.soldOut && (
-                <div className="absolute inset-0 flex items-center justify-center z-30">
-                  <img
-                    src="/assets/cryout24/soldOut.png"
-                    alt="Sold Out"
-                    className="w-full h-auto max-w-[180px] transform scale-150"
-                  />
-                </div>
-              )}
-
               <div className="text-center mb-4">
                 <h3
                   className={`text-2xl font-bold mb-2 ${
@@ -267,9 +258,8 @@ const Registration = () => {
                         ? "bg-gradient-to-r from-fuchsia-400 to-fuchsia-600 hover:from-fuchsia-500 hover:to-fuchsia-700 hover:cursor-pointer"
                         : "bg-gradient-to-r from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800 hover:cursor-pointer"
                   }`}
-                  disabled={plan.soldOut || typeof plan.price === 'string'}
                 >
-                  SOLD OUT
+                  REGISTER NOW
                 </button>
               </div>
 
