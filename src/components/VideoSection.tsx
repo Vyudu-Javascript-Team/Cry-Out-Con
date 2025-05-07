@@ -11,25 +11,24 @@ interface VideoSource {
   quality: number;
 }
 
-interface PromoVideo {
+interface Video {
   title: string;
-  video: {
+  videoFile: {
     url: string;
     sources: VideoSource[];
   };
-  poster: string;
 }
 
 const VideoSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [videoData, setVideoData] = useState<PromoVideo | null>(null);
+  const [videoData, setVideoData] = useState<Video | null>(null);
   const [selectedSource, setSelectedSource] = useState<VideoSource | null>(null);
 
   useEffect(() => {
     const fetchVideo = async () => {
-      const query = `*[_type == "promoVideo" && isActive == true][0] {
+      const query = `*[_type == "video" && isActive == true][0] {
         title,
-        "video": video.asset->{
+        "videoFile": videoFile.asset->{
           url,
           "sources": sources[]{
             url,
@@ -37,15 +36,14 @@ const VideoSection = () => {
             height,
             quality
           }
-        },
-        "poster": poster.asset->url
+        }
       }`;
       
       const data = await client.fetch(query);
       setVideoData(data);
       
       // Select the best quality based on network conditions
-      if (data?.video?.sources) {
+      if (data?.videoFile?.sources) {
         const connection = (navigator as any).connection || 
                          (navigator as any).mozConnection || 
                          (navigator as any).webkitConnection;
@@ -55,17 +53,17 @@ const VideoSection = () => {
           // If we have network information, choose quality based on connection type
           const speed = connection.downlink; // Mbps
           if (speed >= 10) {
-            source = data.video.sources.find((s: VideoSource) => s.width === 1920);
+            source = data.videoFile.sources.find((s: VideoSource) => s.width === 1920);
           } else if (speed >= 5) {
-            source = data.video.sources.find((s: VideoSource) => s.width === 1280);
+            source = data.videoFile.sources.find((s: VideoSource) => s.width === 1280);
           } else {
-            source = data.video.sources.find((s: VideoSource) => s.width === 854);
+            source = data.videoFile.sources.find((s: VideoSource) => s.width === 854);
           }
         }
         
         // Fallback to highest quality if we can't determine network speed
         if (!source) {
-          source = data.video.sources[0];
+          source = data.videoFile.sources[0];
         }
         
         setSelectedSource(source);
@@ -90,7 +88,7 @@ const VideoSection = () => {
           fallback={
             <div className="relative">
               <img
-                src={videoData.poster || fallbackImage}
+                src={fallbackImage}
                 alt={videoData.title}
                 className="w-full h-full object-cover"
               />
@@ -107,7 +105,7 @@ const VideoSection = () => {
             preload="auto"
             muted
             playsInline
-            poster={videoData.poster || fallbackImage}
+            poster={fallbackImage}
           >
             <source src={selectedSource.url} type="video/mp4" />
             Your browser does not support the video tag.
