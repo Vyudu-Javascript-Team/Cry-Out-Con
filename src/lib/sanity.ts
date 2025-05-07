@@ -29,58 +29,46 @@ export function urlFor(source: any) {
 }
 
 export async function getVideo() {
-  console.log('Fetching video...');
+  console.log('Fetching video from Sanity...');
   
   try {
-    // Query for all active videos
+    // Query for active videos with proper asset references
     const query = `*[_type == "video" && isActive == true] | order(_createdAt desc) {
       _id,
       title,
       "videoUrl": videoFile.asset->url,
       "videoAsset": videoFile.asset->{
+        _id,
         url,
         originalFilename,
         mimeType,
         size
       },
       isActive
-    }`;
+    }[0]`; // Get the most recent active video
 
-    const results = await client.fetch(query);
-    console.log('Video query results:', results);
+    const video = await client.fetch(query);
+    console.log('Video query result:', video);
 
-    if (!results || results.length === 0) {
-      throw new Error('No active videos found');
+    if (!video) {
+      throw new Error('No active videos found in Sanity');
     }
-
-    // Try to find the Jackson Launch Hype video first
-    const launchVideo = results.find((video: any) => 
-      video.title?.toLowerCase().includes('launch') || 
-      video.title?.toLowerCase().includes('hype')
-    );
-
-    // If not found, use the most recent video
-    const video = launchVideo || results[0];
 
     if (!video.videoUrl) {
-      throw new Error('Video found but has no URL');
+      throw new Error('Video found but has no valid asset URL');
     }
 
-    // Add the download parameter to the URL and ensure it's using HTTPS
-    const videoUrl = new URL(video.videoUrl);
-    videoUrl.searchParams.set('dl', '');
-    videoUrl.protocol = 'https:';
-    video.videoUrl = videoUrl.toString();
-
-    console.log('Selected video:', {
+    // Use the Sanity-provided URL directly
+    console.log('Using video:', {
       title: video.title,
+      assetId: video.videoAsset?._id,
       url: video.videoUrl
     });
 
     return video;
   } catch (error) {
-    console.error('Error fetching video:', error);
-    throw error; // Let the component handle the error
+    console.error('Error fetching video from Sanity:', error);
+    throw error;
   }
 }
 

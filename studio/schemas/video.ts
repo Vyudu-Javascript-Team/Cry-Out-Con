@@ -17,13 +17,7 @@ const video = defineType({
             type: 'file',
             options: {
                 accept: 'video/*',
-                storeOriginalFilename: true,
-                // Enable Sanity's built-in video transcoding
-                sources: [
-                    { width: 1920, height: 1080, format: 'mp4', quality: 80 },
-                    { width: 1280, height: 720, format: 'mp4', quality: 70 },
-                    { width: 854, height: 480, format: 'mp4', quality: 60 }
-                ]
+                storeOriginalFilename: true
             },
             validation: Rule => Rule.required()
         }),
@@ -38,6 +32,7 @@ const video = defineType({
     preview: {
         select: {
             title: 'title',
+            media: 'videoFile'
         }
     }
 });
