@@ -13,7 +13,7 @@ import Newsletter from "./components/Newsletter";
 import Agenda from "./components/Agenda";
 import Conference from "./components/Conference";
 import DiveIn from "./components/DiveIn";
-import Hotels from "./components/hotels";
+
 import { useEffect, useState } from "react";
 import Countdown from "./components/Countdown";
 import { ArrowRight } from "lucide-react";
@@ -31,13 +31,6 @@ function Home() {
     [1, 0.8, 0.6]
   );
 
-  const handleRegistration = () => {
-    window.open(
-      "#", // Updated to placeholder since 2026 registration isn't available yet
-      "_blank"
-    );
-  };
-
   return (
     <div className="relative min-h-screen bg-primary text-white overflow-x-hidden">
       <FluidCanvas />
@@ -51,13 +44,14 @@ function Home() {
         <div id="hero">
           <Hero />
         </div>
-        <div id="video">
+        
+        <div id="video" className="relative z-10">
           <VideoSection />
         </div>
-        <div className="w-full min-h-[20vh] md:flex gap-9 items-center justify-center py-16 px-8 text-3xl bg-fuchsia-500/30 md:text-5xl lg:text-6xl font-bold">
+        
+        <div className="relative z-10 w-full min-h-[20vh] md:flex gap-9 items-center justify-center py-16 px-8 text-3xl bg-fuchsia-500/30 md:text-5xl lg:text-6xl font-bold">
           <Countdown />
           <a
-            // href="https://brushfire.com/tlhc/cryout25/604672/register"
             href="https://brushfire.com/tlhc/cryout26/604672/register"
             target="_blank"
             rel="noopener noreferrer"
@@ -67,25 +61,20 @@ function Home() {
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
           </a>
         </div>
-        <div id="dive">
+        
+        <div id="dive" className="relative z-10">
           <DiveIn />
         </div>
-        <div id="conference">
+        
+        <div id="conference" className="relative z-10">
           <Conference />
         </div>
-        {/* <div id="keynotes">
-          <Keynotes />
-        </div> */}
-        <div id="registration">
+        
+        <div id="registration" className="relative z-10">
           <Registration />
         </div>
-        {/* <div id="agenda">
-          <Agenda />
-        </div>
-        <div id="news">
-          <News />
-        </div> */}
-        <div id="newsletter">
+        
+        <div id="newsletter" className="relative z-10">
           <Newsletter />
         </div>
       </motion.div>
@@ -114,11 +103,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="relative min-h-screen bg-primary text-white overflow-x-hidden">
+      <div className="min-h-screen bg-primary text-white">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/travel" element={<Hotels />} />
           <Route path="/speakers" element={<AllSpeakers />} />
           <Route path="/sponsors" element={<Sponsors />} />
           <Route path="/refund-policy" element={<RefundPolicy />} />
@@ -126,7 +114,6 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-
         <Footer />
       </div>
     </BrowserRouter>

@@ -1,12 +1,22 @@
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 
-export const client = createClient({
+import { ClientConfig, ClientPerspective } from '@sanity/client';
+
+const config: ClientConfig = {
   projectId: "l96yh15e",
   dataset: "production",
-  apiVersion: "2023-05-01", // Update to latest API version
-  useCdn: false, // Disable CDN caching
-  perspective: "published", // Always get the latest published content
+  apiVersion: "2023-05-01",
+  useCdn: false,
+  perspective: 'published' as ClientPerspective
+};
+
+export const client = createClient(config);
+
+export const previewClient = createClient({
+  ...config,
+  token: process.env.SANITY_API_TOKEN, // Will be undefined in browser, which is fine for public data
+  useCdn: false
 });
 
 const builder = imageUrlBuilder(client);
@@ -19,14 +29,59 @@ export function urlFor(source: any) {
 }
 
 export async function getVideo() {
-  return client.fetch(`
-    *[_type == "video" && title == "Jackson Launch Hype"][0] {
+  console.log('Fetching video...');
+  
+  try {
+    // Query for all active videos
+    const query = `*[_type == "video" && isActive == true] | order(_createdAt desc) {
       _id,
       title,
-      "videoUrl": videoFile.asset->url + "?dl",
+      "videoUrl": videoFile.asset->url,
+      "videoAsset": videoFile.asset->{
+        url,
+        originalFilename,
+        mimeType,
+        size
+      },
       isActive
+    }`;
+
+    const results = await client.fetch(query);
+    console.log('Video query results:', results);
+
+    if (!results || results.length === 0) {
+      throw new Error('No active videos found');
     }
-  `);
+
+    // Try to find the Jackson Launch Hype video first
+    const launchVideo = results.find((video: any) => 
+      video.title?.toLowerCase().includes('launch') || 
+      video.title?.toLowerCase().includes('hype')
+    );
+
+    // If not found, use the most recent video
+    const video = launchVideo || results[0];
+
+    if (!video.videoUrl) {
+      throw new Error('Video found but has no URL');
+    }
+
+    // Add the download parameter to the URL and ensure it's using HTTPS
+    const videoUrl = new URL(video.videoUrl);
+    videoUrl.searchParams.set('dl', '');
+    videoUrl.protocol = 'https:';
+    video.videoUrl = videoUrl.toString();
+
+    console.log('Selected video:', {
+      title: video.title,
+      url: video.videoUrl
+    });
+
+    return video;
+  } catch (error) {
+    console.error('Error fetching video:', error);
+    throw error; // Let the component handle the error
+  }
 }
 
 export async function getDiveInContent() {
