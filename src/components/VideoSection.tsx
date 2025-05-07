@@ -1,119 +1,154 @@
-import { useRef, Suspense } from "react";
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import fallbackImage from "/assets/images/NYE_AD24.png";
 import SectionTitle from "./SectionTitle";
-import { client } from "../lib/sanity";
+import { getVideo } from "../lib/sanity";
 
-interface VideoSource {
+interface VideoAsset {
   url: string;
-  width: number;
-  height: number;
-  quality: number;
+  originalFilename: string;
+  mimeType: string;
+  size: number;
 }
 
 interface Video {
+  _id: string;
   title: string;
-  videoFile: {
-    url: string;
-    sources: VideoSource[];
-  };
+  videoUrl: string;
+  videoAsset: VideoAsset;
+  isActive: boolean;
 }
 
 const VideoSection = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [videoData, setVideoData] = useState<Video | null>(null);
-  const [selectedSource, setSelectedSource] = useState<VideoSource | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
+  const maxRetries = 3;
 
   useEffect(() => {
+    let isMounted = true;
+    let retryTimeout: NodeJS.Timeout;
+
     const fetchVideo = async () => {
-      const query = `*[_type == "video" && isActive == true][0] {
-        title,
-        "videoFile": videoFile.asset->{
-          url,
-          "sources": sources[]{
-            url,
-            width,
-            height,
-            quality
-          }
+      try {
+        if (retryCount >= maxRetries) {
+          throw new Error('Maximum retry attempts reached');
         }
-      }`;
-      
-      const data = await client.fetch(query);
-      setVideoData(data);
-      
-      // Select the best quality based on network conditions
-      if (data?.videoFile?.sources) {
-        const connection = (navigator as any).connection || 
-                         (navigator as any).mozConnection || 
-                         (navigator as any).webkitConnection;
+
+        setIsLoading(true);
+        setError(null);
+        console.log(`Attempt ${retryCount + 1}: Starting video fetch...`);
         
-        let source;
-        if (connection) {
-          // If we have network information, choose quality based on connection type
-          const speed = connection.downlink; // Mbps
-          if (speed >= 10) {
-            source = data.videoFile.sources.find((s: VideoSource) => s.width === 1920);
-          } else if (speed >= 5) {
-            source = data.videoFile.sources.find((s: VideoSource) => s.width === 1280);
-          } else {
-            source = data.videoFile.sources.find((s: VideoSource) => s.width === 854);
-          }
+        const data = await getVideo();
+        
+        if (!isMounted) return;
+
+        console.log('Video data received:', data);
+        if (!data) {
+          throw new Error('No video data returned from Sanity');
         }
         
-        // Fallback to highest quality if we can't determine network speed
-        if (!source) {
-          source = data.videoFile.sources[0];
+        if (!data.videoUrl) {
+          throw new Error('No video URL available');
         }
         
-        setSelectedSource(source);
+        // Test if the video URL is accessible
+        const response = await fetch(data.videoUrl, { method: 'HEAD' });
+        if (!response.ok) {
+          throw new Error('Video URL is not accessible');
+        }
+        
+        setVideoData(data);
+      } catch (err) {
+        console.error('Error fetching video:', err);
+        setError('Failed to load video');
+        if (retryCount < maxRetries) {
+          setTimeout(() => {
+            setRetryCount(prev => prev + 1);
+          }, 2000 * (retryCount + 1)); // Exponential backoff
+        }
+      } finally {
+        setIsLoading(false);
       }
     };
-    
-    fetchVideo();
-  }, []);
 
-  if (!videoData || !selectedSource) {
-    return null;
+    fetchVideo();
+  }, [retryCount]);
+
+  const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    const target = e.target as HTMLVideoElement;
+    console.error('Video playback error:', {
+      error: target.error,
+      networkState: target.networkState,
+      readyState: target.readyState,
+      currentSrc: target.currentSrc
+    });
+    setError('Failed to play video. Please try again later.');
+  };
+
+  const handleVideoLoad = () => {
+    console.log('Video loaded successfully');
+    setIsLoading(false);
+    setError(null);
+  };
+
+  if (!videoData && !error) {
+    return (
+      <div className="relative py-8">
+        <SectionTitle
+          title="Video"
+          gradient="from-pink-500 via-purple-500 to-blue-500"
+        />
+        <div className="relative aspect-video max-w-5xl mx-auto">
+          <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+            <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div ref={sectionRef} className="relative py-8">
+    <div className="relative py-8">
       <SectionTitle
-        title={videoData.title}
+        title={videoData?.title || 'Video'}
         gradient="from-pink-500 via-purple-500 to-blue-500"
       />
       <div className="relative aspect-video max-w-5xl mx-auto">
-        <Suspense
-          fallback={
-            <div className="relative">
-              <img
-                src={fallbackImage}
-                alt={videoData.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                <span className="text-white">Loading video...</span>
-              </div>
+        {error ? (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+            <div className="text-center">
+              <p className="text-white text-lg font-medium mb-4">{error}</p>
+              {retryCount < maxRetries && (
+                <p className="text-white/70 text-sm">Retrying automatically...</p>
+              )}
             </div>
-          }
-        >
+          </div>
+        ) : (
           <video
+            ref={videoRef}
             className="w-full h-full object-cover rounded-lg shadow-xl"
             controls
-            autoPlay
             preload="auto"
-            muted
             playsInline
             poster={fallbackImage}
+            onError={handleVideoError}
+            onLoadedData={handleVideoLoad}
+            onLoadStart={() => console.log('Video load started')}
+            onProgress={() => console.log('Video loading progress')}
           >
-            <source src={selectedSource.url} type="video/mp4" />
+            <source 
+              src={videoData?.videoUrl} 
+              type="video/mp4" 
+            />
             Your browser does not support the video tag.
           </video>
-        </Suspense>
+        )}
       </div>
     </div>
   );
 };
+
 
 export default VideoSection;
