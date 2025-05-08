@@ -32,7 +32,7 @@ export async function getVideo() {
   console.log('Fetching video from Sanity...');
   
   try {
-    // Query for active videos with proper asset references
+    // Query for active videos with proper asset references and streaming configuration
     const query = `*[_type == "video" && isActive == true] | order(_createdAt desc) {
       _id,
       title,
@@ -42,7 +42,9 @@ export async function getVideo() {
         url,
         originalFilename,
         mimeType,
-        size
+        size,
+        playbackId,
+        status
       },
       isActive
     }[0]`;
@@ -58,16 +60,27 @@ export async function getVideo() {
       throw new Error('Video found but has no URL');
     }
 
-    // Add the download parameter to the URL and ensure it's using HTTPS
+    // Configure the video URL for streaming
     const videoUrl = new URL(video.videoUrl);
-    videoUrl.searchParams.set('dl', '');
+    // Remove any existing parameters
+    videoUrl.search = '';
+    // Add streaming parameters
+    videoUrl.searchParams.set('stream', 'true');
+    videoUrl.searchParams.set('quality', 'auto');
+    videoUrl.searchParams.set('cache', 'true');
     videoUrl.protocol = 'https:';
     video.videoUrl = videoUrl.toString();
+
+    // Add HLS URL for adaptive streaming
+    const hlsUrl = new URL(video.videoUrl);
+    hlsUrl.searchParams.set('format', 'hls');
+    video.hlsUrl = hlsUrl.toString();
 
     console.log('Using video:', {
       title: video.title,
       assetId: video.videoAsset?._id,
-      url: video.videoUrl
+      url: video.videoUrl,
+      hlsUrl: video.hlsUrl
     });
 
     return video;

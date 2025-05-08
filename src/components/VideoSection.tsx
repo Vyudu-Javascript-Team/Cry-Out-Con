@@ -8,12 +8,15 @@ interface VideoAsset {
   originalFilename: string;
   mimeType: string;
   size: number;
+  playbackId?: string;
+  status?: string;
 }
 
 interface Video {
   _id: string;
   title: string;
   videoUrl: string;
+  hlsUrl: string;
   videoAsset: VideoAsset;
   isActive: boolean;
 }
@@ -133,6 +136,9 @@ export const VideoSection = (): JSX.Element => {
             onError={handleVideoError}
             onLoadedData={handleVideoLoad}
           >
+            {/* HLS source for browsers that support it */}
+            <source src={videoData.hlsUrl} type="application/x-mpegURL" />
+            {/* Fallback to direct stream */}
             <source src={videoData.videoUrl} type={videoData.videoAsset.mimeType} />
             Your browser does not support the video tag.
           </video>
