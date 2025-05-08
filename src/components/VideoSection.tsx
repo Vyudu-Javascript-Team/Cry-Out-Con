@@ -18,12 +18,12 @@ interface Video {
   isActive: boolean;
 }
 
-const VideoSection = () => {
+export const VideoSection = (): JSX.Element => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoData, setVideoData] = useState<Video | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [retryCount, setRetryCount] = useState(0);
+  const [retryCount, setRetryCount] = useState<number>(0);
   const maxRetries = 3;
 
   useEffect(() => {
@@ -53,27 +53,41 @@ const VideoSection = () => {
           throw new Error('No video URL available');
         }
         
-        // Test if the video URL is accessible
-        const response = await fetch(data.videoUrl, { method: 'HEAD' });
-        if (!response.ok) {
-          throw new Error('Video URL is not accessible');
-        }
-        
         setVideoData(data);
+        console.log('Video data set successfully');
+        setRetryCount(0); // Reset retry count on success
       } catch (err) {
-        console.error('Error fetching video:', err);
-        setError('Failed to load video');
+        console.error('Error loading video:', err);
+        if (!isMounted) return;
+
+        const errorMessage = err instanceof Error ? err.message : 'Failed to load video';
+        setError(errorMessage);
+
+        // Retry after a delay, increasing the delay with each retry
         if (retryCount < maxRetries) {
-          setTimeout(() => {
-            setRetryCount(prev => prev + 1);
-          }, 2000 * (retryCount + 1)); // Exponential backoff
+          const delay = Math.min(1000 * Math.pow(2, retryCount), 5000); // Exponential backoff, max 5 seconds
+          console.log(`Retrying in ${delay}ms...`);
+          retryTimeout = setTimeout(() => {
+            if (isMounted) {
+              setRetryCount(prev => prev + 1);
+            }
+          }, delay);
         }
       } finally {
-        setIsLoading(false);
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     };
-
+    
     fetchVideo();
+
+    return () => {
+      isMounted = false;
+      if (retryTimeout) {
+        clearTimeout(retryTimeout);
+      }
+    };
   }, [retryCount]);
 
   const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
@@ -93,62 +107,52 @@ const VideoSection = () => {
     setError(null);
   };
 
-  if (!videoData && !error) {
-    return (
-      <div className="relative py-8">
-        <SectionTitle
-          title="Video"
-          gradient="from-pink-500 via-purple-500 to-blue-500"
-        />
-        <div className="relative aspect-video max-w-5xl mx-auto">
-          <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-            <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="relative py-8">
+    <div className="relative py-8 bg-gradient-to-b from-transparent to-purple-900/20">
       <SectionTitle
-        title={videoData?.title || 'Video'}
+        title={videoData?.title || "Jackson Launch Hype Video"}
         gradient="from-pink-500 via-purple-500 to-blue-500"
       />
       <div className="relative aspect-video max-w-5xl mx-auto">
-        {error ? (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-            <div className="text-center">
-              <p className="text-white text-lg font-medium mb-4">{error}</p>
-              {retryCount < maxRetries && (
-                <p className="text-white/70 text-sm">Retrying automatically...</p>
-              )}
-            </div>
+        {isLoading ? (
+          <LoadingFallback title={`Loading video${retryCount > 0 ? ` (Attempt ${retryCount + 1}/${maxRetries})` : ''}`} />
+        ) : error ? (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 text-white">
+            <p className="text-xl mb-4">{error}</p>
+            {retryCount < maxRetries && (
+              <p className="text-sm opacity-75">Retrying...</p>
+            )}
           </div>
-        ) : (
+        ) : videoData ? (
           <video
             ref={videoRef}
             className="w-full h-full object-cover rounded-lg shadow-xl"
             controls
-            preload="auto"
+            autoPlay
             playsInline
-            poster={fallbackImage}
             onError={handleVideoError}
             onLoadedData={handleVideoLoad}
-            onLoadStart={() => console.log('Video load started')}
-            onProgress={() => console.log('Video loading progress')}
           >
-            <source 
-              src={videoData?.videoUrl} 
-              type="video/mp4" 
-            />
+            <source src={videoData.videoUrl} type={videoData.videoAsset.mimeType} />
             Your browser does not support the video tag.
           </video>
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+            <img src={fallbackImage} alt="Video placeholder" className="w-full h-full object-cover" />
+          </div>
         )}
       </div>
     </div>
   );
 };
 
-
-export default VideoSection;
+const LoadingFallback = ({ title }: { title: string }) => (
+  <div className="absolute inset-0 bg-black/50 backdrop-blur-sm rounded-lg">
+    <div className="flex flex-col items-center justify-center h-full space-y-4">
+      <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
+      <p className="text-white text-lg font-medium">
+        {title}
+      </p>
+    </div>
+  </div>
+);

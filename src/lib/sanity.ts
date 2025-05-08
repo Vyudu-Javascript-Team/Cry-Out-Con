@@ -45,20 +45,25 @@ export async function getVideo() {
         size
       },
       isActive
-    }[0]`; // Get the most recent active video
+    }[0]`;
 
     const video = await client.fetch(query);
-    console.log('Video query result:', video);
-
+    console.log('Video data:', video);
+    
     if (!video) {
-      throw new Error('No active videos found in Sanity');
+      throw new Error('No active videos found');
     }
 
     if (!video.videoUrl) {
-      throw new Error('Video found but has no valid asset URL');
+      throw new Error('Video found but has no URL');
     }
 
-    // Use the Sanity-provided URL directly
+    // Add the download parameter to the URL and ensure it's using HTTPS
+    const videoUrl = new URL(video.videoUrl);
+    videoUrl.searchParams.set('dl', '');
+    videoUrl.protocol = 'https:';
+    video.videoUrl = videoUrl.toString();
+
     console.log('Using video:', {
       title: video.title,
       assetId: video.videoAsset?._id,
@@ -67,8 +72,8 @@ export async function getVideo() {
 
     return video;
   } catch (error) {
-    console.error('Error fetching video from Sanity:', error);
-    throw error;
+    console.error('Error fetching video:', error);
+    throw error; // Let the component handle the error
   }
 }
 
