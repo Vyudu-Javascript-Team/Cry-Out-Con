@@ -6,8 +6,8 @@ import { ClientConfig, ClientPerspective } from '@sanity/client';
 const config: ClientConfig = {
   projectId: "l96yh15e",
   dataset: "production",
-  apiVersion: "2023-05-01",
-  useCdn: false,
+  apiVersion: "2024-01-01",
+  useCdn: true,
   perspective: 'published' as ClientPerspective
 };
 
@@ -29,64 +29,30 @@ export function urlFor(source: any) {
 }
 
 export async function getVideo() {
-  console.log('Fetching video from Sanity...');
-  
   try {
-    // Query for active videos with proper asset references and streaming configuration
-    const query = `*[_type == "video" && isActive == true] | order(_createdAt desc) {
+    const query = `*[_type == "video" && isActive == true] | order(_createdAt desc) [0] {
       _id,
       title,
       "videoUrl": videoFile.asset->url,
       "videoAsset": videoFile.asset->{
         _id,
         url,
-        originalFilename,
-        mimeType,
-        size,
-        playbackId,
-        status
-      },
-      isActive
-    }[0]`;
+        mimeType
+      }
+    }`;
 
     const video = await client.fetch(query);
-    console.log('Video data:', video);
-    
-    if (!video) {
-      throw new Error('No active videos found');
+    if (!video?.videoUrl) {
+      throw new Error('No video available');
     }
 
-    if (!video.videoUrl) {
-      throw new Error('Video found but has no URL');
-    }
-
-    // Configure the video URL for streaming
-    const videoUrl = new URL(video.videoUrl);
-    // Remove any existing parameters
-    videoUrl.search = '';
-    // Add streaming parameters
-    videoUrl.searchParams.set('stream', 'true');
-    videoUrl.searchParams.set('quality', 'auto');
-    videoUrl.searchParams.set('cache', 'true');
-    videoUrl.protocol = 'https:';
-    video.videoUrl = videoUrl.toString();
-
-    // Add HLS URL for adaptive streaming
-    const hlsUrl = new URL(video.videoUrl);
-    hlsUrl.searchParams.set('format', 'hls');
-    video.hlsUrl = hlsUrl.toString();
-
-    console.log('Using video:', {
-      title: video.title,
-      assetId: video.videoAsset?._id,
-      url: video.videoUrl,
-      hlsUrl: video.hlsUrl
-    });
-
-    return video;
+    return {
+      ...video,
+      videoUrl: `${video.videoUrl}?dl=`
+    };
   } catch (error) {
     console.error('Error fetching video:', error);
-    throw error; // Let the component handle the error
+    throw error;
   }
 }
 
