@@ -4,7 +4,7 @@ import { News } from "./components/News";
 import Registration from "./components/Registration";
 import Footer from "./components/Footer";
 import { FluidCanvas } from "./components/FluidCanvas";
-import VideoSection from "./components/VideoSection";
+import { VideoSection } from "./components/VideoSection";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Keynotes from "./components/Keynotes";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
