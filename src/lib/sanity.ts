@@ -13,11 +13,11 @@ const config: ClientConfig = {
 
 export const client = createClient(config);
 
-export const previewClient = createClient({
-  ...config,
-  token: process.env.SANITY_API_TOKEN, // Will be undefined in browser, which is fine for public data
-  useCdn: false
-});
+// export const previewClient = createClient({
+//   ...config,
+//   token: process.env.SANITY_API_TOKEN, // Will be undefined in browser, which is fine for public data
+//   useCdn: false
+// });
 
 const builder = imageUrlBuilder(client);
 

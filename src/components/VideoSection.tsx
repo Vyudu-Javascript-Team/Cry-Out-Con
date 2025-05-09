@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import fallbackImage from "/assets/images/NYE_AD24.png";
 import SectionTitle from "./SectionTitle";
 import { getVideo } from "../lib/sanity";
+import VideoPlayer from "./VideoPlayer";
 
 interface Video {
   _id: string;
@@ -25,8 +26,8 @@ export const VideoSection = (): JSX.Element => {
         setVideoData(data);
         setError(null);
       } catch (err) {
-        console.error('Error loading video:', err);
-        setError('Failed to load video');
+        console.error("Error loading video:", err);
+        setError("Failed to load video");
       } finally {
         setIsLoading(false);
       }
@@ -49,16 +50,14 @@ export const VideoSection = (): JSX.Element => {
             <p className="text-xl">{error}</p>
           </div>
         ) : videoData ? (
-          <video
-            className="w-full h-full object-cover rounded-lg shadow-xl"
-            controls
-            playsInline
-            src={videoData.videoUrl}
-            onError={() => setError('Failed to play video')}
-          />
+          <VideoPlayer url={videoData.videoUrl} />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-            <img src={fallbackImage} alt="Video placeholder" className="w-full h-full object-cover" />
+            <img
+              src={fallbackImage}
+              alt="Video placeholder"
+              className="w-full h-full object-cover"
+            />
           </div>
         )}
       </div>
@@ -70,9 +69,7 @@ const LoadingFallback = ({ title }: { title: string }) => (
   <div className="absolute inset-0 bg-black/50 backdrop-blur-sm rounded-lg">
     <div className="flex flex-col items-center justify-center h-full space-y-4">
       <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
-      <p className="text-white text-lg font-medium">
-        {title}
-      </p>
+      <p className="text-white text-lg font-medium">{title}</p>
     </div>
   </div>
 );
