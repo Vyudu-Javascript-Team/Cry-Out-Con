@@ -19,6 +19,16 @@ interface AgendaData {
   days: AgendaDay[];
 }
 
+interface ProcessedSession {
+  time: string;
+  activities: {
+    title: string;
+    note?: any;
+  }[];
+  isLongRunning: boolean;
+  startTimeMinutes: number;
+}
+
 const Agenda = () => {
   const [agendaData, setAgendaData] = useState<AgendaData | null>(null);
 

@@ -9,6 +9,10 @@ import { getRegistrationData } from "../lib/sanity";
 // Set to true to always use 2026 data, false to attempt to fetch from Sanity first
 const use2026OfflineData = true;
 
+// Flag to control whether to display "Sold Out" status across all plans
+// Set to false to use individual plan's soldOut property
+const forceAllSoldOut = false;
+
 export interface RegistrationFeature {
   feature: string;
   included: boolean;
@@ -89,7 +93,20 @@ const Registration = () => {
       try {
         // If use2026OfflineData is true, skip Sanity fetch and use default data
         if (use2026OfflineData) {
-          setRegistrationData(default2026Data);
+          // If forceAllSoldOut is true, override soldOut property for all plans
+          if (forceAllSoldOut) {
+            const updatedData = {
+              ...default2026Data,
+              plans: default2026Data.plans.map((plan: RegistrationPlan) => ({
+                ...plan,
+                soldOut: true // Force all plans to show as sold out
+              }))
+            };
+            setRegistrationData(updatedData);
+          } else {
+            // Use default data without modifications
+            setRegistrationData(default2026Data);
+          }
           return;
         }
 
@@ -121,7 +138,8 @@ const Registration = () => {
   };
 
   const handlePlanRegistration = (planTitle: string) => {
-    handleRegistration();
+    // Always open the registration link
+    window.open("https://brushfire.com/tlhc/cryout26/604672/register", "_blank");
   };
 
   const getPlanBackground = (planName: string) => {
@@ -191,16 +209,6 @@ const Registration = () => {
                 whileHover={{ opacity: 1 }}
               />
 
-              {plan.soldOut && (
-                <div className="absolute inset-0 flex items-center justify-center z-30">
-                  <img
-                    src="/assets/cryout24/soldOut.png"
-                    alt="Sold Out"
-                    className="w-full h-auto max-w-[180px] transform scale-150"
-                  />
-                </div>
-              )}
-
               <div className="text-center mb-4">
                 <h3
                   className={`text-2xl font-bold mb-2 ${
@@ -251,7 +259,7 @@ const Registration = () => {
                         : "bg-gradient-to-r from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800 hover:cursor-pointer"
                   }`}
                 >
-                  {plan.soldOut ? "SOLD OUT" : `CHOOSE ${plan.title}`}
+                  REGISTER NOW
                 </button>
               </div>
 

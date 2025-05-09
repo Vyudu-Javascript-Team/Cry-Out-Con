@@ -31,6 +31,13 @@ function Home() {
     [1, 0.8, 0.6]
   );
 
+  const handleRegistration = () => {
+    window.open(
+      "https://brushfire.com/tlhc/cryout26/604672/register",
+      "_blank"
+    );
+  };
+
   return (
     <div className="relative min-h-screen bg-primary text-white overflow-x-hidden">
       <FluidCanvas />
@@ -57,7 +64,7 @@ function Home() {
             rel="noopener noreferrer"
             className="bg-white relative md:mt-0 mt-6 md:text-2xl z-20 text-primary px-4 py-4 text-xl font-semibold transition-all rounded shadow-lg hover:cursor-pointer hover:shadow-white/25 flex items-center gap-2 group"
           >
-            Registration Coming Soon
+            Register Now
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
           </a>
         </div>
