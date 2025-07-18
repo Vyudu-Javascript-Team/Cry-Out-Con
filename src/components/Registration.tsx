@@ -7,7 +7,7 @@ import { getRegistrationData } from "../lib/sanity";
 
 // Flag to control whether to use Sanity data or 2026 data
 // Set to true to always use 2026 data, false to attempt to fetch from Sanity first
-const use2026OfflineData = true;
+const use2026OfflineData = false;
 
 // Flag to control whether to display "Sold Out" status across all plans
 // Set to false to use individual plan's soldOut property
@@ -23,6 +23,7 @@ export interface RegistrationPlan {
   price: number | string;
   features: RegistrationFeature[];
   soldOut: boolean;
+  visible: boolean;
   order: number;
 }
 
@@ -49,6 +50,7 @@ const default2026Data: RegistrationData = {
         { feature: "Meet & greet with speakers", included: true },
       ],
       soldOut: false,
+      visible: true,
       order: 1,
     },
     {
@@ -62,6 +64,7 @@ const default2026Data: RegistrationData = {
         { feature: "Premier check-in line", included: true },
       ],
       soldOut: false,
+      visible: true,
       order: 2,
     },
     {
@@ -75,6 +78,7 @@ const default2026Data: RegistrationData = {
         { feature: "Access to expo area", included: true },
       ],
       soldOut: false,
+      visible: true,
       order: 3,
     },
   ],
@@ -99,8 +103,8 @@ const Registration = () => {
               ...default2026Data,
               plans: default2026Data.plans.map((plan: RegistrationPlan) => ({
                 ...plan,
-                soldOut: true // Force all plans to show as sold out
-              }))
+                soldOut: true, // Force all plans to show as sold out
+              })),
             };
             setRegistrationData(updatedData);
           } else {
@@ -139,7 +143,10 @@ const Registration = () => {
 
   const handlePlanRegistration = (planTitle: string) => {
     // Always open the registration link
-    window.open("https://brushfire.com/tlhc/cryout26/604672/register", "_blank");
+    window.open(
+      "https://brushfire.com/tlhc/cryout26/604672/register",
+      "_blank"
+    );
   };
 
   const getPlanBackground = (planName: string) => {
@@ -190,107 +197,110 @@ const Registration = () => {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-7 max-w-5xl mx-auto">
-          {displayData.plans.map((plan) => (
-            <motion.div
-              key={plan.title}
-              className={`relative p-4 rounded-xl backdrop-blur-sm border transition-all duration-500 ${
-                selectedPlan === plan.title
-                  ? "bg-white/15 border-white/20 shadow-[0_0_30px_rgba(124,58,237,0.3)]"
-                  : getPlanBackground(plan.title)
-              }`}
-              whileHover={{
-                y: -5,
-                scale: 1.02,
-                boxShadow: getPlanShadow(plan.title),
-              }}
-            >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-2xl opacity-0 transition-opacity duration-300"
-                whileHover={{ opacity: 1 }}
-              />
-
-              <div className="text-center mb-4">
-                <h3
-                  className={`text-2xl font-bold mb-2 ${
-                    plan.title === "VIP" ||
-                    plan.title === "Single Day Pass (FRIDAY)" ||
-                    plan.title === "Single Day Pass (SATURDAY)"
-                      ? "text-purple-400"
-                      : plan.title === "PREMIER"
-                        ? "text-fuchsia-400"
-                        : "text-gray-800"
+          {displayData.plans.map(
+            (plan) =>
+              plan.visible && (
+                <motion.div
+                  key={plan.title}
+                  className={`relative p-4 rounded-xl backdrop-blur-sm border transition-all duration-500 ${
+                    selectedPlan === plan.title
+                      ? "bg-white/15 border-white/20 shadow-[0_0_30px_rgba(124,58,237,0.3)]"
+                      : getPlanBackground(plan.title)
                   }`}
+                  whileHover={{
+                    y: -5,
+                    scale: 1.02,
+                    boxShadow: getPlanShadow(plan.title),
+                  }}
                 >
-                  {plan.title}
-                </h3>
-                <div
-                  className={`text-5xl font-bold bg-clip-text text-transparent ${
-                    plan.title === "VIP" ||
-                    plan.title === "Single Day Pass (FRIDAY)" ||
-                    plan.title === "Single Day Pass (SATURDAY)"
-                      ? "bg-gradient-to-r from-purple-400 to-purple-600"
-                      : plan.title === "PREMIER"
-                        ? "bg-gradient-to-r from-fuchsia-400 to-fuchsia-600"
-                        : "bg-gradient-to-r from-gray-700 to-gray-900"
-                  }`}
-                >
-                  {typeof plan.price === "number" ? (
-                    <>
-                      <span className="text-5xl">$</span>
-                      {plan.price}
-                    </>
-                  ) : (
-                    plan.price
-                  )}
-                </div>
-              </div>
-
-              <div className="relative z-20">
-                <button
-                  onClick={() => handlePlanRegistration(plan.title)}
-                  type="button"
-                  className={`w-full mb-2 py-4 rounded font-semibold transition-all duration-300 ${
-                    plan.title === "VIP" ||
-                    plan.title === "Single Day Pass (FRIDAY)" ||
-                    plan.title === "Single Day Pass (SATURDAY)"
-                      ? "bg-gradient-to-r from-purple-400 to-purple-600 hover:from-purple-500 hover:to-purple-700 hover:cursor-pointer"
-                      : plan.title === "PREMIER"
-                        ? "bg-gradient-to-r from-fuchsia-400 to-fuchsia-600 hover:from-fuchsia-500 hover:to-fuchsia-700 hover:cursor-pointer"
-                        : "bg-gradient-to-r from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800 hover:cursor-pointer"
-                  }`}
-                >
-                  REGISTER NOW
-                </button>
-              </div>
-
-              <div className="space-y-2">
-                {plan.features.map((feature) => (
                   <motion.div
-                    key={feature.feature}
-                    className="flex items-center space-x-3"
-                    whileHover={{ x: 5 }}
-                  >
-                    {feature.included ? (
-                      <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
-                    ) : (
-                      <X className="w-5 h-5 text-gray-500 flex-shrink-0" />
-                    )}
-                    <span
-                      className={
-                        feature.included
-                          ? plan.title === "GENERAL"
-                            ? "text-gray-800"
-                            : "text-white"
-                          : "text-gray-500"
-                      }
+                    className="absolute inset-0 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-2xl opacity-0 transition-opacity duration-300"
+                    whileHover={{ opacity: 1 }}
+                  />
+
+                  <div className="text-center mb-4">
+                    <h3
+                      className={`text-2xl font-bold mb-2 ${
+                        plan.title === "VIP" ||
+                        plan.title === "Single Day Pass (FRIDAY)" ||
+                        plan.title === "Single Day Pass (SATURDAY)"
+                          ? "text-purple-400"
+                          : plan.title === "PREMIER"
+                            ? "text-fuchsia-400"
+                            : "text-gray-800"
+                      }`}
                     >
-                      {feature.feature}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                      {plan.title}
+                    </h3>
+                    <div
+                      className={`text-5xl font-bold bg-clip-text text-transparent ${
+                        plan.title === "VIP" ||
+                        plan.title === "Single Day Pass (FRIDAY)" ||
+                        plan.title === "Single Day Pass (SATURDAY)"
+                          ? "bg-gradient-to-r from-purple-400 to-purple-600"
+                          : plan.title === "PREMIER"
+                            ? "bg-gradient-to-r from-fuchsia-400 to-fuchsia-600"
+                            : "bg-gradient-to-r from-gray-700 to-gray-900"
+                      }`}
+                    >
+                      {typeof plan.price === "number" ? (
+                        <>
+                          <span className="text-5xl">$</span>
+                          {plan.price}
+                        </>
+                      ) : (
+                        plan.price
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="relative z-20">
+                    <button
+                      onClick={() => handlePlanRegistration(plan.title)}
+                      type="button"
+                      className={`w-full mb-2 py-4 rounded font-semibold transition-all duration-300 ${
+                        plan.title === "VIP" ||
+                        plan.title === "Single Day Pass (FRIDAY)" ||
+                        plan.title === "Single Day Pass (SATURDAY)"
+                          ? "bg-gradient-to-r from-purple-400 to-purple-600 hover:from-purple-500 hover:to-purple-700 hover:cursor-pointer"
+                          : plan.title === "PREMIER"
+                            ? "bg-gradient-to-r from-fuchsia-400 to-fuchsia-600 hover:from-fuchsia-500 hover:to-fuchsia-700 hover:cursor-pointer"
+                            : "bg-gradient-to-r from-gray-300 to-gray-400 hover:from-gray-400 hover:to-gray-500 text-gray-800 hover:cursor-pointer"
+                      }`}
+                    >
+                      REGISTER NOW
+                    </button>
+                  </div>
+
+                  <div className="space-y-2">
+                    {plan.features.map((feature) => (
+                      <motion.div
+                        key={feature.feature}
+                        className="flex items-center space-x-3"
+                        whileHover={{ x: 5 }}
+                      >
+                        {feature.included ? (
+                          <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                        ) : (
+                          <X className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                        )}
+                        <span
+                          className={
+                            feature.included
+                              ? plan.title === "GENERAL"
+                                ? "text-gray-800"
+                                : "text-white"
+                              : "text-gray-500"
+                          }
+                        >
+                          {feature.feature}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )
+          )}
         </div>
       </div>
     </motion.section>

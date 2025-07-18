@@ -70,6 +70,13 @@ const registration = {
                             validation: Rule => Rule.required().error('Indicate if plan is sold out.'),
                         }),
                         defineField({
+                            name: 'visible',
+                            title: 'Visible?',
+                            type: 'boolean',
+                            initialValue: false,
+                            validation: Rule => Rule.required().error('Indicate if plan is visible.'),
+                        }),
+                        defineField({
                             name: 'order',
                             title: 'Display Order',
                             type: 'number',

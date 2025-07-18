@@ -181,6 +181,7 @@ export async function getRegistrationData() {
         included
       },
       soldOut,
+      visible,
       order
     },
     regLink
