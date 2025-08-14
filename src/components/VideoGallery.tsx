@@ -14,7 +14,7 @@ interface Video {
 const videos: Video[] = [
   {
     id: '1',
-    title: 'Cry Out Con 2024 Highlights',
+    title: 'Cry Out Con 2026 Highlights',
     url: 'https://www.youtube.com/watch?v=example1',
     type: 'youtube',
     thumbnail: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=1920'

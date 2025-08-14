@@ -330,7 +330,7 @@ const migrateContent = async () => {
         { label: 'Partners', link: '/#partners' }
       ],
       footer: {
-        copyright: ' 2025 Cry Out Con. All rights reserved.',
+        copyright: ' 2026 Cry Out Con. All rights reserved.',
         socialLinks: {
           facebook: 'https://www.facebook.com/cryoutexperience',
           instagram: 'https://www.instagram.com/cryoutcon/'

@@ -69,7 +69,7 @@ export default function Sponsors() {
           >
             <div className="flex flex-wrap justify-center items-center gap-8 mb-8">
               <div className="flex flex-col items-center">
-                <p className="text-4xl md:text-3xl lg:text-4xl font-bold mb-6 text-center">2025 Brand Partner</p>
+                <p className="text-4xl md:text-3xl lg:text-4xl font-bold mb-6 text-center">2026 Brand Partner</p>
                 <img 
                   src="/assets/sponsors/mielleBrandmark.jpg" 
                   alt="Mielle Sponsor Logo" 

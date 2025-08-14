@@ -70,7 +70,7 @@ const migrateContent = async () => {
         { label: 'About', link: '/about' }
       ],
       footer: {
-        copyright: ' 2025 Cry Out Con',
+        copyright: ' 2026 Cry Out Con',
         socialLinks: {
           facebook: 'https://facebook.com/cryoutcon',
           instagram: 'https://instagram.com/cryoutcon'

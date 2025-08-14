@@ -144,7 +144,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-700 pt-8">
           <div className="flex flex-col md:flex-row text-sm md:text-xl justify-center items-center">
             <p className="text-gray-300">
-              &copy; {new Date().getFullYear()} {footerDetails.copyright}
+              &copy; 2026 Cry Out Con. All rights reserved.
             </p>
           </div>
         </div>
